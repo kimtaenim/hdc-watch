@@ -141,7 +141,7 @@ th { position: sticky; top: 0; background: var(--card); }
 .rowtable { font-size: .68rem; }
 .rowtable th, .rowtable td { text-align: right; padding: 2px 3px; }
 .rowtable thead th { font-weight: 400; color: var(--muted); }
-.rowtable tbody th { text-align: left; font-weight: 600; position: static; }
+.rowtable tbody th { text-align: left; font-weight: 600; position: static; white-space: normal; word-break: keep-all; max-width: 3.6em; line-height: 1.2; }
 .rowtable .sel { background: color-mix(in srgb, var(--hl) 18%, transparent); }
 .hour-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .85rem; margin: 6px 0 10px; }
 .hour-pick button.on { background: var(--hl); color: #fff; border-color: var(--hl); }
