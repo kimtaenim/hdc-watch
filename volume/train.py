@@ -357,6 +357,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                        "alert_percentile": vc["alert_percentile"], "watch_percentile": vc["watch_percentile"]},
         "trained": {"from": dates[0], "end": dates[-1], "days": len(dates), "bars": mem.n,
                     "at": now.isoformat(timespec="seconds")},
+        "dates": dates,
         "history": [{"at": now.isoformat(timespec="seconds"), "kind": "학습", "added": mem.n, "n_after": mem.n}],
         "memory": mem.to_json(),
     }

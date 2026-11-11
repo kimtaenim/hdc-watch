@@ -686,5 +686,28 @@
   },
   "failures": [],
   "trace": "data/volume/045510.KQ/traces/train-20261111-221714.json"
+ },
+ {
+  "at": "2026-11-11T22:24:05+09:00",
+  "kind": "volume.train",
+  "subject": "045510.KQ",
+  "fetched": {
+   "5분봉": 3170,
+   "일봉": 125
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/train-20261111-222405.json"
+ },
+ {
+  "at": "2026-11-11T22:24:37+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 56
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/close-20261111-222437.json",
+  "delay_min": 19,
+  "note": null
  }
 ]

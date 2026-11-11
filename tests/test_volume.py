@@ -1,5 +1,6 @@
 """거래량 앞단(봉 만들기, 단계 나누기)과 모델 확인. 네트워크 없이 돈다."""
 
+import datetime as dt
 import os
 import sys
 import unittest
@@ -103,6 +104,20 @@ class TestWalls(unittest.TestCase):
         self.assertEqual(max(sims, key=sims.get), wall)
         _, sims_c = walls.ask_walls_counter(cb, mem.counts, "밀림", 12)
         self.assertEqual(max(sims_c, key=sims_c.get), wall)
+
+
+class TestLive(unittest.TestCase):
+    def test_slot_status(self):
+        from volume import live
+        now = dt.datetime(2026, 11, 11, 11, 5, tzinfo=data.KST)
+        self.assertEqual(live.slot_status("10:30", now), "확정")
+        self.assertEqual(live.slot_status("11:00", now), "잠정")
+        self.assertEqual(live.slot_status("11:30", now), "아직")
+
+    def test_delay(self):
+        from volume import live
+        self.assertEqual(live.scheduled_delay(dt.datetime(2026, 11, 11, 11, 20, tzinfo=data.KST)), 15)
+        self.assertEqual(live.scheduled_delay(dt.datetime(2026, 11, 11, 11, 3, tzinfo=data.KST)), 28)
 
 
 if __name__ == "__main__":

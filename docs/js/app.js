@@ -163,11 +163,11 @@ function renderRuns(runs) {
     r.at.replace("T", " ").slice(0, 19), r.kind, r.subject,
     Object.entries(r.fetched || {}).map(([k, v]) => `${k} ${v}`).join(", "),
     r.failures?.length ? `${r.failures.length}건: ${r.failures.slice(0, 2).join(" / ")}${r.failures.length > 2 ? " ..." : ""}` : "없음",
-    r.trace, r.note || ""]);
+    r.delay_min ?? "", r.trace, r.note || ""]);
   const t = $("#runs");
-  t.replaceChildren(el("thead", {}, el("tr", {}, ["시각", "종류", "종목", "받은 건수", "실패", "추적 기록", "메모"].map((c) => el("th", {}, c)))),
+  t.replaceChildren(el("thead", {}, el("tr", {}, ["시각", "종류", "종목", "받은 건수", "실패", "예약보다 늦음(분)", "추적 기록", "메모"].map((c) => el("th", {}, c)))),
     el("tbody", {}, rows.map((r) => el("tr", {},
-      r.map((v, i) => i === 5 ? el("td", {}, v ? el("a", { href: v, target: "_blank" }, "열기") : "사라짐")
+      r.map((v, i) => i === 6 ? el("td", {}, v ? el("a", { href: v, target: "_blank" }, "열기") : "사라짐")
         : el("td", { class: i === 4 && v !== "없음" ? "fail" : "" }, v))))));
 }
 
@@ -296,16 +296,36 @@ async function drawFlow() {
   );
 }
 
+// ---------- 오늘(장중 채점) ----------
+async function renderToday(stockDir) {
+  const wrap = $("#today-wrap");
+  let day;
+  try { day = await getJSON(`${stockDir}/live.json`); } catch { wrap.hidden = true; return null; }
+  wrap.hidden = false;
+  $("#today-title").textContent = `오늘 ${day.date} (${day.as_of.slice(11, 16)} 기준${day.closing ? ", 마감" : ""}${day.simulated ? ", 모의" : ""})`;
+  const shown = day.bars.filter((b) => b.status !== "아직");
+  $("#today").replaceChildren(
+    colTable(["시간", "거래량", "단계", "정수 점수", "판정", "상태"],
+      shown.map((b) => [b.slot, b.volume, b.level, b.score, b.verdict, b.status]), -1, () => {}),
+    el("p", { class: "hint" }, "잠정: 아직 끝나지 않은 30분 칸이라 거래량이 덜 찼다. ",
+      el("a", { href: day.trace, target: "_blank" }, "이 실행의 추적 기록")));
+  return day;
+}
+
 // ---------- 문자판 ----------
-async function renderDial(stockId, trainTrace) {
+async function renderDial(stockId, trainTrace, today = null) {
   const s = trainTrace?.subject || { name: stockId, code: stockId };
   $("#dial-stock").textContent = `${s.name} (${s.code})`;
-  if (trainTrace) {
+  const lastToday = today?.bars.filter((b) => b.score != null).at(-1);
+  if (lastToday) {
+    $("#dial-score").replaceChildren(`거래량 점수 `, el("b", {}, fmt(lastToday.score)),
+      ` ${lastToday.verdict} (${today.date} ${lastToday.slot} ${lastToday.status})`);
+  } else if (trainTrace) {
     const tbl = trainTrace.steps.flatMap((x) => x.outputs).find((o) => o.name === "봉별 점수");
     const c = Object.fromEntries(tbl.columns.map((k, i) => [k, i]));
     const last = [...tbl.rows].sort((a, b) => (a[c["날짜"]] + a[c["시간대"]]).localeCompare(b[c["날짜"]] + b[c["시간대"]])).at(-1);
     $("#dial-score").replaceChildren(`거래량 점수 `, el("b", {}, fmt(last[c["점수"]])),
-      ` ${last[c["판정"]]} (${last[c["날짜"]]} ${last[c["시간대"]]}시대)`);
+      ` ${last[c["판정"]]} (${last[c["날짜"]]} ${last[c["시간대"]]})`);
   }
   $("#dial-trend").replaceChildren("오늘의 새 조합 ", el("b", {}, "준비 중(⑤ 단계)"));
 }
@@ -317,7 +337,8 @@ async function show() {
   const pick = (k) => [...RUNS].reverse().find((r) => r.subject === stock && r.kind === k && r.trace && !(r.failures || []).some((f) => f.startsWith("수집 실패")));
   const trainRun = pick("volume.train"), run = pick(kind);
   const trainTrace = trainRun ? await getJSON(trainRun.trace) : null;
-  await renderDial(stock, trainTrace);
+  const today = await renderToday(`data/volume/${stock}`);
+  await renderDial(stock, trainTrace, today);
   if (!run) { $("#gears").replaceChildren(el("li", {}, "아직 실행 기록이 없습니다.")); return; }
   const trace = run === trainRun ? trainTrace : await getJSON(run.trace);
   const isTrain = kind === "volume.train";
