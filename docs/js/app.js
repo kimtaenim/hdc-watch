@@ -189,7 +189,8 @@ async function setupFollow(trace, stockDir) {
   const tbl = scoreStep.outputs.find((o) => o.name === "봉별 점수");
   const col = Object.fromEntries(tbl.columns.map((c, i) => [c, i]));
   F.bars = tbl.rows.map((r) => ({ date: r[col["날짜"]], wd: r[col["요일"]], hour: r[col["시간대"]], vol: r[col["거래량"]],
-    ratio: r[col["배율"]], level: r[col["단계"]], score: r[col["점수"]], rank: r[col["순위"]], verdict: r[col["판정"]] }));
+    ratio: r[col["배율"]], level: r[col["단계"]], score: r[col["점수"]], scoreBin: r[col["이진 점수"]], rank: r[col["순위"]],
+    rankBin: r[col["이진 순위"]], verdict: r[col["판정"]] }));
   F.model = await getJSON(`${stockDir}/model.json`);
   F.trace = trace;
   $("#follow-hint").replaceChildren(`봉 하나를 골라 HDC 연산을 한 칸씩 넘깁니다. 계산은 이 브라우저에서 같은 부품(hdc.js)으로 다시 하고, 마지막에 파이썬이 낸 점수와 맞춰 봅니다.`);
@@ -233,9 +234,14 @@ async function buildFrames(bar) {
   const memV = await mem.toVector();
   const diff = H.bind(barV, memV);
   const d = H.ones(diff);
-  const sim = H.similarity(barV, memV);
+  const simBin = H.similarity(barV, memV);
+  // 누산기 점수: 봉 벡터(0→-1, 1→+1)와 누산기의 코사인
+  let dot = 0, sq = 0;
+  for (let i = 0; i < dim; i++) { const c = mem.counts[i]; dot += (barV[i] ? 1 : -1) * c; sq += c * c; }
+  const sim = dot / (Math.sqrt(dim) * Math.sqrt(sq));
   const th = m.thresholds;
   const verdict = sim <= th.alert ? "이상" : sim <= th.watch ? "주의" : "평소";
+  const same = (a, b) => Math.abs(a - b) < 1e-4;
   const genStep = stepOf(t, "벡터 생성"), flipStep = stepOf(t, "뒤집기"), bindStep = stepOf(t, "묶기"),
     addStep = stepOf(t, "더하기"), cmpStep = stepOf(t, "비교"), judge = stepOf(t, "일반 계산", "판정");
   const label = `${bar.date}(${bar.wd}) ${bar.hour}시대, ${fmt(bar.vol)}주, 그 시간대 중앙값의 ${fmt(bar.ratio)}배 → ${bar.level}단계`;
@@ -244,52 +250,62 @@ async function buildFrames(bar) {
   const grids = (...boxes) => el("details", { class: "more" }, el("summary", {}, `${dim.toLocaleString("ko-KR")}칸 전체를 격자로 보기`),
     el("div", { class: "grids" }, ...boxes));
   F.frames = [
-    { title: "① 요일 벡터 꺼내기", op: "벡터 생성", why: genStep,
+    { title: "① 요일 벡터 꺼내기 (item memory)", op: "벡터 생성", why: genStep,
       body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }], dim), grids(gridBox(`요일:${bar.wd}`, dayV))] },
     { title: "② 시간대 벡터 꺼내기", op: "벡터 생성", why: genStep,
       body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hourV }], dim),
         el("div", { class: "values" }, el("span", { class: "chip" }, "두 줄이 다른 칸 ", el("b", {}, fmt(H.hamming(dayV, hourV)))),
           el("span", { class: "chip" }, "유사도 ", el("b", {}, fmt(H.similarity(dayV, hourV))))),
         grids(gridBox(`요일:${bar.wd}`, dayV), gridBox(`시간대:${bar.hour}`, hourV))] },
-    { title: `③ ${bar.level}단계 벡터 꺼내기`, op: "뒤집기", why: flipStep,
+    { title: `③ ${bar.level}단계 벡터 꺼내기 (level hypervector)`, op: "뒤집기", why: flipStep,
       body: () => [bitRows([{ name: "1단계", bits: lv1 }, { name: `${bar.level}단계`, bits: lvk, mark: flipped }], dim),
         el("div", { class: "values" }, el("span", { class: "chip" }, "1단계에서 뒤집힌 칸(주황) ", el("b", {}, fmt(H.ones(flipped)))),
           el("span", { class: "chip" }, "1단계와의 유사도 ", el("b", {}, fmt(H.similarity(lv1, lvk))))),
         grids(gridBox("1단계", lv1), gridBox(`${bar.level}단계`, lvk, "뒤집힌 칸 주황", flipped))] },
-    { title: "④ 묶기: 요일 ⊕ 시간대", op: "묶기", why: bindStep,
+    { title: "④ 묶기(binding): 요일 ⊕ 시간대", op: "묶기", why: bindStep,
       body: () => [bitRows([{ name: "A 요일", bits: dayV }, { name: "B 시간대", bits: hourV }, { name: "A ⊕ B", bits: ds, line: true }], dim),
         el("p", { class: "hint" }, "세로로 한 칸씩 보면: 위 두 숫자가 같으면 0, 다르면 1."),
         el("div", { class: "values" }, el("span", { class: "chip" }, "결과와 A의 유사도 ", el("b", {}, fmt(H.similarity(ds, dayV)))),
           el("span", { class: "chip" }, "결과와 B의 유사도 ", el("b", {}, fmt(H.similarity(ds, hourV))))),
         grids(gridBox("A 요일", dayV), gridBox("B 시간대", hourV), gridBox("A ⊕ B", ds))] },
-    { title: "⑤ 묶기: (요일 ⊕ 시간대) ⊕ 단계 = 봉 벡터", op: "묶기", why: bindStep,
+    { title: "⑤ 묶기(binding): (요일 ⊕ 시간대) ⊕ 단계 = 봉 벡터", op: "묶기", why: bindStep,
       body: () => [bitRows([{ name: "요일 ⊕ 시간대", bits: ds }, { name: `${bar.level}단계`, bits: lvk }, { name: "봉 벡터", bits: barV, line: true }], dim),
         el("div", { class: "chip" }, "되돌려 보기: 봉 벡터 ⊕ (요일 ⊕ 시간대) = ", el("b", {},
           H.hamming(H.bind(barV, ds), lvk) === 0 ? `${bar.level}단계 벡터와 모든 칸이 같음` : "다름")),
         grids(gridBox("요일 ⊕ 시간대", ds), gridBox(`${bar.level}단계`, lvk), gridBox("봉 벡터", barV))] },
-    { title: "⑥ 기억 꺼내기(이 봉 자신은 뺀다)", op: "더하기", why: addStep,
-      body: () => [bitRows([{ name: "카운터", vals: memAfter }, { name: "기억", bits: memV, line: true }], dim, 4, 4),
-        el("p", { class: "hint" }, `카운터는 칸마다 ${fmt(mem.n)}개 봉의 투표 합(1이면 +1, 0이면 -1). 양수면 기억의 그 칸이 1, 음수면 0.`),
+    { title: "⑥ 기억 꺼내기: 누산기와 원형 (이 봉 자신은 뺀다)", op: "더하기", why: addStep,
+      body: () => [bitRows([{ name: "누산기", vals: memAfter }, { name: "원형(다수결)", bits: memV, line: true }], dim, 3, 3),
+        el("p", { class: "hint" }, `누산기 = 칸마다 ${fmt(mem.n)}개 봉의 합(1이면 +1, 0이면 -1). 원형 = 양수 칸 1, 음수 칸 0.`),
         el("div", { class: "values" }, el("span", { class: "chip" }, "더해 둔 봉 ", el("b", {}, fmt(m.memory.n))),
           el("span", { class: "chip" }, "이 봉을 뺀 뒤 ", el("b", {}, fmt(mem.n)))),
-        grids(gridBox("기억(다수결)", memV))] },
-    { title: "⑦ 비교: 봉 벡터와 기억", op: "비교", why: cmpStep,
-      body: () => [bitRows([{ name: "봉 벡터", bits: barV }, { name: "기억", bits: memV }, { name: "다른 칸", bits: diff, mark: diff, line: true }], dim),
+        grids(gridBox("원형(다수결)", memV))] },
+    { title: "⑦ 비교: 누산기 점수(본 점수)와 이진 점수(비교용)", op: "비교", why: cmpStep,
+      body: () => [
+        el("div", { class: "tname" }, "누산기 점수: 봉 벡터 ±1 × 누산기, 칸마다 곱해 더함"),
+        bitRows([{ name: "봉 ±1", vals: Array.from(barV, (x) => (x ? 1 : -1)) }, { name: "누산기", vals: memAfter },
+          { name: "곱", vals: Array.from(barV, (x, i) => (x ? 1 : -1) * memAfter[i]), line: true }], dim, 3, 3),
         el("div", { class: "values" },
-          el("span", { class: "chip" }, "다른 칸(해밍 거리) ", el("b", {}, fmt(d))),
+          el("span", { class: "chip" }, "곱의 합 ", el("b", {}, fmt(dot))),
+          el("span", { class: "chip" }, "코사인 = ", el("b", {}, fmt(sim)))),
+        el("div", { class: "tname" }, "이진 점수: 봉 벡터와 원형의 다른 칸"),
+        bitRows([{ name: "봉 벡터", bits: barV }, { name: "원형", bits: memV }, { name: "다른 칸", bits: diff, mark: diff, line: true }], dim, 4, 4),
+        el("div", { class: "values" },
+          el("span", { class: "chip" }, "다른 칸 ", el("b", {}, fmt(d))),
           el("span", { class: "chip" }, "무관하면 약 ", el("b", {}, fmt(dim / 2))),
-          el("span", { class: "chip" }, `유사도 = 1 - 2 × ${d} / ${dim} = `, el("b", {}, fmt(sim))),
-          el("span", { class: "chip" }, "잡음 수준 ", el("b", {}, fmt(H.noiseLevel(dim))))),
-        el("div", { class: "check" }, `확인: 파이썬이 낸 점수 ${fmt(bar.score)}, 이 브라우저 ${fmt(Math.round(sim * 1e4) / 1e4)} `,
-          el("span", { class: Math.abs(sim - bar.score) < 1e-4 ? "ok" : "bad" }, Math.abs(sim - bar.score) < 1e-4 ? "일치" : "어긋남")),
-        grids(gridBox("봉 벡터", barV), gridBox("기억", memV), gridBox("다른 칸(주황)", barV, "", diff))] },
+          el("span", { class: "chip" }, `1 - 2 × ${d} / ${dim} = `, el("b", {}, fmt(simBin)))),
+        el("div", { class: "check" }, `확인(파이썬 / 브라우저): 누산기 점수 ${fmt(bar.score)} / ${fmt(Math.round(sim * 1e4) / 1e4)} `,
+          el("span", { class: same(sim, bar.score) ? "ok" : "bad" }, same(sim, bar.score) ? "일치" : "어긋남"),
+          `, 이진 점수 ${fmt(bar.scoreBin)} / ${fmt(Math.round(simBin * 1e4) / 1e4)} `,
+          el("span", { class: same(simBin, bar.scoreBin) ? "ok" : "bad" }, same(simBin, bar.scoreBin) ? "일치" : "어긋남")),
+        grids(gridBox("봉 벡터", barV), gridBox("원형", memV), gridBox("다른 칸(주황)", barV, "", diff))] },
     { title: "⑧ 판정", op: "일반 계산", why: judge,
       body: () => [el("div", { class: "values" },
         el("span", { class: "chip" }, "점수 ", el("b", {}, fmt(sim))),
         el("span", { class: "chip" }, "이상 경계 ", el("b", {}, fmt(th.alert))),
         el("span", { class: "chip" }, "주의 경계 ", el("b", {}, fmt(th.watch))),
         el("span", { class: "chip" }, "판정 ", el("b", {}, verdict)),
-        el("span", { class: "chip" }, `반년 ${F.bars.length}개 중 순위 `, el("b", {}, `${bar.rank}위`)))] },
+        el("span", { class: "chip" }, `반년 ${F.bars.length}개 중 순위 `, el("b", {}, `${bar.rank}위`)),
+        el("span", { class: "chip" }, "이진 점수로는 ", el("b", {}, `${bar.rankBin}위`)))] },
   ];
   F.label = label;
   showFrame(0);

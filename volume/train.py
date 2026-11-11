@@ -156,70 +156,79 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                    sum(dist_reg)),
        source=data.level_of)
 
-    # ⑤ 기본 벡터 꺼내기
-    t.section("시간대 모델", "봉 하나 = 요일 ⊕ 시간대 ⊕ 거래량 단계. '이 요일·시간대에 이 거래량이 흔했나'를 묻는다.")
+    # ⑤ 기본 벡터 꺼내기 (item memory)
+    t.section("시간대 모델", "Binary Spatter Code. 봉 하나 = 요일 ⊕ 시간대 ⊕ 거래량 단계(binding). "
+                         "기억 = 봉들의 bundling. '이 요일·시간대에 이 거래량이 흔했나'를 묻는 원형 기반 이상탐지.")
     cb = model.Codebook(sessions, levels, D)
-    sims_ds = [similarity(a, b) for i, a in enumerate(list(cb.days.values()) + list(cb.sessions.values()))
-               for j, b in enumerate(list(cb.days.values()) + list(cb.sessions.values())) if i < j]
-    n_base = len(cb.days) + len(cb.sessions)
-    n_pairs = n_base * (n_base - 1) // 2
-    t.step(f"요일 벡터 {len(cb.days)}개, 시간대 벡터 {len(cb.sessions)}개 꺼내기", "벡터 생성", [
-        why("설계 선택", "요일과 시간대는 서로 독립인 무작위 벡터다. 월요일과 화요일이 가깝다는 식의 순서 정보는 넣지 않았다."),
-        why("수학적 사실", f"이름이 다르면 벡터는 서로 무관하다. {n_base}개 벡터의 {n_pairs}쌍 유사도는 0 근처이고 흔들림은 약 {noise_level(D):.2f}이다."),
+    base = list(cb.days.values()) + list(cb.sessions.values())
+    sims_ds = [similarity(x, y) for i, x in enumerate(base) for j, y in enumerate(base) if i < j]
+    n_base, n_pairs = len(base), len(sims_ds)
+    t.step(f"요일 벡터 {len(cb.days)}개, 시간대 벡터 {len(cb.sessions)}개 꺼내기 (item memory)", "벡터 생성", [
+        why("설계 선택", "요일과 시간대는 이름의 SHA-256에서 만든 서로 무관한 벡터다. 월요일과 화요일이 가깝다는 식의 순서 정보는 넣지 않았다."),
+        why("수학적 사실", f"무작위 벡터 두 개의 유사도는 평균 0, 표준편차 1/√D = {noise_level(D):.2f}인 분포를 따른다(근사). "
+                       "SHA-256 출력을 무작위로 볼 수 있다는 것은 증명된 정리가 아니라 널리 받아들이는 가정이다."),
+        why("이 데이터에서 관찰", f"{n_base}개 벡터의 {n_pairs}쌍 유사도는 {min(sims_ds):.4f}부터 {max(sims_ds):.4f}까지였다."),
     ], outputs=[vec_info(model.day_name(k), v, full=True) for k, v in cb.days.items()]
                + [vec_info(model.session_name(k), v, full=True) for k, v in cb.sessions.items()]
                + [{"type": "value", "name": f"{n_pairs}쌍 유사도 범위",
                    "value": [round(min(sims_ds), 4), round(max(sims_ds), 4)]}],
-       check=check(f"{n_pairs}쌍 모두 |유사도| ≤ 0.03인가", True, bool(max(abs(s) for s in sims_ds) <= 0.03)),
+       check=check(f"{n_pairs}쌍 모두 |유사도| ≤ 0.03인가", True, bool(max(abs(x) for x in sims_ds) <= 0.03)),
        source=model.Codebook)
 
     lv_sims = [round(similarity(cb.level(1), cb.level(k)), 4) for k in range(1, levels + 1)]
-    t.step("수준 벡터 12단계 만들기", "뒤집기", [
-        why("설계 선택", f"1단계는 '{model.LADDER_NAME}'에서 꺼낸 벡터. 한 단계 오를 때마다 아직 안 뒤집은 칸을 약 {D // 2 // (levels - 1)}개씩 뒤집는다."),
-        why("수학적 사실", "이웃 단계는 비슷하고 먼 단계는 무관하다. 1단계와 12단계는 정확히 절반이 달라 유사도 0이다. "
-                       "이 성질 때문에 '7단계 봉'은 기억 속 '6단계 봉'과도 꽤 닮은 것으로 계산된다."),
+    t.step(f"수준 벡터 {levels}단계 만들기 (level hypervectors)", "뒤집기", [
+        why("설계 선택", f"1단계는 '{model.LADDER_NAME}'에서 꺼낸 벡터. 한 단계 오를 때마다 아직 안 뒤집은 칸을 약 {D // 2 // (levels - 1)}개씩 뒤집는다. "
+                       "HDC 문헌의 level hypervector와 같은 방식이다."),
+        why("수학적 사실", f"뒤집은 칸이 겹치지 않으므로 두 단계의 해밍 거리는 그 사이에 뒤집은 칸 수와 정확히 같다. "
+                       f"그래서 유사도는 단계 차이에 따라 일정하게 줄고, 1단계와 {levels}단계는 정확히 절반이 달라 유사도 0이다."),
     ], outputs=[vec_info(f"{k}단계", cb.level(k), full=True) for k in range(1, levels + 1)]
                + [{"type": "table", "name": "단계마다 뒤집은 칸 수", "columns": ["구간", "칸 수"],
                    "rows": [[f"{k + 1}→{k + 2}", len(f)] for k, f in enumerate(cb.flips)]},
                   {"type": "table", "name": "1단계와의 유사도", "columns": ["단계", "유사도"],
-                   "rows": [[k, s] for k, s in zip(range(1, levels + 1), lv_sims)]}],
-       check=check("1단계와 12단계의 다른 칸 수", D // 2, hamming(cb.level(1), cb.level(levels))),
+                   "rows": [[k, x] for k, x in zip(range(1, levels + 1), lv_sims)]}],
+       check=check(f"1단계와 {levels}단계의 다른 칸 수", D // 2, hamming(cb.level(1), cb.level(levels))),
        source=model.Codebook)
 
-    # ⑥ 기억에 더하기
     used = [b for b in bars if b["level"] is not None]
     mem = model.train(cb, used)
     mv = mem.to_vector()
-
-    # ⑦ 다시 채점 (자기 자신 빼고)
     vecs = [model.bar_vector(cb, b["weekday"], b["hour"], b["level"]) for b in used]
+
+    # 봉 하나 묶기 예시는 채점 뒤에 고른다(가장 드문 봉)
     for b, v in zip(used, vecs):
-        b["score"] = round(model.score_leave_one_out(mem, v), 4)
-        b["score_in"] = round(model.score(mv, v), 4)
-        cl, same, n = model.count_closeness(used, b, levels)
+        b["score"] = round(model.counter_score_leave_one_out(mem, v), 4)
+        b["score_bin"] = round(model.score_leave_one_out(mem, v), 4)
+        cl, same, n, cl_sum = model.count_closeness(used, b, levels)
         b["count_closeness"] = round(cl, 4) if cl is not None else None
+        b["count_sum"] = round(cl_sum, 3)
         b["count_same"], b["count_peers"] = same, n
     scores = np.array([b["score"] for b in used])
+    bins = np.array([b["score_bin"] for b in used])
     alert = float(np.percentile(scores, vc["alert_percentile"]))
     watch = float(np.percentile(scores, vc["watch_percentile"]))
+    alert_b = float(np.percentile(bins, vc["alert_percentile"]))
+    watch_b = float(np.percentile(bins, vc["watch_percentile"]))
     ranked = sorted(used, key=lambda b: b["score"])
     for i, b in enumerate(ranked):
         b["rank"] = i + 1
         b["verdict"] = "이상" if b["score"] <= alert else "주의" if b["score"] <= watch else "평소"
+    for i, b in enumerate(sorted(used, key=lambda b: b["score_bin"])):
+        b["rank_bin"] = i + 1
 
-    # 따라가기 예시: 가장 이상한 봉
     ex = ranked[0]
     dv, sv, lv = cb.days[ex["weekday"]], cb.sessions[ex["hour"]], cb.level(ex["level"])
     ds = bind(dv, sv)
     bv = bind(ds, lv)
     back = nearest(bind(bv, ds), {f"{k}단계": cb.level(k) for k in range(1, levels + 1)})
-    t.step("봉 하나를 벡터 하나로 묶기", "묶기", [
-        why("설계 선택", "봉 하나 = 요일 ⊕ 시간대 ⊕ 단계. 세 이름표를 XOR로 묶어 1만 비트 하나로 만든다."),
-        why("수학적 사실", "묶은 벡터는 재료 셋 중 어느 것과도 닮지 않는다(유사도 0 근처). "
-                       "그래서 '화요일 13시대 12단계'와 '화요일 13시대 6단계'는 단계 벡터끼리 닮은 만큼만 닮는다."),
-        why("수학적 사실", "묶은 벡터를 (요일 ⊕ 시간대)로 다시 XOR하면 단계 벡터가 그대로 나온다."),
-    ], inputs=[{"type": "value", "name": "예시 봉",
-                "value": f"{ex['date']} ({ex['weekday']}) {ex['hour']}시대 {ex['volume']:,}주, 중앙값의 {ex['ratio']:.1f}배, {ex['level']}단계"},
+    t.step("봉 하나를 벡터 하나로 묶기 (binding)", "묶기", [
+        why("설계 선택", "봉 하나 = 요일 ⊕ 시간대 ⊕ 단계. 세 벡터를 XOR로 묶어 1만 비트 하나로 만든다(역할 셋을 한 레코드로 묶는 binding)."),
+        why("수학적 사실", "XOR로 묶은 벡터는 무작위 재료와 무관해진다(유사도 0 근처). 같은 열쇠(요일 ⊕ 시간대)로 묶은 두 봉의 해밍 거리는 "
+                       "두 단계 벡터의 해밍 거리와 정확히 같다. 그래서 같은 요일·시간대 안에서는 단계끼리 닮은 만큼만 닮는다."),
+        why("수학적 사실", "묶은 벡터를 (요일 ⊕ 시간대)로 다시 XOR하면(unbinding) 단계 벡터가 그대로 나온다."),
+        why("수학적 사실", "요일 ⊕ 시간대 열쇠들은 쌍마다 거의 무관하지만 서로 독립은 아니다. 예: (월 ⊕ 10시) ⊕ (월 ⊕ 11시) ⊕ (화 ⊕ 10시) = 화 ⊕ 11시. "
+                       "그래서 다른 칸 봉들이 섞어 넣는 잡음(crosstalk)은 무작위가 아니라 구조를 가진다."),
+    ], inputs=[{"type": "value", "name": "예시 봉(가장 드문 봉)",
+                "value": f"{ex['date']} ({ex['weekday']}) {ex['hour']}시대 {ex['volume']:,}주, 중앙값의 {ex['ratio']:.2f}배, {ex['level']}단계"},
                vec_info(model.day_name(ex["weekday"]), dv, full=True),
                vec_info(model.session_name(ex["hour"]), sv, full=True),
                vec_info(f"{ex['level']}단계", lv, full=True)],
@@ -230,68 +239,105 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
        check=check("봉 벡터 ⊕ (요일 ⊕ 시간대)에 가장 가까운 단계", f"{ex['level']}단계", back[0][0]),
        source=model.bar_vector)
 
+    ctx = {(w, h): sum(1 for b in used if b["weekday"] == w and b["hour"] == h) for w in "월화수목금" for h in sessions}
+    empty = [f"{w} {h}시대" for (w, h), n in ctx.items() if n == 0]
+    nonempty = [n for n in ctx.values() if n]
+    loo_ties = float(np.mean([int((model.without(mem, v).counts == 0).sum()) for v in vecs]))
     hist_counts = np.bincount(np.abs(mem.counts))
-    t.step("모든 봉을 기억에 더하기", "더하기", [
-        why("설계 선택", f"학습 기간의 봉 {mem.n}개(결측 제외)를 칸마다 +1/-1로 누적한다. 이 카운터 1만 개가 모델의 전부다."),
-        why("수학적 사실", "새 봉이 오면 카운터에 그 봉의 +1/-1을 더하기만 하면 된다. 다시 학습할 필요가 없다. 순서를 바꿔 더해도 결과가 같다."),
-        why("설계 선택", "비교할 때는 카운터를 다수결로 0/1 벡터로 만든다. 0:0인 칸은 고정된 동점깨기 벡터를 따른다."),
+    t.step("모든 봉을 기억에 더하기 (bundling)", "더하기", [
+        why("설계 선택", f"학습 기간의 봉 {mem.n}개(결측 제외)를 칸마다 +1/-1로 누적한다. 이 누산기(accumulator)가 기억이다. "
+                       "다수결로 0/1을 정하면 원형(prototype) 벡터가 된다."),
+        why("수학적 사실", "기억(누산기)은 새 봉의 +1/-1을 더하기만 하면 갱신되고, 더하는 순서와 무관하다. "
+                       "다만 중앙값, 단계 경계, 판정 기준은 자료가 늘면 다시 계산해야 한다."),
+        why("설계 선택", "다수결에서 0:0으로 비긴 칸은 고정된 동점깨기 벡터를 따른다. 모든 원형이 이 벡터 쪽으로 조금 치우치는 대가가 있다."),
+        why("이 데이터에서 관찰", f"요일·시간대 칸마다 봉 수는 {min(nonempty)}-{max(nonempty)}개다. "
+                               + (f"{', '.join(empty)}에는 봉이 하나도 없다(월요일은 늘 주말 다음 날이라 9시대 시간봉이 0으로 나오고, 그날 15시대 역산 봉을 결측으로 두기 때문이다). "
+                                  "이 칸의 새 봉은 비교할 같은 칸 봉이 없다." if empty else "")),
     ], inputs=[{"type": "value", "name": "더한 봉 수", "value": mem.n}],
-       outputs=[{"type": "value", "name": "카운터 범위", "value": [int(mem.counts.min()), int(mem.counts.max())]},
-                {"type": "table", "name": "카운터 절댓값 분포", "columns": ["|카운터|", "칸 수"],
+       outputs=[{"type": "value", "name": "누산기 범위", "value": [int(mem.counts.min()), int(mem.counts.max())]},
+                {"type": "value", "name": "모든 봉이 같은 값이던 칸 수(|누산기| = 봉 수)", "value": int((np.abs(mem.counts) == mem.n).sum())},
+                {"type": "table", "name": "누산기 절댓값 분포", "columns": ["|누산기|", "칸 수"],
                  "rows": [[i, int(c)] for i, c in enumerate(hist_counts) if c]},
-                {"type": "value", "name": "동점(0) 칸 수", "value": mem.tie_count()},
-                vec_info("기억(다수결)", mv, full=True)],
+                {"type": "value", "name": "전체 기억의 동점(0) 칸 수", "value": mem.tie_count()},
+                {"type": "value", "name": "자기 제외 기억의 동점 칸 수(평균)", "value": round(loo_ties, 1)},
+                {"type": "table", "name": "요일·시간대 칸별 봉 수", "columns": ["요일"] + [f"{h}시대" for h in sessions],
+                 "rows": [[w] + [ctx[(w, h)] for h in sessions] for w in "월화수목금"]},
+                vec_info("원형(다수결)", mv, full=True)],
        check=check("더한 봉 수 = 결측 아닌 봉 수", len(used), mem.n),
        source=model.train)
 
     noise = noise_level(D)
-    t.step("반년을 다시 채점하기", "비교", [
-        why("설계 선택", "점수 = 봉 벡터와 기억의 유사도. 높으면 그 요일·시간대에 흔하던 단계, 낮으면 드물던 단계다."),
-        why("설계 선택", "채점할 때는 그 봉 자신을 기억에서 빼고(카운터에서 그 봉의 +1/-1을 되돌리고) 비교한다. "
-                       "앞으로 들어올 새 봉은 채점 시점에 아직 기억에 없으므로, 같은 조건을 맞춘 것이다."),
-        why("수학적 사실", f"이 유사도에는 다른 요일·시간대 봉들에서 오는 잡음이 섞이며, 그 흔들림은 약 1/√D = {noise:.3f}이다."),
-        why("이 데이터에서 관찰", f"점수는 {scores.min():.4f}부터 {scores.max():.4f}까지 퍼져 있다. "
-                               f"잡음 폭 {noise:.3f}은 이 퍼짐(5%-95% 구간 {np.percentile(scores, 5):.4f}-{np.percentile(scores, 95):.4f})에 비해 작지 않다."),
-    ], outputs=[{"type": "table", "name": "점수 분포", "columns": ["구간 시작", "봉 수"], "rows": histogram(scores)},
-                {"type": "value", "name": "잡음 수준(1/√D)", "value": noise},
+    rho_c = model.spearman(scores, [b["count_sum"] for b in used])
+    rho_b = model.spearman(bins, [b["count_sum"] for b in used])
+    rho_cb = model.spearman(scores, bins)
+    t.step("반년을 다시 채점하기: 누산기 점수와 이진 점수", "비교", [
+        why("설계 선택", "본 점수 = 봉 벡터(0→-1, 1→+1)와 누산기의 코사인. 비교용 점수 = 봉 벡터와 0/1 원형의 해밍 유사도(BSC 원형 그대로). "
+                       "둘 다 그 봉 자신을 누산기에서 뺀 뒤 잰다."),
+        why("수학적 사실", "봉 벡터를 무작위로 뽑는다고 보면, 누산기 점수의 기댓값은 같은 요일·시간대 다른 봉들의 '단계 가까움' 합에 비례한다. "
+                       "다수결을 거친 이진 점수는 이 합의 비선형 함수라 순서가 달라진다."),
+        why("이 데이터에서 관찰", f"단순 카운트(가까움 합)와의 순위 상관: 누산기 점수 {rho_c:.2f}, 이진 점수 {rho_b:.2f}. "
+                               f"두 점수끼리의 순위 상관은 {rho_cb:.2f}다. 다수결에서 잃는 정보가 크다."),
+        why("수학적 사실", f"점수에 섞이는 잡음(crosstalk)의 크기는 약 1/√D = {noise:.3f}(근사)다. 이 잡음은 실행마다 바뀌지 않는다. "
+                       "벡터 이름이 정해지면 고정되는 치우침이라, 같은 조합은 늘 같은 방향으로 틀린다."),
+    ], outputs=[{"type": "table", "name": "누산기 점수 분포", "columns": ["구간 시작", "봉 수"], "rows": histogram(scores)},
+                {"type": "value", "name": "누산기 점수와 카운트 순위 상관", "value": round(rho_c, 3)},
+                {"type": "value", "name": "이진 점수와 카운트 순위 상관", "value": round(rho_b, 3)},
+                {"type": "value", "name": "두 점수의 순위 상관", "value": round(rho_cb, 3)},
                 {"type": "table", "name": "봉별 점수",
-                 "columns": ["날짜", "요일", "시간대", "거래량", "출처", "배율", "단계", "점수", "자기포함 점수",
-                             "카운트 가까움", "같은 단계 수", "같은 칸 봉 수", "순위", "판정"],
+                 "columns": ["날짜", "요일", "시간대", "거래량", "출처", "배율", "단계", "점수", "이진 점수",
+                             "카운트 가까움 합", "같은 단계 수", "같은 칸 봉 수", "순위", "이진 순위", "판정"],
                  "rows": [[b["date"], b["weekday"], b["hour"], b["volume"], b["source"], round(b["ratio"], 4),
-                           b["level"], b["score"], b["score_in"], b["count_closeness"], b["count_same"],
-                           b["count_peers"], b["rank"], b["verdict"]] for b in used]}],
-       check=check("점수 순서와 단순 카운트(같은 요일·시간대 봉들과의 단계 가까움) 순서의 순위 상관",
-                   1.0, round(model.spearman(scores, [b["count_closeness"] for b in used]), 3)),
-       source=model.score_leave_one_out)
+                           b["level"], b["score"], b["score_bin"], b["count_sum"], b["count_same"],
+                           b["count_peers"], b["rank"], b["rank_bin"], b["verdict"]] for b in used]}],
+       check=check("카운트 하위 30개(가장 드문 30개) 중 누산기 점수 하위 30개에 든 수", 30,
+                   len({id(b) for b in sorted(used, key=lambda b: b["count_sum"])[:30]} & {id(b) for b in ranked[:30]})),
+       source=model.counter_score_leave_one_out)
 
+    # 이름을 바꿔 다시 만들면?
+    robust = []
+    for salt in ("다른이름1|", "다른이름2|"):
+        cb2 = model.Codebook(sessions, levels, D, salt)
+        mem2 = model.train(cb2, used)
+        s2 = [model.counter_score_leave_one_out(mem2, model.bar_vector(cb2, b["weekday"], b["hour"], b["level"])) for b in used]
+        top2 = {id(used[i]) for i in np.argsort(s2)[:30]}
+        robust.append([salt, round(model.spearman(scores, s2), 3), len(top2 & {id(b) for b in ranked[:30]})])
+    t.step("이름을 바꿔 다시 만들어 보기", "비교", [
+        why("설계 선택", "요일·시간대·단계 벡터 이름 앞에 글자를 붙여 전혀 다른 벡터로 같은 계산을 다시 한다. 점수가 벡터 선택에 얼마나 기대는지 본다."),
+        why("이 데이터에서 관찰", f"다시 만든 점수와의 순위 상관은 {robust[0][1]:.2f}, {robust[1][1]:.2f}이고, 하위 30개 중 겹친 수는 "
+                               f"{robust[0][2]}, {robust[1][2]}개다. D = {D:,}에서도 순위의 세부는 벡터 선택에 따라 달라진다. "
+                               "'이상' 판정 하나하나를 확정된 답으로 읽으면 안 된다."),
+    ], outputs=[{"type": "table", "name": "이름을 바꾼 결과", "columns": ["붙인 글자", "순위 상관", "하위 30 겹침"], "rows": robust}],
+       source=model.Codebook)
+
+    n_alert = sum(b["verdict"] == "이상" for b in used)
+    n_watch = sum(b["verdict"] == "주의" for b in used)
     t.step("판정 기준 정하기", "일반 계산", [
-        why("설계 선택", f"학습 봉 점수의 하위 {vc['alert_percentile']}%를 '이상', 하위 {vc['watch_percentile']}%를 '주의' 경계로 삼는다. "
+        why("설계 선택", f"학습 봉 누산기 점수의 하위 {vc['alert_percentile']}% 지점을 '이상', 하위 {vc['watch_percentile']}% 지점을 '주의' 경계로 삼는다. "
                        "기준이 이 종목의 자기 데이터에서 나오므로 종목마다 다르다."),
-        why("수학적 사실", f"정의상 학습 봉 {len(used)}개 중 약 {vc['alert_percentile']}%가 '이상'으로, 약 {vc['watch_percentile']}%가 '주의' 이하로 분류된다."),
+        why("이 데이터에서 관찰", f"같은 점수인 봉이 있어 정확히 {vc['alert_percentile']}%가 되지는 않는다. 이번에는 '이상' {n_alert}개, '주의' {n_watch}개다."),
     ], outputs=[{"type": "value", "name": "이상 경계(점수 이하)", "value": round(alert, 4)},
                 {"type": "value", "name": "주의 경계(점수 이하)", "value": round(watch, 4)},
+                {"type": "value", "name": "이진 점수의 이상 경계(참고)", "value": round(alert_b, 4)},
                 {"type": "table", "name": "판정별 봉 수", "columns": ["판정", "봉 수"],
                  "rows": [[v, sum(b["verdict"] == v for b in used)] for v in ("이상", "주의", "평소")]}],
        source=run)
 
     big = [b for b in used if b["hour"] != dsess and b["ratio"] >= 16]
-    count_rank = {id(b): i + 1 for i, b in enumerate(sorted(used, key=lambda b: b["count_closeness"]))}
-    t.step("가장 이상한 봉 순위", "일반 계산", [
-        why("설계 선택", "점수가 낮은 순으로 줄 세운다. 옆에 단순 카운트로 매긴 순위를 함께 둔다."),
-        why("이 데이터에서 관찰", "HDC 점수가 묻는 것은 '이 요일·시간대에 이 단계가 흔했나'다. '중앙값의 몇 배인가'와 같은 질문이 아니다. "
-                               "그래서 거래량이 0에 가까운 봉(1단계)도 폭증한 봉만큼 낮은 점수를 받고, "
-                               "같은 요일·시간대에 큰 봉이 여러 번 있었다면 폭증 봉도 점수가 덜 낮다."),
-    ], outputs=[{"type": "table", "name": "상위 30",
-                 "columns": ["순위", "날짜", "요일", "시간대", "거래량", "배율", "단계", "점수", "판정", "카운트 순위"],
+    count_rank = {id(b): i + 1 for i, b in enumerate(sorted(used, key=lambda b: b["count_sum"]))}
+    t.step("가장 드문 봉 순위", "일반 계산", [
+        why("설계 선택", "누산기 점수가 낮은 순으로 줄 세운다. 옆에 이진 점수 순위와 단순 카운트 순위를 둔다."),
+        why("이 데이터에서 관찰", "점수가 묻는 것은 '이 요일·시간대에 이 단계가 흔했나'다. '중앙값의 몇 배인가'와 같은 질문이 아니다. "
+                               "그래서 거래가 거의 없던 봉(1-2단계)도 폭증한 봉만큼 낮은 점수를 받는다(1단계와 12단계가 평소에서 비슷하게 멀다)."),
+    ], outputs=[{"type": "table", "name": "하위 30",
+                 "columns": ["순위", "날짜", "요일", "시간대", "거래량", "배율", "단계", "점수", "판정", "이진 순위", "카운트 순위"],
                  "rows": [[b["rank"], b["date"], b["weekday"], b["hour"], b["volume"], round(b["ratio"], 2),
-                           b["level"], b["score"], b["verdict"], count_rank[id(b)]] for b in ranked[:30]]},
+                           b["level"], b["score"], b["verdict"], b["rank_bin"], count_rank[id(b)]] for b in ranked[:30]]},
                 {"type": "table", "name": f"평소의 16배 이상이던 {span} 봉",
-                 "columns": ["순위", "날짜", "요일", "시간대", "배율", "단계", "점수", "카운트 순위"],
+                 "columns": ["순위", "날짜", "요일", "시간대", "배율", "단계", "점수", "이진 순위", "카운트 순위"],
                  "rows": [[b["rank"], b["date"], b["weekday"], b["hour"], round(b["ratio"], 1), b["level"],
-                           b["score"], count_rank[id(b)]] for b in sorted(big, key=lambda b: b["rank"])]}],
-       check=check("16배 이상 봉 중 상위 30위 안에 든 수", len(big),
-                   sum(1 for b in big if b["rank"] <= 30)),
-       source=model.score_leave_one_out)
+                           b["score"], b["rank_bin"], count_rank[id(b)]] for b in sorted(big, key=lambda b: b["rank"])]}],
+       check=check("16배 이상 봉 중 하위 30위 안에 든 수", len(big), sum(1 for b in big if b["rank"] <= 30)),
+       source=model.counter_score_leave_one_out)
 
     # 저장
     os.makedirs(out, exist_ok=True)
@@ -307,7 +353,9 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
         "stock": stock_id, "name": stock["name"], "dim": D, "levels": levels, "sessions": sessions,
         "ladder": model.LADDER_NAME, "edges": edges.tolist(),
         "medians": {str(s): meds[s] for s in sessions},
+        "score": "누산기 코사인(자기 제외). 이진 점수는 비교용",
         "thresholds": {"alert": round(alert, 4), "watch": round(watch, 4),
+                       "alert_bin": round(alert_b, 4), "watch_bin": round(watch_b, 4),
                        "alert_percentile": vc["alert_percentile"], "watch_percentile": vc["watch_percentile"]},
         "trained": {"start_after": start, "end": end, "days": len(dates), "bars": mem.n,
                     "at": now.isoformat(timespec="seconds")},
