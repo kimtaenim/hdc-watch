@@ -664,5 +664,16 @@
   },
   "failures": [],
   "trace": "data/volume/045510.KQ/traces/walls-20261111-220109.json"
+ },
+ {
+  "at": "2026-11-11T22:13:00+09:00",
+  "kind": "volume.train",
+  "subject": "045510.KQ",
+  "fetched": {
+   "5분봉": 3170,
+   "일봉": 125
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/train-20261111-221300.json"
  }
 ]

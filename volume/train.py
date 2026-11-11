@@ -1,4 +1,4 @@
-"""거래량 모델 학습: 최근 반년 봉을 모두 더해 프로토타입을 만들고, 그 반년을 다시 채점한다.
+"""거래량 모델 학습: 최근 60일(야후 5분봉) 봉을 모두 더해 프로토타입을 만들고, 그 기간을 다시 채점한다.
 
 실행: python -m volume.train [--stock 045510.KQ] [--end YYYY-MM-DD] [--raw 저장된원자료.json]
 결과: docs/data/volume/<종목>/model.json, bars.json, raw.json, traces/train-*.json, docs/data/runs.json
@@ -54,7 +54,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
 
     t = Trace("volume.train", subject={"type": "stock", "id": stock_id, "code": stock["code"],
                                        "name": stock["name"]},
-              params={"D": D, "levels": levels, "sessions": sessions, "train_months": vc["train_months"],
+              params={"D": D, "levels": levels, "sessions": sessions, "source": "야후 5분봉 최근 60일",
                       "ratio_edge_exponents": vc["ratio_edge_exponents"]})
 
     t.section("공통: 자료와 거래량 단계", "HDC 연산 없이 숫자를 이름표로 바꾸는 앞단.")
@@ -62,49 +62,64 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     try:
         if raw_path:
             raw = json.load(open(raw_path, encoding="utf-8"))
-            hourly, daily, fetched_at = raw["hourly"], raw["daily"], raw.get("fetched_at")
-            closes = raw.get("closes", {})
+            fetched_at = raw.get("fetched_at")
             t.note(f"저장된 원자료 사용: {raw_path}")
         else:
-            hourly, daily, closes = data.fetch(stock_id)
+            raw = data.fetch(stock_id)
             fetched_at = now.isoformat(timespec="seconds")
+        fivemin, daily = raw["fivemin"], raw["daily"]
     except Exception as e:
         t.failure("저장된 원자료 읽기" if raw_path else "yfinance 수집", f"{type(e).__name__}: {e}")
         t.save(trace_path)
         append_run({"at": now.isoformat(timespec="seconds"), "kind": "volume.train", "subject": stock_id,
                     "fetched": {}, "failures": [f"수집 실패: {e}"], "trace": rel(trace_path)})
         raise
-    t.fetched("시간봉", len(hourly))
+    hourly = data.hourly_from_5m(fivemin)
+    t.fetched("5분봉", len(fivemin))
     t.fetched("일봉", len(daily))
     days = data.complete_days(hourly, daily, now)
-    end = end or days[-1]
-    dates, start = data.window(days, end, vc["train_months"])
-    t.step("원자료 받기", "일반 계산", [
-        why("설계 선택", "yfinance(야후 금융의 비공식 경로)로 1시간봉과 일봉을 받는다. 비공식이라 실패하거나 값이 바뀔 수 있어, "
-                       "받은 원자료를 raw.json에 그대로 남긴다."),
-        why("설계 선택", f"학습 기간은 {start} 다음 날부터 {end}까지 {vc['train_months']}개월. 일별 거래량이 확정된 날만 쓴다."),
-    ], outputs=[{"type": "value", "name": "받은 시간봉", "value": len(hourly)},
-                {"type": "value", "name": "받은 일봉", "value": len(daily)},
+    if end:
+        days = [d for d in days if d <= end]
+    dates = days[1:]  # 60일의 첫날은 중간부터 잘려 있을 수 있어 뺀다
+    t.step("원자료 받기 (5분봉)", "일반 계산", [
+        why("설계 선택", "yfinance(야후 금융의 비공식 경로)로 5분봉을 받는다. 야후가 5분봉을 주는 최대 기간인 최근 60일이 학습 기간이다. "
+                       "받은 원자료는 raw.json에 그대로 남긴다."),
+        why("설계 선택", "60일의 첫날은 중간부터 잘려 있을 수 있어 빼고, 오늘은 장 마감 뒤(16시 이후)에만 쓴다."),
+    ], outputs=[{"type": "value", "name": "받은 5분봉", "value": len(fivemin)},
                 {"type": "value", "name": "학습 기간", "value": f"{dates[0]} - {dates[-1]}"},
                 {"type": "value", "name": "학습 거래일 수", "value": len(dates)},
                 {"type": "value", "name": "받은 시각", "value": fetched_at}],
        source=data.fetch)
 
+    # 5분봉으로 만든 시간 봉과 야후 시간봉 대조
+    yh = {(r["date"], r["hour"]): r["volume"] for r in raw.get("hourly_yahoo", [])}
+    pairs = [(h, yh.get((h["date"], h["hour"]))) for h in hourly if h["date"] in set(dates) and h["hour"] in sessions]
+    pairs = [(h, y) for h, y in pairs if y is not None]
+    same = sum(1 for h, y in pairs if h["volume"] == y)
+    rel_diff = [abs(h["volume"] - y) / y for h, y in pairs if y > 0]
+    rel_med, rel_95 = (float(np.median(rel_diff)), float(np.percentile(rel_diff, 95))) if rel_diff else (0.0, 0.0)
+    zero9 = sorted({h["date"] for h, y in pairs if y == 0 and h["volume"] > 0})
     # ② 하루 봉 만들기
     bars = data.build_bars(hourly, dates, sessions)
     span = f"{sessions[0]}-{sessions[-1]}시대"
     for b in bars:
         if b["missing"]:
             t.failure("봉 만들기", f"{b['date']} {b['hour']}시대: {b['missing']}")
-    t.step(f"하루 {len(sessions)}개 봉 만들기", "일반 계산", [
-        why("설계 선택", f"{span} 시간봉 {len(sessions)}개를 그대로 쓴다. 9시대는 야후 시간봉이 쉬는 날 다음 거래일마다 0으로 나와 빼고, "
-                       "15시대(마감 동시호가)는 시간봉이 없어 뺀다(2026-11-11 결정)."),
+    t.step(f"5분봉을 합쳐 하루 {len(sessions)}개 봉 만들기", "일반 계산", [
+        why("설계 선택", f"5분봉을 시간대별로 합쳐 {span} 봉 {len(sessions)}개를 만든다. 15시대(15:00-15:30)는 야후 5분봉에 없고, "
+                       "'일별 - 5분봉 합'으로 역산하면 음수가 나오는 날이 있어 뺀다(2026-11-11 결정)."),
+        why("이 데이터에서 관찰", f"5분봉 합과 야후 시간봉이 정확히 같은 봉은 {len(pairs)}개 중 {same}개지만, 차이는 대부분 작다"
+                               f"(상대 차이 중앙값 {rel_med:.1%}, 95% 지점 {rel_95:.1%}). 원인은 확인하지 못했다. "
+                               f"큰 차이는 야후 시간봉에서 9시대가 0인데 5분봉에는 거래가 있는 날({len(zero9)}일)이다. 그래서 시간봉 대신 5분봉을 쓴다."),
     ], outputs=[{"type": "value", "name": "만든 봉", "value": len(bars)},
                 {"type": "value", "name": "빠진 봉", "value": sum(1 for b in bars if b["missing"])},
-                {"type": "table", "name": "최근 하루", "columns": ["날짜", "요일", "시간대", "거래량"],
-                 "rows": [[b["date"], b["weekday"], b["hour"], b["volume"]] for b in bars[-len(sessions):]]}],
+                {"type": "value", "name": "야후 시간봉과 같은 봉", "value": f"{same} / {len(pairs)}"},
+                {"type": "table", "name": "야후 시간봉이 9시대 0인데 5분봉엔 거래가 있던 날", "columns": ["날짜", "5분봉 합", "야후 시간봉"],
+                 "rows": [[h["date"], h["volume"], y] for h, y in pairs if y == 0 and h["volume"] > 0]},
+                {"type": "table", "name": "최근 하루", "columns": ["날짜", "요일", "시간대", "거래량", "5분봉 수"],
+                 "rows": [[b["date"], b["weekday"], b["hour"], b["volume"], b.get("n5")] for b in bars[-len(sessions):]]}],
        check=check("만든 봉 수 = 거래일 수 × 시간대 수", len(dates) * len(sessions), len(bars)),
-       source=data.build_bars)
+       source=data.hourly_from_5m)
 
     # ③ 시간대 중앙값
     meds = data.session_medians(bars, sessions)
@@ -247,7 +262,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     rho_c = model.spearman(scores, [b["count_sum"] for b in used])
     rho_b = model.spearman(bins, [b["count_sum"] for b in used])
     rho_cb = model.spearman(scores, bins)
-    t.step("반년을 다시 채점하기: 정수 점수와 이진 점수", "비교", [
+    t.step("학습 기간을 다시 채점하기: 정수 점수와 이진 점수", "비교", [
         why("설계 선택", "본 점수 = 봉 벡터(0→-1, 1→+1)와 정수 프로토타입의 코사인. 비교용 점수 = 봉 벡터와 이진 프로토타입의 해밍 유사도(바이너리 스패터 코드 본래 방식). "
                        "둘 다 그 봉 자신을 정수 프로토타입에서 뺀 뒤 잰다."),
         why("수학적 사실", "봉 벡터를 무작위로 뽑는다고 보면, 정수 점수의 기댓값은 같은 요일·시간대 다른 봉들의 '단계 가까움' 합에 비례한다. "
@@ -320,10 +335,10 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     os.makedirs(out, exist_ok=True)
     window_set = set(dates)
     with open(os.path.join(out, "raw.json"), "w", encoding="utf-8") as f:
-        json.dump({"fetched_at": fetched_at, "stock": stock_id,
-                   "hourly": [r for r in hourly if r["date"] in window_set],
-                   "daily": {k: v for k, v in daily.items() if k in window_set},
-                   "closes": {k: v for k, v in closes.items() if k in window_set}}, f, ensure_ascii=False)
+        json.dump({"fetched_at": fetched_at, "stock": stock_id, "source": "yahoo 5m 60d",
+                   "window": [dates[0], dates[-1]],
+                   "fivemin": fivemin, "hourly": hourly, "hourly_yahoo": raw.get("hourly_yahoo", []),
+                   "daily": daily}, f, ensure_ascii=False)
     with open(os.path.join(out, "bars.json"), "w", encoding="utf-8") as f:
         json.dump({"stock": stock_id, "bars": bars}, f, ensure_ascii=False)
     model_json = {
@@ -334,7 +349,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
         "thresholds": {"alert": round(alert, 4), "watch": round(watch, 4),
                        "alert_bin": round(alert_b, 4), "watch_bin": round(watch_b, 4),
                        "alert_percentile": vc["alert_percentile"], "watch_percentile": vc["watch_percentile"]},
-        "trained": {"start_after": start, "end": end, "days": len(dates), "bars": mem.n,
+        "trained": {"from": dates[0], "end": dates[-1], "days": len(dates), "bars": mem.n,
                     "at": now.isoformat(timespec="seconds")},
         "history": [{"at": now.isoformat(timespec="seconds"), "kind": "학습", "added": mem.n, "n_after": mem.n}],
         "memory": mem.to_json(),

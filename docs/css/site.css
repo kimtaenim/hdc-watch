@@ -138,8 +138,8 @@ th { position: sticky; top: 0; background: var(--card); }
 .why-box { margin-top: 4px; }
 .why-box > summary { cursor: pointer; color: var(--muted); font-size: .8rem; }
 .table-wrap.flat { max-height: none; border: 0; }
-.rowtable { font-size: .74rem; }
-.rowtable th, .rowtable td { text-align: right; padding: 2px 4px; }
+.rowtable { font-size: .68rem; }
+.rowtable th, .rowtable td { text-align: right; padding: 2px 3px; }
 .rowtable thead th { font-weight: 400; color: var(--muted); }
 .rowtable tbody th { text-align: left; font-weight: 600; position: static; }
 .rowtable .sel { background: color-mix(in srgb, var(--hl) 18%, transparent); }

@@ -259,10 +259,10 @@ async function drawFlow() {
     class: h === bar.hour ? "on" : "", onclick: () => { F.hour = h; drawFlow(); } }, `${h}시`)));
 
   ol.replaceChildren(
-    card("①", "받은 자료 (시간봉)", "일반 계산", S((s) => s.name.startsWith("원자료")),
+    card("①", "받은 자료 (5분봉을 시간대별로 합침)", "일반 계산", S((s) => s.name.startsWith("원자료")),
       rowTable(["시간", ...hours.map((h) => `${h}시`)], [
-        ["거래량", ...hours.map((h) => raw[h]?.volume)]], hi)),
-    card("②", "평소 거래량 (반년 중앙값)", "일반 계산", S((s) => s.name.includes("중앙값")),
+        ["거래량", ...hours.map((h) => raw[h]?.volume)], ["5분봉 수", ...hours.map((h) => raw[h]?.n5)]], hi)),
+    card("②", "평소 거래량 (학습 기간 중앙값)", "일반 계산", S((s) => s.name.includes("중앙값")),
       rowTable(["시간", ...hours.map((h) => `${h}시`)], [["중앙값", ...hours.map((h) => Math.round(m.medians[h].median))]], hi)),
     card("③", "평소의 몇 배 → 12단계", "일반 계산", S((s) => s.name.includes("단계 나누기")),
       rowTable(["시간", ...hours.map((h) => `${h}시`)], [
@@ -291,10 +291,10 @@ async function drawFlow() {
       rowTable(["시간", ...hours.map((h) => `${h}시`)], [
         ["정수 점수", ...day.map((b) => r2(res[b.hour].sim, 3))], ["이진 점수", ...day.map((b) => r2(res[b.hour].simBin, 3))],
         ["판정", ...day.map((b) => b.verdict)], ["순위", ...day.map((b) => b.rank)]], hi),
-      el("p", { class: "hint" }, `순위는 반년 ${F.bars.length}개 봉 중 정수 점수가 낮은 순.`),
+      el("p", { class: "hint" }, `순위는 학습 기간 ${F.bars.length}개 봉 중 정수 점수가 낮은 순.`),
       el("div", { class: "values" }, el("span", { class: "chip" }, "이상 경계 ", el("b", {}, fmt(th.alert))),
         el("span", { class: "chip" }, "주의 경계 ", el("b", {}, fmt(th.watch)))),
-      el("div", { class: "check" }, "파이썬 계산과 이 브라우저 계산(그날 5개 봉, 두 점수) ",
+      el("div", { class: "check" }, `파이썬 계산과 이 브라우저 계산(그날 ${day.length}개 봉, 두 점수) `,
         el("span", { class: allOk ? "ok" : "bad" }, allOk ? "모두 일치" : "어긋남 있음"))),
   );
 }

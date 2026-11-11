@@ -12,27 +12,37 @@ KST = dt.timezone(dt.timedelta(hours=9))
 WEEKDAYS = "월화수목금토일"
 
 
-def fetch(ticker: str):
-    """yfinance로 1시간봉과 일봉을 받는다. 비공식 경로라 실패할 수 있으므로 예외를 그대로 올린다.
-
-    돌려주는 값
-      hourly: [{"date": "2026-11-10", "hour": 9, "volume": 1234, "open", "high", "low", "close"}, ...]
-      daily:  {"2026-11-10": 32059, ...}            일별 거래량
-      closes: {"2026-11-10": 1057.0, ...}           일별 종가
-    """
+def fetch(ticker: str) -> dict:
+    """yfinance로 5분봉(최근 60일, 야후가 주는 최대), 비교용 1시간봉, 일봉을 받는다.
+    비공식 경로라 실패할 수 있으므로 예외를 그대로 올린다.
+    돌려주는 값: {"fivemin": [{"date", "time", "hour", "volume", "open", "high", "low", "close"}, ...],
+                  "hourly_yahoo": [{"date", "hour", "volume"}, ...], "daily": {"날짜": 거래량}}"""
     import yfinance as yf  # 수집할 때만 필요
 
     t = yf.Ticker(ticker)
-    h = t.history(period="730d", interval="1h", auto_adjust=False)
-    d = t.history(period="1y", interval="1d", auto_adjust=False)
-    if h.empty or d.empty:
-        raise RuntimeError(f"빈 응답: 시간봉 {len(h)}행, 일봉 {len(d)}행")
-    hourly = [{"date": ts.strftime("%Y-%m-%d"), "hour": ts.hour, "volume": int(r.Volume),
-               "open": float(r.Open), "high": float(r.High), "low": float(r.Low), "close": float(r.Close)}
-              for ts, r in zip(h.index.tz_convert("Asia/Seoul"), h.itertuples())]
+    m = t.history(period="60d", interval="5m", auto_adjust=False)
+    h = t.history(period="60d", interval="1h", auto_adjust=False)
+    d = t.history(period="6mo", interval="1d", auto_adjust=False)
+    if m.empty or d.empty:
+        raise RuntimeError(f"빈 응답: 5분봉 {len(m)}행, 일봉 {len(d)}행")
+    fivemin = [{"date": ts.strftime("%Y-%m-%d"), "time": ts.strftime("%H:%M"), "hour": ts.hour, "volume": int(r.Volume),
+                "open": float(r.Open), "high": float(r.High), "low": float(r.Low), "close": float(r.Close)}
+               for ts, r in zip(m.index.tz_convert("Asia/Seoul"), m.itertuples())]
+    hourly_yahoo = [{"date": ts.strftime("%Y-%m-%d"), "hour": ts.hour, "volume": int(v)}
+                    for ts, v in zip(h.index.tz_convert("Asia/Seoul"), h["Volume"])]
     daily = {ts.strftime("%Y-%m-%d"): int(v) for ts, v in zip(d.index, d["Volume"])}
-    closes = {ts.strftime("%Y-%m-%d"): float(v) for ts, v in zip(d.index, d["Close"])}
-    return hourly, daily, closes
+    return {"fivemin": fivemin, "hourly_yahoo": hourly_yahoo, "daily": daily}
+
+
+def hourly_from_5m(fivemin):
+    """5분봉을 시간대별로 합친다. 거래량 = 합, 시가 = 첫 봉 시가, 고가·저가 = 최대·최소, 종가 = 마지막 봉 종가.
+    야후는 거래가 없던 5분 칸은 보내지 않으므로, 5분봉 수가 12개보다 적을 수 있다."""
+    groups = {}
+    for r in sorted(fivemin, key=lambda r: (r["date"], r["time"])):
+        groups.setdefault((r["date"], r["hour"]), []).append(r)
+    return [{"date": d, "hour": h, "volume": sum(x["volume"] for x in g), "n5": len(g),
+             "open": g[0]["open"], "high": max(x["high"] for x in g), "low": min(x["low"] for x in g), "close": g[-1]["close"]}
+            for (d, h), g in sorted(groups.items())]
 
 
 def complete_days(hourly, daily, now: dt.datetime, close_hour: int = 16):
@@ -55,8 +65,7 @@ def window(days, end: str, months: int):
 def build_bars(hourly, dates, sessions):
     """날짜마다 정해진 시간대의 시간봉을 봉으로 만든다.
     봉: {"date", "weekday", "hour", "volume"(없으면 None), "missing": 이유 또는 None}
-    (9시대는 야후 시간봉이 쉬는 날 다음 거래일마다 0으로 나와 쓰지 않는다. 15시대는 시간봉이 없고,
-     일별 거래량에서 역산하면 9시대 누락이 섞여 정확하지 않아 쓰지 않는다. 2026-11-11 의장님 결정.)"""
+    (15시대는 야후 5분봉에 없고 일별 거래량에서 역산하면 부정확해 쓰지 않는다. 2026-11-11 의장님 결정.)"""
     by_key = {(r["date"], r["hour"]): r for r in hourly}
     bars = []
     for d in dates:
@@ -67,6 +76,8 @@ def build_bars(hourly, dates, sessions):
                    "missing": None if r else "시간봉 없음"}
             if r and "close" in r:
                 bar["ohlc"] = [r["open"], r["high"], r["low"], r["close"]]
+            if r and "n5" in r:
+                bar["n5"] = r["n5"]
             bars.append(bar)
     return bars
 
