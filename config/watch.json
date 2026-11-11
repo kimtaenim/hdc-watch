@@ -1,0 +1,30 @@
+{
+  "_설명": "볼 종목과 키워드 목록. 코드는 이 목록만 보고 돈다. 종목과 키워드를 더하려면 여기에 항목을 추가한다.",
+  "stocks": [
+    {
+      "id": "045510.KQ",
+      "code": "045510",
+      "name": "정원엔시스",
+      "market": "KOSDAQ"
+    }
+  ],
+  "volume": {
+    "train_months": 6,
+    "sessions": [9, 10, 11, 12, 13, 14, 15],
+    "derived_session": 15,
+    "levels": 12,
+    "ratio_edge_exponents": [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6],
+    "alert_percentile": 1,
+    "watch_percentile": 5
+  },
+  "keywords": [
+    {"id": "physical-ai", "name": "피지컬 AI", "variants": ["피지컬 AI", "피지컬AI", "Physical AI", "PhysicalAI"], "_확인필요": "'물리 AI' 포함 여부"},
+    {"id": "ai-infra", "name": "AI 인프라", "variants": ["AI 인프라", "AI인프라", "인공지능 인프라", "인공지능인프라"], "_확인필요": "이대로 둘지"},
+    {"id": "robot", "name": "로봇", "variants": ["로봇", "로보틱스", "Robot", "Robotics"]},
+    {"id": "humanoid", "name": "휴머노이드", "variants": ["휴머노이드", "Humanoid"]},
+    {"id": "quadruped", "name": "사족보행 로봇", "variants": ["사족보행 로봇", "사족보행로봇", "사족로봇", "4족 보행 로봇", "4족보행로봇", "로봇개"]},
+    {"id": "amr", "name": "AMR", "variants": ["AMR", "자율이동로봇", "자율 이동 로봇"], "_주의": "AMR은 항생제 내성(Antimicrobial Resistance)의 약자로도 쓰임. 실제 제목에서 확인할 것"},
+    {"id": "battery", "name": "배터리", "variants": ["배터리", "이차전지", "2차전지"]},
+    {"id": "bess", "name": "BESS", "variants": ["BESS", "배터리 에너지저장장치", "배터리에너지저장장치"], "_주의": "ESS는 합치지 않음(의장님 결정)"}
+  ]
+}
