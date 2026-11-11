@@ -100,7 +100,11 @@ class TestWalls(unittest.TestCase):
         res = dict(walls.touches(day, self.W))
         self.assertEqual(res[walls.cell_of(1225, self.W)], "밀림")   # 1,225원 칸까지 갔다가 아래로 마감
         self.assertEqual(res[walls.cell_of(1160, self.W)], "안착")
-        self.assertEqual(res[walls.cell_of(1141, self.W)], "돌파")
+        self.assertEqual(res[walls.cell_of(1141, self.W)], "지지")   # 시가가 칸 위: 내려와 닿고 버팀
+        up = dict(walls.touches({"open": 1100, "high": 1180, "low": 1095, "close": 1175}, self.W))
+        self.assertEqual(up[walls.cell_of(1130, self.W)], "돌파")    # 시가가 칸 아래: 뚫고 올라감
+        down = dict(walls.touches({"open": 1200, "high": 1205, "low": 1100, "close": 1105}, self.W))
+        self.assertEqual(down[walls.cell_of(1150, self.W)], "하락관통")
 
     def test_ask_finds_wall(self):
         """1,200원 칸에서만 큰 거래량으로 여러 번 밀리고, 다른 칸은 섞인 결과를 넣으면 1,200원 칸이 1등이어야 한다."""
@@ -114,6 +118,8 @@ class TestWalls(unittest.TestCase):
             mem.add(walls.touch_vector(cb, k, ("안착", "돌파")[i % 2], 1 + i % 12))
         _, sims = walls.ask_walls(cb, mem.to_vector(), "밀림", 12)
         self.assertEqual(max(sims, key=sims.get), wall)
+        _, sims_c = walls.ask_walls_counter(cb, mem.counts, "밀림", 12)
+        self.assertEqual(max(sims_c, key=sims_c.get), wall)
 
 
 if __name__ == "__main__":
