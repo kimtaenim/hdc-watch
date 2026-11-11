@@ -1,0 +1,248 @@
+{
+ "at": "2026-11-11T22:56:47+09:00",
+ "feeds": {
+  "한국경제": [
+   {
+    "url": "https://www.hankyung.com/feed/all-news",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "젠슨황 스캔들 '일파만파'…트럼프와 상무부도 의혹 소용돌이",
+     "\"도둑이 내 아들\"…수사 회피 대신 9개월 뭉갠 경찰관 '덜미'",
+     "\"'암살자(들)' 같은 논란 막자\"…국힘 '제작 가이드라인' 제안"
+    ]
+   },
+   {
+    "url": "https://www.hankyung.com/feed/economy",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "젠슨황 스캔들 후폭…칩보안법 통과확률 80%로 급등",
+     "\"이번엔 학력도 안 본대\"…SK 하이닉스 '킹산직' 채용 공고에 '관심'",
+     "\"빼빼로가 뭐길래\"…카카오톡 선물하기, 한때 35만명 대기"
+    ]
+   },
+   {
+    "url": "https://www.hankyung.com/feed/it",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "해외서 산 마운자로·위고비, 12일부터 국내 반입 가능",
+     "마운자로 열두 병 챙긴다…해외서 처방받은 약 반입 허용",
+     "ETRI 첫 특임고문에 최성현·정송 교수"
+    ]
+   }
+  ],
+  "매일경제": [
+   {
+    "url": "https://www.mk.co.kr/rss/30000001/",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "“도저히 못 살겠다” 최악의 주거난에 ‘폭발’…스페인 노동자들 총파업",
+     "李, 김민석·한병도와 3시간 만찬…“당정 한마음으로 움직여야”",
+     "전주 다가구주택 화장실 비데서 불…소방, 장비 14대 투입"
+    ]
+   },
+   {
+    "url": "https://www.mk.co.kr/rss/50300009/",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "국토부 \"市, 법 근거없는 절차로 공급 발목\"… 서울시 \"지구 지정부터 늦어\"",
+     "공급 급한 與 \"서울시 주택사업 승인권 회수할 수도\"",
+     "‘속도’에 성패 갈린다는 재개발 … 공공 vs 민간, 어느 쪽이 정말 빠를까 [부동산 심머니]"
+    ]
+   },
+   {
+    "url": "https://www.mk.co.kr/rss/30100041/",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "“통장 만들면 1000원 기부”…DB저축은행, 연말 나눔 캠페인",
+     "유엔참전용사 추모의날 맞아 이중근 회장 국민대표로 헌화",
+     "이중근 부영 회장, ‘유엔참전용사 추모’ 국민대표로 헌화"
+    ]
+   }
+  ],
+  "이데일리": [
+   {
+    "url": "http://rss.edaily.co.kr/edaily_news.xml",
+    "robots": null,
+    "robots_note": "robots.txt 못 읽음: HTTPError",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "에퀴닉스, 싱가포르 데이터센터 개소…3900억원 투입",
+     "'명품 팔아도 남는 게 없다'…한국투자증권, 신세계 목표가 5개월새 반토막",
+     "[개장전특징주]엔비디아, 코어위브, 월마트, TSMC"
+    ]
+   },
+   {
+    "url": "https://rss.edaily.co.kr/edaily_news.xml",
+    "robots": null,
+    "robots_note": "robots.txt 못 읽음: URLError",
+    "ok": false,
+    "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+   },
+   {
+    "url": "http://rss.edaily.co.kr/economy_news.xml",
+    "robots": null,
+    "robots_note": "robots.txt 못 읽음: HTTPError",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "[미리보는 이데일리 신문]알바인 줄 알았더니, 2030 사장님",
+     "한진칼, 지분경쟁 랠리에 급제동…애프터마켓서  17% 급락",
+     "“물량은 6%만, 금리는 3.5%로” 공유…후임에 짬짜미 방법 인수인계도"
+    ]
+   }
+  ],
+  "지디넷코리아": [
+   {
+    "url": "https://feeds.feedburner.com/zdkorea",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 30,
+    "sample": [
+     "AI스페라, 크리미털IP 위협정보 스플렁크서 활용 앱 출시",
+     "데이터산업진흥원, 'AI·데이터 문제해결은행' 서비스 개편한다",
+     "과기정통부, GS건설 침해사고 직권 조사 결정"
+    ]
+   },
+   {
+    "url": "https://zdnet.co.kr/rss/newsall.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ],
+  "블로터": [
+   {
+    "url": "https://www.bloter.net/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "국고채 담합에 증권사 과징금 1조3760억…KB·NH·미래에셋 '집중'",
+     "메리츠금융, 3Q 실적 방어 속 주주환원율 50% 원칙 재확인",
+     "메리츠금융, 3Q 누적 순익 647억↓…변동성·투자손실 영향"
+    ]
+   },
+   {
+    "url": "https://www.bloter.net/feed",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ],
+  "전자신문": [
+   {
+    "url": "http://rss.etnews.com/Section901.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 30,
+    "sample": [
+     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
+     "증시 바닥인 줄…“남은 건 반등” 지하 못 본 개미들 '빚투' 자극한 결과",
+     "261만 유튜브 수익 얼마길래?…빠니보틀 “방송보다 훨씬 많이 벌어”"
+    ]
+   },
+   {
+    "url": "https://rss.etnews.com/Section901.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 30,
+    "sample": [
+     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
+     "증시 바닥인 줄…“남은 건 반등” 지하 못 본 개미들 '빚투' 자극한 결과",
+     "261만 유튜브 수익 얼마길래?…빠니보틀 “방송보다 훨씬 많이 벌어”"
+    ]
+   },
+   {
+    "url": "http://rss.etnews.com/Section902.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 30,
+    "sample": [
+     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
+     "[ET포토] 사카구치 켄타로, '분위기 있는 하트'",
+     "[ET포토] 사카구치 켄타로, '열도에서 온 미남'"
+    ]
+   }
+  ],
+  "뉴시스": [
+   {
+    "url": "https://newsis.com/RSS/sokbo.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 100,
+    "sample": [
+     "놀이방 설치에 40억…자녀 위해 집 꾸미기 거액쓰는 美 부모들",
+     "미·러·우크라 3자 종전협상 종료…대규모 포로 교환 합의(종합)",
+     "전주 다가구주택 화장실서 불…비데 발화 추정"
+    ]
+   },
+   {
+    "url": "https://www.newsis.com/RSS/economy.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 100,
+    "sample": [
+     "韓, 2035년 세계 전력 소비 비중 35% 확대 지지…COP31서 동참 의사",
+     "[올댓차이나] 대만 증시, TSMC 급등에 사흘 연속 상승 마감…3.62%↑",
+     "독일 10월 소비자물가 0.2% '하락'…연 인플레 2.8%"
+    ]
+   },
+   {
+    "url": "https://newsis.com/RSS/economy.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 100,
+    "sample": [
+     "韓, 2035년 세계 전력 소비 비중 35% 확대 지지…COP31서 동참 의사",
+     "[올댓차이나] 대만 증시, TSMC 급등에 사흘 연속 상승 마감…3.62%↑",
+     "독일 10월 소비자물가 0.2% '하락'…연 인플레 2.8%"
+    ]
+   }
+  ]
+ }
+}
