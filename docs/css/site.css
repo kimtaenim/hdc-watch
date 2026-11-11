@@ -46,13 +46,13 @@ h2 { font-size: 1.1rem; margin: 0 0 8px; }
 .hint { color: var(--muted); font-size: .88rem; margin: 0 0 12px; }
 
 /* 문자판: 작게 */
-.dial { position: sticky; top: 0; z-index: 5; background: var(--card); border-bottom: 1px solid var(--line);
-  padding: 8px 16px; }
-.dial-row { max-width: 820px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .9rem; }
+.dial { background: var(--card); border-bottom: 1px solid var(--line); padding: 6px 16px; }
+.dial-row { max-width: 820px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0 12px; font-size: .8rem; line-height: 1.5; }
 .dial-stock { font-weight: 700; }
 .dial-item { color: var(--muted); }
 .dial-item b { color: var(--ink); }
-.pickers { max-width: 820px; margin: 4px auto 0; display: flex; gap: 12px; font-size: .82rem; color: var(--muted); }
+.pickers { max-width: 820px; margin: 4px auto 0; display: flex; gap: 12px; font-size: .78rem; color: var(--muted); }
+.pickers select { padding: 2px 6px; }
 select, button { font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line);
   border-radius: 6px; padding: 4px 8px; }
 button { cursor: pointer; }
@@ -108,6 +108,10 @@ th { position: sticky; top: 0; background: var(--card); }
 .follow-pick select { width: 100%; }
 .quick { display: flex; flex-wrap: wrap; gap: 6px; }
 .follow-stage { min-height: 220px; margin-top: 12px; }
+.follow-stage .grids { flex-wrap: nowrap; gap: 4px; }
+.follow-stage .grid-box { width: auto; flex: 1 1 0; min-width: 0; }
+.follow-stage .grid-box canvas { width: 100%; height: auto; aspect-ratio: 1; }
+.follow-stage .grid-op { flex: 0 0 auto; font-size: 1rem; }
 .frame-title { font-weight: 700; }
 .frame-step { color: var(--muted); font-size: .8rem; }
 .follow-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
