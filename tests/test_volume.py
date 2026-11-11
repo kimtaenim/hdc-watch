@@ -28,6 +28,15 @@ class TestBars(unittest.TestCase):
         self.assertEqual(len(problems), 1)
         self.assertEqual(bars[0]["weekday"], "화")
 
+    def test_zero_first_session_is_missing(self):
+        hourly = [{"date": "2026-11-09", "hour": h, "volume": 0 if h == 9 else 1000} for h in range(9, 15)]
+        bars, problems = data.build_bars(hourly, {"2026-11-09": 9000}, ["2026-11-09"], SESSIONS, 15, [9])
+        self.assertIsNotNone(bars[0]["missing"])   # 9시대
+        self.assertIsNone(bars[1]["missing"])      # 10시대
+        self.assertIsNone(bars[-1]["volume"])      # 15시대 역산도 결측
+        self.assertTrue(data.after_break("2026-11-09", ["2026-11-06", "2026-11-09"]))
+        self.assertFalse(data.after_break("2026-11-10", ["2026-11-09", "2026-11-10"]))
+
     def test_levels(self):
         self.assertEqual(data.level_of(0.0, EDGES), 1)
         self.assertEqual(data.level_of(1.0, EDGES), 6)

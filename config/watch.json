@@ -12,6 +12,8 @@
     "train_months": 6,
     "sessions": [9, 10, 11, 12, 13, 14, 15],
     "derived_session": 15,
+    "zero_is_missing_sessions": [9],
+    "_zero_is_missing_sessions": "이 시간대의 0주 시간봉은 자료 누락으로 보고 결측 처리(2026-11-11 의장님 결정). 근거: 30분봉·5분봉 대조",
     "levels": 12,
     "ratio_edge_exponents": [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6],
     "alert_percentile": 1,

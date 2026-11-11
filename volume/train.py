@@ -89,22 +89,29 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
        source=data.fetch)
 
     # ② 하루 7개 봉 (15시대 역산)
-    bars, problems = data.build_bars(hourly, daily, dates, sessions, dsess)
+    zero_missing = vc.get("zero_is_missing_sessions", [])
+    bars, problems = data.build_bars(hourly, daily, dates, sessions, dsess, zero_missing)
     derived = [b for b in bars if b["source"] == "역산"]
     ok = [b for b in derived if b["missing"] is None]
     sums_ok = sum(1 for b in ok if b["volume"] + b["hourly_sum"] == b["daily"])
     for p in problems:
-        t.failure("15시대 역산", f"{p['date']}: {p['reason']}")
+        t.failure("봉 만들기", f"{p['date']}: {p['reason']}")
+    zero_days = sorted({b["date"] for b in bars if b["missing"] and "0주" in b["missing"]})
+    n_zero = len(zero_days)
+    after_break = sum(1 for d in zero_days if data.after_break(d, days))
+    n_neg = sum(1 for b in derived if b["missing"] and "음수" in b["missing"])
     t.step("하루 7개 봉 만들기", "일반 계산", [
         why("설계 선택", f"9시대-14시대 6개는 시간봉 그대로 쓰고, {dsess}시대(마감 동시호가) 봉은 시간봉에 없어 "
                        "'일별 거래량 - 시간봉 6개 합'으로 역산한다. 역산값이 음수면 그 봉은 결측으로 둔다."),
         why("이 데이터에서 관찰",
-            f"{len(dates)}일 중 {len(problems)}일은 시간봉 6개 합이 일별 거래량보다 커서 역산할 수 없었다. "
-            "야후의 시간봉과 일봉이 서로 다른 집계에서 왔을 가능성이 있으나 확인하지 못했다."),
+            f"{len(dates)}일 중 {n_zero}일은 {', '.join(map(str, zero_missing))}시대 시간봉이 0주였다. 그중 {after_break}일이 쉬는 날 바로 다음 거래일이고, "
+            "같은 날 30분봉·5분봉에는 9시대 거래가 있다(2026-11-11 최근 60일 대조). 그래서 그 봉과 그날 역산 봉을 결측으로 둔다."),
+        why("이 데이터에서 관찰",
+            f"{n_neg}일은 시간봉 6개 합이 일별 거래량보다 커서 역산할 수 없었다. 원인은 확인하지 못했다."),
     ], outputs=[{"type": "value", "name": "만든 봉", "value": len(bars)},
                 {"type": "value", "name": f"역산한 {dsess}시대 봉", "value": len(ok)},
-                {"type": "table", "name": "역산하지 못한 날", "columns": ["날짜", "이유"],
-                 "rows": [[p["date"], p["reason"]] for p in problems]},
+                {"type": "table", "name": "결측으로 둔 봉", "columns": ["날짜", "시간대", "이유"],
+                 "rows": [[b["date"], b["hour"], b["missing"]] for b in bars if b["missing"]]},
                 {"type": "table", "name": "역산 예시(최근 5일)", "columns": ["날짜", "일별", "시간봉 6개 합", "역산"],
                  "rows": [[b["date"], b["daily"], b["hourly_sum"], b["volume"]] for b in ok[-5:]]}],
        check=check(f"역산 {dsess}시대 + 시간봉 6개 = 일별 거래량인 날 수", len(ok), sums_ok),

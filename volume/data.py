@@ -39,6 +39,12 @@ def complete_days(hourly, daily, now: dt.datetime, close_hour: int = 16):
     return [d for d in days if d < today or (d == today and now.astimezone(KST).hour >= close_hour)]
 
 
+def after_break(day: str, days) -> bool:
+    """day가 쉬는 날(주말, 휴일) 바로 다음 거래일인가: 전날이 거래일 목록에 없으면 참."""
+    prev = (dt.date.fromisoformat(day) - dt.timedelta(days=1)).isoformat()
+    return prev not in days
+
+
 def window(days, end: str, months: int):
     """end를 포함해 거슬러 months개월 사이의 날짜. (end - months개월) 당일은 빼고 그 다음 날부터."""
     e = dt.date.fromisoformat(end)
@@ -49,8 +55,12 @@ def window(days, end: str, months: int):
     return [d for d in days if start.isoformat() < d <= end], start.isoformat()
 
 
-def build_bars(hourly, daily, dates, sessions, derived_session):
+def build_bars(hourly, daily, dates, sessions, derived_session, zero_is_missing=()):
     """날짜마다 7개 봉을 만든다. 9-14시대는 시간봉 그대로, 15시대는 '일별 - 시간봉 6개 합'으로 역산.
+
+    zero_is_missing: 거래량 0을 자료 누락으로 보는 시간대들. 그 봉과 그날 역산 봉을 결측으로 둔다.
+      (야후 시간봉은 쉬는 날 다음 첫 거래일의 9시대를 0으로 내는데, 같은 날 30분봉·5분봉에는 거래가 있다.
+       빠진 거래량은 일별에는 들어 있어 역산 봉을 부풀린다.)
 
     봉: {"date", "weekday", "hour", "volume"(없으면 None), "source": "시간봉"|"역산", "missing": 이유 또는 None}
     """
@@ -60,12 +70,17 @@ def build_bars(hourly, daily, dates, sessions, derived_session):
     for d in dates:
         wd = WEEKDAYS[dt.date.fromisoformat(d).weekday()]
         vols = [by_key.get((d, s)) for s in regular]
+        zeroed = [s for s, v in zip(regular, vols) if v == 0 and s in zero_is_missing]
         for s, v in zip(regular, vols):
-            bars.append({"date": d, "weekday": wd, "hour": s, "volume": v, "source": "시간봉",
-                         "missing": None if v is not None else "시간봉 없음"})
+            miss = "시간봉 없음" if v is None else (f"{s}시대 0주: 시간봉 누락으로 봄" if s in zeroed else None)
+            bars.append({"date": d, "weekday": wd, "hour": s, "volume": v, "source": "시간봉", "missing": miss})
+            if s in zeroed:
+                problems.append({"date": d, "reason": f"{s}시대 시간봉 0주(누락으로 봄)"})
         reason, derived = None, None
         if any(v is None for v in vols):
             reason = "시간봉 6개가 다 있지 않아 역산 불가"
+        elif zeroed:
+            reason = f"{zeroed[0]}시대 시간봉 누락: 빠진 거래량이 역산값에 섞임"
         elif d not in daily:
             reason = "일별 거래량 없음"
         else:
