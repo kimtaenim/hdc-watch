@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hdc-watch 투명 시계</title>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header id="dial" class="dial" aria-live="polite">
+  <div class="dial-row">
+    <span id="dial-stock" class="dial-stock">불러오는 중</span>
+    <span id="dial-score" class="dial-item"></span>
+    <span id="dial-trend" class="dial-item"></span>
+  </div>
+  <div class="pickers">
+    <label>종목 <select id="pick-stock"></select></label>
+    <label>보기 <select id="pick-view">
+      <option value="volume.train">시간대 이상탐지</option>
+      <option value="volume.walls">매물벽 찾기</option>
+    </select></label>
+  </div>
+</header>
+
+<main>
+  <section id="today-wrap" class="panel" hidden>
+    <h2 id="today-title">오늘</h2>
+    <div id="today"></div>
+  </section>
+
+  <section id="flow-wrap" class="panel">
+    <h2>톱니바퀴: 하루치 실제 자료가 지나가는 길</h2>
+    <div class="flow-pick">
+      <select id="pick-date" aria-label="날짜"></select>
+      <button id="pick-rare">가장 드문 봉이 있는 날</button>
+    </div>
+    <ol id="flow" class="gears"></ol>
+  </section>
+
+  <details id="gears-wrap" class="panel">
+    <summary id="gears-title">전체 계산 기록</summary>
+    <p class="hint" id="gears-meta"></p>
+    <ol id="gears" class="gears"></ol>
+  </details>
+
+  <section class="panel">
+    <h2>운행 기록</h2>
+    <div class="table-wrap"><table id="runs" class="runs"></table></div>
+  </section>
+</main>
+
+<footer class="foot">HDC 학습용 실험이며 투자 판단 자료가 아님</footer>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

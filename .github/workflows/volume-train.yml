@@ -1,0 +1,33 @@
+# 거래량 모델 최초 학습(수동 버튼). Actions 탭 → "거래량 학습" → Run workflow
+name: 거래량 학습
+on:
+  workflow_dispatch:
+    inputs:
+      end:
+        description: "학습 마지막 날(YYYY-MM-DD). 비우면 일별 거래량이 확정된 가장 최근 날"
+        required: false
+permissions:
+  contents: write
+concurrency: data-commit
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests
+      - name: 학습
+        run: |
+          if [ -n "${{ inputs.end }}" ]; then python -m volume.train --end "${{ inputs.end }}"; else python -m volume.train; fi
+      - name: 매물벽 찾기
+        run: python -m volume.walls
+      - name: 결과 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet || git commit -m "거래량 학습 $(TZ=Asia/Seoul date +%Y-%m-%dT%H:%M)"
+          git push

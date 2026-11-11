@@ -1,0 +1,1366 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "volume.walls",
+ "subject": {
+  "type": "stock",
+  "id": "045510.KQ",
+  "code": "045510",
+  "name": "정원엔시스"
+ },
+ "started_at": "2026-11-11T19:50:37+09:00",
+ "finished_at": "2026-11-11T19:50:38+09:00",
+ "params": {
+  "D": 10000,
+  "cell_width": 0.02,
+  "windows": [
+   20,
+   60
+  ],
+  "query_level": 12,
+  "train_months": 6
+ },
+ "sections": [
+  {
+   "title": "공통: 일봉과 거래량 단계",
+   "text": "",
+   "from_index": 1
+  },
+  {
+   "title": "최근 20거래일",
+   "text": "2026-10-15 - 2026-11-11. 이 기간 일봉만으로 기억을 만들고 묻는다.",
+   "from_index": 4
+  },
+  {
+   "title": "최근 60거래일",
+   "text": "2026-08-13 - 2026-11-11. 이 기간 일봉만으로 기억을 만들고 묻는다.",
+   "from_index": 8
+  }
+ ],
+ "steps": [
+  {
+   "index": 1,
+   "section": "공통: 일봉과 거래량 단계",
+   "name": "일봉 받기",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "매물벽은 일봉으로 본다. 시간대 모델과 같은 최근 6개월만 쓴다. 시간봉의 9시대 누락 문제가 없다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "거래가 없던 날(거래량 0)은 뺀다. 오늘 자료는 장 마감 뒤(16시 이후)에만 쓴다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "쓰는 일봉",
+     "value": 124
+    },
+    {
+     "type": "value",
+     "name": "기간",
+     "value": "2026-05-12 - 2026-11-11"
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/walls.py",
+    "line": 112,
+    "function": "fetch_daily"
+   }
+  },
+  {
+   "index": 2,
+   "section": "공통: 일봉과 거래량 단계",
+   "name": "날마다 거래량 단계 매기기",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "그날 거래량 ÷ 반년 일별 거래량 중앙값(79,274주)을 시간대 모델과 같은 12단계로 나눈다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "최근 10일",
+     "columns": [
+      "날짜",
+      "거래량",
+      "평소 대비 배율",
+      "단계"
+     ],
+     "rows": [
+      [
+       "2026-10-29",
+       29956,
+       0.38,
+       4
+      ],
+      [
+       "2026-10-30",
+       75796,
+       0.96,
+       5
+      ],
+      [
+       "2026-11-02",
+       36041,
+       0.45,
+       4
+      ],
+      [
+       "2026-11-03",
+       34279,
+       0.43,
+       4
+      ],
+      [
+       "2026-11-04",
+       49907,
+       0.63,
+       5
+      ],
+      [
+       "2026-11-05",
+       44754,
+       0.56,
+       5
+      ],
+      [
+       "2026-11-06",
+       27989,
+       0.35,
+       4
+      ],
+      [
+       "2026-11-09",
+       61088,
+       0.77,
+       5
+      ],
+      [
+       "2026-11-10",
+       32059,
+       0.4,
+       4
+      ],
+      [
+       "2026-11-11",
+       126166,
+       1.59,
+       6
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/walls.py",
+    "line": 71,
+    "function": "volume_levels"
+   }
+  },
+  {
+   "index": 3,
+   "section": "공통: 일봉과 거래량 단계",
+   "name": "가격칸 나누기와 벡터 꺼내기",
+   "op": "벡터 생성",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "가격칸 k = [(1 + 0.02)^k, (1 + 0.02)^(k+1))원. 칸 폭은 어디서나 2%이고, 기준이 고정이라 실행마다·종목마다 칸 경계가 같다. 예: 1,200원은 1,199-1,223원 칸이다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "가격칸마다 '가격칸:k' 이름에서 서로 무관한 벡터를, 결과(밀림·안착·돌파)마다 '결과:…' 벡터를 꺼낸다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "쓰이는 가격칸 수",
+     "value": 16
+    },
+    {
+     "type": "value",
+     "name": "가격칸 범위",
+     "value": "984-1,003원 - 1,324-1,350원"
+    },
+    {
+     "type": "vector",
+     "name": "가격칸:353",
+     "dim": 10000,
+     "ones": 5040,
+     "head": "1011110010001000100110111110000100011010010011111110001101101010",
+     "bits_b64": "vIib4RpP42o9crWuWnnA/OoKtgIFW6zZ0hVooonbSc8xdB8sgRjDoHfR1OEye4hsq1/5WxLVO6NO6t14Bga4mc7BvKXBetMthv9FBu3JW17vbSTlq3ICHXxPQawn1wRVBP5zjGB9W38+r6B3Q1Y3I+H2QRADmvWgjOk2frCU9bGjvGVCc0+7x2+Ym+uNV16G8O6qJbW1FdYlCuq5BMvG87TrnBqT7NX/0LAUSni/PlUd1/B7/iyFlmvbB0Dx4Gk2gj74PGzDOG0x1FFhuQvvx30aRoNgdXmPzJisAUytmOHMLNzg5ZfSDoM0skcnVApmmd79PH1aPmvqT4iwrX1e/hD5jpiwJIDPmXuJnFfy/rFlYieUi0XjmHDCraBUQlRgYtfY9mEWP91/e/i4jeVVoC69OZppNWESmLUx5NOGr2OBRrJQ3E2MLgp3XaF3XDfe11W8Y4p/9HRddJeTwmVVuYkmfM404Kgr27PyhjSpIInr2Qf57sy24TXjBUmCn5HI4YABIy1TOwCEsFa1YRZGctzuQttVwKNVCCI1lHYPPwSP7NFSSjfKOMfb1BLuXdlMwV/3ECt5bk1fevQRGncmm/1KLuRnF/CN9f6wQDx8qE6M1H6MMSsJptb4fWGmCxE8G8u9JgFVOYdJB5x9+Nrjr/i6tRaci5yds0ojqqg/psPzLMoJ48GAoSlL6C96P/XJyFevhvq3Kby9gWsxUchS7xHxCsDA9px5goSjo4ha7ROsl1NAJ5/5obwNgNpcqRO3W89YPvsv4WfNEotR3OUE3XmjsZCfKm3xbVnwT+78gPXYgf5L6ikypQZqyfFG0BnAf+QDQjrn1/ZjOOccBsbfEngcIDOFspD2qYsQ+8nOJXA0dy6XbVvpoN5VFIU4gNlhk32r4gz8O4T7vr8r5uMuq2n7gOLt3qTttTyEfko4hdE8OMNsiL7qn20oTCzcMn7MrTYh0TnE/VYNVD+WpD1zoOhV6tUT1+5h6wKYJkkF2QyxUZNambZzKGluIPlsPO6lleJMdKdbmxpYwmnTLbrNi7e78cSlt4umjIFalSokOtiwzuMn2EM+Udq0zUZTlOrifGePWLmKLQVy+WM4Pu6xbeDPWQdurOR7dtoPJRNKzrPtHfDA6z7bp8NxaHAWuY0JhKnqx/LAZo3KkoaZPFSpVq1DbwZsowKWSnBSlgQ5kygCI4xaa/5Uu2dgU3j0W6LWK2L63/qw5QmW6p49ZtDio20esSEL2KYHpqF0XDzMKUazoyEjOsnx0KhGLrqK+D6q4Vu8kfjDdcIUHaXUTbAdCYTpq8SQYkVWrr8VfguoiiNuSkEk6IcbvcGize2GvSEcfa0qBRhx83rk9CS7dHkFBr15mBrUGZtx8qbmzg9B8bGhe71+jHxIkdiA92gDOUp2Vo0w0e9oqcCjhy6zMt7/smNH1aWTcgKe5x2az8appkY4oqoWjACUsrM/uiq0bG73P4y/PiBtNbU5C9sc2R3hnpRlZQqf3xi/JxTFUsxKYLLOGauQHhfGlqCj1Gk1u+AILl9IOmG9IRnfZixgB0xes9inkAMtNTRCpdimGwBf8OGuvjWCcM6UzOyeETG3MCTxxcDX9Zn9VmAwawQRcctrVKxcJJfsbFY08RtHrMBgtSauPbvT266by7ZG3SDNJ7vmius="
+    },
+    {
+     "type": "vector",
+     "name": "결과:밀림",
+     "dim": 10000,
+     "ones": 5095,
+     "head": "0001110011011101101000010000011111010111110100010100100011011101",
+     "bits_b64": "HN2hB9fRSN0Y7+UC6KehKeTwupCjvh2v49ajwwquXKcyMKkT5tOh/s/jxYhZzZWkFdZfEYiE7RHhcermxtTWhoA2xsad0LaZCVmkzjHWSPwpABBwPWMbiLgZfvtcXHe9qrKRP4aw+03PqBJRDVBzj9vqROk1kPqvM4mVrl6Lax98u09LvJKyuS5tW8Kv8iHyyvOAfLBhv8la/1ESC33TODR4WpsAjjxApgsZf9mNVfRTui+xBXMMo7J3cTkBeKX/wa3ZFvGIN+w47ItntswQ+Jh4kCvWh2/ptQW3oFQbHdVZdyTTN2JUwZqwVOswT1VoRiwPINF7y/d2ImywdbYa3gE9nwF+Gh/ao90a/3nmzCfBx9XMco7pJIu7EDE1RdVvj4IOym7Gg11/HxR4o37tjUBK+BiXTcY+2OZnPjQOk6sth7Piqr4VrTwYMt9ZdToHrWwcvK5TV+mUHTHPebRQhPStNu/UGGp8jrtf5LSJud/hyOSSlwwqovFyVisP8RWel1ZPue7AD2mxUQ6F6axcKa73G1LBGo/vLmU+I8nVsauGx3Ycfs3Agzwb+VLYNoTQMoA9tZHkf0lfGALWh2VBOusrGLIobXDHjOQjbTFOs5ZoGVUfHUeyFJ5SATZsMm5tVkAWuBL7rpTp9mCDRNzSoV5lY5+ogScAHOuEAMvC0q5Cml9Y7etfxrLf1Pd64c1RdwsMQla4EnVdZneeHkPsC42/EHtSP1EscSL+jCLk1JIuuBuDoI+cbbl3okDNkBkPog4gRx89eMPH1OZSzOdde6HjkHTkob47QbVrHh8lsGVJ7PCryuRfeztiyslavY//d2AOvMlRS/7jo5N9RdlZ8pM46N31zKz4GrdSxlWtGyoZGPlQYMhYExBPfaBpvf1zE3wm2hYAzqnOh/RHLvexu19kqJ/UICwgkSb5oSNpX7YX1CLuLG8ivitKxtX7QQCwuLxfMvu73TnuLJDr7TwnOdRnSc2NUxWznZw1fOJG3pt2Qs/wDStlg1tR/uee1OjoNQw0eyZ2Wwb0zEmQkGXGecQ8LPupXSZNgzYwvqudNkaf4Zhza63KZFrNnG/9ABUnvr1g/vS0LuThqq2DwNWgI+K4iFOemEduQIxnnEZploIr/H/28njPbw1mhvZs4Ttfj8AW8zcBQtfukLPtz4U9FaeMgYyGl5fe+pFS2Azzr5zwS/KuuVlC5D2GzPkKccKg2rXtQCmbPLUr12dAm/+BxS0F8Aka4fNt56xgpL/T6Yq2T8iE8DL4YDtIhnGfolvVQfY/fzcaoOJfb0BgfXSqFC0655LI6eiAKs8HJCF4lv+0DlWIXz8oaATRsrDkaJG5E6ioGHbMuz6j7ZlluX2Oe8W2ZMxLNnCJBQGqdxmkOLoCjvEt6JmpDoMy7yWzzHaITA54QAezhj55FCIRx2P22teMt0jQf2Bmx2ppuui38yc08C/w123+J1felAlVOJqmTkxols+JKLynxZ8db112hC6q6SQiCvMbxpNM8Yk7K0/IlTpdk3wbPqOOcNdbzQDLZtb4yKBB+p2X8OzuhG33Pg+bZH+fm91meb1bqAPKmA+f9W1RP6Dsl6SL6XGcqGkscZPYU2tBHfEszRbmb1G9ld4rTUL4R511NqKNYZBDFh4LWVXCNl8PjY9OGbxl7gPH1qc="
+    },
+    {
+     "type": "vector",
+     "name": "결과:안착",
+     "dim": 10000,
+     "ones": 4963,
+     "head": "1111101001101100111110101100011010101101001000110100111000001011",
+     "bits_b64": "+mz6xq0jTgvVXbVln7cKtXxtRFsSzEqTkUOKq+PiOSlUOHVe573iGCNBHphwjl34a2nkVqGqi5AES1zOQskJc93KfSQAsdXNVfxA6k2TXlw1dgHEVFyXnteJLjzjL0UXqRxNTKw4pbtewQOZM2o/Up20jj7OQIgW5atlImhES9Jwob3+SgLXREL7FisBpU8EFUYSVmToY02hZsIoNz+ZYYeovJ3uOSxqyOvcb7WGbFbPDwsuAgCwHY4yeNdHj00mbiT9S7unVKL/eiQMKG/ssHgwelZTEWleQUVAnjyyPQlBa+pL++eJaWKkPDvmfvzkWsoEWLXT3xzw38aI2SepYcVFNfQfC0Adfn7XRD562VUCW5AmqSU2zGc1fCW5oFOz8W0IChDVPDNgQU5lm3YX2cfeqBSYAblIdV9Pm0MxF0A3fIpTgUYypuOBHPniZJfsszsj32CzPTa+00uvAD+uY6Vs2YLT/rHpWCMZ+dhC8E7kxEBLN2+IWE0juMyT7xbyNLsxUtq1Qz5Frsa2Q4Iy7PCipSv7I78Js5maqFwACsKVNVFgrJScMUSK+AGlLREoEmXnBtn+TFhsGwgDQAPRpijQky/da75K96THWfbJg+lcAC5/y4gDefOc3XRhvJoEPm+WI9AnivvHLGp/vereGLd2V3sa4eHs4xjJ7bdoSLhJXPS1xDVga2PEkGgY1UNCK/+Bi2bXYgTO7gPNfgdRbI9oT4pblxZMHZePQMm1TJzNvopmj8x6C2aLA65AqSLjf5zuHdt5bSfDHxjR96K++jlH0oxhxmRO7Y4kFED3FAh94zwqDQduU2FFBBSTcHF7L8g9vJs9IRpbu4lMQ4isqMOKnn2TDQcKDY/9481m7srrvBvNOnKtEQprSJzuBDyAnZs0m+IoqoKo3z2lvsECfzSwYzK45vSPTMaTqvA3Ig918c/+/2lBBisshLAT2rOLyPCFNUIZn77B0n5jyc3jysgDdtZoq2Yxy12nheU0YgMtHg2Gh/vB8e8vYQGqmxcinCFGNHFRJO+9/e27xpkEOfuoHSzvcnuyOaVYzAoKdHaaz3oM38EhE/I+SlFSxIkfpPcNZLjpGXB8bYCVi3Z9v4ZJars0hQ5R4RTpyNZy2NdQrUFbsoY3xeFagmuTiuzEPn2NSA3w6Qf7rdkmQyMcVbHamo30be+Ryva+8fpE+jIzV2SvL3GWExy4yuShxARlhT9QEsfanpumVHsj4hsP6TtnmmirPc6EMOrCc3Pp/nProUrU23QDd7n/A5Kc9gHmsJoaSc4SbyIZ9yL5buMF7sb/ect4nfmu4RzpA4VDFVYRC6R8fSXfF6mVPxk1whSRHvUiUSctZN7b9pyJPlk4fb31g3ck5vAItuGUU5q0sZL8plnkHUqL/tzPFncTV353uTCK/qpZwxOWHsEYwsRfbh7C2wEUUUFEViufREbLXMZY1+Mv5MSnFAzN1U+BW21ACkAGtJqm2KpefaNkn+3mCqhSjI7Non7UXtZkhr28zWmRi090SaYSA1TV5uNScS+xlDHM7arFtXwhrxwGbq5dqhKEVNpEI+p1QsRoWeoFKhNAw6ap2rNOwSlkkoDwsUfdcfthPw3YwI/70HYEmSNVvsKTB8VXKhJKp/OuPRGdD+3G8ERxL9d4Ec1GgM4c8LYhhMw="
+    },
+    {
+     "type": "vector",
+     "name": "결과:돌파",
+     "dim": 10000,
+     "ones": 5008,
+     "head": "1111001000011100100100101110101101011110001011110011100000111010",
+     "bits_b64": "8hyS614vODriyEjfcHkfOCTwx84vSOg/rsnCdb9PwX04JZg6LdZ9GqexBOSS28HyfrBHgZv6uQgZjxANaqI5yV5cKygoEHMgfZOR7VjVtlj2SahYJz3SoHj9MSC/Vr0LIizb+0PFpTstUXPaNhPuR8bzlks4sppMhC8Y+fWunA0HSstZCJDPsIsx2lyYZDObsbtq4zDfzIX2uViQQ4XTLPkYbhm+78QgY7jcPeKd4oh+9fLFV9fkbAPXQjp3TGdq5AVz+DiPO7KHQqv0xrtmmOLJkSRuqtrErlCa8Ta3Ta4MXBf2ut3ulExKZzy0JMEq/5gnuK49FSg+9zMlTjo+xFbOxzL2B2ep+f6F5WxwV2Ra4UouXI5/NeFw3Q4u6Rci3Ak9KshkhU4F517m/DaqsKNQN71mo/xVJ70fcUMwLtIc5OsaH4yh/TDu62iC8eukYrPsFmpW+4xXArJlp6kDRDPSSr/tbr2l+yhyeMX/HncnAedJeg4/0b61cZMh9z1Ca0kK9GjWsWjuaekxhz33/3VWSy0c9SVLDk3pOO/MLHwkA93RjmJ58u1cE+MKvL49MRhJgLkqn1orUkg1BpL095fZFcuEwPIcCfoJYDXPMoHPgxwxxdt9FYRCjt5qsSQNMKjDu9vCGsusbsUQ5sT1ojTePko13esw5j/mSWmJLdhAmlFcMjw/c5DhCBXXCRm84HBqUb6dGpjidN4iAhZ70aohPyiG7g36J3chZWUNXqUMlpYQYbCJYI3CKr8mXXAJSn3M95Ukq1KDkB+pJoqyBXklUyQV1/A9i1alD+p2jI0Kn4g3FTutuEBtxcQK6QyOWrApPgM0/SLeunGTa6AlwJq3LQLBLdPPHOBTGsnUQfMQz+2ftZfAXkMJvEAMadIOKiSyP6Cr5JthotEJm1hxT7HpBKikYDwBAN5GZIqe4x2A41d9HMRULPAi/Zq3YJmc6wz5ePEUCRLaXjNhkM3sg7xRwcxc28tFmv1jHp+u9ee/D6dOM5PeX+QavhHSHUTpoyRNq50awCqXr3iAGZO+N2UwcCJcaxPKD/Db699dzCxp3znanB4KkcZ6KXUzXH9iyrbvI1YnMkn/gSViYqabthuEDJoyHAzBCYEz23+q5+sYKpLKVcUCTSkoM8kk/ZMqZrS//qDvoB6aBLG7xbjN7AtTW9TVBgCLs/PV4Aas89U3VBF/FFt0azjDPiTe/17glIsoO9sJrwbzlvVFM7btuUMBK1bPHrLd7x3eLcrBqvHAM88cF1RxP34G0H9lG3COORJ/g4qbRyKE5ZRIVDqB1PXfRfr5dlMJKgfMR7Vb6ronjaqmoVuL0cljcHb/OOzrI5zq+G+PQb7NklD4Oi4LvCDPAiySAcBkvFBwceKWfHKvYkKm3asX0DZoVX5XBj6GXXOIMj1sz2+i/FGmEHjFp3qQM8tfAezUhJfi7olmKING7gaWfgCfidS0iiuX4+Oc6gF9JqPnj8Xesxf54tSiNmxDOjqZuYjAd/iKGp/B2LMTrawGEnFoQ1e3VHeoWfsAqQa+/p363jhcnqzeLAtmiQ4IZzS+KYq8gKDo+imoGlaLgSbQfBymTHMVnBg+B8rfCEswxPbrOecHFXYNNNRX2YBEP5d+MIBcUThXQ8QkOfmv2ZS/f5ueGot4wtz32Wcfes4="
+    }
+   ],
+   "check": {
+    "question": "결과 벡터 3쌍의 |유사도|가 모두 0.03 이하인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "volume/walls.py",
+    "line": 82,
+    "function": "WallCodebook"
+   }
+  },
+  {
+   "index": 4,
+   "section": "최근 20거래일",
+   "name": "날마다 닿은 가격칸과 결과 매기기",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "그날 저가부터 고가까지 걸친 가격칸마다, 종가가 그 칸 아래면 '밀림', 위면 '돌파', 안이면 '안착'으로 매긴다. 칸 폭은 2%다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "장중에 그 가격 위까지 갔다가 아래로 마감한 날도 '밀림'이다. 그 가격 위에서 버티지 못했다는 뜻이기 때문이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "거래량만으로는 누가 팔았는지 알 수 없다. 여기서 보는 것은 '그 가격에서 밀려 마감한 날이 잦았고, 그때 거래가 많았나'다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "닿음 수(날 × 칸)",
+     "value": 101
+    },
+    {
+     "type": "value",
+     "name": "닿은 가격칸 수",
+     "value": 16
+    },
+    {
+     "type": "table",
+     "name": "최근 5일",
+     "columns": [
+      "날짜",
+      "시가",
+      "고가",
+      "저가",
+      "종가",
+      "거래량 배율",
+      "단계",
+      "닿은 칸과 결과"
+     ],
+     "rows": [
+      [
+       "2026-11-05",
+       1118,
+       1187,
+       1084,
+       1142,
+       0.56,
+       5,
+       "1,065-1,086원 돌파, 1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림"
+      ],
+      [
+       "2026-11-06",
+       1101,
+       1198,
+       1095,
+       1148,
+       0.35,
+       4,
+       "1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림"
+      ],
+      [
+       "2026-11-09",
+       1130,
+       1151,
+       1104,
+       1148,
+       0.77,
+       5,
+       "1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착"
+      ],
+      [
+       "2026-11-10",
+       1148,
+       1216,
+       1122,
+       1136,
+       0.4,
+       4,
+       "1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림, 1,199-1,223원 밀림"
+      ],
+      [
+       "2026-11-11",
+       1132,
+       1132,
+       1070,
+       1095,
+       1.59,
+       6,
+       "1,065-1,086원 돌파, 1,086-1,108원 안착, 1,108-1,130원 밀림, 1,130-1,153원 밀림"
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/walls.py",
+    "line": 54,
+    "function": "touches"
+   }
+  },
+  {
+   "index": 5,
+   "section": "최근 20거래일",
+   "name": "닿음 하나를 벡터 하나로 묶기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "닿음 하나 = 가격칸 ⊕ 결과 ⊕ 거래량 단계. 가격칸과 결과는 서로 무관한 벡터, 거래량 단계는 이웃끼리 닮은 수준 벡터다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "가격칸까지 수준 벡터로 만들면 묶은 벡터들이 한 중심으로 뭉쳐 칸이 구분되지 않았다(2026-11-11 매물대 첫 시도). 묶은 벡터끼리의 유사도가 재료 유사도의 곱이기 때문이다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "value",
+     "name": "예시(거래량 단계가 가장 큰 밀림)",
+     "value": "2026-10-28 고가 1,208원 종가 1,138원, 1,153-1,176원 밀림, 거래량 평소의 2.5배(7단계)"
+    },
+    {
+     "type": "vector",
+     "name": "가격칸:356",
+     "dim": 10000,
+     "ones": 4954,
+     "head": "0011111010111111001100111010000000011110000101001110101111010000",
+     "bits_b64": "Pr8zoB4U69B2ZKpkSrrsoleGY/vQXY+4KaMxsYszVseVYTQR6mLDr09gW376+4ZcUCzu13jCLq9hKl52cP5vxLKb4rsImhpAs0mP6pNDwhlJi1wgb7KGfHOtu+ZR2u1Ls+Da3yScBDdbnl3MnIT065GSzNxYU37IEkPdCuvKFuRTrUpRWJOPZzKVLtVsKOFOJhpt4VJAcBEg14TLpN9uZhKW9gbb6L1f1Z74ARg8iEV1jY4zYJ2sv3X6tvL9xJFYD3v4vXcgBE9eEK/xmNS+vBkNnscWZsh1Eh//xsfQ+KKkqPJ/1ZjFdu/JcTYts9DywZKNEk5wNlXrR0r/VSIgTOtDU2fWK1kcuQTQMqQqPMW5EagRqc5bvNrXKi86fu9w6HIzvLy5/+vtFCYBZFBL3LxxRO8DmnrM3A+VALuD9zA+4MTAUVeF2a3ykaNhGY0gcAXCGZ5tU6H4ylWtnn+8sTS3bFT0LUsPU0mI/bc+VeSIirihq6w3sr8Cdeh3Hk2iE0I9qT/tu7rkyLuW/1QzCCfJ/2IsdYLewnnlscj56G3NVlZz/yEqKc6LgIV59x7uX5LbHumgGqNXJmTcNw/ji1635qDmSBuMfcGq5X+eKuplXiUAUypnQVu+UMj14lAJjQ0gMwnsSgCcfaF6Q9RE9uP4EBckxtjC+F/5rNWmf9zOet/dD4lmIGpzLbvaYeE1MNRDSkVTWAtSFIqJ+6O5W5kSs5Oc5TYLjynhFnLMrwEHI2D8FQ6ZHWeoJsnA1uDcAhw1KCTVeRD7zShHNSIcY9awmuJx8ZBb1BvpPWPBLo647TNU7fI7hMw8gVewTdyI+P9t8/FvfeZrrTG9TIrp0O+2OmGVW0KFwMRLqrLwyXkrZR5/nyGVH1ZY2AteBDRTZhADDXFP7BnomAyZsbWnh+tTa+pDK9gbJHwmG5nwHxVNRbkmusSlDZNaJAl9LvFGbOfwepX/W8cHuO32gkqqYonYEwOdboWulTpdOWQ2rVxalZh/osIulJzBeZBEmY0APv/jESF8Mx+JV+EMTo32mxd8OmsM8UgIaVB2U1P1f10Rnvbijs6TRL1cSGAKWyemaliNfgYgwjy+R9LzA7v9GyfOpIewxcLgv8MuM51jbXWNhFXZsJRhFUs5NCIciaYVbWYfOK+eY+83SBknieMFFSVrQ7FAhkt/P4F7/ujsQ9rlIMBp5xjSm8VFyB5hikUuGC0eI+BJprnvtRephBmID6HQE4zd4yHBkky4kcSLGzjrLvBdN48kiH3ISEuN8kmPXCjqVY4WQadR0s4uJoWaF0AEMO7llhkXSwyGsFiaoCMKPPf/9vqgiol+RW3nwqBwDxCjppylrH8AFlVn7zG8on5WpYjGtsMnuhv6w3NXdVCEMeQfNohKuyj5uARLW0Js9PKyM0Vrh0N7zd4RBTO9vwZ/adCEkkhILizXYeCtINTotFOLH8f05iHPKLqW+QaLkoR0PtcTVeZaNTvr48kJxKqREMtoYE2afsPyQ7ESLqTy1hQM6qfsYb80DcvoFIe5n5E6wCCdUQVnC9CHX0YKNMw7hTEMqk+vRnHhtf3ro1Eo6StSXh7JG1mWPAwkAGO0ywog4iaTkEerjcADNy/LvoUkAsIx0aepA9cuNUDH0sAfxpbKIuFjVDoVSfLrE5/iHz8="
+    },
+    {
+     "type": "vector",
+     "name": "결과:밀림",
+     "dim": 10000,
+     "ones": 5095,
+     "head": "0001110011011101101000010000011111010111110100010100100011011101",
+     "bits_b64": "HN2hB9fRSN0Y7+UC6KehKeTwupCjvh2v49ajwwquXKcyMKkT5tOh/s/jxYhZzZWkFdZfEYiE7RHhcermxtTWhoA2xsad0LaZCVmkzjHWSPwpABBwPWMbiLgZfvtcXHe9qrKRP4aw+03PqBJRDVBzj9vqROk1kPqvM4mVrl6Lax98u09LvJKyuS5tW8Kv8iHyyvOAfLBhv8la/1ESC33TODR4WpsAjjxApgsZf9mNVfRTui+xBXMMo7J3cTkBeKX/wa3ZFvGIN+w47ItntswQ+Jh4kCvWh2/ptQW3oFQbHdVZdyTTN2JUwZqwVOswT1VoRiwPINF7y/d2ImywdbYa3gE9nwF+Gh/ao90a/3nmzCfBx9XMco7pJIu7EDE1RdVvj4IOym7Gg11/HxR4o37tjUBK+BiXTcY+2OZnPjQOk6sth7Piqr4VrTwYMt9ZdToHrWwcvK5TV+mUHTHPebRQhPStNu/UGGp8jrtf5LSJud/hyOSSlwwqovFyVisP8RWel1ZPue7AD2mxUQ6F6axcKa73G1LBGo/vLmU+I8nVsauGx3Ycfs3Agzwb+VLYNoTQMoA9tZHkf0lfGALWh2VBOusrGLIobXDHjOQjbTFOs5ZoGVUfHUeyFJ5SATZsMm5tVkAWuBL7rpTp9mCDRNzSoV5lY5+ogScAHOuEAMvC0q5Cml9Y7etfxrLf1Pd64c1RdwsMQla4EnVdZneeHkPsC42/EHtSP1EscSL+jCLk1JIuuBuDoI+cbbl3okDNkBkPog4gRx89eMPH1OZSzOdde6HjkHTkob47QbVrHh8lsGVJ7PCryuRfeztiyslavY//d2AOvMlRS/7jo5N9RdlZ8pM46N31zKz4GrdSxlWtGyoZGPlQYMhYExBPfaBpvf1zE3wm2hYAzqnOh/RHLvexu19kqJ/UICwgkSb5oSNpX7YX1CLuLG8ivitKxtX7QQCwuLxfMvu73TnuLJDr7TwnOdRnSc2NUxWznZw1fOJG3pt2Qs/wDStlg1tR/uee1OjoNQw0eyZ2Wwb0zEmQkGXGecQ8LPupXSZNgzYwvqudNkaf4Zhza63KZFrNnG/9ABUnvr1g/vS0LuThqq2DwNWgI+K4iFOemEduQIxnnEZploIr/H/28njPbw1mhvZs4Ttfj8AW8zcBQtfukLPtz4U9FaeMgYyGl5fe+pFS2Azzr5zwS/KuuVlC5D2GzPkKccKg2rXtQCmbPLUr12dAm/+BxS0F8Aka4fNt56xgpL/T6Yq2T8iE8DL4YDtIhnGfolvVQfY/fzcaoOJfb0BgfXSqFC0655LI6eiAKs8HJCF4lv+0DlWIXz8oaATRsrDkaJG5E6ioGHbMuz6j7ZlluX2Oe8W2ZMxLNnCJBQGqdxmkOLoCjvEt6JmpDoMy7yWzzHaITA54QAezhj55FCIRx2P22teMt0jQf2Bmx2ppuui38yc08C/w123+J1felAlVOJqmTkxols+JKLynxZ8db112hC6q6SQiCvMbxpNM8Yk7K0/IlTpdk3wbPqOOcNdbzQDLZtb4yKBB+p2X8OzuhG33Pg+bZH+fm91meb1bqAPKmA+f9W1RP6Dsl6SL6XGcqGkscZPYU2tBHfEszRbmb1G9ld4rTUL4R511NqKNYZBDFh4LWVXCNl8PjY9OGbxl7gPH1qc="
+    },
+    {
+     "type": "vector",
+     "name": "7단계",
+     "dim": 10000,
+     "ones": 4975,
+     "head": "0001100001101100111100001000011011101110000010101101111010011110",
+     "bits_b64": "GGzwhu4K3p7mJqxHb7/eXZEv6Mip0PSfsdWVVSU8lFH6KG7vBmVn3yJlOAJRDuPJFLrdFSzXmHEkzkrpU8YHjfG/eDCn3MC2bBzG3uv7EDvfJ0vH8sZG5rWHCtoG8DZdZe1tyYNCY4Clj68C4PtQU4+bD+2UKxwKHOHDhRgBe1968vADX56IacfK3b5zwRkIup7zZS6lSR3DjSyeLj77JeZAl2pCgPpQXb5Pjk4p6NcAMiw1wUQ4cXSWdhC4I9kHEB0aZW4o8jXS8/uljJte7TtU0DlXF7xf5k3V9Gw405AzRIRZPvg+G1TX2Tff2eAmCc4RA/q3T0VBaqjG4GVZiv6EYPeRk5IwydjaGJ/cWNz9bsUy9cLN6d/iNEBVk3kC8b8+bXs8eCOcBNFIKPppihtEYie4EJx7xl5bMOFN+Oepyo1qqDBd+70heEhc0CfNV9DIV6ZumxqyLcf+EJ1Pmkdb+lHKQUr93vf7yFPU87fviqVSzWfdVnBKjxkL+fHBeLBB4EtqxccZJ3T/w7JaK8A2VD7tOX4qz1M8ryQXxwq0JSa4o63K9Re94C8yS+koQjbcYZfamLS27Sc8xVjv5LCEs6AP5ai0x2Djk8s6f3SoMHcUj7zaLlXubz2PrjVV4kXdwj9VQp57IlLY3jAG9ze4FWdxENeGH/Bkm6MgKJrULF6Ymmk2NcCaPu9QN3V4Eho0B7Sb/AqTl30NwQgO/6l3RszOIhsOIjp1V88SLx2IeMUBtK5v+ISzJ43SDsCMft4/FCuU+ZFyhUy619LNOSTRMFJCcarm/DW2fv/xcXzMnzfOwR13Bc2pP+dQxbADGfXnEhQqFTWmjtTN+WmNhG6N1cNMyh0nUHPfKWcQLE7yn6sAgVRAG6HQqmRwmYz38Ri2yjwErOb0NGp/lOKX74+2PsRLCieRJlSQOBMf3eb1+hmZWze/qvZLrXaXrsHU8ly2R6xjolJuUPrLV79su6Dda6J3TxAASvBC4/axY1sNZt87+/34r/csHkJYpZ/psCMU0J4FujkR0IAhKWSmf1yUSyUxyqQaxif4LP00C4qG9jNLrY/iB9nm4DUdgksRASYNaHtCTmGFgUqh9p58BYjESKiW+j6WW6iFBKyzxHSHHABQPEt4i8zJyTvKC/aMqwyQjGz4Jgv9cxqOfU4cs9nERSdHNtvjI1/ggHcEio4hGAZZPrrUlFJyF7FWRh34DgRuMF3tqk6bDS7ofpWcLBJes5WHqTj4M7FuiaoodlD/qB+FlNqTtT8+EYjpWip2BTgfTIjgIL4HCFN8PLLFHW5FsvJWUJJvs00jJKmHHB7kTdyVOfzUb5yW8gjgfuJlg5DbH9joQrJjS5MJJhWmTmNTk/acBqPDKpysopIuQEgpL0NN3FjIgbJ25IEX6xadlrjjoBDPo3ahEw+orOjcXjWlSugKDKujjetVKS0eCKNKodAEc+wQGmp4MFhRH6ltSmBb0wLl9302jsgwvSPKXmygM/Jc5SVQKa3vZvux17jx34opQby3+9crW4B+sC7u8JHkNU7twV/d6osDUKRfGCiyUvMEEFrv1JyTFPBCQgGzy9x4NdEMVmMk93KechMCdx7SLgvO+SyB0+mtQmHedrNT36JNDi2mgwids7WaXnZzQWuR0GYEJkTo1kLPTK0w6cg="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "닿음 벡터",
+     "dim": 10000,
+     "ones": 4988,
+     "head": "0011101000001110011000100010000100100111110011110111110110010011",
+     "bits_b64": "Og5iISfPfZOIreMhzaKT1iJZMaPaM2aIe6AHJ6ShnjFdefPtCtQFjqLmpvTyOPAxUUBs09yRW8+klf555ey+z8MSXE0ylmxv1gzt+klumt6/rAeXoBfbEn4zz8cLdqyrfL8mKSFunPoxueCfcS/XN8Xjh9j56JhtPSuLIa1ABqRV5PUZu5+1t9syqKmwG9m0Vnce+MyEhsW5pflHgZxGe8CuO/eZ5ntPLiuu8I+YNWYmBY23pKqYbbMbsdtEn+2g3ss7zuiAwZa0D98zooPwqboh3tWX9hvDQVedkv/zNufOm1L13AKvrCGu/OrCJWW8jnCTMWW8sufcD46JwPFjGBT6rJE5otT20wEQ1UIQqD6FuLjvLoJ/cY6ODl5aqEMdlk8DG6lDBJUOD+Mx79TP2+d/3tAsxyCJwrepDm7AnHy6rfpIU9nNjyzL2zRkvJDqirkW8pZQn1Le+qOc91ajr4dBoOrqdGuOAwUs0VBjH4yGyPlh8cfARj46rNpzFqn9/KQz8JpHcRRMvsHs1Uo1CkkIsA4AVnMbI0/nPSU7nsz/tAbXIkEgX+UtmfiTinMWLyQ6yu+e/V6+00E2dTJNVQUYTbLBwMP/NkVqG4Xq5gildwcLwdEPe5ACPsMWfgsxOQjrSSRCpgoOqZMh2TiQoIolZu/9VyhE+0QZN71EhehYzN4deAsP0xg2x6Pwt1kcVcV7D6dwtnSc5YAaJOhbr73a5SQA+Hwp3DFqzZ86VI6h475+AS9qiFpsowTfSDlf3swqexB8+EJOnIKvLheMIVOCOsTXIYSGaZs0XYMV75c9nvQx5gsT+jr3dHm6NeN0lmqEXSwUIy0ugHYN8Do9phIDB38sXfNaigDGRYBN/h3A4kwvfr2NF+fHD89HIEXXhHSTHVtLjlbSK5KhC6CB0zuB/bHcAdOqkw5PgqmGnUWva4JRzZw4GU5bT6oRwTAiJgcZD8InJKyHxIfWOMnh4P1iMWxncoAdQlYqpnDBEJwhsYi0VBSzuDC8mTWC6PoBu9DDupkP0iBsSyi994yWnY/UXbWUZspfLEG+wQVcQpEIiV3aSOy7Jz53NDrq2XmQ1cPg6InWornabDXRNfAhPU2yZHy4p7sYpOfMq3e5P4MhZCp/fqfW8YqWe++6Y2vGSaqZR/RnBzMkq7BEOygks1sjhxqBJwdC5k/JppMbZsg0czSeYPtE66qxE1Y9vZp2zJydU5Q/MEJfb14BYXOV5p6LUBBAq+pURlG2vNFwhOKiySdcU2dPXXm+37L7CjgsGObKZjHswfsJtd0yZ0P1HgN7ZY57L2P40o6isNBlKsJaf37ikDlcjRE5BdXj1NOsnyjQoTKBVfPAsF8LcFmUl9izUrIRhhBtlYb8FvjdDaKvkFZ/AkkrNBm9s6DvfCJ5LkQp01IXogujyvOobriXO+RWlHBe4YONZK3r8iUE21CW5ax/u0Ya2xxpjOuS3jVAlqhHexp/iifLfmzGMbe1Huibyh0Wj5vRkf1R1MOY0lPLnKR4OGdApMuRJpzNaamcCdYmPc4xasctEbdqi4+iEusSs72XIcgm61ApCQ5jeV8E15p7VG8p2p45Ig8m2hmazYcqn0YcdJoGkz9IGh+oXehckCKEmBd6tn0+52Uemqhn3qiZxNho//GzhgxBsTEVIFA="
+    }
+   ],
+   "check": {
+    "question": "닿음 벡터 ⊕ 결과 ⊕ 단계가 가격칸 벡터와 같은가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "volume/walls.py",
+    "line": 93,
+    "function": "touch_vector"
+   }
+  },
+  {
+   "index": 6,
+   "section": "최근 20거래일",
+   "name": "닿음을 모두 기억에 더하기",
+   "op": "더하기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "이 기간의 닿음 101개를 카운터 하나에 더한다. 기간마다 기억을 따로 만든다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "다수결 기억에 담을 수 있는 양에는 한계가 있다. 더한 수가 많을수록 하나하나의 몫이 작아져 잡음에 묻히기 쉽다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "더한 닿음 수",
+     "value": 101
+    },
+    {
+     "type": "value",
+     "name": "동점(0) 칸 수",
+     "value": 0
+    },
+    {
+     "type": "vector",
+     "name": "기억(다수결)",
+     "dim": 10000,
+     "ones": 5020,
+     "head": "0001110011010110110000100010001010100110110000010011111110111010",
+     "bits_b64": "HNbCIqbBP7oSnPVxRfMQnEEpQatC4yd6Aoh3vp3GmfO/mI+5L2lFZ/SG9s7zKmmjEdN3343jHoevn0+6J2pmjWEy+Zmmhmh/5hyDQ13tuw8jh85SetVTEuXzhlbqXb5r1qPGq4aLrYgeELg/5eMHV9CfJQj4QtwtFGMBYr5kg6I8xEXYtxH0oI8h3ImrJ3enAhZ29uzDLg4pYdIPDdYiv/qGI+8OAqPv+jznsCnJtFlwhcm5dYMifbgcM+k8h26VzKebyvhY1NYcd91i8wfYq3qd8vQ9XhoQQVH1dcuyPvZHnVJBKCMHAKitXKhAIcen7c2xsSjzju3HCotTyTUrEQjyJLcjsLR4sXtEU4Z5/+DGkXrpPhuNcUySFl5brEoRb08b0UlvwquOq32zsuTFwth00NDEQ4Tq6j6zq6Xem3ZbpOjN+/2pD955TYXtmXMg4qtcDQdFlVddP0tIR3S4f4/J1DF3HP3DjgJ1FHltDoOCheXvp1fJvupNOQvy0+TjTHwiNi7t/4RdPsekdY6mFOuj9Z6qRHIugS4tyGcY0I3tRHS53eG4fydo/Zl/oL4RPsSqh0S53N5s7x8p1Rx8AUhZKIPZiPH9Vwx7r5u6pjjr/4sqAczr+cTSOGJgNQ6Bgmnay0ASLcIfizK86TqUdGIkpLYecqjlUuEJVHlz8yFItdU1e5WPx0npz+dgN19NR39yh+bRlyzNoSketehR5ji3ZSRGsDSTFElskU5l+Bol+ehr8AnWGbpexcDpTHBfT+SpTB5O84hP1lpIOLRIZaJTXup1qD6CHZDVuoltATgU2gCxXg9X+RPqYpDavjYElsONt6jH663+ghTLKQMn7EBJxbeBXAZ/wRgFbFEOw41cM0Qo/Ztt9eWCCmt0QAXQqTGfWhkfelsFKZFND8GAW2ek/QZIw9O1gbY/R6GUuQrrZ8MhjXwoG6rJB6rwoQJELGMaBeanVAXJroFfN00JsdnJ8n8mXqBkCyxr5fjovRgDouNwYBRY+DIcV7gibPYjGm3THERV4BTOyS4mJAnJSa6U4Lf9FthbCYf/Vxl2zgsp+OMeyvsmgYoRKCJNSPt01+MoP82dVSrMrTH7oZE91ivfIVXgp7NJhO3h/4Vdj5W7b3I7JrIW8aoQyq1+v0dmASjBT3bnVDLGuTR91Pp4sdwSyzhuF4FShkzPJ9KZ/koQwbScqJZX1MDTyXI1k5Z4nIacnZSSoEgeWUcBanOUtjYRU+ELqIkWZ0E+tIM0jcblOYClUUUozjl2/hK7iTDm+cSeRLZ48qsTtwzRw3FdPJ1xacwrLWx60vL41VVXasBwX2vB+LlsAcS1RTXCVa+kvTjpioIV++cOFNVaOFWchZyzWrdVNq0FtNgGF/uZveM38yd7RmYD4Vi8pYcF9qJmruPJi9AXyx4t6PidrhokC27WtNRVKJSNqO2h0iFQRGK22pxt0uUK79v7kssYMfxLHqwceuBJrChxdnJEJvM0nimDTrlqe9+JOe0R9A8Y08C56oN9+c4YMA3bd/3jeANCQtwH/YAJbro3bikcX4tmIH6WI62WkawF8fV93Uz1cPSA1d9rUO9dGx+7TA9kn2mEq4MzPgXutItkrptRit5jG75J1tPPvT/Ssyk+9UtqYa131MKhDkHAdnxRjATFkmCUBFw="
+    }
+   ],
+   "check": {
+    "question": "더한 수 = 닿음 수",
+    "count_answer": 101,
+    "hdc_answer": 101,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 54,
+    "function": "Memory.add"
+   }
+  },
+  {
+   "index": 7,
+   "section": "최근 20거래일",
+   "name": "기억에 '밀림 ⊕ 큰 거래량'으로 묻기",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "수학적 사실",
+     "text": "기억 ⊕ 밀림 ⊕ 12단계를 하면, 밀림으로 더했던 닿음들은 '가격칸 ⊕ (그날 단계와 12단계의 차이)'로 남고 다른 결과로 더했던 것은 잡음이 된다. 남은 것을 가격칸 벡터마다 비교하면, 그 칸에서 밀린 날이 많고 그날 거래량 단계가 12단계에 가까울수록 유사도가 높다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "묻는 단계를 12단계(가장 큰 쪽)로 둔 까닭: 수준 벡터 유사도가 단계에 정비례하므로, 밀린 날 하나하나를 '거래량 단계가 클수록 크게' 세는 것과 같아진다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "단순 카운트 정답 = 그 칸에서 밀린 날마다 (1 - |단계 - 12| / 11)를 더한 값. HDC 유사도가 근사하려는 바로 그 양이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "한 번도 밀린 적 없는 칸의 유사도는 0 근처에서 약 0.01 흔들린다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "가격칸별 결과(HDC 순)",
+     "columns": [
+      "HDC 순위",
+      "가격칸",
+      "닿은 날",
+      "밀린 날",
+      "돌파한 날",
+      "밀린 날 거래량 배율(중앙값)",
+      "HDC 유사도",
+      "카운트 정답",
+      "카운트 순위",
+      "밀린 날짜"
+     ],
+     "rows": [
+      [
+       1,
+       "1,153-1,176원",
+       13,
+       9,
+       3,
+       0.56,
+       0.1294,
+       3.091,
+       1,
+       [
+        "2026-10-26",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-10"
+       ]
+      ],
+      [
+       2,
+       "1,176-1,199원",
+       11,
+       8,
+       0,
+       0.5,
+       0.0948,
+       2.727,
+       2,
+       [
+        "2026-10-26",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-10"
+       ]
+      ],
+      [
+       3,
+       "1,199-1,223원",
+       7,
+       7,
+       0,
+       0.52,
+       0.0848,
+       2.545,
+       3,
+       [
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-10"
+       ]
+      ],
+      [
+       4,
+       "1,223-1,248원",
+       3,
+       3,
+       0,
+       0.52,
+       0.044,
+       1.091,
+       6,
+       [
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-29"
+       ]
+      ],
+      [
+       5,
+       "1,108-1,130원",
+       12,
+       3,
+       9,
+       0.96,
+       0.039,
+       1.091,
+       4,
+       [
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-11"
+       ]
+      ],
+      [
+       6,
+       "1,324-1,350원",
+       4,
+       3,
+       0,
+       0.87,
+       0.0374,
+       1.0,
+       7,
+       [
+        "2026-10-16",
+        "2026-10-20",
+        "2026-10-21"
+       ]
+      ],
+      [
+       7,
+       "1,130-1,153원",
+       14,
+       3,
+       3,
+       0.96,
+       0.0222,
+       1.091,
+       5,
+       [
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-11"
+       ]
+      ],
+      [
+       8,
+       "1,298-1,324원",
+       6,
+       2,
+       1,
+       1.17,
+       0.0222,
+       0.818,
+       9,
+       [
+        "2026-10-21",
+        "2026-10-22"
+       ]
+      ],
+      [
+       9,
+       "1,248-1,273원",
+       3,
+       2,
+       1,
+       1.0,
+       0.02,
+       0.818,
+       8,
+       [
+        "2026-10-22",
+        "2026-10-23"
+       ]
+      ],
+      [
+       10,
+       "1,044-1,065원",
+       2,
+       0,
+       1,
+       null,
+       0.0114,
+       0,
+       16,
+       []
+      ],
+      [
+       11,
+       "1,065-1,086원",
+       7,
+       1,
+       6,
+       0.96,
+       0.0082,
+       0.364,
+       11,
+       [
+        "2026-10-30"
+       ]
+      ],
+      [
+       12,
+       "1,273-1,298원",
+       6,
+       1,
+       4,
+       1.48,
+       0.0042,
+       0.455,
+       10,
+       [
+        "2026-10-22"
+       ]
+      ],
+      [
+       13,
+       "1,003-1,023원",
+       1,
+       0,
+       1,
+       null,
+       -0.0046,
+       0,
+       14,
+       []
+      ],
+      [
+       14,
+       "1,023-1,044원",
+       1,
+       0,
+       1,
+       null,
+       -0.01,
+       0,
+       15,
+       []
+      ],
+      [
+       15,
+       "984-1,003원",
+       1,
+       0,
+       1,
+       null,
+       -0.0144,
+       0,
+       13,
+       []
+      ],
+      [
+       16,
+       "1,086-1,108원",
+       10,
+       1,
+       7,
+       0.96,
+       -0.0226,
+       0.364,
+       12,
+       [
+        "2026-10-30"
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(1/√D)",
+     "value": 0.01
+    },
+    {
+     "type": "value",
+     "name": "HDC 순서와 카운트 순서의 순위 상관",
+     "value": 0.915
+    }
+   ],
+   "check": {
+    "question": "HDC 상위 5칸과 카운트 상위 5칸이 겹치는 수",
+    "count_answer": 5,
+    "hdc_answer": 4,
+    "agree": false
+   },
+   "source": {
+    "file": "volume/walls.py",
+    "line": 98,
+    "function": "ask_walls"
+   }
+  },
+  {
+   "index": 8,
+   "section": "최근 60거래일",
+   "name": "날마다 닿은 가격칸과 결과 매기기",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "그날 저가부터 고가까지 걸친 가격칸마다, 종가가 그 칸 아래면 '밀림', 위면 '돌파', 안이면 '안착'으로 매긴다. 칸 폭은 2%다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "장중에 그 가격 위까지 갔다가 아래로 마감한 날도 '밀림'이다. 그 가격 위에서 버티지 못했다는 뜻이기 때문이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "거래량만으로는 누가 팔았는지 알 수 없다. 여기서 보는 것은 '그 가격에서 밀려 마감한 날이 잦았고, 그때 거래가 많았나'다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "닿음 수(날 × 칸)",
+     "value": 258
+    },
+    {
+     "type": "value",
+     "name": "닿은 가격칸 수",
+     "value": 16
+    },
+    {
+     "type": "table",
+     "name": "최근 5일",
+     "columns": [
+      "날짜",
+      "시가",
+      "고가",
+      "저가",
+      "종가",
+      "거래량 배율",
+      "단계",
+      "닿은 칸과 결과"
+     ],
+     "rows": [
+      [
+       "2026-11-05",
+       1118,
+       1187,
+       1084,
+       1142,
+       0.56,
+       5,
+       "1,065-1,086원 돌파, 1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림"
+      ],
+      [
+       "2026-11-06",
+       1101,
+       1198,
+       1095,
+       1148,
+       0.35,
+       4,
+       "1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림"
+      ],
+      [
+       "2026-11-09",
+       1130,
+       1151,
+       1104,
+       1148,
+       0.77,
+       5,
+       "1,086-1,108원 돌파, 1,108-1,130원 돌파, 1,130-1,153원 안착"
+      ],
+      [
+       "2026-11-10",
+       1148,
+       1216,
+       1122,
+       1136,
+       0.4,
+       4,
+       "1,108-1,130원 돌파, 1,130-1,153원 안착, 1,153-1,176원 밀림, 1,176-1,199원 밀림, 1,199-1,223원 밀림"
+      ],
+      [
+       "2026-11-11",
+       1132,
+       1132,
+       1070,
+       1095,
+       1.59,
+       6,
+       "1,065-1,086원 돌파, 1,086-1,108원 안착, 1,108-1,130원 밀림, 1,130-1,153원 밀림"
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/walls.py",
+    "line": 54,
+    "function": "touches"
+   }
+  },
+  {
+   "index": 9,
+   "section": "최근 60거래일",
+   "name": "닿음 하나를 벡터 하나로 묶기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "닿음 하나 = 가격칸 ⊕ 결과 ⊕ 거래량 단계. 가격칸과 결과는 서로 무관한 벡터, 거래량 단계는 이웃끼리 닮은 수준 벡터다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "가격칸까지 수준 벡터로 만들면 묶은 벡터들이 한 중심으로 뭉쳐 칸이 구분되지 않았다(2026-11-11 매물대 첫 시도). 묶은 벡터끼리의 유사도가 재료 유사도의 곱이기 때문이다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "value",
+     "name": "예시(거래량 단계가 가장 큰 밀림)",
+     "value": "2026-08-13 고가 1,199원 종가 1,106원, 1,108-1,130원 밀림, 거래량 평소의 7.2배(8단계)"
+    },
+    {
+     "type": "vector",
+     "name": "가격칸:354",
+     "dim": 10000,
+     "ones": 5000,
+     "head": "0100011001100101111000010100111110000100111011011011010100100100",
+     "bits_b64": "RmXhT4TttSQGsDbBO+PVuPbxau3gSDUaHBiNGWb1LvFlFWkNFYvJj1IrShRyp395QpnPQDiUl2BeeMmORmpK4dvzpQEmC9uY35kWELZAdeZ0HR38PcVOMD6Z26p5I/BRRIFjGkdIj3cC9GK+mpO9Sxv/+qRdvw5sFIwSnWJZ8iFZGn+S5iORccOf6PcUVCUQyTNLKtGni6ZcdZckPAqcGqTYmCy+bamvqSegXLW1wDwPRCXpFQQMAFRTyY2qpNOaOWBC7i/7DzVZxM7vuYyfJikQochCmj3qOVqnOtA9uZgt/wjibxXT8eokvqzxWPFrCq4PmipRx1W4zXSJgWBMWSG69mhhe/dxw8kdvnH1uR5QLMX/4Xs1iWLw/JfltuB/t1Oul9l3pZYCwPblwrnGDqp4yeYOUqZXK6ayP83oBw6e3JjUSZddB2+uFrWK+q1fzAtQ9CAXpDCYbzwRs+YQgv1Yx78AKBUuBXvliktSChWmA7dmERioPUTgTw/GEXB8X6WpD5zP24CdbAq83MO6qX4B3qWbrblfAd/ZNe6m/2hVLTvIoQ4w82G0TPTZEdNQA3sOPuBMviExOSPpFhntUIdahEpyrSHiEORxXnHTzFMsrKJLK787ZxlVUCaA/OTBtAzAmLSLc4tcy2N12RZniGPQ5qtDNwZHL2TahvP7NwXNn9CxBYDi0R3GtSFvzx+ntXS8hYDRW+qkUpK65qIzgBjznoB+ahMokZXeE8x++biiET54u8c0nL+LytNujfDdawSfnYn0gVo0t1U7gY1cdvHxbIUjpSxaa66O86D6zMkW2rNZziagiF9EOK/rg6uPls8T8meBw86HrfFjotsBIrw7OpYE42m/stqI3/xIgtQJ49rX3AJ1+ahTDs4rNPIKUo/jhQDSKG7kTXspSGPuLl3522j3zRJG1x3vz7sTkypG+pOZ+MpQ/a+MS2+QZkK1u8NeHvF8egT9k8wE5jtvDQ9PhCVuVepX04dKerRwiXJ5ywAt45ZirKg4vU6rTC1x79JKL11akWimDMaXJszdbbs4aQGzLw0sQHjk8LvmAcWCoVmW+fuINJhLjpnxgZ9UNHPyJcZpIOKeJNw7re31YbB3Y7hYuTCXwfTHqnvkX2dcXynhS0BuFT8lqdYagMP87JfmORfxnCenhnkLbihQf4NZlck0J1h4XvC3xYszgBhcjVerljHNNiRhavc1ovUjS637rhIOeaN+J/yYkxrUwiJMg3FHmwN+b9zCth+nkyDUrEu+0GtBXFrmN+d3ruk0l4R+TnM4ClJWgMuFi3Ib4GLAznuLT5wQYbDRFtvjfRW2gz3azGyynMcDXQt9Ea4QhGJe+TZipQOGJxMYMU//bQtjZdmqYuQiBsDKkAqvqR+UhNTRa5dL/kzmXaMX+fZUN2Rqn9Q/oEfImWKWVIhE0zV7UzwnLtyy08mBMwVSqe6dn9OayA2A7uUfYSvCWbuJDUoHC0RP1zDYqMaDbfRAWysh2+a6wU4ld1N+WnASdcMDEDEvNtzT7a3D9N6Rk90iWtcMVQtWJ7y2OBvdO2vG7ZwscE+lom/mQeGlErQEeiP0SAXAkwM3s9/NBwtEdPuPAN+RT3iDYCnn8A3/uGU7kQogx2e8R4Ag8FNzxzq2U0Yr7a8vrtbPcaqRG9zEKI01eEo="
+    },
+    {
+     "type": "vector",
+     "name": "결과:밀림",
+     "dim": 10000,
+     "ones": 5095,
+     "head": "0001110011011101101000010000011111010111110100010100100011011101",
+     "bits_b64": "HN2hB9fRSN0Y7+UC6KehKeTwupCjvh2v49ajwwquXKcyMKkT5tOh/s/jxYhZzZWkFdZfEYiE7RHhcermxtTWhoA2xsad0LaZCVmkzjHWSPwpABBwPWMbiLgZfvtcXHe9qrKRP4aw+03PqBJRDVBzj9vqROk1kPqvM4mVrl6Lax98u09LvJKyuS5tW8Kv8iHyyvOAfLBhv8la/1ESC33TODR4WpsAjjxApgsZf9mNVfRTui+xBXMMo7J3cTkBeKX/wa3ZFvGIN+w47ItntswQ+Jh4kCvWh2/ptQW3oFQbHdVZdyTTN2JUwZqwVOswT1VoRiwPINF7y/d2ImywdbYa3gE9nwF+Gh/ao90a/3nmzCfBx9XMco7pJIu7EDE1RdVvj4IOym7Gg11/HxR4o37tjUBK+BiXTcY+2OZnPjQOk6sth7Piqr4VrTwYMt9ZdToHrWwcvK5TV+mUHTHPebRQhPStNu/UGGp8jrtf5LSJud/hyOSSlwwqovFyVisP8RWel1ZPue7AD2mxUQ6F6axcKa73G1LBGo/vLmU+I8nVsauGx3Ycfs3Agzwb+VLYNoTQMoA9tZHkf0lfGALWh2VBOusrGLIobXDHjOQjbTFOs5ZoGVUfHUeyFJ5SATZsMm5tVkAWuBL7rpTp9mCDRNzSoV5lY5+ogScAHOuEAMvC0q5Cml9Y7etfxrLf1Pd64c1RdwsMQla4EnVdZneeHkPsC42/EHtSP1EscSL+jCLk1JIuuBuDoI+cbbl3okDNkBkPog4gRx89eMPH1OZSzOdde6HjkHTkob47QbVrHh8lsGVJ7PCryuRfeztiyslavY//d2AOvMlRS/7jo5N9RdlZ8pM46N31zKz4GrdSxlWtGyoZGPlQYMhYExBPfaBpvf1zE3wm2hYAzqnOh/RHLvexu19kqJ/UICwgkSb5oSNpX7YX1CLuLG8ivitKxtX7QQCwuLxfMvu73TnuLJDr7TwnOdRnSc2NUxWznZw1fOJG3pt2Qs/wDStlg1tR/uee1OjoNQw0eyZ2Wwb0zEmQkGXGecQ8LPupXSZNgzYwvqudNkaf4Zhza63KZFrNnG/9ABUnvr1g/vS0LuThqq2DwNWgI+K4iFOemEduQIxnnEZploIr/H/28njPbw1mhvZs4Ttfj8AW8zcBQtfukLPtz4U9FaeMgYyGl5fe+pFS2Azzr5zwS/KuuVlC5D2GzPkKccKg2rXtQCmbPLUr12dAm/+BxS0F8Aka4fNt56xgpL/T6Yq2T8iE8DL4YDtIhnGfolvVQfY/fzcaoOJfb0BgfXSqFC0655LI6eiAKs8HJCF4lv+0DlWIXz8oaATRsrDkaJG5E6ioGHbMuz6j7ZlluX2Oe8W2ZMxLNnCJBQGqdxmkOLoCjvEt6JmpDoMy7yWzzHaITA54QAezhj55FCIRx2P22teMt0jQf2Bmx2ppuui38yc08C/w123+J1felAlVOJqmTkxols+JKLynxZ8db112hC6q6SQiCvMbxpNM8Yk7K0/IlTpdk3wbPqOOcNdbzQDLZtb4yKBB+p2X8OzuhG33Pg+bZH+fm91meb1bqAPKmA+f9W1RP6Dsl6SL6XGcqGkscZPYU2tBHfEszRbmb1G9ld4rTUL4R511NqKNYZBDFh4LWVXCNl8PjY9OGbxl7gPH1qc="
+    },
+    {
+     "type": "vector",
+     "name": "8단계",
+     "dim": 10000,
+     "ones": 4947,
+     "head": "0001100101111100111100001001011011101110000010101101111010011111",
+     "bits_b64": "GXzwlu4K3p/mBqxHb7/eXZEr6Mip0PCesdWVVSU8FFH4KOrnBnVnVxJtOSJTDuPJFDrdFazXmHEkzkrpU8YHjfG/eDCn/MC2rBzG/ulbEDvfJ0vH8sYG5rWGC9oO8DZdZex9zYNCY4Clj68C4fvQc4+bD+2UKxwKHODDhQgRc096svADX56oacXKzbxzwRkIup7vZSaFSR3DjS2eLj77IeZAl2pGgPpQWb5PjE4pyNcAMgwVwUQ4cUSXVhC4I9EHBB0aZW4o8jXSc/mhjJtO7TtU0DlXE7xf5k3V5Gw4UZQzRITZPvg+G1fX2TffyeAuCcoRA/qyR0VBaqjG4WVZi/6EAPKRk5IwydjaGJ/cWNz9bu2y9cLN6V+iNEhVk/kD8b++bXs9eCOcBNFIKLppiltFYie4EJ17xl5bNOFNePOo641qqTRd+71lekjMwDfNR8DIV6ZumxqyLcf+EI1Lkk97/lHKQUq93vf7yFPU87etiqVSzW/ZVnVKjxkb2fnBeLJB4EtqxccZJ3T/w7JaKcA2VDjNuX4qz1M8ryQXxyq0JSSoo63K9Re95C+yS+koQjbYZpbaGLS2/S88RVjv9LCEs6AP5Yg0x2LzE8s6/3SoMFeUj7zSLlXuLz2Prj1V4ATdwr9VQp57IlLo3jgG9xexFWVxENeGH/Rsm6MgKJrULF6Ymmk2NcCbPm9QN3V4Eh41B7ab/AqTl30NwQgO/6l1RszPIhtOInr1V88SLxmIed0BtS9t+IS7J43SDsCMft4/FCuWmZFyhEy619LNMS3AEFJy8Qrm/DWWfv/RcXzMnzvOwR1nBc2pP+dRxbADGfH3FxQKFXWmjpHN+WmNkG7N1cNMyl0nVHPfqUcSJM7i3+sAgVRAG6HQ6mRwmYz3cRi2yj0EqOb0NGp9lOKX74+2PsRLCieBJlSQOBIf3eb16hmZWje/qn5LLXaXrtBQ8ky2RexjolJvUPvIVz9su6Dde6J3TxAASrBB43a1YlsNZt9n+/3Qr/csHkLYgd/5MCEU0L4FujkR0IAlKWQmf16URyUxiOQbxqf6LM00C4qG9jNLrY/iB1nGoDUdgksRASYNaGpALmGFgUqh9p58RYjFSKiW2j6WWyiVDKwzxHSHHCBQPAo4i8zJzTvKC7aIuwywjGz4Zov9c5qGbE4cINmERSVHNlvjA1/ggHeECo4hHAZZPLrElFJyFrFWRh34DkRuMF3trk6TDS7qfhWcLBJes5eHqTrwMbFuiaqoclD/qB2FlNqTtR9eEYjpWip2hTgXTIjwIb4GCFt8OLLlHW5FsvJWUJJls00DJKmGHA7kTdyXOPzUJ5zWcgjgfuJlo5DbH9roQpZjS5MIJhWmTsPT0/YcBqPjKpysopIuwEgpL0NN3FiIgaJ2ZIUX6xadlrjjoFDLo3agEx+opOjcXjWtSugKDK+jjetdKS8eCKPIodAEc/wQGmp4MFhRHyltSmB704Ll9300jsgy/SPKXmywMfNc9SVQKa3vZvsx17jx/6oJQby3+tcrW4B+sC7u8JFkNU7twV/d6osDcKRfGCiyUvEEEFrP1JSTFvBCAwGjy9x4NdEMVmEs93KcchNC9x7aLonO+ayBk+mtQmHeVrNT36JNDi2mgwids7eaXnZzQWuT0GIEJkTo1kLPTL0w6Mg="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "닿음 벡터",
+     "dim": 10000,
+     "ones": 5024,
+     "head": "0100001111000100101100001101111010111101001101100010001101100110",
+     "bits_b64": "Q8Sw3r02I2b4WX+EvPuqzIMqOLXqJtgrThu7j0lnZgevDSr59S0PJo+ltr54ZAkUQ3VNRBzH4gCbx2mB03ib6qp6G/ccJ623etx0IG7NLSGCOkZL8mBTXjMGrosrj7Gxi9+P6EK6F7po09/tdjget0+OsaD8BOjJO+VEtjTD6nFfE8DaBS+LoSg4fonIZx3quV4kM0dDfXLFB+uoGUm0A3bgVd34Y2+/VpL2ryIRXR9czAZN0TM40qKz7qQT/6di/NCBnbBbyuyzW7wpg9vBM4o84drDDu5cahLFfuge9dlHzKjoZo+5KydDM3Ae3kQtRUgRuQGYS+ePhbD/FbMPDN4DaZuO8nqbqczdWZfPLeVshf2BZjcRRLbp2O6FYMwTyW4eMMyMXujh2zPVSX1CCbF3U9khD/0SNR6ONRir7FYbsKZcSh0VUe7TXiIfT6CVJqeEHygqaMO+X8og2t8LlEaODwEecTXvVTdBpqwPQH3qQfamS3tbycDYlj3SOZwjsEGnVjllES41GnDG9t28qRDAkc+XDkia4OnbuQNkielnz2l8fG46hUoSUYmzbL6oc83r7edy2dzY3A4D1CRDntz1L1hVJdkRW2KhIIungLHshaDAuURbXdLpfi1jYLf5AkgL4hkln4HOH1EeQ/Kz3ioEkFGapvbBLHsyHZsZzTFbKdFxcgKLIm+CX7lFGaeO0GGFwGDytZVqo5gpOenRdDw5yDfjd1lKws3VyCGIAjME0Pj6rmfFCYJHTx5xEylet9SAzr1fYAiB5//TmrjMPH3S7KO19ZiH1i5zk0AODdCTqXg8xd+Y9qmPzYHg+5Rz+F7qWbranUXCgPPTHmvVQEHOB4i95Zhg/B4FsO73vTDyJMiHPZ5t8RnMmQoyEIOOMOtzlSvWTiHe/uUT8nbIeo0rTTNo5xnnYG+GVoplEXqkxKjujpLN6fqNoMz8iZJV8TO3aeakBW9876cnXDgkj3v1tkqUSe/kBKs+5SCDNbIC7xC6FUDXgARFXevtGRpg6v9qhMUpcFdDEA8in809ayGQAt8r+s96BekuYt1PPAmbtvKuP9mgV5tAssMRA8Fii+ifs1idIGf6DzsZm6YpB9oKo0NQ+0lv2lA1OpG+DZHwv3ZHhTKZ8f6K4hu8ak4r2FtARkwIuHu0ZVBgzeNxSv1RUWD1hpRFpz4FnfBEJQqN2qNcE9JLRkuVsL9plSp7n1x43mZ461jG/bUydvDJKx0XwO/a08rjucHMmwrcCPqdS56/tIMqiX7woB4BVpiXU0pWfczSiw4P59CZzrRU6SG/mxsV9ub1+DLVFlMd9+TmwLTFq69O018EnbN5B93MNFot/ppGXKtGgRl1rifXWA0G0uP9UjdIKV3MRYElUe2/JWaxX1ZqcW2i1gOz3pZB7dLxf4NHhQ8Rnl8vNwNuV9darpz9XRN3mUi1oML7UmphzixubJxu09i5xXrGfghCCWYUTgkjCPFL45Gs/4r8gWk7AzHEPphumG3dzQIYiTQ6eqF75Bx/Kdlm34m07vMHzJCQqOX6HH78Inwwz6Juy7sFRsE+KehP7MhtrEeM4S3IdrTpmXLXchpqGQhEroHhhlKTMpoMhHRKrvK0lVVYUmdYVYcJDjDzRfljFR1vGy5T9ZF+SOvE2mE31CJuijPCRiU="
+    }
+   ],
+   "check": {
+    "question": "닿음 벡터 ⊕ 결과 ⊕ 단계가 가격칸 벡터와 같은가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "volume/walls.py",
+    "line": 93,
+    "function": "touch_vector"
+   }
+  },
+  {
+   "index": 10,
+   "section": "최근 60거래일",
+   "name": "닿음을 모두 기억에 더하기",
+   "op": "더하기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "이 기간의 닿음 258개를 카운터 하나에 더한다. 기간마다 기억을 따로 만든다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "다수결 기억에 담을 수 있는 양에는 한계가 있다. 더한 수가 많을수록 하나하나의 몫이 작아져 잡음에 묻히기 쉽다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "더한 닿음 수",
+     "value": 258
+    },
+    {
+     "type": "value",
+     "name": "동점(0) 칸 수",
+     "value": 185
+    },
+    {
+     "type": "vector",
+     "name": "기억(다수결)",
+     "dim": 10000,
+     "ones": 5007,
+     "head": "0101011011011110110000001010001100110111111000110011111110011110",
+     "bits_b64": "Vt7AozfjP54KndwgRfMgkEMpEONCY8d6BoB3nr1GiOG7HMu5IulFZ/TE9sbzumnhCRB+343DOoKr1U+yJ0CKxWMS+Z2Ghm1XnlSTYx3uOSsv4s9zWpRTMjHzjxboXT1L0yGGq+LOqYh+0fg/5aMWH9Cfi6joAnylHSOJ4hZQg6JcRFVYtgP0sO4i2A2rJ3/Hkl529OzDLgJlZZOPKVam97OCc68eQuevaiTnsCHZhF1yxcm5dqNg3bAYIe80n29TzA+bpKlc1tZsb51g0wPcq9q1+vQVWi6cURX1f0qiPvdH/VpBBJIPgLDnXSkIKEfn3cm7sSD0RqyODopTyT8rFQryLb0joHB883uEUZZ97NTOka3rPjuVVV6zVVZZSEpVb0/L0QlOwIjmqm2dsmDHi3h235UEA1YoYh63v6Tal/ZaouhJz/mpGtLViwTt+XMmQ75WCGZB19NaP2vId3ewfc+p8DFjF/evbjNhHlwtCM+gxSXvp3fJ/urKMwPTkeRj7nwiPyzp9yzc5si0dYw+lOqH1fjgRHImgS8dCGY42I0tzhgx3eM4fR1p9Xl/KD5YMuFqp2Yt2NdszR0p1Rx4CUk7SgvRibt8fEh5p5m6pjjox4MnIUzo3UbCPSth9I7BgmGCywRGPY9eixK+yzK0ZEq0pLaediinUqEKXDlztyFKsdV1b4nL52tHy+VhN39Plv0wkPbRl2zsoSg4ua9VdjyzZyRGuhSVRQl/kU4g+Dol+Wnr8KgWGR5ewUToTDh6f8QrbBpOM4jf1vpIGLFOZaZTX+q0pDqCWZJ9n1FsIbiU/HSxFhdo8YqrYMzavrYUfcOMP7jj66n+gzTLKTNzzlAIwTcVfYZ71wgFXFC+0M1cc0wMfYNttSWLym9WQA/osCuLWppXe1MlLZQNB2KIC/OE/YY4y5u0sQYHB6mTOQjNMYehjawuGarJLarwoBLoLWMSTWanUI2JvqF8N8kBEbnZsX1kUqVkiyJvhekIvADLKuFUSLhb9BJYX7wqTHMjil0aXEYG4RzuySJkLAnTaa6UwJOtFpBdCRf/VBl/xDGouOM+yvn7AZmVDTJNSLpk2+FJM0weVqDIrDXTg/08XqNvdXXgz9othO/he40fh5V7b/MfJr6a8ypW2qz2r89+STjNTx73VvKF8Tw91Oo4MdwSFTj/N5FfwkzP51LL5kpQwLwcKJd31NCTOfp1Ef7Znbyd3dQw4EguWccFanLRNjcRG+ALoYke5lF4vAc0jcbhE4YpMQcgTjx2/xo7CTDk2cQORKZwEKoa9xzRw3Fd9J1xadgrLWx78vp6VEFVeMR2S31B+LkNoZC1RbX73dnMvQnLqqIV8SduHR1KPDWYh521WLRQti2kPEgWBzqZnaMj86d750cD43iwpIaH/LJgrOPBG9BRqR+lyOAZLhgMC2zStFBVbJyNoOmtkqXQTmCm7p1pSuw6bdn5UusQsOxCHiQYeu1JqGh5drBUpvNkhymDTJgqTZ+hCW9Xpgg6y1PrgodxeKYIMA0b93nhehLCQl4B+Ykpahc9Ii0cV4t6IHqUIoiWEKwN8fV/jV7V8LQE9N9r0e9diB6sTm8kh2nk64MzHkT+sKtuJrsSAn8jeftN0vPHHTtyoyE+b1t+ae3XlMDRDkXB9nRTjgR/kCTAhEw="
+    }
+   ],
+   "check": {
+    "question": "더한 수 = 닿음 수",
+    "count_answer": 258,
+    "hdc_answer": 258,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 54,
+    "function": "Memory.add"
+   }
+  },
+  {
+   "index": 11,
+   "section": "최근 60거래일",
+   "name": "기억에 '밀림 ⊕ 큰 거래량'으로 묻기",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "수학적 사실",
+     "text": "기억 ⊕ 밀림 ⊕ 12단계를 하면, 밀림으로 더했던 닿음들은 '가격칸 ⊕ (그날 단계와 12단계의 차이)'로 남고 다른 결과로 더했던 것은 잡음이 된다. 남은 것을 가격칸 벡터마다 비교하면, 그 칸에서 밀린 날이 많고 그날 거래량 단계가 12단계에 가까울수록 유사도가 높다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "묻는 단계를 12단계(가장 큰 쪽)로 둔 까닭: 수준 벡터 유사도가 단계에 정비례하므로, 밀린 날 하나하나를 '거래량 단계가 클수록 크게' 세는 것과 같아진다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "단순 카운트 정답 = 그 칸에서 밀린 날마다 (1 - |단계 - 12| / 11)를 더한 값. HDC 유사도가 근사하려는 바로 그 양이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "한 번도 밀린 적 없는 칸의 유사도는 0 근처에서 약 0.01 흔들린다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "가격칸별 결과(HDC 순)",
+     "columns": [
+      "HDC 순위",
+      "가격칸",
+      "닿은 날",
+      "밀린 날",
+      "돌파한 날",
+      "밀린 날 거래량 배율(중앙값)",
+      "HDC 유사도",
+      "카운트 정답",
+      "카운트 순위",
+      "밀린 날짜"
+     ],
+     "rows": [
+      [
+       1,
+       "1,153-1,176원",
+       25,
+       17,
+       6,
+       0.56,
+       0.106,
+       6.273,
+       1,
+       [
+        "2026-08-13",
+        "2026-08-18",
+        "2026-08-19",
+        "2026-08-27",
+        "2026-08-31",
+        "2026-09-01",
+        "2026-09-09",
+        "2026-09-11",
+        "2026-10-26",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-10"
+       ]
+      ],
+      [
+       2,
+       "1,176-1,199원",
+       18,
+       10,
+       5,
+       0.6,
+       0.0642,
+       3.909,
+       4,
+       [
+        "2026-08-13",
+        "2026-08-18",
+        "2026-10-26",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-10"
+       ]
+      ],
+      [
+       3,
+       "1,108-1,130원",
+       39,
+       14,
+       17,
+       0.65,
+       0.0624,
+       4.818,
+       2,
+       [
+        "2026-08-13",
+        "2026-08-19",
+        "2026-08-20",
+        "2026-08-28",
+        "2026-09-03",
+        "2026-09-04",
+        "2026-09-10",
+        "2026-09-14",
+        "2026-09-16",
+        "2026-09-17",
+        "2026-09-28",
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-11"
+       ]
+      ],
+      [
+       4,
+       "1,223-1,248원",
+       12,
+       7,
+       3,
+       1.17,
+       0.061,
+       3.0,
+       5,
+       [
+        "2026-09-29",
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-06",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-29"
+       ]
+      ],
+      [
+       5,
+       "1,130-1,153원",
+       34,
+       15,
+       5,
+       0.38,
+       0.06,
+       4.727,
+       3,
+       [
+        "2026-08-13",
+        "2026-08-19",
+        "2026-08-27",
+        "2026-09-01",
+        "2026-09-03",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-16",
+        "2026-09-17",
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-10-29",
+        "2026-10-30",
+        "2026-11-11"
+       ]
+      ],
+      [
+       6,
+       "1,199-1,223원",
+       13,
+       7,
+       2,
+       0.52,
+       0.035,
+       2.545,
+       6,
+       [
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-28",
+        "2026-10-29",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-10"
+       ]
+      ],
+      [
+       7,
+       "1,324-1,350원",
+       6,
+       5,
+       0,
+       0.87,
+       0.0324,
+       1.909,
+       8,
+       [
+        "2026-10-12",
+        "2026-10-14",
+        "2026-10-16",
+        "2026-10-20",
+        "2026-10-21"
+       ]
+      ],
+      [
+       8,
+       "1,248-1,273원",
+       9,
+       4,
+       4,
+       1.24,
+       0.0146,
+       1.818,
+       9,
+       [
+        "2026-09-29",
+        "2026-10-07",
+        "2026-10-22",
+        "2026-10-23"
+       ]
+      ],
+      [
+       9,
+       "1,298-1,324원",
+       9,
+       3,
+       1,
+       0.87,
+       0.0076,
+       1.182,
+       10,
+       [
+        "2026-10-13",
+        "2026-10-21",
+        "2026-10-22"
+       ]
+      ],
+      [
+       10,
+       "1,003-1,023원",
+       1,
+       0,
+       1,
+       null,
+       0.0032,
+       0,
+       14,
+       []
+      ],
+      [
+       11,
+       "1,023-1,044원",
+       4,
+       0,
+       4,
+       null,
+       -0.0038,
+       0,
+       15,
+       []
+      ],
+      [
+       12,
+       "1,273-1,298원",
+       10,
+       2,
+       6,
+       1.1,
+       -0.0048,
+       0.818,
+       11,
+       [
+        "2026-10-13",
+        "2026-10-22"
+       ]
+      ],
+      [
+       13,
+       "1,086-1,108원",
+       37,
+       7,
+       19,
+       0.68,
+       -0.0084,
+       2.455,
+       7,
+       [
+        "2026-08-19",
+        "2026-08-21",
+        "2026-08-24",
+        "2026-09-03",
+        "2026-09-17",
+        "2026-09-28",
+        "2026-10-30"
+       ]
+      ],
+      [
+       14,
+       "984-1,003원",
+       1,
+       0,
+       1,
+       null,
+       -0.0086,
+       0,
+       13,
+       []
+      ],
+      [
+       15,
+       "1,044-1,065원",
+       14,
+       0,
+       12,
+       null,
+       -0.014,
+       0,
+       16,
+       []
+      ],
+      [
+       16,
+       "1,065-1,086원",
+       26,
+       2,
+       19,
+       0.7,
+       -0.0164,
+       0.636,
+       12,
+       [
+        "2026-09-03",
+        "2026-10-30"
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(1/√D)",
+     "value": 0.01
+    },
+    {
+     "type": "value",
+     "name": "HDC 순서와 카운트 순서의 순위 상관",
+     "value": 0.853
+    }
+   ],
+   "check": {
+    "question": "HDC 상위 5칸과 카운트 상위 5칸이 겹치는 수",
+    "count_answer": 5,
+    "hdc_answer": 5,
+    "agree": true
+   },
+   "source": {
+    "file": "volume/walls.py",
+    "line": 98,
+    "function": "ask_walls"
+   }
+  }
+ ],
+ "log": {
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "notes": []
+ }
+}

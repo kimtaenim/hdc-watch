@@ -1,0 +1,38 @@
+# 장중 30분마다 채점, 장 마감 뒤 프로토타입 갱신과 매물벽 찾기.
+# 예약 시각은 UTC. 한국 시각 = UTC + 9시간.
+#   장중: 평일 09:05-15:35 KST, 매시 5분과 35분 (UTC 00:05-06:35)
+#   마감: 평일 16:10 KST (UTC 07:10)
+# GitHub 예약 실행은 기본 브랜치에 있는 워크플로만 돌고, 수십 분 밀리거나 빠질 수 있다.
+# 밀린 시간과 빠진 실행은 docs/data/runs.json에 남는다.
+name: 거래량 장중 채점
+on:
+  schedule:
+    - cron: "5,35 0-6 * * 1-5"
+    - cron: "10 7 * * 1-5"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: data-commit
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: 채점 (15:30 이후 실행이면 마감 갱신)
+        run: python -m volume.live
+      - name: 매물벽 찾기 (마감 뒤만)
+        run: |
+          if [ "$(TZ=Asia/Seoul date +%H)" -ge 16 ]; then python -m volume.walls; fi
+      - name: 결과 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "거래량 채점 $(TZ=Asia/Seoul date +%Y-%m-%dT%H:%M)"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 5)); done
+          exit 1

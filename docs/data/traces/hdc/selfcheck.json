@@ -1,0 +1,952 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "hdc.selfcheck",
+ "subject": null,
+ "started_at": "2026-11-11T22:00:57+09:00",
+ "finished_at": "2026-11-11T22:00:57+09:00",
+ "params": {
+  "D": 10000,
+  "levels": 12
+ },
+ "code": {
+  "commit": "a90bcb7cb6435d0ab6ea571e3635403f8e33f409",
+  "dirty": true
+ },
+ "sections": [],
+ "steps": [
+  {
+   "index": 1,
+   "section": null,
+   "name": "이름에서 벡터 꺼내기",
+   "op": "벡터 생성",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "난수 생성기 대신 SHA-256으로 '이름#0', '이름#1', ...을 해시해 1만 비트를 이어 붙인다. 같은 이름은 파이썬에서도 브라우저에서도 같은 벡터가 되므로 벡터를 저장하지 않는다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "SHA-256 출력을 무작위 비트처럼 볼 수 있다고 가정한다. 증명된 정리는 아니고 널리 받아들이는 가정이다. 그 가정 아래 1의 개수는 약 5,000개가 된다."
+    }
+   ],
+   "inputs": [
+    "요일:수",
+    "시간대:14"
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "요일:수",
+     "dim": 10000,
+     "ones": 5022,
+     "head": "1100000010000010100011100000110110000110001001001011001011010010",
+     "bits_b64": "wIKODYYkstJggVqzfYC1ZNr2KdGCWFvJu/XNMA5vtQgZXUrBiuXbB+oDcH5MINaEX8sXMO4xTPx8A0Wn8NkZC+69dujxxp9B7uuES/QDT6qdZCUxG6GYwFdZfNt81Z0BgLGE28nf6bereJFxfKfeCQmjVd/xdKQHys8cW+0IED1aBpOtQWrhrt6yFaUgL0hm6RqYUm0sIMk4+DCcaKO9JfWqC5jUpTiMWgPwqRXVoODw0eAhu3jHp5FO0HMzopfgYbMkH0LMW384YThLelEvQ3Ai9dUaogz4/Ff5UB5ByQC2rKp8VJfdDTIboXIYxg3DIvBwFAfqNO4RTuY8eP25NXmD9xA7uz9Jo6m+JR1uUd6zY9B2hyr3+aC7/vqnJWTH7N3IxwSNN9DtRyQUV+H7tctX6aixli8iZgnEIb3MzH4SESy54dxr6p5ZLrcDlZXjHehfdcCNHo9Jjsv+g1FMR7FpT6U3OdG386sFIDmcfn8XemPimXVmXDsN0BRNT6CRqgpFIn/lO/J0e6tSVh0QPeoWitwfJjIThQzls4XTHWUrlptKviAswzCTJLl6tUcVkfn7vxkO/Wvfslhong1g2UZVivfyRM6Y58hDjyH+NisGrEGuQLZEIDiIOWJCYIJ09HaYDKLg7H/CDtzFzbiXZPkvbH6er4kXbMa3myWj37JPq/G+dUKl2RUvCHrdzqaec/qwdNC4e9nC/h9BsbnXJ02mNpi2O/2mrI7lgUk/ywx5iKKi4pzuxE68Ohe9alBBnvlwmo47Qe8OPjXSVlbXkiVDwKsnjkWEIgyk8kZZqpcS20hy2X0vu39nTpvDWDCmrWXVvF4vQDQcEoBM6EDFfYwP6pMnoyPT4E/S3n1EY7CrdqKsWig047N+llib4PLqVI7luIzOWnYE7DGhEs7YNI336TF8Ot3HjnLrNQjjYc+7JsNeXSYp4WX6xjtL3DSzIS5uSxdkf/yEAXaGhHwjAQHewFFuHrTAnkyEhDbPhEf5FnwX9Bj06Yv6fo9nVjx31tUN7abNJNJirqVVD3diio7vFb+z+RCoKPzU5b6ZyOhJv1Onnb1n6bhgepEke4nrT1lxi2Q6N7/nLfedYOhGkBzRmbWG3aeF7WvS3UiAqeS+z/cT3+O1UIeCLFOOzcZmeu++DzmYWcvqSCQKvnfIKfe5bawaBCyMiixE4DBTxpwON13o5XgQqNlUuFuaon2MzNRR24JvHPWq71ElnsIwtfNQxofIIe1G1seKwbpyzyJ6Fu/ZBAoJoTiLZAvQipu9kcpuU2x9EyZBUJ5rypnzKhPloIxWDk+/yuGGh8NXFQdRl1M9XuqE5y15Uxltn+P6xdSO6eeR8bF2z38B7OLvlZdZ0lySwSzVV3+7yf9kMPxmG9J82VDu2wqGIpSNECMbK3JItx0LsFABEWWRf9H8Q0xKFzcCaMm3hpCoCjpKi262UINP/uTCjyCYvl2xSGutqqlQ7MEH6K0IE/rNgttF8kRc6eh0WXjRSQAXYATJl7X9M4wXv5foSbl3jVWn4j6e5b98mOzdT0kFi2AsDxfRoiB3Iepqm0gS+2DVsRsajgnjT4pIrvhKVIPHgKHGQ0rpn9PXyI49YI2NTTofzH2dBfgVraYJr2dEsmF42hmXHtCaPH3t3AzWNjKrF05PUPBN7FM="
+    },
+    {
+     "type": "vector",
+     "name": "시간대:14",
+     "dim": 10000,
+     "ones": 5006,
+     "head": "0011110101011011101001110011111011000010010110001010110100011001",
+     "bits_b64": "PVunPsJYrRnh/Vv5WPwGKsEvWeeG2CawSKQI5aCEOoVGLF6jCmiyPchjoPoiftmngg03/V/3hg+CWZgmzb1UK6591qkl1BS/K44X1wI4tSR+7jmOeoWIUBjQsPE4NPp287JCqoByqw9y/776tdNiLTLiazl5IVcXE86aU0aexJhCfjXntbCxvsbh2G8q2nQG1WgKOjdGvR1/TafKfOLyEPOE/T8SC6LrXKc7zhLk+5sp6r1YfpQLUKdrvvpWPdACjeGtyZyE6l4+wvLfVnVkBbKd2JBqf8LHVN27UBKcHQyUvAcmhaqtCLMLO80mb6SBQsyNA8cLurg8EIW+OZz90FCpQrCtibpKvuYskHyD9VvzDKxdxYTjINlPA2WVkohF0wvi5BICDlTZJEMZdlQQIOrs+PmypM0qCGjuPsQm2+cahaPVj8zSXkAKLuz+MHuIm9l58A3zEa94sfrDAWsEQc9o6YZovid2e9HQdMs76FQrK+B2kN9D+uCeOGDGGjAbVkySBBt5T+EONvRxudU9K0YcRJRNI79t/Uu49qtzo9GtnXf1tOTwUorMYRjg8Dk9d7nGo6O7CoNNlSCIhz/qreXtz5PWt93OoM05Sxm9iz7GJJ0ldgZFXxdtAz2TnvHfgV6bEMm6AelCBkEguJ69KxRckvnq6eHokYSV1r2sK7xAuPuvSaaU5BmJN8wS5VD6S0THS8Qlg5+bVKGBjGrD3Tmf7dGGF8sewsN4TzF0IKMIJ2PAIuPeFNkV19+kY6wsCWB1D4FuMP++bXMnHcUZmdI4F7nHMqRWKjtQ0NmyYYoTbnvWJUjJKMa5aE4vAooaQbOjUB7c2ON8e0WFCIAli04AhfbpB9Bre3Ayj2zPP/+4ajfp1jNMU5tYEknL5zD0rENefMjqg1M6n35PWM/S8CuSuX90wpYGC9MFvKftHqJMjAdQOm/y8q3Riu4rjzUtEQTls35ox01mmMNn7kf2/nIwEKD3Fm3ZS+eZf/EUkrCraWS3Yolv6R8ticIqNScf+SqtpALZYPgDwcFslAvW1QXMOZn7vx7Laosvj045GbB/YJ8UKNyqouB7Ga3Y88ZHT2BvLI7RFj18bWcjj3Fzdcne9zoQa6gpnBacT3dPAD1YLiW9JIgneOz19jtdbPZytqcSN88ewtFUd4zJbWDf7NSV4kwnMkno4GPY3PoY/EVOrs46IhncTrlH/Nuj9nsIdkmUAVMke6XUrC0WKXqu6/9Bfc9tf8FLTr1LQiE7jEj1iu3Q14VJVDoAmYM2XCQDmlC7GHbwj06Skt4C8gGI//gR5Dm4hXP5jqSI/KKidWCeDbsV+YaWggBGEEr30MpWXvUqFSi3I5QrYO2QGu3C8ddV3t6ct4Mi9pnynGLGoVTHXfxYwt2n96R48z7fHmbhBpJjRe2ue3L38Ip8QTSK4hQg6vA7qG5TjP4Fp8KUtJr9rn2Of6hsZtTXKN9hFbQG3DaqRkvgBTWIa3/Ihqzn13nsmUTIPCycogV4SzMj6btkivIsjdAPxyJ6C4xmkEd4TdJH2bsW2pZ2mImz2oJ+Z7Pz1R4jBCKpkDJbOZQjw3QFGkz5NZju7ejHkNLgnysYxcnm+UAZpmp2i/kNyrVvCdWp/m+Oi/RDpMJhC2FexXEN7RS7bRRp4boQgUL5gCRblLQ="
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "hdc/vectors.py",
+    "line": 23,
+    "function": "make_vector"
+   }
+  },
+  {
+   "index": 2,
+   "section": null,
+   "name": "무관한 두 벡터 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "수학적 사실",
+     "text": "무관한 두 벡터는 칸마다 같을 확률이 1/2이라, 다른 칸 수는 평균 D/2, 유사도는 0 근처에서 표준편차 약 1/√D = 0.010로 흔들린다(근사)."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "요일:수",
+     "dim": 10000,
+     "ones": 5022,
+     "head": "1100000010000010100011100000110110000110001001001011001011010010"
+    },
+    {
+     "type": "vector",
+     "name": "시간대:14",
+     "dim": 10000,
+     "ones": 5006,
+     "head": "0011110101011011101001110011111011000010010110001010110100011001"
+    }
+   ],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "해밍 거리",
+     "value": 4954
+    },
+    {
+     "type": "value",
+     "name": "유사도",
+     "value": 0.009199999999999986
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(1/√D)",
+     "value": 0.01
+    }
+   ],
+   "check": {
+    "question": "다른 칸 수(한 칸씩 직접 센 값)",
+    "count_answer": 4954,
+    "hdc_answer": 4954,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 25,
+    "function": "hamming"
+   }
+  },
+  {
+   "index": 3,
+   "section": null,
+   "name": "묶고 다시 풀기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "수학적 사실",
+     "text": "XOR은 같은 값을 두 번 하면 원래대로 돌아온다: (A⊕B)⊕B = A. 그래서 묶기와 풀기가 같은 연산이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "A, B가 서로 무관한 무작위 벡터면, 묶은 결과 A⊕B는 A와도 B와도 무관한(유사도 0 근처) 새 벡터가 된다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "요일:수",
+     "dim": 10000,
+     "ones": 5022,
+     "head": "1100000010000010100011100000110110000110001001001011001011010010",
+     "bits_b64": "wIKODYYkstJggVqzfYC1ZNr2KdGCWFvJu/XNMA5vtQgZXUrBiuXbB+oDcH5MINaEX8sXMO4xTPx8A0Wn8NkZC+69dujxxp9B7uuES/QDT6qdZCUxG6GYwFdZfNt81Z0BgLGE28nf6bereJFxfKfeCQmjVd/xdKQHys8cW+0IED1aBpOtQWrhrt6yFaUgL0hm6RqYUm0sIMk4+DCcaKO9JfWqC5jUpTiMWgPwqRXVoODw0eAhu3jHp5FO0HMzopfgYbMkH0LMW384YThLelEvQ3Ai9dUaogz4/Ff5UB5ByQC2rKp8VJfdDTIboXIYxg3DIvBwFAfqNO4RTuY8eP25NXmD9xA7uz9Jo6m+JR1uUd6zY9B2hyr3+aC7/vqnJWTH7N3IxwSNN9DtRyQUV+H7tctX6aixli8iZgnEIb3MzH4SESy54dxr6p5ZLrcDlZXjHehfdcCNHo9Jjsv+g1FMR7FpT6U3OdG386sFIDmcfn8XemPimXVmXDsN0BRNT6CRqgpFIn/lO/J0e6tSVh0QPeoWitwfJjIThQzls4XTHWUrlptKviAswzCTJLl6tUcVkfn7vxkO/Wvfslhong1g2UZVivfyRM6Y58hDjyH+NisGrEGuQLZEIDiIOWJCYIJ09HaYDKLg7H/CDtzFzbiXZPkvbH6er4kXbMa3myWj37JPq/G+dUKl2RUvCHrdzqaec/qwdNC4e9nC/h9BsbnXJ02mNpi2O/2mrI7lgUk/ywx5iKKi4pzuxE68Ohe9alBBnvlwmo47Qe8OPjXSVlbXkiVDwKsnjkWEIgyk8kZZqpcS20hy2X0vu39nTpvDWDCmrWXVvF4vQDQcEoBM6EDFfYwP6pMnoyPT4E/S3n1EY7CrdqKsWig047N+llib4PLqVI7luIzOWnYE7DGhEs7YNI336TF8Ot3HjnLrNQjjYc+7JsNeXSYp4WX6xjtL3DSzIS5uSxdkf/yEAXaGhHwjAQHewFFuHrTAnkyEhDbPhEf5FnwX9Bj06Yv6fo9nVjx31tUN7abNJNJirqVVD3diio7vFb+z+RCoKPzU5b6ZyOhJv1Onnb1n6bhgepEke4nrT1lxi2Q6N7/nLfedYOhGkBzRmbWG3aeF7WvS3UiAqeS+z/cT3+O1UIeCLFOOzcZmeu++DzmYWcvqSCQKvnfIKfe5bawaBCyMiixE4DBTxpwON13o5XgQqNlUuFuaon2MzNRR24JvHPWq71ElnsIwtfNQxofIIe1G1seKwbpyzyJ6Fu/ZBAoJoTiLZAvQipu9kcpuU2x9EyZBUJ5rypnzKhPloIxWDk+/yuGGh8NXFQdRl1M9XuqE5y15Uxltn+P6xdSO6eeR8bF2z38B7OLvlZdZ0lySwSzVV3+7yf9kMPxmG9J82VDu2wqGIpSNECMbK3JItx0LsFABEWWRf9H8Q0xKFzcCaMm3hpCoCjpKi262UINP/uTCjyCYvl2xSGutqqlQ7MEH6K0IE/rNgttF8kRc6eh0WXjRSQAXYATJl7X9M4wXv5foSbl3jVWn4j6e5b98mOzdT0kFi2AsDxfRoiB3Iepqm0gS+2DVsRsajgnjT4pIrvhKVIPHgKHGQ0rpn9PXyI49YI2NTTofzH2dBfgVraYJr2dEsmF42hmXHtCaPH3t3AzWNjKrF05PUPBN7FM="
+    },
+    {
+     "type": "vector",
+     "name": "시간대:14",
+     "dim": 10000,
+     "ones": 5006,
+     "head": "0011110101011011101001110011111011000010010110001010110100011001",
+     "bits_b64": "PVunPsJYrRnh/Vv5WPwGKsEvWeeG2CawSKQI5aCEOoVGLF6jCmiyPchjoPoiftmngg03/V/3hg+CWZgmzb1UK6591qkl1BS/K44X1wI4tSR+7jmOeoWIUBjQsPE4NPp287JCqoByqw9y/776tdNiLTLiazl5IVcXE86aU0aexJhCfjXntbCxvsbh2G8q2nQG1WgKOjdGvR1/TafKfOLyEPOE/T8SC6LrXKc7zhLk+5sp6r1YfpQLUKdrvvpWPdACjeGtyZyE6l4+wvLfVnVkBbKd2JBqf8LHVN27UBKcHQyUvAcmhaqtCLMLO80mb6SBQsyNA8cLurg8EIW+OZz90FCpQrCtibpKvuYskHyD9VvzDKxdxYTjINlPA2WVkohF0wvi5BICDlTZJEMZdlQQIOrs+PmypM0qCGjuPsQm2+cahaPVj8zSXkAKLuz+MHuIm9l58A3zEa94sfrDAWsEQc9o6YZovid2e9HQdMs76FQrK+B2kN9D+uCeOGDGGjAbVkySBBt5T+EONvRxudU9K0YcRJRNI79t/Uu49qtzo9GtnXf1tOTwUorMYRjg8Dk9d7nGo6O7CoNNlSCIhz/qreXtz5PWt93OoM05Sxm9iz7GJJ0ldgZFXxdtAz2TnvHfgV6bEMm6AelCBkEguJ69KxRckvnq6eHokYSV1r2sK7xAuPuvSaaU5BmJN8wS5VD6S0THS8Qlg5+bVKGBjGrD3Tmf7dGGF8sewsN4TzF0IKMIJ2PAIuPeFNkV19+kY6wsCWB1D4FuMP++bXMnHcUZmdI4F7nHMqRWKjtQ0NmyYYoTbnvWJUjJKMa5aE4vAooaQbOjUB7c2ON8e0WFCIAli04AhfbpB9Bre3Ayj2zPP/+4ajfp1jNMU5tYEknL5zD0rENefMjqg1M6n35PWM/S8CuSuX90wpYGC9MFvKftHqJMjAdQOm/y8q3Riu4rjzUtEQTls35ox01mmMNn7kf2/nIwEKD3Fm3ZS+eZf/EUkrCraWS3Yolv6R8ticIqNScf+SqtpALZYPgDwcFslAvW1QXMOZn7vx7Laosvj045GbB/YJ8UKNyqouB7Ga3Y88ZHT2BvLI7RFj18bWcjj3Fzdcne9zoQa6gpnBacT3dPAD1YLiW9JIgneOz19jtdbPZytqcSN88ewtFUd4zJbWDf7NSV4kwnMkno4GPY3PoY/EVOrs46IhncTrlH/Nuj9nsIdkmUAVMke6XUrC0WKXqu6/9Bfc9tf8FLTr1LQiE7jEj1iu3Q14VJVDoAmYM2XCQDmlC7GHbwj06Skt4C8gGI//gR5Dm4hXP5jqSI/KKidWCeDbsV+YaWggBGEEr30MpWXvUqFSi3I5QrYO2QGu3C8ddV3t6ct4Mi9pnynGLGoVTHXfxYwt2n96R48z7fHmbhBpJjRe2ue3L38Ip8QTSK4hQg6vA7qG5TjP4Fp8KUtJr9rn2Of6hsZtTXKN9hFbQG3DaqRkvgBTWIa3/Ihqzn13nsmUTIPCycogV4SzMj6btkivIsjdAPxyJ6C4xmkEd4TdJH2bsW2pZ2mImz2oJ+Z7Pz1R4jBCKpkDJbOZQjw3QFGkz5NZju7ejHkNLgnysYxcnm+UAZpmp2i/kNyrVvCdWp/m+Oi/RDpMJhC2FexXEN7RS7bRRp4boQgUL5gCRblLQ="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "요일:수 ⊕ 시간대:14",
+     "dim": 10000,
+     "ones": 4954,
+     "head": "1111110111011001001010010011001101000100011111000001111111001011",
+     "bits_b64": "/dkpM0R8H8uBfAFKJXyzThvZcDYEgH1581HF1a7rj41fcRRigI1pOiJg0IRuXg8j3cYgzbHGyvP+Wt2BPWRNIEDAoEHUEov+xWWTnPY7+o7jihy/YSQQkE+JzCpE4Wd3cwPGcUmtQrjZhy+LyXS8JDtBPuaIVfMQ2QGGCKuW1KUYeKZK9NpQEBhTzcoK9TxgPHKSaFpqndRHtZdWFEFPNQYu9qfGrppnBqTLZwcxW3vZO115xezM9zYlbolln0fi7FKJ1t5IsSEGo8qULCRLRsK/LUVw3c4/qIpCAAzd1AwiEK1a0T1wBYEQmr8+qalCYDz9F8DhjlYtXmOCQWFE5SkqtaCWMoUDHU+StWHtpIVAb3wrQq4U2Xn0/Z8yt+yCP9YqIxaPOYQ0Y2cNIbXrlSG7EVEDMuIIbmEqH3nqF5kIlI9sbhC5tN5TAFv9pe5rhjEmhc1+DyAxPzE9gjpIBn4BpiNfh/bBiHrVVPKnlis8UYOUCaolptuT6HSLVZCK/EbXJmScdBN6TV8j78gtFqwKzkhSBY1+eEddRS6gvrSGC+y/CsTckbpfRaGaRX4o5kA9HLq19+iSJ3jgGTKKdKO4RWQk8xNWRwV6xDhDvRXAiNyLNrABfy/lOl/R/nOrdSgDHGta7ZaACJ3ldSYqT+1z/od0Rmj//UIiTZgP9A4PEwoRPOQxPQymP7bPK/ZkOL53PxSd+EZZqr7APdMU+nQ520kwLDa4bk2dznhL669xr8FiwH8w0Jep7cgZCfxtl5kFlQ9VcRCwU0b1S5POC/d71xLgvOHSCDf0Ip/ryx0BtTOk/DXmk7neJtXsWrq87NZ27EDzmNdgacXJ4MDg9sIPb2XOpPO4mz/gURGLXE8THJVFjBt4sCgmhBFQB8Ie+M27xEQk2SU+c0/uSgEKxKZlUE4I+EvBhaHuia8Of233qsQOZ0nbE8grTNVgUwGeMCqL+GkMuLHimbXhajvV/3Pu0PGZCNkZ1asd+8fbFvdSfxiglpGbAJTX901NYxtoL/+gSaQURCphb2Q5m3y0X4sjLCZIRg5jQnf7avCg0Vg238yztWHNS1gbYzz8iE+sADkep+rrIYKbQJC+75k15dUPbo+Wtg+scX1Okj/Pqdnm4dKu+2uSKGt32mjToTAUzEisOPaGmxq+P6jD0xcXxSMsj+A9NmVkak+cPMpLOtlAmZPSx2HM5mATRIA5VAaEup3F2tFLZ1B+Q3wzt7ieXgwRu0ilXiwNmHrBg5tJQ2qPnAIJ049A9QKL/Yjm1r++C5rVSxqNnGjTwkBpOJh71ev0RLXuizxGREUOe2H1YGfPmugop2wSZS0/Q1OaTymsmyGk/M8m0iVdr5KR9g8tZEAMDIIOdq/3oeZJVZ2ikaihRi4kG41JLK7+0apSDkX6LeAr8vClyyL24e/tPuV2oVhq/cc5wKfkCm6trfjeP/RL/v7BgUyu6fRPloLQXd+rdp/6qorn7ZiAeIUFBHeiJT2wcKy8ZVRN6wVvKzfqfg6ZuX47MkfnjpsNhtnBcnnmqG07QVfLld9zE+mf1ZWvxZOE9PRJn2q7a1KOiI85TX3mVcaxm2CkuWsAEHMm3GHxWhoxMc4kxuf7xsMSBsjyDC28U8mHJJMHFqMZ0XjJ26GX0WlWsRi/14i7lgy20NQWeOc="
+    },
+    {
+     "type": "value",
+     "name": "결과와 A의 유사도",
+     "value": -0.0012000000000000899
+    },
+    {
+     "type": "value",
+     "name": "결과와 B의 유사도",
+     "value": -0.0043999999999999595
+    },
+    {
+     "type": "value",
+     "name": "(A⊕B)⊕B와 A의 유사도",
+     "value": 1.0
+    }
+   ],
+   "check": {
+    "question": "(A⊕B)⊕B가 A와 칸마다 같은가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 4,
+   "section": null,
+   "name": "수준 벡터 사다리 만들기",
+   "op": "뒤집기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "1단계는 이름에서 꺼낸 벡터, 단계가 오를 때마다 아직 안 뒤집은 칸 약 455개를 뒤집는다. 11번 오르면 정확히 5,000칸(절반)이 바뀐다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "뒤집은 칸이 겹치지 않으므로 두 단계의 해밍 거리는 그 사이에 뒤집은 칸 수와 정확히 같다. 거리가 단계 차이에 (반올림 오차 안에서) 비례하므로, 유사도는 1에서 0까지 일정하게 줄어든다."
+    }
+   ],
+   "inputs": [
+    "거래량단계"
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "1단계",
+     "dim": 10000,
+     "ones": 5018,
+     "head": "0001101011100111110000000000011001000111110010111000101010101110",
+     "bits_b64": "GufABkfLiq7nJoBnd93f3JEf4MqVkPbXsc3VQS00sANqq3avAqQr3iVFOIjZDuNpGLr+FyyJ2G8szcjqXX5Cj5e/dhgF1MmHRpSG2q79UKvbiwZmygfKrjvH5khG2LQPvOWNChMXR0ayr9EAGHcEUhw73+63axwaNNXJtZqC/5970+gzT9wKY4dLVd5jFlOMejaz9gwtW1zDTCxcOjzTZf5YRrjgCcpgXa82Rm5taYzSkmw1xuRK93qWNxR9Al2FOxUaQ7aI9tXDpLv22KtVV5Nc0ntGF7l+tllRt3qw+5IiaARZ0GootETX8X+tnGv2KX9Bi/4/TZcIu6jGaE7QLgZMcvUxF4CAy8f6CJ7cXR79XsIihcpCyM/WZsZBB30GwZQrKXwMUiKlhchUKv4JmqNM3jfeEh5bxhgbEjAo+mf5xJ5JanAd+6UgCFB9cWdvfrCKZbYpvAuS6++8gH5PmEOIqEnLY0xzyuL/TLL1luHCr2V6j3ZdRlCYB5FK+kHIaAxhVVvoxcQft1TE0xjCK9MFUm5rO3407zrWxGZw/wv05DLYdw7DxXe6gMIamVklGrblYRHauT127SEm5wrP7Lgp8ha+4iC1fgCng1w+X3SItHUYz/0roAdubDfKLAUf4k3V6ltVXoJqrkvYxBATZzYqEOZjBNeHp8AmmWcQZLDWgVzw0ku3c9Oa/rJCDvFtUnO8V/gb3JKbl/kVAUC6/aJvZ8bqOhIk4ix3RY9OB44ocMGImLwj6IihoY3wnOGOfp67LT/U+ZFx1ay665LtOKRRdQpGWPLe+D43/nXjeNB0+jXuxR9Wz0wiLc4AVPMinPxBMh43zT3sRNR9yqv1zGuPNNnE0q3HUQN2MXJQKEdWHpsIwRxQM6PXqnBQ0Az5xUw+yjxMfu4VIW7/GFLXvYeuvpRzJbeTNJ7wciEfHeW3vhq7K3c++tbD5UaXpMn1+hm8wirjpAqO8JwbfL8EKSztq75WHZAB6/nCg/bwxfqrZv8Zqoe8hfchWEJ65z3qgOskkEYFmlI/uQBh+2eif/jUaS0w2q4cRnPcKH0Ek86h5KtLrYtiFbwuzWXN+islE1RuPvtTT2OFEUKjru0VBMmwTKye/17Wy6CFtWyTVSGfEF8RPFdoh71J0XWfwfec480AnG38sg/9cyKfPYcLt9rAUScTvt9j4e1qhNUGq8ylGgYM9p635OhQFeNeRgHudLxuO3zMm1bZdD7cepWebjZdsQ0F2Xl846F+AutcRpHx4h7F1O71qT26EPqtWCi8BQsPmlxgCv6BCBcePrPHFFVJmvRgULMvqQYjJeunvH3xQZwdcfzQX9CX0AFlbuFlQpG/F/nuB+BlTYE7ihXEXmNTHdLUw6vTKWVmMxoXWAgNhSFF5XzIhfJ75NJTyxzUmhTioBLXUXYllgeerGvP1iYkX94LDqjCAeIVKQkGjWVKp9CceODQHmpsMDdR/+lO6GFb02qh5fmWDuAgLSXXHuCgM/DQhXZMLPd3ZlmRdrSmH4itQRrn/+Mr3kA8sA9psArlB27tBKfb6JpWVLQDWJ+jUvM1DBPg3J6bBfFSWAK6GdRS1VNM1FMH+gaeElGBeRLSNCPc+S2B7siuQgsddLdHikdlShx+i4A1kVmHJ3Y1QW3w2jYU5MnoRQDffqxx7eA="
+    },
+    {
+     "type": "vector",
+     "name": "2단계",
+     "dim": 10000,
+     "ones": 5018,
+     "head": "0001101011100111110000000000011001101111110010111000101010101110",
+     "bits_b64": "GufABm/Liq7nJoBnd53fXJEf4MiN0PbXsc3VQS00sAPqq3avAqQr3iVFOArZDuNpHLreFyyJ2H0szcjqWX5Cj5O/fhgF1MGHRBSG2qr5UKvbi0dGygfGrj/H5lhG2DQdveWtixMXR8awr5EAgHcEUh473+63axwaFNXJtZqCf9970/gzX94KYYdLVd5jFxOM+jaz9gwtW1zDDCxeOjzTZfZYVrpiCcpgXa8XRm5taYzSkmw1xuRK936WdxQ9Al2FMhUaR/YI9tXDpPvk2KtVTZNU0jtGF7h+tlnRt3ow25IibARZ0Go4tETX0XetmGv2KX9Ri/6/TdcAu6jG6E5RLtZMcvUxl5Kgy8z6CJ7cXRz9XsIyhcJD6M/yZsZBh3kGwZUrKX0cWiKFBclUKv4JmqNM3jfeEh5bxhgbEDAs+uf5xJ5raHAd+6UgCFh9cWdvdrCKZbYtvAuSa+++gH9PmkfY6FHLQ0xzyvP/zPLVluHCr2V6z3ddRlCYB5FK+EHIaDxBVFvoxcQft1TE0xDKK9MFUi5rO3407xp2xGZw7wu05DbYdwzDxXe6gIIaiVklGrb9YRXauT027SEm5xrP5Lgo8hS+5SC1fgCng1w+f3SItHUQz/0qoAdubDXKLBUf4kXVyltVVoJrrkvYxDATZzYqEOZjBNeGp8AmmWMQYLjWAVyw0mu2d9OavrJAD/FsUjO8V7gb3JKbl/kVAUC+/aJvZs7qOhIk4ix3R49KD40IcMGInLwj6IihoY3wnOGOfp6/LS/U+ZFx1Sy659LtOKRRdQpCWPLG+D43/nXjeFD0+jfuwR92z0wiL84AVPMinPxFMhw3zT3sRNR9yqmlzG+PNMnEwq3HUUN+MXJQKE92HrsIwRxQM6PXqnBQ0Az51Uw+yjwM/O4VJW7/GFLXvYeuvpR7ITeTNB7wcAEfHeW3/hq7K3c++tZD5VaXpMn1+hi+wi7joAKO8JwLdL8EKSzNa7ZWH5ABy/nCo/awxfopZv8Zqse8jfchWEJ65z3qgOs0kBYFulI/uQBhu2aif/jUaS0w2q4cRnfcKH0Ek8qh5KtLrY9iFf0uyWVN+gslE1RuPvtTT2GFEUKj7u0VBMmwTKye/l7Wy6CFteyTVSGfEBMRPFd4h51J0XXewfeM480AnG38sg/9czqfPY4Os9rAUScTNttj4d1ohNUEqsylGgYcdr735OhQFaNeRhHudLxuO3zMilbbfS7MfpWebjJcsZ0H+Xl846FuCetYZlHx4h7FlOqxqT26EPqpWCr8BQkPnlzgCv6BCBd+PrPHFFVNkvRAULMvqU4jJeunvH3hSZwdcfzQX9CX0gBkbuFlQpC/F9nuRuBlT4E5qhXkXmNTHfLcgqvTKmRmsxIeWAgthyFN7VzIhfJ+5MATyxTUkhTioBLX0XYllweOrGrPVjclT/4LDqjCAeMVKQ0GjSVKo9CMeOzQHmpsMHNRv+lO6mFb02rh5/mWDuAgLSXXHuCgM/DQpXZILPdnZlmRVrS2H4itQR7n//Mr3kA8sC9rsArlB27thLfb6JpWULQDWJ2jUvMVABLn1J6bBfFSWAK6GdRS9VNM1FMH8gaeElGBcRLSNiPc+S2B/sivQgsddLdHi0dFSjxui4A1kVGGJ3YxQW2x2jYU5MnoRQDffqxx7eg="
+    },
+    {
+     "type": "vector",
+     "name": "3단계",
+     "dim": 10000,
+     "ones": 4985,
+     "head": "0001100001100111110000001000011001101111110010111000101010101110"
+    },
+    {
+     "type": "vector",
+     "name": "4단계",
+     "dim": 10000,
+     "ones": 4983,
+     "head": "0001100001101110110000001000011001101111110010111000111010101110"
+    },
+    {
+     "type": "vector",
+     "name": "5단계",
+     "dim": 10000,
+     "ones": 4982,
+     "head": "0001100001101110110100001000011001101111100010111000111010101110"
+    },
+    {
+     "type": "vector",
+     "name": "6단계",
+     "dim": 10000,
+     "ones": 4970,
+     "head": "0001100001101100110100001000011001101110100010101101111010011110"
+    },
+    {
+     "type": "vector",
+     "name": "7단계",
+     "dim": 10000,
+     "ones": 4975,
+     "head": "0001100001101100111100001000011011101110000010101101111010011110"
+    },
+    {
+     "type": "vector",
+     "name": "8단계",
+     "dim": 10000,
+     "ones": 4947,
+     "head": "0001100101111100111100001001011011101110000010101101111010011111"
+    },
+    {
+     "type": "vector",
+     "name": "9단계",
+     "dim": 10000,
+     "ones": 4944,
+     "head": "0001100101111100111100001001011011101110000010101101111011011111"
+    },
+    {
+     "type": "vector",
+     "name": "10단계",
+     "dim": 10000,
+     "ones": 4958,
+     "head": "0001100101111100111110001001011011101110000000101101111111011111"
+    },
+    {
+     "type": "vector",
+     "name": "11단계",
+     "dim": 10000,
+     "ones": 4987,
+     "head": "0001100101111100111110001001010011101110000100101101111111011111"
+    },
+    {
+     "type": "vector",
+     "name": "12단계",
+     "dim": 10000,
+     "ones": 5018,
+     "head": "0001000101011100111110001001010011101110000101101101110111011111"
+    },
+    {
+     "type": "flips",
+     "name": "1→2단계에서 뒤집은 칸",
+     "cells": [
+      8263,
+      485,
+      2099,
+      8731,
+      5797,
+      8022,
+      9881,
+      8749,
+      6703,
+      2833,
+      4901,
+      5934,
+      6496,
+      8539,
+      2843,
+      2347,
+      2126,
+      9751,
+      4177,
+      8218,
+      9506,
+      3180,
+      9604,
+      8233,
+      4708,
+      8411,
+      9828,
+      1086,
+      8436,
+      1070,
+      2825,
+      5916,
+      9405,
+      3435,
+      4482,
+      7605,
+      3417,
+      5775,
+      8655,
+      731,
+      4085,
+      2174,
+      1988,
+      6590,
+      1543,
+      9317,
+      8399,
+      3083,
+      6625,
+      5576,
+      4856,
+      7448,
+      7351,
+      6163,
+      9787,
+      9839,
+      2891,
+      8228,
+      8239,
+      2692,
+      5598,
+      3280,
+      7720,
+      1246,
+      7519,
+      4629,
+      4796,
+      4104,
+      1689,
+      5244,
+      3090,
+      4198,
+      5641,
+      5851,
+      3629,
+      5860,
+      7037,
+      7466,
+      9074,
+      350,
+      3630,
+      3054,
+      1367,
+      1960,
+      4233,
+      8158,
+      8417,
+      5147,
+      2370,
+      7379,
+      8591,
+      6471,
+      6514,
+      693,
+      5552,
+      1565,
+      7126,
+      443,
+      4914,
+      344,
+      692,
+      2088,
+      8583,
+      2782,
+      9412,
+      169,
+      5030,
+      2250,
+      4688,
+      7257,
+      4643,
+      7283,
+      1135,
+      9406,
+      2760,
+      3698,
+      3614,
+      7518,
+      8397,
+      5782,
+      6996,
+      7538,
+      1884,
+      5820,
+      5430,
+      8496,
+      2039,
+      4446,
+      7150,
+      613,
+      7451,
+      9887,
+      2991,
+      4207,
+      824,
+      2590,
+      4069,
+      867,
+      5417,
+      1660,
+      3599,
+      2913,
+      6835,
+      7544,
+      2106,
+      9155,
+      9399,
+      3866,
+      8292,
+      4121,
+      666,
+      6801,
+      2220,
+      9021,
+      5250,
+      1137,
+      5704,
+      2253,
+      792,
+      7084,
+      2858,
+      7200,
+      9407,
+      1627,
+      2391,
+      7533,
+      3475,
+      389,
+      8113,
+      7195,
+      864,
+      1662,
+      8262,
+      2922,
+      7694,
+      2319,
+      8334,
+      7597,
+      517,
+      752,
+      7709,
+      7601,
+      1744,
+      7210,
+      6397,
+      5904,
+      5723,
+      5549,
+      9762,
+      7429,
+      2904,
+      8280,
+      6022,
+      7842,
+      7397,
+      8717,
+      8595,
+      7545,
+      3892,
+      2016,
+      9675,
+      3282,
+      4157,
+      4886,
+      8098,
+      105,
+      1008,
+      838,
+      158,
+      9091,
+      4713,
+      7939,
+      7828,
+      7439,
+      8300,
+      2652,
+      4138,
+      4478,
+      4709,
+      6179,
+      3493,
+      3806,
+      1152,
+      1505,
+      9378,
+      4092,
+      6255,
+      4223,
+      763,
+      1310,
+      2234,
+      1318,
+      2293,
+      1477,
+      5266,
+      9778,
+      8527,
+      2203,
+      7769,
+      8452,
+      2844,
+      5453,
+      1059,
+      8362,
+      6016,
+      7372,
+      3274,
+      6995,
+      7387,
+      1901,
+      6057,
+      5602,
+      5163,
+      2814,
+      3740,
+      4031,
+      709,
+      582,
+      1874,
+      8162,
+      8677,
+      7948,
+      1617,
+      2048,
+      9389,
+      786,
+      9133,
+      7516,
+      7507,
+      2356,
+      3349,
+      1719,
+      1778,
+      1843,
+      3563,
+      1540,
+      2586,
+      4468,
+      6241,
+      3946,
+      902,
+      3082,
+      9002,
+      7375,
+      7585,
+      4375,
+      2799,
+      8119,
+      6805,
+      3329,
+      7159,
+      3911,
+      1768,
+      868,
+      8303,
+      7673,
+      3476,
+      3827,
+      1977,
+      5978,
+      8797,
+      5424,
+      5379,
+      5993,
+      8079,
+      5540,
+      6485,
+      4864,
+      7881,
+      7031,
+      584,
+      1805,
+      564,
+      8873,
+      5125,
+      8348,
+      9861,
+      9202,
+      2102,
+      849,
+      8142,
+      9630,
+      7217,
+      1630,
+      3188,
+      7023,
+      5105,
+      8886,
+      7347,
+      8178,
+      4151,
+      6907,
+      962,
+      6349,
+      9043,
+      2552,
+      9350,
+      1043,
+      164,
+      8559,
+      2051,
+      2827,
+      4950,
+      1576,
+      4380,
+      766,
+      2343,
+      5204,
+      9695,
+      8697,
+      9556,
+      8031,
+      1659,
+      5905,
+      6076,
+      1569,
+      4773,
+      5898,
+      2231,
+      5102,
+      5193,
+      7093,
+      6177,
+      4479,
+      532,
+      2977,
+      663,
+      1312,
+      7670,
+      2376,
+      2280,
+      7029,
+      6465,
+      9388,
+      8579,
+      1225,
+      2127,
+      446,
+      3225,
+      3374,
+      9275,
+      8414,
+      3521,
+      4461,
+      6850,
+      1676,
+      9996,
+      6752,
+      9214,
+      5013,
+      8271,
+      2124,
+      8356,
+      2821,
+      4517,
+      4795,
+      8748,
+      621,
+      2049,
+      1284,
+      8838,
+      7653,
+      3631,
+      5954,
+      120,
+      3103,
+      1939,
+      1017,
+      657,
+      7115,
+      2598,
+      7080,
+      6881,
+      4341,
+      2895,
+      256,
+      7884,
+      8809,
+      7770,
+      3315,
+      1299,
+      7462,
+      2032,
+      6804,
+      4257,
+      3852,
+      8322,
+      1362,
+      8602,
+      3767,
+      1489,
+      6445,
+      2733,
+      8568,
+      2526,
+      8039,
+      402,
+      7114,
+      7821,
+      7020,
+      6194,
+      5107,
+      7366,
+      36,
+      8793,
+      799,
+      34,
+      775,
+      2541,
+      9264,
+      5813,
+      163,
+      3580,
+      6887
+     ]
+    },
+    {
+     "type": "table",
+     "name": "1단계와의 유사도",
+     "rows": [
+      [
+       1,
+       1.0
+      ],
+      [
+       2,
+       0.9092
+      ],
+      [
+       3,
+       0.8182
+      ],
+      [
+       4,
+       0.7274
+      ],
+      [
+       5,
+       0.6364000000000001
+      ],
+      [
+       6,
+       0.5456
+      ],
+      [
+       7,
+       0.4546
+      ],
+      [
+       8,
+       0.3638
+      ],
+      [
+       9,
+       0.27280000000000004
+      ],
+      [
+       10,
+       0.18200000000000005
+      ],
+      [
+       11,
+       0.09099999999999997
+      ],
+      [
+       12,
+       0.0
+      ]
+     ]
+    }
+   ],
+   "check": {
+    "question": "1단계와 12단계의 다른 칸 수",
+    "count_answer": 5000,
+    "hdc_answer": 5000,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/vectors.py",
+    "line": 51,
+    "function": "level_vectors"
+   }
+  },
+  {
+   "index": 5,
+   "section": null,
+   "name": "프로토타입에 더하고 풀어서 묻기",
+   "op": "더하기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "세 조합(요일×시간대×단계)을 칸마다 +1/-1로 더해 정수 프로토타입 하나에 담는다. 비교할 때는 다수결로 0/1 벡터로 만들고, 비긴 칸은 고정된 동점깨기 벡터를 따른다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "이진 프로토타입을 (수×14시대)로 풀면 수×14시대에 묶였던 단계 벡터는 비슷하게 남고, 나머지 두 조합은 무관한 잡음이 된다. 그래서 높은 확률로 가장 가까운 단계가 저장했던 단계다(확실한 것은 아니다)."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "table",
+     "name": "더한 조합",
+     "rows": [
+      [
+       "월",
+       9,
+       3
+      ],
+      [
+       "수",
+       14,
+       9
+      ],
+      [
+       "금",
+       11,
+       6
+      ]
+     ]
+    }
+   ],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "정수 프로토타입의 동점 칸 수",
+     "value": 0
+    },
+    {
+     "type": "vector",
+     "name": "이진 프로토타입",
+     "dim": 10000,
+     "ones": 4989,
+     "head": "1001010110110111111100010010000111101010000100001101100000010101",
+     "bits_b64": "lbfxIeoQ2BXHHoaLSpYtU5D3mvwrGAs/AAzQR33nUd4iZk+t+vx+y1BN50atQQziTfB8mUgR9rLIkLdobvNIqL05GVnQ6mNKRWhSwzd+47f+vhPc2SKUTHoNzvSrEZYKnOehPeKvAT5YgKAhuqRiRIS7Mxs8X37IwI1HQyOGp3sCQhZFs2T5CdDJSFZpt2U646idg2ypxM+pOLLrGn5NFGCEJ94gbjG3Vzukyggdgsa4HNEoDDuswmuqurTbtM5kiEO/sbFp0QRUUJInqPcH+7mq/TwPkvNGVqNWJvGlxczbVCmX78VHPm7TA2Bm5kJc//7iVK5JUzvMoOsEoW06bta3vVhO6RG3VDdgrdAl+nkcyfOctW9ZsSz3rcdnIIXnzinUQ8MyEaG5Q7ZTQ4ucHzD8d1KzoV9yoB6i+pjnb3GgbvEGRvHgV1e62tMxJdi21Ons0ksMkBprO7Zic7UChsFzAFKV3jbcV4cvyjH53c2Z+3aDR2XMaK25x9sqSOFjxDLGakeuucBJaoKUTFs1Pxh02vHvNe5UlxFg+Ha3WY5TLu1zq3lPZLMiC4zqE88YhGcl7i1v71wk3lbQRO/lkDsokkQKhrvGhKfJVvP7EflomaEfcjyfQnhaMao6glb2HQymm4UPrxm7AuwHqtYuuupCa4xVHo19Zr1GhVm9+tebLfbJTo1KeKhwEekcGgB8srLDNgJCBw3YfYrlfM1abN1snRDbAn+6TDJIAYBVQVZxHs1SUUBIL0FShgfOnjaJQ2quqeGi4M1IrYp8kQsnPsq750qRNfu8tKoiHmEgmSWJOqVuJXOFFjD/2SDtG5Y79S+oW1T4rGLyo/RBmXNt55TBu5aQ7q6PJ6x/aD6feQOqw35BzU0q6Yn1n0czGk1pjffEijk0E8PQpyTT3sediinSesJCYn4KIvF8L6XDYq8QAF0FbDb0vbRywPG37fLO0vR1/dVtMuJdSE4hOcfdQdNyJRNmacBbGxHNlX1+WLzbGVLnQ+zhxmX6bh+EYvafP8p0nVoVeoPQOyQTch6b5gf2Kotp5sp9xdC5bz0F/tmUK+3wG8pkTWNdwwnw0pSZaA4j2+KHBakK11gdHiZ7KN1IZgEgPvExP1mD0hmV5L2ldfJ1hwUKh7b7l1MX/Z2090uc19o+5xEgZPZHv9GKb8o56snqCGqCaUR9v71OMlrACLKjsVwJ4HDBOlStshv9tJlYmoxj0SvtSlLYURtCSlbHCI0mVn6xpMmvTxmteXJROJ+MZ9bzYwlT4IA7TBg8hrHAFpApMb/eCig0EahuyAe390+4T6yB1wGeH9gTGSkpV34Sh0jHgzFMtVlaPJvkefRHAlXenaM+QKibUZKbeAufmZaQ6D4UC8/Fl6mE0XBOaO3ah9EDrQiMlisBQVOHm1B9UsxsqhwwtfVcGA3qv7FGhg6RnEoHE6/1pO7AJ127P+TVsrC7Y5w8/nkPwxvWffkpvCYGHKW0tjok8n5IS3Qk1E/1mWm9yakobY8Vo71IJ9Az9/lTLAhitXkP5Bdpa+xeLB1qcFIsy/+I5yRg/Zt1sjRMjwRwTYRfmjm6k05w/gJPsuOlbRo0pZE6/gKDJQw970eeOUuIXCgzRrisWL6uwkuC2poD3bvWAsjBA/egmioBZT/bk013As5RBH0FoQc="
+    },
+    {
+     "type": "vector",
+     "name": "이진 프로토타입 ⊕ (수×14시대)",
+     "dim": 10000,
+     "ones": 5029,
+     "head": "0110100001101110110110000001001010101110011011001100011111011110",
+     "bits_b64": "aG7YEq5sx95GYofBb+qeHYsu6sovmHZG810VktMM3lN9F1vPenEX8XItN8LDHwPBkDZcVPnXPEE2ymrpU5cFiP35uRgE+Oi0gA3BX8FFGTkdNA9juAaE3DWEAt7v8PF97+RnTKsCQ4aBB4+qc9DeYL/6Df20Co3YGYzBS4gQc94aOrAPR76pGciahZxjQlla39oP6zbDWRvujSW9Dj8CIWaq0XnmwKvQUZ9vrQ8s2b1hJ4xRyddgNV2P1D2+K4mGZBE2Z28hYCVS81izhNNMvXsV0Hl/Tz15/ikUJv14EcD5RITNPvg3O+/Dmd9YT+sen8IfQ26o3W3h/oiG4Ax+i/+dCPjY25S0SXjyGLHIXvxcpo+398FNaFUDUFhVl2ll8f/+YNW9KCWNINFeYj53ihFHZgOwk716zn+I5eENeOio+n5qKOFZ44np2ojMgDbdUtjKV4ZynzpaBIdf8Y9KgL9ypnHKWcAd3/36nsNeS+alqvUXTs/pznYqL6+hHXHpOHQRTCMyzdMzJ923o5MYKbR+FLm9MGMq71Y9vVgX5zrVJQHMob2T9Ql9Ti1wVrEwYicY8pfaGLS2+S4wXd1v5JiQ1yAudaiQw6Kzksu4rOyoEX2URIyePVe/C/XrfCVdaCSlh+5VQo87CnHi3/AE9QcxlQshWOWCm/9kyMGyDtmUPvzYcml7RaTWLl/TMfYYigy0CRbf/0uB1zQlQR5OlqlVRlnrLkkCIn/Vz/geqvkAsQwwkT94/9b7a8/Xl8rk1POrPO73kd34/syJ2pjpNT3AMFhxiRpuvJ3WPP7LUjiIj5bK2UZjhYkh//UBQSyHGfnetxQLNLWSyjGIebONEVbO1PNeSl03vJOfOS8UJUy53+sEQVZSWaHTG1ZjHY93dTp/Tn0Qyubu1Gs9lMaXTo+3KoxKmjXLp1CSpgrNHcLnqpkLC38vrnxZjCTXvvNQ4t7+BbxhilO/0fvAU/wIvqCc9eL/YRlCzrrQbrqlTkuJZkpH1X16xvEtmVLJAe33EDXU1P4BPqmxVEAq6WIvuYzVBq0hoMQeh6dCBc2lL4Gi9CFDrqupBjtGoDUMWts1aDc9fAhsJCuRl8ij8b9OzQhHCI62iP6dTiTNQCZaTWRDlCDbfG6Yr92MTTvEXK2gOwMw7yy4fAueW16EbMadqukVZSnXPg/mAwvhg3cFCIOAkSFxdj3FBhDSftSU5h15DgSdQF0otnuTCS7r5qPcFFrWs8WDCFK8PLNuzILkOhjepJ2FtFmzlgvYHQjdmqeCjSsVXYqkrdcNyGhdKTAVHexDs/pWxJDHk0SQZLnmeU7mzZY6ICTV5hxz9grAc7JI4tXj/pr4T4Zj7zoKp522HEuTlRSenpHjqimMwjQmQNjvLsP+nFxKgaZyR4FTTxZ9trBWoDzJYT7GVBqxJuicHukse8moXO3jGcFYCRYeGKnwwRoUM/wVimhzaPvfnsR9C2bTFqzh8T00zr8h9gnqbkmUpONJ/D3wIqxHRrj/3bPRnq4Ixb60opNvM6DOlm6Pw4FlbUqh5Y1f2BYXMrHPOAjxRsAFEG7LJtbREraD3jOWq8T+KYMB1HE0teIcImNyfxYM3om6/6xzmushQHBeVJMSkYIF/gkEyxjP07AI2FY3S0NX1CdkRMXMlMLn1KkT2eA="
+    },
+    {
+     "type": "table",
+     "name": "풀어 물은 결과와 단계별 유사도",
+     "rows": [
+      [
+       "9단계",
+       0.5065999999999999
+      ],
+      [
+       "10단계",
+       0.4646
+      ],
+      [
+       "8단계",
+       0.4616
+      ],
+      [
+       "7단계",
+       0.41879999999999995
+      ],
+      [
+       "11단계",
+       0.41759999999999997
+      ],
+      [
+       "12단계",
+       0.37260000000000004
+      ],
+      [
+       "6단계",
+       0.37139999999999995
+      ],
+      [
+       "5단계",
+       0.3234
+      ],
+      [
+       "4단계",
+       0.27759999999999996
+      ],
+      [
+       "3단계",
+       0.23040000000000005
+      ],
+      [
+       "2단계",
+       0.1814
+      ],
+      [
+       "1단계",
+       0.13580000000000003
+      ]
+     ]
+    }
+   ],
+   "check": {
+    "question": "수요일 14시대에 저장한 단계",
+    "count_answer": "9단계",
+    "hdc_answer": "9단계",
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 42,
+    "function": "Memory"
+   }
+  }
+ ],
+ "log": {
+  "fetched": {},
+  "failures": [],
+  "notes": []
+ }
+}
