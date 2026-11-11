@@ -1,0 +1,2225 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "trend.analyze",
+ "subject": {
+  "type": "keywords",
+  "id": [
+   "physical-ai",
+   "ai-infra",
+   "robot",
+   "humanoid",
+   "quadruped",
+   "amr",
+   "battery",
+   "bess"
+  ]
+ },
+ "started_at": "2026-11-11T23:00:44+09:00",
+ "finished_at": "2026-11-11T23:00:56+09:00",
+ "params": {
+  "D": 10000,
+  "date": "2026-11-11",
+  "past_days": 28,
+  "min_today": 2,
+  "noise_k": 3
+ },
+ "code": {
+  "commit": "519f4e17ae848f718a8aedfbf143f46cbad04130",
+  "dirty": false
+ },
+ "sections": [
+  {
+   "title": "수집",
+   "text": "RSS 제목을 받아 링크로 중복을 거르고 날짜별로 쌓는다.",
+   "from_index": 1
+  },
+  {
+   "title": "키워드: 피지컬 AI",
+   "text": "표기: 피지컬 AI, 피지컬AI, Physical AI, PhysicalAI",
+   "from_index": 2
+  },
+  {
+   "title": "키워드: AI 인프라",
+   "text": "표기: AI 인프라, AI인프라, 인공지능 인프라, 인공지능인프라",
+   "from_index": 6
+  },
+  {
+   "title": "키워드: 로봇",
+   "text": "표기: 로봇, 로보틱스, Robot, Robotics",
+   "from_index": 10
+  },
+  {
+   "title": "키워드: 휴머노이드",
+   "text": "표기: 휴머노이드, Humanoid",
+   "from_index": 14
+  },
+  {
+   "title": "키워드: 사족보행 로봇",
+   "text": "표기: 사족보행 로봇, 사족보행로봇, 사족로봇, 4족 보행 로봇, 4족보행로봇, 로봇개",
+   "from_index": 17
+  },
+  {
+   "title": "키워드: AMR",
+   "text": "표기: AMR, 자율이동로봇, 자율 이동 로봇",
+   "from_index": 20
+  },
+  {
+   "title": "키워드: 배터리",
+   "text": "표기: 배터리, 이차전지, 2차전지",
+   "from_index": 23
+  },
+  {
+   "title": "키워드: BESS",
+   "text": "표기: BESS, 배터리 에너지저장장치, 배터리에너지저장장치",
+   "from_index": 27
+  },
+  {
+   "title": "요약",
+   "text": "",
+   "from_index": 30
+  }
+ ],
+ "steps": [
+  {
+   "index": 1,
+   "section": "수집",
+   "name": "RSS 제목 받기",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "매체가 공식으로 내놓는 RSS의 제목, 링크, 날짜, 매체명만 저장한다. 본문은 저장하지 않는다. RSS는 최근 글만 주므로 하루 여러 번 받아 링크로 중복을 거른다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "이번 실행에서 받은 수",
+     "columns": [
+      "매체",
+      "받은 글"
+     ],
+     "rows": [
+      [
+       "한국경제",
+       100
+      ],
+      [
+       "매일경제",
+       50
+      ],
+      [
+       "이데일리",
+       50
+      ],
+      [
+       "지디넷코리아",
+       30
+      ],
+      [
+       "블로터",
+       50
+      ],
+      [
+       "전자신문",
+       30
+      ],
+      [
+       "뉴시스",
+       200
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "새로 쌓은 제목",
+     "value": 501
+    },
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 410
+    },
+    {
+     "type": "value",
+     "name": "과거 28일 제목",
+     "value": 9
+    },
+    {
+     "type": "value",
+     "name": "과거 중 자료가 있는 날",
+     "value": 1
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목 예시",
+     "columns": [
+      "시각",
+      "매체",
+      "제목"
+     ],
+     "rows": [
+      [
+       "09:00",
+       "뉴시스",
+       "정부, '국민일자리 프로젝트' 조속 마련…청년·중장년 고용 지원"
+      ],
+      [
+       "08:17",
+       "뉴시스",
+       "10월 취업자 13만9000명↑…청년 고용률 30개월째 하락(2보)"
+      ],
+      [
+       "08:02",
+       "뉴시스",
+       "[속보]20대 취업자 20만3000명 감소…청년 고용률 1.7%p 하락"
+      ],
+      [
+       "08:00",
+       "뉴시스",
+       "10월 취업자 13만9000명↑…제조업 한 달 만에 감소 전환(1보)"
+      ],
+      [
+       "07:00",
+       "뉴시스",
+       "에너지바우처 예산 500억 남는데…기초수급 10곳 중 3곳 지원 못받아"
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/collect.py",
+    "line": 55,
+    "function": "collect"
+   }
+  },
+  {
+   "index": 2,
+   "section": "키워드: 피지컬 AI",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 3
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": [
+      [
+       "이데일리",
+       "“시청 부지에 기업 유치…'피지컬AI 선도도시' 만들 것\"",
+       [
+        "시청",
+        "부지",
+        "기업",
+        "유치",
+        "선도도시"
+       ]
+      ],
+      [
+       "전자신문",
+       "[경남 디지털 혁신거점] 세계가 주목하는 피지컬 AI 대표 행사 'The NEXT AI'",
+       [
+        "경남",
+        "디지털",
+        "혁신거점",
+        "세계",
+        "주목",
+        "대표",
+        "행사",
+        "The",
+        "NEXT",
+        "AI"
+       ]
+      ],
+      [
+       "전자신문",
+       "[경남 디지털 혁신거점] 제조업 중심지 넘어 '글로벌 피지컬 AI 선도도시'로",
+       [
+        "경남",
+        "디지털",
+        "혁신거점",
+        "제조업",
+        "중심지",
+        "글로벌",
+        "선도도시"
+       ]
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 3,
+   "section": "키워드: 피지컬 AI",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:physical-ai",
+     "dim": 10000,
+     "ones": 4981,
+     "head": "1001011110100000101110100100010111011100011011010100100011000110",
+     "bits_b64": "l6C6RdxtSMZJBRUxadND8sLO/eGrLuOQbmllc27RAZtbjiHXYoZpkBjNDr6Xinun1AX9Wc1kZ7jMgnmZeIKem1V9lEZewJJ4z197w3NCwUsSN/lOWpwwLbDxIG1YKli2uxjpvir5wLaVJPuJlEq9AYtspABPA569JmRFBonJMmS3XzDjA0Vzr/guLcMNlhjxxoA4AxtS7uiJjwc+OPaF5zKnu3F7ErTuaRvSpJTLPlb0rR2Q5LCyyNdtEcaUzJjaFQKd6a0CwxS7UZ8g7F7Pi8zili/X6QdXc48BAd5f4QFQfP8P9vzPlixagwxB9J5YzQwlJuujXYw/RI45b7xFMw0S1BH4JLLy/U/wDtFUYN9lJAnFR9vZ2H0zXT0W2Rmedx2a2bVTPKnB1dQCEcZOx+xHTz4lPbZE02pskSuCWHpR7n3CjfP60kzO7i+jTCw4FqOwnURjDyaqu8Uh1FXI6Q5hQBQjpwa1gIAQLib92820bqsQTnOwotZg8j+LK+okfsh6wUp/d6pZAzjIWfX1hTKg6u3veQRvOCd/ydRFoLWtVtpg7tH0PI+++wR1QiRkJguNcHs/cUz+5YqJV0jtVeWYogFCMXyWJ43Xas5VAAXU6KbVPBvVer7tv8mlKHIiXxiJ/pn3Crj7SGYlebCM56RBypBxHXwDxF0XM/tj+Vg5ewjbx+r+iPOjKUQnUtNTaxeAiu84/8UPl9Ek+/UP7K576iEkpSV24ts855q8juBXD3BeF3WoDWFPuSJdfyTRNLyOBJnpslWAAoKhX2ZKz2xZfXVH9pqdi4UYFSwqCUtyF1w4+HCPPCahsL3ssIwcqwFN5kQ1qZlDJqGI07d7yyTv9thFFV7q26Y7Fwf+AL9zZZ1Sl5S8pB6E2HeK4BR31o6Fb7Gow48h2QUfiha41F34i/pCChGrSIPYt+tFo9CF/VnuRJMMTX9pevIcNRY3DlyYoiYBYEpkW37UrqvJv2rMcAzb4En0WDkWlV2oC8uGekJLo9FRZyIjUX3B7KB9R08Ldzqkj1aUiUDl9gMBXrGy5k/hb9d3Ki071C5iL3G56lR5+60+QlAMuA68Mz+9pkrJYYr1ngAOYYuujg7LBGXtV49XCZqftvSfJmfaQCwWejjCw/gBE+YlzLwsBhD4sCkUSnO33ZQsAwxbVbRXpU+cATZy4C2if2jj2ivx9F1BJor3BYHNhM7TdGIsVvVqHsoKkTksVSsrK7gVzgty4tlfqTvafXhhIyFX091sqFS5NddiplP0uQe4Zr0E2/ijkR+XNfwrVX3lVrO1dc19lHmIcpcVGNpR3UZo5BTNhx7hLC7b/TjqVWIfQRTw6YwHANJoTkZNdKTiNXj80tAc+bS69zGE7lyNMNJzksYJ0/pTdRWcnkX9Q0K6LgAyx0fdPjHpoBuRAMjXyQDhCT9pp3ckO9hFeqykV4iP8R4BmlNc7AQEo7TNB3vpiCzfJHBmNKfwNtcRLuGMyyCY4Rj4BFtzExAA/gK0jrhXKotveJITu/q8vwo1DrEoeLGfJjXiYgc58sY2mI7QZH8iHYyf8v+ZzbCjuyDEtkw/VkzXAa6Tr77vw376S5X6IpthjGggXVLk8vuIKZhw54iWF1ud1SZ/0gLNf655fXjOnVOvJURatbC2LZ6c3B3EeBJzhkls7jI="
+    },
+    {
+     "type": "vector",
+     "name": "단어:선도도시",
+     "dim": 10000,
+     "ones": 5034,
+     "head": "1100001001001101111100111100110101100010100010110000110000000101",
+     "bits_b64": "wk3zzWKLDAV/mWVJth1KrcRM53FE8MnR1NQQIyQgi7gEQBlWVuIzS3XywchFGjknzCG4WgQbCjxVWvDhvfkyXfcg8lYkOU2j9j3NezgSehCqc8XLGDsQbyob5go7IbNFo0ATkRsXOtn1QHYTvVZXeSE5O57RFAH2UNef7YQz+pJvIyeQ4CxsEijgPs1/wG4kIErfrNB8ZBHXadmtEFkjsMgzVJ0gIZnFWaycX1gyzms9s48KiErnj7nlntzBZmeRs2U72nbN1cmcak0odwUqHYFP7Xmcr1bZ5iid+dRLuczT8eog5Ks2Jno0ac2/fy89UQfzDkvDz+oxB5RXGB9qJWhdgIJCwogybZ8La91s02Sse2optMxWbDW33rDkFlwaJOsdOqOt0AuB1jNqHGr70x/L+XS4+nYOzYkePK4OngNFAA9Ua10yZSlaH7jJstSFyqJBfEi48zkfKf6JaOzAVTNB66M2wPGK4Vk7f8XwLLH2cMBta0EkZfVVfwK3PjEWpVA8GzEugM8BG3sq+Mi8Z2N08IvDjUvB/y/q32XeVmepLSeJowJAtM0rm0G8fRyBsBN2Gtwg9WMn9RmlxfKI0xr8ezn/IKnxQtLvS520UcHqn44wLuRRrR0GBr1hg5ytywc7UGaLq1tAlLMiglAvqM+4M+1BA0HL6Db32w2ypdEOh7fi2rVbUUVPJFi57wQttLJq7xaaJfLD1GsNKpBPHjlVY6Umv7Ac5MGyTF1Lc/SpD0Au1WRVAscjTBJJlk86J+y/nMQcvEPSqdUQW0OUzujSyF/eQCX/A+VvbAdh6WhEp8ywdo0Ditx3DyAr2CULV3P8MCFKwRp9x8YyqmIYYDFCdXohHUUji3pK0oXvr/YOlv4CK3Lt24tLkasjaGrDoitp2mdQ1p8K69peBL0fczQt7/V5JL2XE4cksj4vCm5tZ6+iRZM0T90Z75xiJPr5ZlV6GnrYJRgNq/3zCtTDKt8htAHjPv1b3E23Mw0j8N+HoTX9C9dqwFFPdIWM/K9TFp1txFCfIzUya89FnWDYvVSkaFalfuY3plvmNLHw/B/bpGrTeVFE/Tz5y2crYdn3FLIivphuSMbVKXV2dzS9Uto1K4XKtthj5A9dtb1bU4lUqfVGjBKhVAnxjeem73YoBwjTJL1OtX1mHlXoTqe1JVn16Y2mm1zlA0uDR/iC8DzFge1bQhdaCBQSF4Irxsf22LR/31UG9XacF7a3yYNcdc/6wxfKzoI06jTA8FEttuZ5AAaks7C+irbz/vgGmZXWVqKVyj7A/hOqFl2tzqQ/Z7HWo5aoUf5qJLUJ1ILwA3Dta9CuRskOI98YAbM/f7ZK0Sf3ESplkShl9bJnZ+dyuUjBza+xHsbOHzD0Ublnodz9zruUHt/LudAc12mg56/aOn6b9E9SZjnQ+p7oofVbOjz4CqdVnHZmQLJBwZrdu45ous9TR1jt3xGCoCb3wYDAcQkMTft4W/LkQRK8VQ6OGABOAy4yHIzOQQJ9p+MJbPVE56wP2QPGxP+7Qj3K55F4u+7m7nXw5m6Zru5hKUTDoP1erIekwn4qI64cyPNDOpbBYN7qrN6fOVPFuEXAZotQHGQPkEupn+BGxnxby6W9UD7pobIiFkRlzaGtOfLjtMkKt7tD0HRJjkbUjzUpNxH/0fc="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:physical-ai ⊕ 단어:선도도시",
+     "dim": 10000,
+     "ones": 5105,
+     "head": "0101010111101101010010011000100010111110111001100100010011000011",
+     "bits_b64": "Ve1JiL7mRMM2nHB4384JXwaCGpDv3ipBur11UErxiiNfzjiBNGRa220/z3bSkEKAGCRFA8l/bYSZ2Il4xXusxqJdZhB6+d/bOWK2uEtQu1u4RDyFQqcgQprqxmdjC+vzGFj6LzHu+m9gZI2aKRzqeKpVn56eF59LdrPa6w36yPbYfBdz42kfvdDOEw5yVnbV5srnr8suivle5t6TKK+mV/qU7+xbMy0rMLdO+8z58D3JHpKabPpVR26IjxpVqv9LpmemM9vPFt0nO9IIm1vllk2te1ZLRlGOlaec+AoUWM2DjRUvElf5sFZu6sH+i7FlnAvWKKBgkmYOQxpud6MvFmVPVJO65jrAkND7ZQw4s7vJX2Ps8xePtEiEg43yz0WEU/aH4xb+7KJAA+doDay1FPOMtkqdx8BKHuNyrYWMxnkU7nKW5q7It2WU8Zdq/vi93AHx4Qzb/B+1kjuovLkIvD0gq7cVZ/c/YdkrUeMN93xCHmt9JTKUxyM1jT08Fdsy25hG2ntR92VYGEPioT1J4lHUGmYs9E+uxwiVFrGb9tIEe/3pTdO0iEKVYEXJPzjllhj7aqcfhC/ZEJMskrplhv9k2Ti9EdVnZV84IVPhUcQ+dyjlEv+E16PruXTEq+6PlB+yrv98oeO73NUH++CjT2v5+X0wHj3ILGvg6PbRXIk3/L85HV+l2bbsDRyevdd+36XqZfmi2jfMQ7op0WVA8pcuiYQCGpVqBhqOq8f3/RT+ADBwwhH9D6Zs9TAU6WvrE1AxmF31DhZSq1exBCXeAYSLtSqZtr9iiGB3eStL4CM2sJCIjv2MtvrWv53HaKkX/HKx1mV/aIM+4We6edVjqxWtg6JkCBvJUNxxxYIRr0l982NQvOZRf5XPSdypiH60dKXstdb4FRArMt9Bjqunp2nVZA87Lqw8WwT8BdVqqb7omvZMAQA4AqJwlW5+EezOaAniuFzZRVJp8IMnpH8KlbXtxA043rSvhHShplCL+xQB23e2qAY7p3NsJfhNEA8uUdJms2o7rGOm4o+ga2PZ4+UWjhlEETFAjHbd4J+S025iTj6qgvx6v2z1c2mXUuZKsvjr3xKb1sbbSP7Y+Tp2Vr/YfAqdv0L8UvvCk9qBE6VC082ET+qgR+/UQVuK6WbQtyHHbs75aOlKHVmzGxPigBZp6LvUe3FHfCNgndNzBGGEp2esR5aXjNrBY+AHkDKcxn51TmwqoF23PA6iB4gulxalaiwQs/pVyRWXI4xBHrLANdHGFeNKM7FLmEUCQm11x70C/8Lrq25PQO4Yu2lC88he0QG9SSQ7+fNhMJY9hG4MR/51u/Hkdr0HQKfPljpN0fWfX2wo5YyHwMqbtTduQPx7Op418JpDL+KHw39uciauu64IgJo2+pKm+WmSIOgHBE9yVFTDZvEHM54JqMoynUvcMX8Q5trCFzrOMITcId00VstX5Owg2GprKAoo5fCmRa78eyxpdRNoijIktBZ2HFs9ED4y4o56z7oqjWhmFGdXXFazZgnzyk6TOoxVwaSa2enfHLPGfuBJypFDNMhcUgLHYTcHeV7uleIjnr+UOzhSz2AFb6BlcsY/mt6h6uNwQTbrYrAhtng2IfTN3P4ghRiWc7DvaeocsNljpKFMkY1QAgv1/erVUlsQ9ydasViTP8U="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 22
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 0
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 4,
+   "section": "키워드: 피지컬 AI",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": [
+      [
+       "선도도시",
+       2,
+       0.3718,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "경남",
+       2,
+       0.3629,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "디지털",
+       2,
+       0.3674,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "혁신거점",
+       2,
+       0.3685,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "시청",
+       1,
+       0.1845,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "부지",
+       1,
+       0.1758,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기업",
+       1,
+       0.175,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "유치",
+       1,
+       0.1789,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "세계",
+       1,
+       0.1792,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "주목",
+       1,
+       0.1893,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "대표",
+       1,
+       0.1983,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "행사",
+       1,
+       0.1807,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "The",
+       1,
+       0.1845,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "NEXT",
+       1,
+       0.1785,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "AI",
+       1,
+       0.1926,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "제조업",
+       1,
+       0.1728,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "중심지",
+       1,
+       0.1739,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "글로벌",
+       1,
+       0.1742,
+       0,
+       0.0,
+       "",
+       ""
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 18,
+    "hdc_answer": 18,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 5,
+   "section": "키워드: 피지컬 AI",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 6,
+   "section": "키워드: AI 인프라",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 1
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": [
+      [
+       "전자신문",
+       "미국발 불확실성에 삼성 AI 인프라 현지 전략도 '주춤'…美 미스트라, 헬릭스 자금납입 연기",
+       [
+        "미국",
+        "불확실",
+        "삼성",
+        "현지",
+        "전략",
+        "미스트라",
+        "헬릭",
+        "자금납입",
+        "연기"
+       ]
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 7,
+   "section": "키워드: AI 인프라",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:ai-infra",
+     "dim": 10000,
+     "ones": 4965,
+     "head": "1101001111101100001110111000111110100000100011110101101100101000",
+     "bits_b64": "0+w7j6CPWyjQthqoaixVdvyV429L0e1i+Xu03Zpa8kxxKLFl7lDFaLrpPRUBaoPJK/TH5jq4s2g7VYAEoXriutt5/uLrK+eBTQAUgRASCHBGJ+9OS6Xhf/kMyEg2XNkEOLbl3ceuNE9/KE7bLyjHFnGiCrQ2msuDr99T7Av6yYotjr/FES4cvBCv919Z8HuDqfQ2ZMUvvKfoLCmz23G6YC8xkIBqIWvMZVWODvTsKsjq3xQSCCMoq3zeG4VGFERocgBFUDt90hpEEgRhPE+OjSBeGGXGqC9OKjT3dJxsMtvsYqr8CjxYzobXiLxFAQyMoPOsKVRFSZ/QLdd52NwPZEqiBKL3/krgSj6bDzcWrDM67tJTr1/LzDsJUrpRXu+AY2jdf+g7ghBFXDXOHa450dwnbF3AiCKuDxwDsvmliuWQym5L9M1JjrI3bSVmfCjaIaV+xKcE4gqhf5MfXhlWery4yk/+gkKREHimk7R06b50YLfTivnMGaPS9rARM4xZvEJL5gKKbDD3EaWJGeDNjusUbYKTi77cUY1MFHtKKW5NLp7qATT7AtgmcL4uCPquE9/3RtL1mEXQYWaJA8Iivqyckf2q/a3XH6YDULYXKJX7PMF25Xdw27YzIuuvz0p98AVvkAsCkNzlaF0bJXyIGSz9JctCM+3rF18EW5gP6jT86LVEoYgcYUz8vvu4I+Tycygt+9C+z2FcmEFIzhh6iYOKOSqE1ov6FPAxhvshnvWthOGc1xkpGm5E+B/76DbbWIFeI76QkYWasDC+rO7do2shxX4EE5Jar7EQYSvmhY2TUvtYUKrlnfLgJD7xMYTa5D7hALjMYdduGAEtowcXaHWSzlPB4UXWJN8yS/Uzbs7Ep7fUxHvmI/iqDREgdJviScIjU9IrySOZfgW5W0FJxP2M9K+R0/SBKVxEzBkAeYx05b61lx3NemA8HMuW9lN1Raz2cRXOCA74hKAlcf3BOQHBUcujjto23h1BrvGxFoM+idWKGq0MDPKG9cVeWxA7KU65S1I8v76rWM8AwMSgnpJH8Nl25XkrLTQ2878JJzUiFW6l4JSS3OvrUfvoqCCKWQUSe+GGyg6liJZi/YXKHnS+/gnYaj13YrcxRr1PULSBU1Phd3mHZK9bcxhZS+zidi6oqmuXuqmNNtA7KuuvIahxQcKHpVORJY/SlYFv9EWtPBUKE947nrLIt9DtfMhaXWY0OT8J1haw97Sknx9nBF1MRGbWRUvhq/jITAlBxREOpEKllMOeGJ5eVNbrcBrVZbyOZ/dukVSIHJf5bRmNrqV3eKnqpQPgUV01bxFS+hvyjTsZhjeM6vh7HWtLjE9AqsoNJz4DRR90MzPQgF13uQWiPYeaKab8okhlQnZACj6fWfuNiZeiSY2zvyvwgK3DaHD2qM7+QQ7fvB52Cyd/bkh0ryCp+2aDZhXOfHEaXfpuotpes2JOn8fqCloDauwRZw7bdCBQTLQHGWjLW0Qi0m2n1hhVelGIeSXgw39f/g9OIcDdrzv+Nql4hTtB9HRnzOqnjMWQNa1ZUZr1JUMEsglnnuJLGsigwLDxqRkqFUfw+xZ8rxgkyIK4OsVtYtxXKddWSAQmx/Q6ccTkXmgvbB0QdnC76B3jtuNi4z9GUKb9V+/ka8QfCbfcBFNfXlb7b8o="
+    },
+    {
+     "type": "vector",
+     "name": "단어:미국",
+     "dim": 10000,
+     "ones": 5015,
+     "head": "0000110011111010000111011010111100010110011011010110110000111010",
+     "bits_b64": "DPodrxZtbDo8cnZzbj6npKsJ9H0WeeKMzy9R+u0HT0ahTYopGEzlTZugfHMtsTkM1Uhq1xUzqTvMpdwxSdY2T5OGZmu+bVYP2hDgGtFCoAC0+fVY2asHkTRqM8xM2ypLfzovVrM6M5zYdBq4Usv4sb9GXw2/dley/Ep/84g/48s2jJjGZ+cxRmxQxuGuYi3bXu2b1r60+7+Q32voM11NMJzmMphk2YomrLlEfraZ/xFbNmVu/rDjw4RcoECYu2YEYJvwj6KubGmF9/4laWyOrRsNE2gzr4Nkd/0Yqrd40ljEP3WGdmh2Zr4I8mcpzm/BqE1+T24gDyKefU6jeMmBM59jcjcR05278XVTuZn/6bJVwSe6OrtKaTjjPQ7Di+nxcaXpDJMh+A/itPoJ0GaZE2WjxGIEYjAZk35cuorbnJRqzWhQLPkXovfZpNAHAtxdGw4TgTLiBDPkD6uogpCbjsYMKsYRsjSxgxOsCiRXr4AlyHKsqdv3zlCaukmyIN+qv4P0wujRcQKkvmnJJSlXUeqFQxfx5X1srS8iDRs+5o0C/aD9rIxzZl2BgGwJ/Y2wewtNXYsifEnRZJ1Enc70Ktiwt9TYefXhKENEEnVu9i7i9NPprxasOfYzerTAshGSYeN6u9XWIR/2VlyU0fs+3ZXpCRLOZeJCIqZgOwl+ra+7CPsZOJdo3CqNtfaybTEdS01Io11kIoAi3nOWUTlYZwbFeMvZssL8VA8VbvD4XhxpbXrPxIatvIxhCNf6Fxb++JFwndiaYUjo+ciw3pbMCYHCXzciN9H2rtsRso/HEnnfG9/OR8HEiDXnYopGAqYIGuxX5DdQLxkVYfHDLWSOo+cxS1taSqKRVU7pio4DazpeR6e8tdTjZM6fvQE8wNFzfdmScqqzrxvGPsYaVwRv1E/SEtatyFzLnsYpokhi+uQOs6J5bNOodH9RZyUMJtgJyP6kZweyFVUrrex0zYTzqyEIBG3aaA53gTE/RQ2tzAxjgBsr45MK3I5vxoYzwnqqT0aE75nNC69Cr6xlPAsvwXI+P2eMSe/uOeeMH9GZDCcqDvgq44vMPI6K1jihUz/Qi2Nr6vzP6u6yIY41a/4ct0Z+7SqMEP+8oxxdmdCi62aGTjISX4OzZtHdiIW6MJq1PyRr0CO3fxjCsZfPsZE5LwvotXigeFBUYHuR+gKSYIY+Wwp62eAQ34bakKIBbnOjvvaYf8JV5mLUt3AoFMQrwpXKQ33yY720Bv2yLUtC8tGS8WwCUU2kDGdzTq12G9cG0qxJyke4LbUsnWNfNcz0DVdp2I/Id6UEZsUvwQYDhNJo8jkSeQ4NlC8JzByajUMdkWUb6Z2VfxJuZw1TRhgzZUT8hvmaH1pmw9aOcOUIZ1zvd6ZK3qkGu2SSGeeiytxsLx200ZhB6xy4CIJZQf46CSEEslljniJxYhnYVWQ/vFB0RmGy4gB7rjPnJoQU05wthGaK8bKGTb+bFNsXpc1dmOIFacUBbrXvW97tIQx6mlXiGcUB7vH12ThfrqlNG2RrciNw5hceC3oQacVse00xf8t1ARqe71g2kLpaPTO8RYdWEdp92Y42pOcpBCngonnLpRg+QiUkXcmxHyri9wb+MAK6EaQ5WpPDAJH38WpPB6hX/w+AVXr8GIqM9R23H9NafGY="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:ai-infra ⊕ 단어:미국",
+     "dim": 10000,
+     "ones": 4982,
+     "head": "1101111100010110001001100010000010110110111000100011011100010010",
+     "bits_b64": "3xYmILbiNxLsxGzbBBLy0lecFxJdqA/uNlTlJ3ddvQrQZTtM9hwgJSFJQWYs27rF/rytMS+LGlP38Fw16KzU9Uj/mIlVRrGOlxD0m8FQqHDy3hoWkg7m7s1m+4R6h/NPR4zKi3SUB9OnXFRjfeM/p87kVbmJ7JwxU5UsH4PFKkEbAicDdskt+nz/Mb73klZY9xmtsnubRxh480Jb6Cz3ULPXohgO+OHqyezKcEJ11dmx6XF89pPLaPiCu8XeryJsEpu135nTvnPB5fpEVSMAIDtTCw31B6wqXcnv3isU4IMoXd96fFQuqDjfettsz2NNCL7SZjplRr1OUJnaoBWOV9XBdpXmLddbu0vItq7pRYFvL/XpleSBpQPqb7SS1QZxEs00c3saeh+n6M/HzcigwrmEqD/E6hK3nGJfCHN+FnH6BwYb2DReLEXuyfVhfvSHOqttRZXm5jlFcDi33InN9Hq04InvMHYgk2sKmZAjRj5RqMV/IyI71/NITPmjE1PzA8G/JOpbHTJTr8xAPMma3wGRLpVibsOw/KJuGWB0z+NP0z4XrbiIZIWn8NIn9XceaNS6G1nX5AwBBfvNngzWlHQsJilyhFg2N+VHQsN53rsZyBKfSmHc4kAAWF9vfVvvkeYVK97UscMTPgGP9Ie2xLkULNmMVg+pNflkYJFxR5tH4E5dmR90vWZxCw0KTtXvOGVlWI3a7eF+RjLenyEi7oVPQeFdZEkGQP8k6AvZwOnE6ZtTE5+EpuIl8MgB/yAloBAuvmYK8M1ySfgOcngRqurjmkkmJEOsAWoB06Qhl/RMSSSWF2shFccHRrS3MyLS/tK25I+cTs57efDujmOZy5KjhQibq+dHcZHbwXswBfSa4BBoca8FRzY1sBActEqRNBuxIXiYZjhfQMOjDEUmELJe5nk8G6hKt5ptblFig2h6VhzM+85lDh9te+6a0It8jVJSFhJ8HVvTKUxRvHkykiDJVaZ55tRBXyx+6/wc2o9dCc6h+T4G0HzpM0NtmWqRZgg9pMvxtBHp92Nl/M+PX+B5z776rJbFFNO67G6QKxIIG5aPAx9e4GVhh8NJ+x9a0mZ5kR1JIOAXqRhXlnvWqTLAEyNUesLLwats323tu9IHHWHzKPo0An6G+53je3ZXSQrDekggxbFPh0f0m3qWDqOZ9Lon3QPFRfRDb4P9lMOTZx9wyj4rQTQSJ3LsErv545CsRv1cMHRkQMSMi9tMxsiGBxskJvZVrQV6YUIDN8CcVS6nxY46FPktGnuda83TtxDHrbDWvOGkgfSmWNV5o/IeoCYi0qbkN5garhdRfsmafwIL/zmBftdy0XfRAQxdO68WzqOWOg0aVD6DxkVE3EFeu34ANvyaYZ7rMpNIbWJwLl3HVz6k8ukhpsxSSnGvR21CeVa/qhJntJwvStlFZ2lwHXnKZUTyBAwWKRUl4aoa5LvsUWI1MfQNLN4XuXA842hRhZLWAQucDbPc/ol/So+iv91UFORnIvsN4nMlZFqsOAXcQcoL75EnK5IM7xAMvsnXatKOPtdJOF+ZXg41zcISn/jV9ZCWUAqrlCqWUMCm6swBdpYSbGWRPuyNwKWcjM9oCiECmj2Lbu4GqW7RXB+qZ9SCso4gtnKVElUJVw6qqOBkPr7jET1Q8U7oQYWhE6w="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 9
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 0
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 8,
+   "section": "키워드: AI 인프라",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": [
+      [
+       "미국",
+       1,
+       0.3406,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "불확실",
+       1,
+       0.3325,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "삼성",
+       1,
+       0.3393,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "현지",
+       1,
+       0.319,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "전략",
+       1,
+       0.3316,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "미스트라",
+       1,
+       0.3238,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "헬릭",
+       1,
+       0.3255,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "자금납입",
+       1,
+       0.3377,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "연기",
+       1,
+       0.333,
+       0,
+       0.0,
+       "",
+       ""
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 9,
+    "hdc_answer": 9,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 9,
+   "section": "키워드: AI 인프라",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 10,
+   "section": "키워드: 로봇",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 3
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 1
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": [
+      [
+       "한국경제",
+       "'네이버 로봇'에 하트 날린 지멘스 회장",
+       [
+        "네이버",
+        "하트",
+        "지멘스",
+        "회장"
+       ]
+      ],
+      [
+       "블로터",
+       "[의료로봇 줌인] 리브스메드, 코스닥 입성 첫 성적표 '멀어진 흑자경영'",
+       [
+        "줌인",
+        "리브스메드",
+        "코스닥",
+        "입성",
+        "성적표",
+        "흑자경영"
+       ]
+      ],
+      [
+       "뉴시스",
+       "차세대 센서·액추에이터·로봇용 이차전지, 미래 성장동력으로 키운다",
+       [
+        "차세대",
+        "센서",
+        "액추에이터",
+        "이차전지",
+        "미래",
+        "성장동력"
+       ]
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 11,
+   "section": "키워드: 로봇",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:robot",
+     "dim": 10000,
+     "ones": 4944,
+     "head": "0000010011011100101111111101111001010110000111011100011100011001",
+     "bits_b64": "BNy/3lYdxxkha5by2cDsAejcbAsuzeOTAi+Wgg1BwYP647cbrTWLyYdKOo7yG8tqm9mxszbiRe2j1V+9K8CKUWQUM+jSIOApGguV0bI8ED5hhVu9n39OX8gvIQqGjpvc7fkt1AiAqRmJUsw5dw0Z18erJzNzXaoNi1Kz+RUEpzvbKMu/uUEVmQyjdI9FFIb1O9TDq3G4KpD0/IdrWhKbUbM3Gji2kV6bPUD1+1VTNyBUTSBiiIHc6LJs3smH7vdWr/t9JG3Uu0FCDxenHqRS1V1FITJlUyp1zpHcj8gF63zd/pOHK6XlwmDfziVYgDDjxo23osGMKFv3XfY+HUU1Utv8j8JYhwujMwbfmydHlMBwL6JdnaYTFlCQH5TVlF7hvndhx49oGhu7YAuxl+Xqyybe0HCykqYgyww7Trt2tGFQUHaFNTQKHQVYaulSnZ97uX2tZ4sIPe6IorCYmtJr8kv/KHxPI9uI2oQmQLuNFOmYW8GOdPAfa7gkKTVKRVaXnVkq2woKZ9786YC3OsazIzBFtXIat8Q9OjNUiEqpsqpcEKSCRbVwQU3nVQp/70lLyGgosHEGnVWNc1fID8PlbdEu0FoaK55r+I5w2aFFVtLjrAw+fEGzkfllRmpIGmxXUR5EgnWCqAyihy+7IVCo2DE2XDHYrMy0thPN2Wys0i/gn5gh8wMVPC2Ly7if+FKW3uE1Mzrf36Gh1LlXAB4ehRxr24Hx5vpIo9y42gFF5hRY/5YPv8xvv2W+VJspd6VLNqIRQgCQnlTmkgZ7zkTVqiXbwzDtGaysCcyyKS4ors0dRdRY/jfq5VF5nIKL7/SlbddbQ1tg5cnCQjyaDLYjWpVM02K5qDd3t6gQ1WpDhUjFB4ECqp5TbxA1s6NXiGTMjEKd0vM9EcJpnfT43S4Gb38nMc1gvLELDsO/1mzI7vxXn9zvWzzlYNKAWuASs1x9hK/csu7L/z9Hnm1/x0dHYCybwziElnhwNKt+0DeG17rGpUVuH06jGwYSd8nKpkczKPKM0Mze3ruCwYBjaB0GtDx4bbkP6e+p5YHLx4EtTWwAXlZTyF3Vaqvej/CnC0rYf1MVR7ocVwpNTGDjilLKnnMvu4u+2styQIheOaUEM3FoqjEYuLCmkm7Ukf1pdWwfPSAbu4EH7SBuFlr9b2zL9UU9W89z0k9asc4AFpxZLbXH4FuYkjAFkREV7uLrrmpQZ6iJJhHjlljNzD2HhvLiPJUF0vxtVctXHpNqNvSSHdKe+SK9tklKYc+EfVAR1ZqD4ooKSI05W0hUkDqv3i/KnODE4oZVCFClND02dOtkuVh3SMYY8yP7O8YixCqcSYSe0hizYGYqCtFEU7wsDr/V/8askBEE1CJq/MhShMVJ43qE3OgMbnkMJIHsQudc3HnYk4MxJ++a5bdWHLEBs7yBt0hMIJWhja2JP5Mux+2ls3JbD+Ae8+tegF0UGfEDjNnwx4cf1pIyr/xhlDluiy1+elKMFGIf74d1VxYD83D5YNYT5d0X6zpZ1RVT5BSalpb0SW73kMYPIMQ3Ysh21UJ3DRmB4MaPYRTBO1TB+YPJSRYsFfoRtAZaYoTCfpPfWV4EnynHh+xRALq2BALwbGhk0nkE2vF0jATiMk1JKAzWQvKGh2vgfwBh5tPJXiHRQzyXfcU="
+    },
+    {
+     "type": "vector",
+     "name": "단어:네이버",
+     "dim": 10000,
+     "ones": 4969,
+     "head": "0000001100000000011001110110011110010111011001001001010111010001",
+     "bits_b64": "AwBnZ5dkldGXKTdJP7RDSlXV7AIfg7I1Wh9tJ9/RaOAvmnd4BoBF8hymd0ypds5C3t1+RUXXRaWVFKgnf/CxylWm3IMpoJmro0jNsgEvp/vJE0Wq3utd8IFIOJA8T1G5y/WkqPONrOns9qMkC4V7jvxK0zOJC1z1r/Vq4MIHcpJA7TZ26sjyhBNCY2ZbNUH2j+XbNtNjwPmif2+eGfft0IoLmSAhg8oKEy4i5bgb3aOviq9urHUvwaBkjRAtwM1Y8UxGmFk4HWKnqRHDk/I8Gd9bxtUNhC+pM+GbuJXKKpoyzEpjrx8kgTebsX9Up2vL0oYCeLIKV/Bx3iGPmtf1xr7UWSHy6Gn9z1anAfQw+NfamcuBYTyhS4Mv+hdvRWXFJZ44+vEeICwEYdR55EFi1K5So0AEVYlcQmzpuLPQYgBkyh0YYqUh+yCdHrkwp9MQiFSEZQJ3+qbJ3lr5n1WTWVbc/xBwshu2Hc21v4f0BntbCHYNUCqp6rO5iB1zt5RE9W7p8K7xhotpt0Y5/T77UmwGaPDdpfTlooe3bxlerjNF+JRKB4mSSPo/9MnjqmeyD37GwRQ+WS2Ni0y+W87rqMc2/X+/9QqYAX3rsLxuPZXhM1UDfxkT2ZzYEc4llx29vMgJ/rhzb4PGBBONP4kQtI7zugKx9S2HJTBwwWpHyhAo90cRgU0tyiHrb+HCj4WmsdGIRsOTt+ihMqmhBdWA+BastUwGDeKu0Fabt/2YeQgJhMUQ5BN77w6gPwTTqOCuJBF/jcRPA0uvOS5mFqMk3ohXifla5oAsKnq4VaOXy8EIbS9iAeiFTShwcwaYBTquGzZk2xLrGCBB/dN5wfMd5ZoVaAA9VI4ioWdLcbDDy2lvyY8gqwufFeDdZfZ1CUASOanpWYKc0Wt5rVngwFrvuoPierGWCpbnRDNIPc0BJDwp1QigMU2rHWnJ5pkKdrhmnWCKHl1ifAjaamGEDIYe53tmiEXrgSEbCr5Bij8jopa2ATdywKE0ZkravwmRezacdPmEz9c3ZM9pVY6AConDxOm1Rf5sNldd56Gk31p/DXi+krh4Ka25cMv5j78VLTZcXrOHgYFhT6au/7sMkce+91eEAaTZ3P9r3SpelZE2cpeSt4TaHxo8xGMFoaonqyvCDHoc0iKd4grWJMVENCjrPOoabBknIqmljIwhYQuLEA4o1ILi3Yw8arGzObF7Sa5fYsPMHyTTfljbnTDRWRwPPdyiQ8Zu66Z+G6/v13+AwKLUklndRZgM+jDiHSN4WEJNhIEU+Lt45zTr7CdSsWoCo+nctdM5RdL5j//isc3OkCY8SgGu1wdcQRA4davm7DEusWYmgpBGWBL7axr0KXI3z7oUz6cTgMwbS8fB43giW3UH+IFki+zYuWZ+x3Dp2brKpFr+rEqM/Fv59F4pvGEuzDQBh/Qwt2JAOMf9376E50/7LV20S6VXUTBIFR3sPQQNaeVP2R1YBe5XC0PJJDeCLVWBYM/GyvzLmH4ONT3UxXSnH4HA/xGtW+eWpz+NkoVWa5gg5z+zGqR8wgEeX8Hp1Bq6tRq+W6Dg5djc+VvuAqNlaR9q55kwNgFqLe5G4AaWhCGIcotz6JhVeP7oPU34kRewJnM5n5BCzF4kYmztDt9Kn+cMWvVqz01268RNwLw3S18="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:robot ⊕ 단어:네이버",
+     "dim": 10000,
+     "ones": 5095,
+     "head": "0000011111011100110110001011100111000001011110010101001011001000",
+     "bits_b64": "B9zYucF5Usi2QqG75nSvS70JgAkxTlGmWDD7pdKQqWPVecBjq7XOO5vsTcJbbQUoRQTP9nM1AEg2wfeaVDA7mzGy72v7gHmCuUNYY7MTt8Wolh4XQZQTr0lnGZq6wcplJgyJfPsNBfBlpG8dfIhiWTvh9AD6Vvb4JKfZGdcD1ambxf3JU4nnHR/hF+keIccDtDEYnaLb6mlWg+j1Q+V2gTk8gxiXEpSRLm7XHu1I6oP7x48MJPTzKRIIU9mqLjoOXrc7vDTspiPlpgZkjVZuzIIe5+do1wXc/XBHN13PwebvMtnkhLrBQ1dEf1oMJ1soFAu12nOGf6uGg9exh5LAlGUo1uOqb2Je/FB4mtN3bBeqtmnc/JqyXdO/5YO60Tskm+lZPX52Oje/Ad/Ic6SIH4iMczC2xy98iWDS9gim1mE0mmudV5Er5iXFdFBiOkxrMSkpAol/x0hBfOphBYf4qx0j12w/kcA+x0mT/zx5EpLDU7eDJNq2gQudoSg58sLTaDfDK6T74VWVXsaOx/hIcVxD3YLHEjDYmLTj51P3HJkZ6DDIQjziCbfYocOcRS75xxbucWU4xHgA+Bt2VA0OxRYYLSWl3pTz+fObaR0ra0cCn1k9A1igSGW9V6RtjXHq7dZNfM3xx49kgzw2Htm4bL/F5jNpWeEzkyO9GAbrGD/IaN8wck449gxgpFldd9cwbzC9dflMaEkA5hD2BcuefQrHbs336xjmc4ojbfzdnxxRe1MfW98UUGsea5/630XlErNuz8TfnR9Jqygd2OfxdK2MSsm3/yyAI7YKfI2/ZQwVKPs6/99vqHkJ74QT6s4LduE/mEmL/emDv+/jzUU+vw9Zu2KE/LlVFs9bpNqATiGqzg4iAZXMevDo1lUigSTetet0i3GhwKkQMK0YHXTp1fzFS3z2tifsSvD366HJysB+StRPanFOfbtJvHkYxeQbGc9WrLOpgzed9Az7y8FZh1f9S31vF1lrPhU/WgildSxwpHIc3++XfUzIyMBb3XGvXAsIHxvpunTrlA7jYpTFcNXNKEdj37j0AiBvGNtSQBS+zO4r4fBsGmAnAE+yJnyEIeCSxjt9GKzjs9vvG5V0aSSrui9nBjQZnaIArDQyQeb6HbXCp6qaVg3RMFdO3kfdMVoHaaOaDyq4Mp+5W0Qgya8nN9ZU8Ob/PUIhd5fSPbvvNNl6T7w5+6Cm11OQ58QPBWtFOTUw6AAWUQ1W3+7tAUmnkToDvm0pBTyF4YsS3XBKa3tg89FGm/9mYHNpjdjOZgsesDZBvHy/fB39b0XIPwkYV1VsTYJcu8LUxSaqKX5LAse2JCSnetYasYF6pbWwY36V4vZsUsO/OKbYJ83iMHy4X7YXVO5xtw+TZ71ruA+DJGlo5ZXUneeShZe1BcMSN9nPi6UWGeyv6O8oD92ve3xNp2GROs/JB1TTGFMhVD2gIr2quE4J0W1cDOzvsd39rmJQD49qqhI2n3qnrxr8VwcNdK3ZJXu+z2gNxk0tpaK0+lzXFCv0jvLFQysXBBOiIvbXd/m8OmBLoMloioOe2QM7VdwxOrQh3owdANgnS7VJfOV7U59qVIWoU32ZuViSGwhP9Wci6CLjfPwYUSWcQ260/IJNE5Sg/hNtSmA7TC3MGIzsJfULKZ6/teWcg4CgNpo="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 16
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 7
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 12,
+   "section": "키워드: 로봇",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거에 한 번 나온 단어의 점수는 약 0.378로, 잡음 수준 0.030보다 크다. 한 번 나온 것도 구별된다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": [
+      [
+       "네이버",
+       1,
+       0.2428,
+       1,
+       0.3788,
+       "",
+       ""
+      ],
+      [
+       "하트",
+       1,
+       0.2428,
+       0,
+       -0.0021,
+       "",
+       ""
+      ],
+      [
+       "지멘스",
+       1,
+       0.2405,
+       1,
+       0.3728,
+       "",
+       ""
+      ],
+      [
+       "회장",
+       1,
+       0.248,
+       1,
+       0.3719,
+       "",
+       ""
+      ],
+      [
+       "줌인",
+       1,
+       0.2712,
+       0,
+       -0.0074,
+       "",
+       ""
+      ],
+      [
+       "리브스메드",
+       1,
+       0.2551,
+       0,
+       0.0049,
+       "",
+       ""
+      ],
+      [
+       "코스닥",
+       1,
+       0.2397,
+       0,
+       0.0001,
+       "",
+       ""
+      ],
+      [
+       "입성",
+       1,
+       0.2428,
+       0,
+       0.0117,
+       "",
+       ""
+      ],
+      [
+       "성적표",
+       1,
+       0.2529,
+       0,
+       0.0035,
+       "",
+       ""
+      ],
+      [
+       "흑자경영",
+       1,
+       0.257,
+       0,
+       -0.0119,
+       "",
+       ""
+      ],
+      [
+       "차세대",
+       1,
+       0.2621,
+       0,
+       -0.0067,
+       "",
+       ""
+      ],
+      [
+       "센서",
+       1,
+       0.2565,
+       0,
+       0.0009,
+       "",
+       ""
+      ],
+      [
+       "액추에이터",
+       1,
+       0.2455,
+       0,
+       0.0036,
+       "",
+       ""
+      ],
+      [
+       "이차전지",
+       1,
+       0.2289,
+       0,
+       -0.0187,
+       "",
+       ""
+      ],
+      [
+       "미래",
+       1,
+       0.2504,
+       0,
+       0.018,
+       "",
+       ""
+      ],
+      [
+       "성장동력",
+       1,
+       0.2258,
+       0,
+       -0.018,
+       "",
+       ""
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": 0.378
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 16,
+    "hdc_answer": 16,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 13,
+   "section": "키워드: 로봇",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": 0.278
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": 0.2835
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 14,
+   "section": "키워드: 휴머노이드",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 0
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": []
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 15,
+   "section": "키워드: 휴머노이드",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": []
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 0,
+    "hdc_answer": 0,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 16,
+   "section": "키워드: 휴머노이드",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 17,
+   "section": "키워드: 사족보행 로봇",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 0
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": []
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 18,
+   "section": "키워드: 사족보행 로봇",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": []
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 0,
+    "hdc_answer": 0,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 19,
+   "section": "키워드: 사족보행 로봇",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 20,
+   "section": "키워드: AMR",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 0
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": []
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 21,
+   "section": "키워드: AMR",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": []
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 0,
+    "hdc_answer": 0,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 22,
+   "section": "키워드: AMR",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 23,
+   "section": "키워드: 배터리",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 1
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": [
+      [
+       "뉴시스",
+       "차세대 센서·액추에이터·로봇용 이차전지, 미래 성장동력으로 키운다",
+       [
+        "차세대",
+        "센서",
+        "액추에이터",
+        "로봇",
+        "미래",
+        "성장동력"
+       ]
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 24,
+   "section": "키워드: 배터리",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:battery",
+     "dim": 10000,
+     "ones": 5111,
+     "head": "1101001100111111001100000000110010110000011010000100101110010011",
+     "bits_b64": "0z8wDLBoS5Opmx5EVbgnu1x9p+MVe3wCszNQp2qOZpo4+/xCRtWAqNs72dDBHddGTLwZAZyltqSK/wDY09mJDHkIdwNtets8DYH0tRHuwhWeuB6c3cgAzLZiPm/OcNs+lOOuY/BOBQe2f2iIIJeMQNggikyu2aKECX/TaJuRrG/Zn5Fv72/R05mVitL+zr8wSv2D2840xvSUUpb46I23Zy/aCw0I/foLNnMWF8AdMcxo/WzzXoqVUvsjJhzPRZb54meugXsY2VYGKCLB9E+XfugmMr5Id2S1girVpn+icoLtQgI8ufJCJIQFL6KF369RRTac6o689ohGC1fw+UHAEbKnPLhCpC0yHzrlrk+dehbAhHnpOeKg2MYy9itwD1F/AZ1iyniDv+ADztY3vVr3sX3rAzPAC0vpJo0sMvtIN9HrA5mDp6t3xGuJeKv5HrANg4/hmkf5NCgxoEEaHECkCheE1gMYwxZ6ux4Xp9FU3SsXfE8E5wQoTTu3bBuYDTc6tGx83dCzF9fGdd8bXbIlaL7gfZl31HrabHL/B35DpOHBXxHEtP6yqpVmt5Kf3W+GH/WXugSZD7vsBElNbqw/1PsAlQOwsBNMt4LvyyN/P7hkgAzCEwDSZ2XHvx4d9iGeXP0H2xuyvpv+K7hvnpohuz4TZEQU4OYUfhXOGgIlgqEvT9TTCjcsnVl2Dt46SkyOTYNU7qZs7QlofgLABe4elnT/PvrMKtfzNKzRGujW/r+6e1j2WrRNsbEET2Zukv/dz5fsTMEKkNg1G403lNVG/zN3UQ5wd7WmA3nyuywvIVTcvxFUVtSv+Up7ExIHM/0eip/B+2sQXleHTjxGV/i+1W+VBYtDmnueNm7Qxvy+RU67Arl5UEJdHdbDuGUcSe9ghu+JC9qkYuOkT++qjLTZ9kdr/SFwPGCH7jWhPdEUlvtqxUcRyfby5sG3qnNZ7SDmkAFYEvNCCkVAOZLYSDupV2+FTqWHj4nBuJw3Bkgrj89+8b25GlRD1I0aIHz9hXpUIHK0cswec+vSsrErnmJGhyHBfCh2zmy2ZGbGGv0rXiX7O2GbGvulqij0NFsWEhmA89walhOjCtS9vyM6AAFOe0nR0RI8a0+7adtyg8mWMKPes/UDqRxzQrME/vu/8rYVhnNt0m45mEN7JQYqHpfdNfcIlS9HwQkVam8kVfh71xV+A9QxRjdCnNlz4lKi1QwnZ27/MlKE7XBqh3jt2+wtkxywB1CoZsYDPF4940067SCQJOl2UM23Po+eQpRNZqb0oHm19xB9IboiO7s0Z39893HNBFqROzLzTdW0Hfw0MgeLTeMPhLgPF4uMBsOLod3B+3oJR0VlIVW4r+Y3awCXyyzn4ak9v/WjhYWqt8zXHC86lp24Mmmy4ziVEv9nfWP4bEuW94i3JtfrhGG+uDTUh09TZsqsK/6gIcWKSoBjNJvGyfv1KbTM2m7nKO+JFTm7ddGTTamzZfKEa1xxHmPzEJmimHgKy96zUsrUmTSLfizhlbUbWRRY4vtaBeWhHUGUfylmpyb5/XrccV0gNVGMPW+jG7YTgcVejEPaZ8Rsf3twzpmLftktPRMjmb1YtrjXk09D5rWtWzoG74fwzbzMm7AgUelax/JQe3zDoEDVn73k0n4427X4hcnfGCWNpiKvfH8="
+    },
+    {
+     "type": "vector",
+     "name": "단어:차세대",
+     "dim": 10000,
+     "ones": 5035,
+     "head": "1100100100010001101110101110011100000111010010000111111000110110",
+     "bits_b64": "yRG65wdIfjbPk0u0Yl+BY3PTFr4sY3fqgKQ0RANX+BWzyxVQOEG4Fi14POeUcitLuTtqCHiIxrI8PXqsxo6N5HgfAYGD52NNj6cC4thf9wUmadaOHMMQnYHuVYORKFAnLDdbL+ZkMQYCYbKV4tw9ko/kw9gcABKMQsrlSI67lZvofihHNMPgwoohICpHB5fJ2MzCYjoGcI4hQVFV+pyOvZc2V0dQeMWAu/DheltW/2/xgQn3HHEqMRPbJvs+PlH0xkeiqUC6NH6J1ElsP/S71mHaMBmWnnK5nv1fPb5jUynTRp0z3c4QT8n29b30pU6ui1TtOK/Cli3x8uwJEjJFdRXXLs2dvel5eJKm733HSVs9ZWoYwpM//OWZ3tAhkkK+uABrhowOGLZ1zKaBqIYvmm+Mfu5P7UxKReRaJt45+D8Bqny6H+qSaRA/HjKPfbNaFA+Y4XpleHCiIY/JUCerWstrVYlViWhygN98zy5JvrYDb9rm8bFB14Vu752TfSIVXLaSeuJFaGe+JvUuKPKA36Way16OeNaSHa7WIp0fR8bWVgxlb0vbVD+elpCqD6kJEU7zTsyWIQ16QOM0YqW2uL6a8g3/q2YjrtQDxCkDfLARhpQRLZwdxV2kXOOsdwZINpX3x+cg1CZVqJNxE3P17tknbLoBvuSfyy6DKYuf5wRMxwVNbjJ5Gb2ElMYFscOgoOlceP+vHQ70yDF7LKyy3Epqluocs82k1nN8ALhvZejDsqjEWfwNs9Ybdwak4JpYL5CyHhpubbEigcUscG7LNXtBIiWNZXhD8EXDNRpxQl/fYYEmIR7780D9qWx1uiqB60lB/qNcI7kA79ylxzvxQXq/dt66dPejIS40x2v0CA83y8n4Uqa4Qz8+P1GwZctMGgCqcl86z+inP6lnb/K3OM0tE/n0e9rDKndanh2tdNmrPwbHlTUzdvGp/9Qg2c8IH8RGi0nOD242uI3b0EuSuMz/6aiawY4uhDcStboyX70RkM6+u4V3IDvkAZ02ZTvpumSvdA7ZehPO4hZZqatNR+Iitf7GZDDaVsCRm/7AGkxJ2KgUCqAYNAwmoJ8YZfQIpcEpQtR4I05s5GUC6pJfp/fPN5G/cnjxQak/Ltu4w7jxM+ABsKP1NtvmeMuep7XtA440qeI2fG+NrsTku2F08DGm2MNJ7/psW7tsuW/V3wajLQt/O4QQBqRxnb20xq73YVq7FnB4YLPzbA9YEnuDGHwvU4J73215SdC8LRJmfeam2al8lC76xDDKWYOzPvPJvL4EebX+0hX7NEYYKvMrn8UeLUv8iVGy6/Ey8/53KKBKC6yxEAT6souosGNXDl6zBLW92PtHlgYEeV4KS+yf/Soq9eGAbbqyktBIosWHfZLRHtn5zSpdJeaj+j7nbo3OH1vgoXA40yuycxyuUOkaTPT0ANmNSL22RzW4eOReyGa9qmZ8gdPvCaPm1glkqmjIdOQ+0tV48D2CpwlpCzcqWVbuWCp6SqlDINJd5P0s5D+WdecquUwvj8UMHJR0RvKY47ihfcvgZztEi7GmIdfD+IyY5IfKjqRkgGVh2CiHKBTgKIw4iNgWDOeki7C3nRsVqR3dhEiERp3yBkhSzkOGmoBPZ9SdN4qK7w7Ikv4E25MjwmNGXNBkPX9NiOJ6m5vQeeQ="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:battery ⊕ 단어:차세대",
+     "dim": 10000,
+     "ones": 5018,
+     "head": "0001101000101110100010101110101110110111001000000011010110100101",
+     "bits_b64": "Gi6K67cgNaVmCFXwN+em2C+usV05GAvoM5dk42nZno+LMOkSfpQ4vvZD5TdVb/wN9YdzCeQtcBa2wnp0FVcE6AEXdoLunbhxgib2V8mxNRC40cgSwQsQUTeMa+xfWIsZuNT1TBYqNAG0Htodwkux0lfESZSy2bAIS7U2IBUqOfQx4bko26wxERO0qvi5ySj5kjFBufQytnq1E8etEhE52rjsXEpYhT+LjYP3bZtLzqOZfGUEQvu/Y+j4AOfxe8cNJCAMKDui7SiP/Guty7ssqIn8Aqfe6RYMHNeKm8HBIas+BJ8PZDxSa03z2h9xeuH/zmJx0iF+YKW3+bv563OFZKdwEnXfGcRLZ6hDQTJaM0394RPx+3GfJCOrKPtRnRPBuZ0JTPSNp1Z2AnC2FdzYKxJnfd2P5gejY2l2FCVxz+7qqeU5uEHlrXu2Zpl2YwNXl4B5ez2cTFiTgc7TTGcPUNzvg4pNSn4IO8FraP8dY50UE5XiFrVpmr7Zg4YLcBUv6NrupzL2f7B4Uyo1dUCltxt6tsf5rKxIcdwpJeNc4ycXCR2h27Vp/qr4IQI10saPDrtk9MgPLraWRKp5DAmJbEWaZw5PG3VvGVbsDwp8Qwh1BpjTPpzPojhj4/2xgSfWamjwHPySar2rgysejenUVec0CP4VXgKLtTtNM4m6ZaVjiNGeZAVVhOTymhg/+48u7WoIllnD8AectjO7KUKsSj6VqBDQmRpX4t+tGlC5m1d5yfAyA0hAAmcfOGDKcmWF4AdeUttk/WkXmkgb5LuNykg2cyv9Es3l8zwxjjZeYwsD3pByd8pUCgqGun5yidefYdaABchMfe6HoeDjkMNPlBUqc1X57ow9F0DkAZdKTUGMyXCBAuTlXun9hzSsLCQsnO8jeYWerQsDcEbN40ZuzopG7tiER7pExEL7o8y54iLB+kHWXMPBkDAeVad5NO/uj8UembqMBSt2gR8DmHA776N6pw0dTgfvPKsls/IZ0HJvYXMHodE09Lb+IeHL4EG9mhYbBsLHCfgcUKdyN8kLwMPjydawqlxsMqZXgQPrRGmy48mPEFu9niTSlMQOd+2IVh0z1MfbKZrRW0Y46pMR3L4e5oODGTdKKHJNrRIu8xsvgBUCGb+GdGjihjAhVQP4hf1Ze4wP5Cz2i8LOpfapxcauTewOLvN5MdRI7JeuCBPdLt9OfbNSmn0Cf+8WE6LQBjREJCL8jcOZ63e1yZeui2CfVNLTuat6dY6Bzl9ckMY2/UAKxONN+r9UGxf+WFU9HMexjqWD86/ZD/0sTYxXaLTTKRFtsmNBpiSG7gJDGqfBRk++lLz1pQAktqDcr4Ny/8+0n74it1O81rg9IOwINgbNFEi90k8RF1XiFQlQYb3riERB/0Pvxt426MGAE+42cxB2VviP9fxZ930Q6N3Oy7unZhMhY0MWZvAyMmQ9/P17Y52JqGcj080B/ubtv1FzATWtn3zLlc8GzFUYFVTZSc9MwFJwgXfwchiJfcmnmhN34FIx4Fh3bT5WGXHVW7MMnJHH2u0ZmkGY+uyGFIZPxeM7/zHZD2E6DCa7v+zrV2+Q5hWz9gE7MfSHEg3vK6PCOlKeYv0pHaf06c+iA/9KATBvNj3H8HjalHILMr7RRC7HEB1+h2WcuLaSkMf3Pbl/BZs="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 6
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 0
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 25,
+   "section": "키워드: 배터리",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": [
+      [
+       "차세대",
+       1,
+       0.4176,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "센서",
+       1,
+       0.4132,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "액추에이터",
+       1,
+       0.4067,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "로봇",
+       1,
+       0.4155,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "미래",
+       1,
+       0.3959,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "성장동력",
+       1,
+       0.397,
+       0,
+       0.0,
+       "",
+       ""
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 6,
+    "hdc_answer": 6,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 26,
+   "section": "키워드: 배터리",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 27,
+   "section": "키워드: BESS",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 0
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": []
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 28,
+   "section": "키워드: BESS",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 1일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": []
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 0,
+    "hdc_answer": 0,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 29,
+   "section": "키워드: BESS",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 30,
+   "section": "요약",
+   "name": "키워드별 오늘의 새 조합",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드마다 새 조합 수와 문맥 코사인을 모은다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "요약",
+     "columns": [
+      "키워드",
+      "오늘 제목",
+      "과거 제목",
+      "새 조합",
+      "문맥 코사인",
+      "상태"
+     ],
+     "rows": [
+      [
+       "피지컬 AI",
+       3,
+       0,
+       4,
+       null,
+       "예열 중"
+      ],
+      [
+       "AI 인프라",
+       1,
+       0,
+       0,
+       null,
+       "예열 중"
+      ],
+      [
+       "로봇",
+       3,
+       1,
+       0,
+       0.278,
+       "예열 중"
+      ],
+      [
+       "휴머노이드",
+       0,
+       0,
+       0,
+       null,
+       "예열 중"
+      ],
+      [
+       "사족보행 로봇",
+       0,
+       0,
+       0,
+       null,
+       "예열 중"
+      ],
+      [
+       "AMR",
+       0,
+       0,
+       0,
+       null,
+       "예열 중"
+      ],
+      [
+       "배터리",
+       1,
+       0,
+       0,
+       null,
+       "예열 중"
+      ],
+      [
+       "BESS",
+       0,
+       0,
+       0,
+       null,
+       "예열 중"
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 76,
+    "function": "run"
+   }
+  }
+ ],
+ "log": {
+  "fetched": {
+   "한국경제": 100,
+   "매일경제": 50,
+   "이데일리": 50,
+   "지디넷코리아": 30,
+   "블로터": 50,
+   "전자신문": 30,
+   "뉴시스": 200
+  },
+  "failures": [],
+  "notes": []
+ }
+}
