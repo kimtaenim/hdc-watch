@@ -68,8 +68,8 @@ function gridBox(name, bits, extra = "", highlight = null) {
     el("div", { class: "gname" }, name), el("div", {}, `1의 개수 ${H.ones(bits).toLocaleString("ko-KR")}`), extra ? el("div", {}, extra) : null);
 }
 
-// ---------- 숫자 줄: 앞 n칸 ··· 뒤 tail칸을 위아래로 맞춰 ----------
-function bitRows(rows, dim, n = 8, tail = 4) {
+// ---------- 숫자 줄: 앞 4칸 ··· 뒤 4칸을 위아래로 맞춰 ----------
+function bitRows(rows, dim, n = 4, tail = 4) {
   const cols = [...Array(n).keys(), null, ...Array.from({ length: tail }, (_, i) => dim - tail + i)];
   const head = el("tr", {}, el("th", {}, "칸"), cols.map((c) => el("th", { class: "pos" }, c === null ? "" : c + 1)));
   const body = rows.map((r) => el("tr", { class: r.line ? "result" : "" }, el("th", { class: "rname" }, r.name),
@@ -268,7 +268,7 @@ async function buildFrames(bar) {
           H.hamming(H.bind(barV, ds), lvk) === 0 ? `${bar.level}단계 벡터와 모든 칸이 같음` : "다름")),
         grids(gridBox("요일 ⊕ 시간대", ds), gridBox(`${bar.level}단계`, lvk), gridBox("봉 벡터", barV))] },
     { title: "⑥ 기억 꺼내기(이 봉 자신은 뺀다)", op: "더하기", why: addStep,
-      body: () => [bitRows([{ name: "카운터", vals: memAfter }, { name: "기억", bits: memV, line: true }], dim, 4, 2),
+      body: () => [bitRows([{ name: "카운터", vals: memAfter }, { name: "기억", bits: memV, line: true }], dim, 4, 4),
         el("p", { class: "hint" }, `카운터는 칸마다 ${fmt(mem.n)}개 봉의 투표 합(1이면 +1, 0이면 -1). 양수면 기억의 그 칸이 1, 음수면 0.`),
         el("div", { class: "values" }, el("span", { class: "chip" }, "더해 둔 봉 ", el("b", {}, fmt(m.memory.n))),
           el("span", { class: "chip" }, "이 봉을 뺀 뒤 ", el("b", {}, fmt(mem.n)))),
