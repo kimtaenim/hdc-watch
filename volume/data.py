@@ -35,24 +35,6 @@ def fetch(ticker: str):
     return hourly, daily, closes
 
 
-def attach_prices(bars, hourly, closes, derived_session):
-    """봉마다 대표 가격을 붙인다.
-    시간봉: (고가 + 저가 + 종가) / 3. 역산 봉(마감 동시호가): 그날 종가. 동시호가는 한 가격(종가)에 체결된다."""
-    by_key = {(r["date"], r["hour"]): r for r in hourly}
-    for b in bars:
-        if b["hour"] == derived_session:
-            b["price"] = closes.get(b["date"])
-            b["price_basis"] = "일봉 종가"
-        else:
-            r = by_key.get((b["date"], b["hour"]))
-            ok = r is not None and "high" in r and r["high"] > 0
-            b["price"] = (r["high"] + r["low"] + r["close"]) / 3 if ok else None
-            b["price_basis"] = "(고가+저가+종가)/3" if ok else "가격 없음"
-            if ok:
-                b["ohlc"] = [r["open"], r["high"], r["low"], r["close"]]
-    return bars
-
-
 def complete_days(hourly, daily, now: dt.datetime, close_hour: int = 16):
     """일별 거래량이 확정된 날짜 목록. 오늘은 close_hour시 이후에만 확정으로 본다."""
     today = now.astimezone(KST).strftime("%Y-%m-%d")

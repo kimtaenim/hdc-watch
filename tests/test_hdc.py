@@ -136,6 +136,14 @@ class TestMemory(unittest.TestCase):
         print(f"\n  35조합을 더한 기억에서 풀어 물은 단계 맞힌 수: {hits}/35")
         self.assertEqual(hits, 35)
 
+    def test_majority_keeps_only_larger_of_two_repeated(self):
+        """서로 다른 벡터 두 개를 60번, 20번 더하면 다수결 결과는 60번 쪽 벡터와 똑같다. 적은 쪽은 사라진다."""
+        a, b = make_vector("A"), make_vector("B")
+        m = Memory(D)
+        m.add(a, weight=20)
+        m.add(b, weight=60)
+        self.assertTrue(np.array_equal(m.to_vector(), b))
+
     def test_save_load(self):
         m = Memory(D)
         m.add(make_vector("A"))

@@ -23,6 +23,14 @@
     "alert_percentile": 1,
     "watch_percentile": 5
   },
+  "walls": {
+    "_설명": "매물벽 찾기(일봉). 가격칸 폭, 보는 기간(거래일), 묻는 거래량 단계, 평소 거래량을 잴 직전 거래일 수",
+    "cell_width": 0.02,
+    "windows": [20, 60],
+    "query_level": 12,
+    "volume_lookback": 60,
+    "top": 5
+  },
   "keywords": [
     {"id": "physical-ai", "name": "피지컬 AI", "variants": ["피지컬 AI", "피지컬AI", "Physical AI", "PhysicalAI"], "_확인필요": "'물리 AI' 포함 여부"},
     {"id": "ai-infra", "name": "AI 인프라", "variants": ["AI 인프라", "AI인프라", "인공지능 인프라", "인공지능인프라"], "_확인필요": "이대로 둘지"},

@@ -8,8 +8,8 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from hdc import similarity
-from volume import data, model, zone
+from hdc import Memory, similarity
+from volume import data, model, walls
 
 SESSIONS = [9, 10, 11, 12, 13, 14, 15]
 EDGES = 2.0 ** np.arange(-4, 7)
@@ -86,36 +86,34 @@ class TestModel(unittest.TestCase):
         self.assertAlmostEqual(model.spearman([1, 2, 3, 4], [4, 3, 2, 1]), -1.0)
 
 
-class TestZone(unittest.TestCase):
-    def test_edges_and_zone(self):
-        e = zone.zone_edges(700, 1400, 12)
-        self.assertAlmostEqual(e[0], 700)
-        self.assertAlmostEqual(e[-1], 1400)
-        self.assertAlmostEqual(e[1] / e[0], e[12] / e[11])  # 로그 눈금: 칸마다 같은 비율
-        self.assertEqual(zone.zone_of(700, e), (1, False))
-        self.assertEqual(zone.zone_of(1400, e), (12, False))
-        self.assertEqual(zone.zone_of(600, e), (1, True))
-        self.assertEqual(zone.zone_of(2000, e), (12, True))
+class TestWalls(unittest.TestCase):
+    W = 0.02
 
-    def test_majority_keeps_only_larger_of_two_repeated(self):
-        """수학적 사실: 서로 다른 벡터 두 개를 60번, 20번 더하면 다수결 결과는 60번 쪽 벡터와 똑같다."""
-        cb = model.Codebook(SESSIONS, 12, 10000)
-        zcb = zone.ZoneCodebook(12, cb.levels, 10000)
-        mv = zone.train(zcb, [{"zone": 2, "level": 3}] * 20 + [{"zone": 9, "level": 10}] * 60).to_vector()
-        self.assertTrue(np.array_equal(mv, zone.bar_vector(zcb, 9, 10)))
+    def test_cells(self):
+        k = walls.cell_of(1200, self.W)
+        lo, hi = walls.cell_range(k, self.W)
+        self.assertTrue(lo <= 1200 < hi)
+        self.assertAlmostEqual(hi / lo, 1.02)
 
-    def test_ask_zone_separates_zones(self):
-        """가격대 2에는 2-4단계, 가격대 9에는 9-11단계를 쌓으면 풀어 묻기가 각각의 가운데 단계를 돌려줘야 한다.
-        봉 수가 달라도(20 대 60) 되는지 본다. 다만 '같은 벡터만 반복'이면 다수결이 많은 쪽만 남기므로 단계를 섞는다."""
-        cb = model.Codebook(SESSIONS, 12, 10000)
-        zcb = zone.ZoneCodebook(12, cb.levels, 10000)
-        bars = ([{"zone": 2, "level": lv} for lv in (2, 3, 3, 4)] * 5
-                + [{"zone": 9, "level": lv} for lv in (9, 10, 10, 11)] * 15)
-        bars += [{"zone": z, "level": 1 + (z * 7 + i) % 12} for i in range(40) for z in (5, 7, 11, 12)]
-        mv = zone.train(zcb, bars).to_vector()
-        for z, lv in ((2, 3), (9, 10)):
-            _, sims = zone.ask_zone(zcb, mv, z)
-            self.assertEqual(int(np.argmax(sims)) + 1, lv)
+    def test_touch_outcomes(self):
+        day = {"open": 1150, "high": 1230, "low": 1140, "close": 1160}
+        res = dict(walls.touches(day, self.W))
+        self.assertEqual(res[walls.cell_of(1225, self.W)], "밀림")   # 1,225원 칸까지 갔다가 아래로 마감
+        self.assertEqual(res[walls.cell_of(1160, self.W)], "안착")
+        self.assertEqual(res[walls.cell_of(1141, self.W)], "돌파")
+
+    def test_ask_finds_wall(self):
+        """1,200원 칸에서만 큰 거래량으로 여러 번 밀리고, 다른 칸은 섞인 결과를 넣으면 1,200원 칸이 1등이어야 한다."""
+        wall = walls.cell_of(1200, self.W)
+        cells = list(range(wall - 6, wall + 3))
+        cb = walls.WallCodebook(cells, 12, 10000)
+        mem = Memory(10000)
+        for _ in range(8):
+            mem.add(walls.touch_vector(cb, wall, "밀림", 10))
+        for i, k in enumerate(cells * 4):
+            mem.add(walls.touch_vector(cb, k, ("안착", "돌파")[i % 2], 1 + i % 12))
+        _, sims = walls.ask_walls(cb, mem.to_vector(), "밀림", 12)
+        self.assertEqual(max(sims, key=sims.get), wall)
 
 
 if __name__ == "__main__":
