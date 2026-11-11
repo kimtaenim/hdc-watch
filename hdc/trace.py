@@ -44,6 +44,22 @@ KST = dt.timezone(dt.timedelta(hours=9))
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def code_version() -> dict:
+    """이 실행이 어느 코드로 돌았는지. 화면의 소스 링크가 이 커밋의 줄을 가리킨다."""
+    import subprocess
+    sha = os.environ.get("GITHUB_SHA")
+    dirty = False
+    try:
+        if not sha:
+            sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True,
+                                 text=True, check=True).stdout.strip()
+        dirty = bool(subprocess.run(["git", "status", "--porcelain", "--", "hdc", "volume", "trend"], cwd=REPO_ROOT,
+                                    capture_output=True, text=True).stdout.strip())
+    except Exception:
+        pass
+    return {"commit": sha, "dirty": dirty}
+
+
 def now_kst() -> str:
     return dt.datetime.now(KST).isoformat(timespec="seconds")
 
@@ -92,6 +108,7 @@ class Trace:
             "started_at": now_kst(),
             "finished_at": None,
             "params": params or {},
+            "code": code_version(),
             "sections": [],
             "steps": [],
             "log": {"fetched": {}, "failures": [], "notes": []},
