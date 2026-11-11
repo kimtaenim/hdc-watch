@@ -1,8 +1,8 @@
 """매물벽 찾기: 어느 가격에 닿으면 밀려 내려오는가.
 
 최근 반년 일봉으로 본다. 가격을 2% 폭의 칸으로 나누고, 날마다 주가가 닿은 칸마다
-'가격칸 ⊕ 결과(밀림·안착·돌파) ⊕ 거래량 단계'를 기억에 더한다.
-기억에 '밀림 ⊕ 큰 거래량'으로 풀어 물으면 그런 일이 잦았던 가격칸이 떠오른다.
+'가격칸 ⊕ 결과(밀림·안착·돌파) ⊕ 거래량 단계'를 프로토타입에 더한다.
+프로토타입에 '밀림 ⊕ 큰 거래량'으로 풀어 물으면 그런 일이 잦았던 가격칸이 떠오른다.
 
 실행: python -m volume.walls [--stock 045510.KQ]
 결과: docs/data/volume/<종목>/walls.json, traces/walls-*.json, docs/data/runs.json
@@ -98,7 +98,7 @@ def touch_vector(cb: WallCodebook, cell: int, outcome: str, level: int) -> np.nd
 
 
 def ask_walls(cb: WallCodebook, memory_vec: np.ndarray, outcome: str, level: int):
-    """이진판: 원형 ⊕ 결과 ⊕ 단계(unbinding) → 가격칸 벡터마다 해밍 유사도(cleanup)."""
+    """이진판: 이진 프로토타입 ⊕ 결과 ⊕ 단계 → 가격칸 벡터마다 해밍 유사도."""
     q = bind(bind(memory_vec, cb.outcomes[outcome]), cb.level(level))
     return q, {k: similarity(q, v) for k, v in cb.cells.items()}
 
@@ -108,7 +108,7 @@ def bipolar(v: np.ndarray) -> np.ndarray:
 
 
 def ask_walls_counter(cb: WallCodebook, counts: np.ndarray, outcome: str, level: int):
-    """누산기판(본 점수): 누산기에 결과·단계를 ±1로 곱해 풀고(unbinding), 가격칸 벡터(±1)마다 코사인.
+    """정수판(본 점수): 정수 프로토타입에 결과·단계를 ±1로 곱해 풀고, 가격칸 벡터(±1)마다 코사인.
     0/1의 XOR은 ±1의 곱과 같으므로 이진판과 같은 연산을 다수결 전 숫자에 한 것이다."""
     q = counts * bipolar(cb.outcomes[outcome]) * bipolar(cb.level(level))
     norm = float(np.sqrt((q.astype(np.float64) ** 2).sum())) * np.sqrt(len(q))
@@ -137,7 +137,7 @@ def fetch_daily(ticker: str):
 def analyze_window(t: Trace, cb_all, days, n: int, wc: dict, levels: int):
     width, ql = wc["cell_width"], wc["query_level"]
     win = [d for d in days if d["level"] is not None][-n:]
-    t.section(f"최근 {n}거래일", f"{win[0]['date']} - {win[-1]['date']}. 이 기간 일봉만으로 기억을 만들고 묻는다.")
+    t.section(f"최근 {n}거래일", f"{win[0]['date']} - {win[-1]['date']}. 이 기간 일봉만으로 프로토타입을 만들고 묻는다.")
 
     rows = [(d, k, o) for d in win for k, o in touches(d, width)]
     cells = sorted({k for _, k, _ in rows})
@@ -158,8 +158,8 @@ def analyze_window(t: Trace, cb_all, days, n: int, wc: dict, levels: int):
     ex_d, ex_k, ex_o = max((r for r in rows if r[2] == "밀림"), key=lambda r: r[0]["level"], default=rows[-1])
     cv, ov, lv = cb_all.cells[ex_k], cb_all.outcomes[ex_o], cb_all.level(ex_d["level"])
     tv = touch_vector(cb_all, ex_k, ex_o, ex_d["level"])
-    t.step("닿음 하나를 벡터 하나로 묶기 (binding)", "묶기", [
-        why("설계 선택", "닿음 하나 = 가격칸 ⊕ 결과 ⊕ 거래량 단계. 가격칸과 결과는 서로 무관한 벡터, 거래량 단계는 level hypervector다."),
+    t.step("닿음 하나를 벡터 하나로 묶기", "묶기", [
+        why("설계 선택", "닿음 하나 = 가격칸 ⊕ 결과 ⊕ 거래량 단계. 가격칸과 결과는 서로 무관한 벡터, 거래량 단계는 수준 벡터다."),
         why("수학적 사실", "두 재료 쌍의 다른 칸들이 서로 무관하게 퍼져 있으면, 묶은 벡터끼리의 유사도의 기댓값은 재료 유사도의 곱이다: "
                        "E[sim(a⊕b, c⊕d)] = sim(a, c) × sim(b, d). b = d면 정확히 sim(a, c)다."),
         why("이 데이터에서 관찰", "그래서 가격칸까지 수준 벡터로 만들면 가격칸이 다른 닿음끼리도 닮아 한 중심으로 뭉쳤다(2026-11-11 매물대 첫 시도). "
@@ -179,14 +179,14 @@ def analyze_window(t: Trace, cb_all, days, n: int, wc: dict, levels: int):
         mem.add(touch_vector(cb_all, k, o, d["level"]))
     mv = mem.to_vector()
     one_share = float(np.sqrt(2 / (np.pi * mem.n)))
-    t.step("닿음을 모두 기억에 더하기 (bundling)", "더하기", [
-        why("설계 선택", f"이 기간의 닿음 {mem.n}개를 누산기 하나에 더한다. 기간마다 기억을 따로 만든다."),
-        why("수학적 사실", f"서로 무관한 벡터 N개를 다수결로 묶으면, 그중 하나와 원형의 유사도는 약 √(2/(πN))다(N이 클 때의 근사). "
-                       f"N = {mem.n}이면 약 {one_share:.3f}로, 잡음 폭 {noise_level(cb_all.dim):.2f}과 비교된다. 이것이 용량(capacity)의 한계다."),
+    t.step("닿음을 모두 프로토타입에 더하기", "더하기", [
+        why("설계 선택", f"이 기간의 닿음 {mem.n}개를 정수 프로토타입 하나에 더한다. 기간마다 프로토타입을 따로 만든다."),
+        why("수학적 사실", f"서로 무관한 벡터 N개를 다수결로 묶으면, 그중 하나와 이진 프로토타입의 유사도는 약 √(2/(πN))다(N이 클 때의 근사). "
+                       f"N = {mem.n}이면 약 {one_share:.3f}로, 잡음 폭 {noise_level(cb_all.dim):.2f}과 비교된다. 이것이 용량의 한계다."),
     ], outputs=[{"type": "value", "name": "더한 닿음 수", "value": mem.n},
                 {"type": "value", "name": "하나의 몫(√(2/(πN)))", "value": round(one_share, 4)},
                 {"type": "value", "name": "동점(0) 칸 수", "value": mem.tie_count()},
-                vec_info("원형(다수결)", mv, full=True)],
+                vec_info("이진 프로토타입", mv, full=True)],
        check=check("더한 수 = 닿음 수", len(rows), mem.n),
        source=Memory.add)
 
@@ -214,23 +214,23 @@ def analyze_window(t: Trace, cb_all, days, n: int, wc: dict, levels: int):
         r["hdc_rank"] = i + 1
     for i, r in enumerate(cnt_order):
         r["count_rank"] = i + 1
-    t.step("기억에 '밀림 ⊕ 큰 거래량'으로 묻기 (unbinding + cleanup)", "비교", [
-        why("수학적 사실", f"누산기를 밀림 ⊕ {ql}단계로 풀면(±1 곱), 밀림으로 더했던 닿음들은 '가격칸 ⊕ (그날 단계와 {ql}단계의 차이)'로 남고 "
-                       "다른 결과로 더했던 닿음들은 기댓값 0인 잡음이 된다. 그래서 가격칸마다의 누산기 점수는 기댓값으로 "
+    t.step("프로토타입에 '밀림 ⊕ 큰 거래량'으로 묻기", "비교", [
+        why("수학적 사실", f"정수 프로토타입을 밀림 ⊕ {ql}단계로 풀면(±1 곱), 밀림으로 더했던 닿음들은 '가격칸 ⊕ (그날 단계와 {ql}단계의 차이)'로 남고 "
+                       "다른 결과로 더했던 닿음들은 기댓값 0인 잡음이 된다. 그래서 가격칸마다의 정수 점수는 기댓값으로 "
                        "'그 칸 밀린 날들의 단계 가까움 합'에 비례한다."),
         why("설계 선택", f"묻는 단계를 {ql}단계(가장 큰 쪽)로 둔 까닭: 수준 벡터 유사도가 (단계 - 1)에 비례하므로, "
                        "밀린 날 하나하나를 거래량 단계가 클수록 크게 센다. 1단계 날은 무게 0이다."),
-        why("설계 선택", f"단순 카운트 정답 = 그 칸에서 밀린 날마다 (1 - |단계 - {ql}| / {levels - 1})를 더한 값. 누산기 점수의 기댓값과 같은 꼴이다. "
+        why("설계 선택", f"단순 카운트 정답 = 그 칸에서 밀린 날마다 (1 - |단계 - {ql}| / {levels - 1})를 더한 값. 정수 점수의 기댓값과 같은 꼴이다. "
                        "다수결을 거친 이진 점수는 이 값의 비선형 함수라 순서가 조금 다를 수 있다."),
         why("수학적 사실", f"한 번도 밀린 적 없는 칸의 점수는 0 근처에서 약 {noise:.2f} 흔들린다(근사)."),
-        why("이 데이터에서 관찰", f"카운트와의 순위 상관: 누산기 점수 {rho:.2f}, 이진 점수 {rho_bin:.2f}."),
-    ], outputs=[{"type": "table", "name": "가격칸별 결과(누산기 점수 순)",
+        why("이 데이터에서 관찰", f"카운트와의 순위 상관: 정수 점수 {rho:.2f}, 이진 점수 {rho_bin:.2f}."),
+    ], outputs=[{"type": "table", "name": "가격칸별 결과(정수 점수 순)",
                  "columns": ["순위", "가격칸", "닿은 날", "밀린 날", "돌파한 날", "밀린 날 거래량 배율(중앙값)",
-                             "누산기 점수", "이진 점수", "카운트 정답", "카운트 순위", "밀린 날짜"],
+                             "정수 점수", "이진 점수", "카운트 정답", "카운트 순위", "밀린 날짜"],
                  "rows": [[r["hdc_rank"], r["label"], r["touch"], r["pushed"], r["broke"], r["vol_ratio_median"],
                            r["hdc"], r["hdc_bin"], r["count_weight"], r["count_rank"], r["dates"]] for r in hdc_order]},
                 {"type": "value", "name": "잡음 수준(1/√D)", "value": noise},
-                {"type": "value", "name": "누산기 점수와 카운트 순위 상관", "value": round(rho, 3)},
+                {"type": "value", "name": "정수 점수와 카운트 순위 상관", "value": round(rho, 3)},
                 {"type": "value", "name": "이진 점수와 카운트 순위 상관", "value": round(rho_bin, 3)}],
        check=check(f"HDC 상위 {top}칸과 카운트 상위 {top}칸이 겹치는 수", top, overlap),
        source=ask_walls_counter)
@@ -290,7 +290,7 @@ def run(stock_id: str):
         why("설계 선택", f"가격칸 k = [(1 + {width})^k, (1 + {width})^(k+1))원. 칸 폭은 어디서나 {width:.0%}이고, "
                        "기준이 고정이라 실행마다·종목마다 칸 경계가 같다. 예: 1,200원은 "
                        f"{cell_label(cell_of(1200, width), width)} 칸이다."),
-        why("설계 선택", f"가격칸마다 '가격칸:k' 이름에서 서로 무관한 벡터를, 결과({'·'.join(OUTCOMES)})마다 '결과:…' 벡터를 꺼낸다(item memory)."),
+        why("설계 선택", f"가격칸마다 '가격칸:k' 이름에서 서로 무관한 벡터를, 결과({'·'.join(OUTCOMES)})마다 '결과:…' 벡터를 꺼낸다."),
     ], outputs=[{"type": "value", "name": "쓰이는 가격칸 수", "value": len(all_cells)},
                 {"type": "value", "name": "가격칸 범위", "value": f"{cell_label(all_cells[0], width)} - {cell_label(all_cells[-1], width)}"},
                 vec_info(cell_name(ex), cb.cells[ex], full=True)]

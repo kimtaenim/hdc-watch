@@ -23,30 +23,20 @@
 </header>
 
 <main>
-  <section id="follow-wrap" class="panel">
-    <h2>한 건 따라가기</h2>
-    <p class="hint" id="follow-hint"></p>
-    <div class="follow-pick">
-      <select id="follow-select" aria-label="따라갈 봉"></select>
-      <div class="quick">
-        <button data-quick="worst">가장 드문 봉</button>
-        <button data-quick="best">가장 흔한 봉</button>
-        <button data-quick="latest">가장 최근 봉</button>
-      </div>
+  <section id="flow-wrap" class="panel">
+    <h2>톱니바퀴: 하루치 실제 자료가 지나가는 길</h2>
+    <div class="flow-pick">
+      <select id="pick-date" aria-label="날짜"></select>
+      <button id="pick-rare">가장 드문 봉이 있는 날</button>
     </div>
-    <div id="follow-stage" class="follow-stage"></div>
-    <div class="follow-nav">
-      <button id="follow-prev">이전</button>
-      <span id="follow-pos"></span>
-      <button id="follow-next">다음</button>
-    </div>
+    <ol id="flow" class="gears"></ol>
   </section>
 
-  <section class="panel">
-    <h2>톱니바퀴: 가장 최근 실행의 모든 단계</h2>
+  <details id="gears-wrap" class="panel">
+    <summary id="gears-title">전체 계산 기록</summary>
     <p class="hint" id="gears-meta"></p>
     <ol id="gears" class="gears"></ol>
-  </section>
+  </details>
 
   <section class="panel">
     <h2>운행 기록</h2>

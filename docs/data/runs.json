@@ -633,5 +633,36 @@
   },
   "failures": [],
   "trace": "data/volume/045510.KQ/traces/walls-20261111-214948.json"
+ },
+ {
+  "at": "2026-11-11T22:00:58+09:00",
+  "kind": "volume.walls",
+  "subject": "045510.KQ",
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/walls-20261111-220058.json"
+ },
+ {
+  "at": "2026-11-11T22:01:08+09:00",
+  "kind": "volume.train",
+  "subject": "045510.KQ",
+  "fetched": {
+   "시간봉": 744,
+   "일봉": 124
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/train-20261111-220108.json"
+ },
+ {
+  "at": "2026-11-11T22:01:09+09:00",
+  "kind": "volume.walls",
+  "subject": "045510.KQ",
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/walls-20261111-220109.json"
  }
 ]

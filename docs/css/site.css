@@ -130,3 +130,18 @@ th { position: sticky; top: 0; background: var(--card); }
 .bitrows td.dots { color: var(--muted); }
 .bitrows td.hl { color: #fff; background: var(--hl); border-radius: 3px; }
 .bitrows tr.result td, .bitrows tr.result th { border-top: 1px solid var(--ink); }
+
+/* 하루 흐름 */
+.flow-pick { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.flow-pick select { flex: 1 1 200px; }
+#gears-wrap > summary { cursor: pointer; font-weight: 700; }
+.why-box { margin-top: 4px; }
+.why-box > summary { cursor: pointer; color: var(--muted); font-size: .8rem; }
+.table-wrap.flat { max-height: none; border: 0; }
+.rowtable { font-size: .74rem; }
+.rowtable th, .rowtable td { text-align: right; padding: 2px 4px; }
+.rowtable thead th { font-weight: 400; color: var(--muted); }
+.rowtable tbody th { text-align: left; font-weight: 600; position: static; }
+.rowtable .sel { background: color-mix(in srgb, var(--hl) 18%, transparent); }
+.hour-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .85rem; margin: 6px 0 10px; }
+.hour-pick button.on { background: var(--hl); color: #fff; border-color: var(--hl); }

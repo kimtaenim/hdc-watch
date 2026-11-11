@@ -104,8 +104,6 @@ function renderGear(step, code) {
     el("span", { class: "gear-no" }, `${step.index}.`),
     el("span", { class: "gear-name" }, step.name),
     el("span", { class: "op" }, step.op)));
-  li.append(el("ul", { class: "why" }, step.why.map((w) =>
-    el("li", {}, el("span", { class: "kind", "data-k": w.kind }, w.kind), glossText(w.text)))));
 
   const all = [...(step.inputs || []).map((x) => ({ ...asObj(x), _in: true })), ...(step.outputs || []).map(asObj)];
   const values = all.filter((o) => o.type === "value");
@@ -139,6 +137,8 @@ function renderGear(step, code) {
     more.append(srcLink(step.source, code) || "");
   });
   li.append(more);
+  const w = whyBox(step);
+  if (w) li.append(w);
   return li;
 }
 const asObj = (x) => (typeof x === "object" && x ? x : { type: "value", name: "", value: x });
@@ -171,157 +171,132 @@ function renderRuns(runs) {
         : el("td", { class: i === 4 && v !== "없음" ? "fail" : "" }, v))))));
 }
 
-// ---------- 한 건 따라가기 (시간대 모델) ----------
-const F = { frames: [], i: 0, bars: [], cache: {} };
+// ---------- 톱니바퀴: 고른 날의 실제 자료가 단계마다 바뀌는 모습 ----------
+const F = { cache: {}, trace: null, model: null, raw: null, bars: [], date: null, hour: null };
 
-function stepOf(trace, op, nameHas = "") {
-  return trace.steps.find((s) => s.op === op && s.name.includes(nameHas)) || { why: [] };
+const r2 = (v, d) => (v == null ? "" : Number(v.toFixed(d)));
+const stepOf = (t, test) => t.steps.find(test) || { why: [] };
+function whyBox(step) {
+  if (!step?.why?.length) return null;
+  return el("details", { class: "why-box" }, el("summary", {}, "왜?"),
+    el("ul", { class: "why" }, step.why.map((w) => el("li", {}, el("span", { class: "kind", "data-k": w.kind }, w.kind), glossText(w.text)))));
 }
-function whyList(step) {
-  return el("ul", { class: "why" }, (step.why || []).map((w) => el("li", {}, el("span", { class: "kind", "data-k": w.kind }, w.kind), w.text)));
+function card(no, title, op, why, ...body) {
+  return el("li", { class: "gear", style: `--op-color: var(${OP_COLOR[op] || "--line"})` },
+    el("div", { class: "gear-head" }, el("span", { class: "gear-no" }, no), el("span", { class: "gear-name" }, title), el("span", { class: "op" }, op)),
+    ...body, whyBox(why));
 }
-
-async function setupFollow(trace, stockDir) {
-  const wrap = $("#follow-wrap");
-  if (trace.kind !== "volume.train") { wrap.hidden = true; return; }
-  wrap.hidden = false;
-  const scoreStep = trace.steps.find((s) => s.outputs.some((o) => o.name === "봉별 점수"));
-  const tbl = scoreStep.outputs.find((o) => o.name === "봉별 점수");
-  const col = Object.fromEntries(tbl.columns.map((c, i) => [c, i]));
-  F.bars = tbl.rows.map((r) => ({ date: r[col["날짜"]], wd: r[col["요일"]], hour: r[col["시간대"]], vol: r[col["거래량"]],
-    ratio: r[col["배율"]], level: r[col["단계"]], score: r[col["점수"]], scoreBin: r[col["이진 점수"]], rank: r[col["순위"]],
-    rankBin: r[col["이진 순위"]], verdict: r[col["판정"]] }));
-  F.model = await getJSON(`${stockDir}/model.json`);
-  F.trace = trace;
-  $("#follow-hint").replaceChildren(`봉 하나를 골라 HDC 연산을 한 칸씩 넘깁니다. 계산은 이 브라우저에서 같은 부품(hdc.js)으로 다시 하고, 마지막에 파이썬이 낸 점수와 맞춰 봅니다.`);
-  const sel = $("#follow-select");
-  const sorted = [...F.bars].sort((a, b) => (b.date + b.hour).localeCompare(a.date + a.hour));
-  sel.replaceChildren(...sorted.map((b) => el("option", { value: F.bars.indexOf(b) },
-    `${b.date}(${b.wd}) ${b.hour}시대 ${fmt(b.vol)}주, ${b.level}단계, ${b.rank}위 ${b.verdict}`)));
-  sel.onchange = () => buildFrames(F.bars[+sel.value]);
-  document.querySelectorAll("[data-quick]").forEach((btn) => (btn.onclick = () => {
-    const q = btn.dataset.quick;
-    const b = q === "worst" ? F.bars.find((x) => x.rank === 1) : q === "best" ? F.bars.reduce((a, x) => (x.rank > a.rank ? x : a))
-      : sorted[0];
-    sel.value = F.bars.indexOf(b);
-    buildFrames(b);
-  }));
-  $("#follow-prev").onclick = () => showFrame(F.i - 1);
-  $("#follow-next").onclick = () => showFrame(F.i + 1);
-  sel.value = F.bars.indexOf(F.bars.find((x) => x.rank === 1));
-  await buildFrames(F.bars[+sel.value]);
+// 가로로 놓는 작은 표: 첫 칸은 줄 이름
+function rowTable(head, rows, hlCol = null) {
+  return el("div", { class: "table-wrap flat" }, el("table", { class: "rowtable" },
+    el("thead", {}, el("tr", {}, el("th", {}, head[0]), head.slice(1).map((h, i) => el("th", { class: i === hlCol ? "sel" : "" }, h)))),
+    el("tbody", {}, rows.map((r) => el("tr", {}, el("th", {}, r[0]), r.slice(1).map((v, i) => el("td", { class: i === hlCol ? "sel" : "" }, fmt(v))))))));
 }
-
 async function cached(key, fn) {
   if (!(key in F.cache)) F.cache[key] = await fn();
   return F.cache[key];
 }
 
-async function buildFrames(bar) {
-  $("#follow-stage").replaceChildren(el("p", { class: "hint" }, "브라우저에서 벡터를 만드는 중..."));
-  const m = F.model, dim = m.dim, t = F.trace;
-  const dayV = await cached(`d${bar.wd}`, () => H.makeVector(`요일:${bar.wd}`, dim));
-  const hourV = await cached(`h${bar.hour}`, () => H.makeVector(`시간대:${bar.hour}`, dim));
-  const ladder = await cached("ladder", () => H.levelVectors(m.ladder, m.levels, dim));
-  const lv1 = ladder.vectors[0], lvk = ladder.vectors[bar.level - 1];
-  const flipped = new Uint8Array(dim);
-  for (let k = 0; k < bar.level - 1; k++) for (const p of ladder.flips[k]) flipped[p] = 1;
-  const ds = H.bind(dayV, hourV);
-  const barV = H.bind(ds, lvk);
-  // 기억에서 이 봉 자신을 뺀다(파이썬과 같은 조건)
-  const mem = H.Memory.fromJSON(m.memory);
-  mem.add(barV, -1);
-  const memV = await mem.toVector();
-  const diff = H.bind(barV, memV);
-  const d = H.ones(diff);
-  const simBin = H.similarity(barV, memV);
-  // 누산기 점수: 봉 벡터(0→-1, 1→+1)와 누산기의 코사인
-  let dot = 0, sq = 0;
-  for (let i = 0; i < dim; i++) { const c = mem.counts[i]; dot += (barV[i] ? 1 : -1) * c; sq += c * c; }
-  const sim = dot / (Math.sqrt(dim) * Math.sqrt(sq));
-  const th = m.thresholds;
-  const verdict = sim <= th.alert ? "이상" : sim <= th.watch ? "주의" : "평소";
-  const same = (a, b) => Math.abs(a - b) < 1e-4;
-  const genStep = stepOf(t, "벡터 생성"), flipStep = stepOf(t, "뒤집기"), bindStep = stepOf(t, "묶기"),
-    addStep = stepOf(t, "더하기"), cmpStep = stepOf(t, "비교"), judge = stepOf(t, "일반 계산", "판정");
-  const label = `${bar.date}(${bar.wd}) ${bar.hour}시대, ${fmt(bar.vol)}주, 그 시간대 중앙값의 ${fmt(bar.ratio)}배 → ${bar.level}단계`;
-
-  const memAfter = mem.counts;
-  const grids = (...boxes) => el("details", { class: "more" }, el("summary", {}, `${dim.toLocaleString("ko-KR")}칸 전체를 격자로 보기`),
-    el("div", { class: "grids" }, ...boxes));
-  F.frames = [
-    { title: "① 요일 벡터 꺼내기 (item memory)", op: "벡터 생성", why: genStep,
-      body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }], dim), grids(gridBox(`요일:${bar.wd}`, dayV))] },
-    { title: "② 시간대 벡터 꺼내기", op: "벡터 생성", why: genStep,
-      body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hourV }], dim),
-        el("div", { class: "values" }, el("span", { class: "chip" }, "두 줄이 다른 칸 ", el("b", {}, fmt(H.hamming(dayV, hourV)))),
-          el("span", { class: "chip" }, "유사도 ", el("b", {}, fmt(H.similarity(dayV, hourV))))),
-        grids(gridBox(`요일:${bar.wd}`, dayV), gridBox(`시간대:${bar.hour}`, hourV))] },
-    { title: `③ ${bar.level}단계 벡터 꺼내기 (level hypervector)`, op: "뒤집기", why: flipStep,
-      body: () => [bitRows([{ name: "1단계", bits: lv1 }, { name: `${bar.level}단계`, bits: lvk, mark: flipped }], dim),
-        el("div", { class: "values" }, el("span", { class: "chip" }, "1단계에서 뒤집힌 칸(주황) ", el("b", {}, fmt(H.ones(flipped)))),
-          el("span", { class: "chip" }, "1단계와의 유사도 ", el("b", {}, fmt(H.similarity(lv1, lvk))))),
-        grids(gridBox("1단계", lv1), gridBox(`${bar.level}단계`, lvk, "뒤집힌 칸 주황", flipped))] },
-    { title: "④ 묶기(binding): 요일 ⊕ 시간대", op: "묶기", why: bindStep,
-      body: () => [bitRows([{ name: "A 요일", bits: dayV }, { name: "B 시간대", bits: hourV }, { name: "A ⊕ B", bits: ds, line: true }], dim),
-        el("p", { class: "hint" }, "세로로 한 칸씩 보면: 위 두 숫자가 같으면 0, 다르면 1."),
-        el("div", { class: "values" }, el("span", { class: "chip" }, "결과와 A의 유사도 ", el("b", {}, fmt(H.similarity(ds, dayV)))),
-          el("span", { class: "chip" }, "결과와 B의 유사도 ", el("b", {}, fmt(H.similarity(ds, hourV))))),
-        grids(gridBox("A 요일", dayV), gridBox("B 시간대", hourV), gridBox("A ⊕ B", ds))] },
-    { title: "⑤ 묶기(binding): (요일 ⊕ 시간대) ⊕ 단계 = 봉 벡터", op: "묶기", why: bindStep,
-      body: () => [bitRows([{ name: "요일 ⊕ 시간대", bits: ds }, { name: `${bar.level}단계`, bits: lvk }, { name: "봉 벡터", bits: barV, line: true }], dim),
-        el("div", { class: "chip" }, "되돌려 보기: 봉 벡터 ⊕ (요일 ⊕ 시간대) = ", el("b", {},
-          H.hamming(H.bind(barV, ds), lvk) === 0 ? `${bar.level}단계 벡터와 모든 칸이 같음` : "다름")),
-        grids(gridBox("요일 ⊕ 시간대", ds), gridBox(`${bar.level}단계`, lvk), gridBox("봉 벡터", barV))] },
-    { title: "⑥ 기억 꺼내기: 누산기와 원형 (이 봉 자신은 뺀다)", op: "더하기", why: addStep,
-      body: () => [bitRows([{ name: "누산기", vals: memAfter }, { name: "원형(다수결)", bits: memV, line: true }], dim, 3, 3),
-        el("p", { class: "hint" }, `누산기 = 칸마다 ${fmt(mem.n)}개 봉의 합(1이면 +1, 0이면 -1). 원형 = 양수 칸 1, 음수 칸 0.`),
-        el("div", { class: "values" }, el("span", { class: "chip" }, "더해 둔 봉 ", el("b", {}, fmt(m.memory.n))),
-          el("span", { class: "chip" }, "이 봉을 뺀 뒤 ", el("b", {}, fmt(mem.n)))),
-        grids(gridBox("원형(다수결)", memV))] },
-    { title: "⑦ 비교: 누산기 점수(본 점수)와 이진 점수(비교용)", op: "비교", why: cmpStep,
-      body: () => [
-        el("div", { class: "tname" }, "누산기 점수: 봉 벡터 ±1 × 누산기, 칸마다 곱해 더함"),
-        bitRows([{ name: "봉 ±1", vals: Array.from(barV, (x) => (x ? 1 : -1)) }, { name: "누산기", vals: memAfter },
-          { name: "곱", vals: Array.from(barV, (x, i) => (x ? 1 : -1) * memAfter[i]), line: true }], dim, 3, 3),
-        el("div", { class: "values" },
-          el("span", { class: "chip" }, "곱의 합 ", el("b", {}, fmt(dot))),
-          el("span", { class: "chip" }, "코사인 = ", el("b", {}, fmt(sim)))),
-        el("div", { class: "tname" }, "이진 점수: 봉 벡터와 원형의 다른 칸"),
-        bitRows([{ name: "봉 벡터", bits: barV }, { name: "원형", bits: memV }, { name: "다른 칸", bits: diff, mark: diff, line: true }], dim, 4, 4),
-        el("div", { class: "values" },
-          el("span", { class: "chip" }, "다른 칸 ", el("b", {}, fmt(d))),
-          el("span", { class: "chip" }, "무관하면 약 ", el("b", {}, fmt(dim / 2))),
-          el("span", { class: "chip" }, `1 - 2 × ${d} / ${dim} = `, el("b", {}, fmt(simBin)))),
-        el("div", { class: "check" }, `확인(파이썬 / 브라우저): 누산기 점수 ${fmt(bar.score)} / ${fmt(Math.round(sim * 1e4) / 1e4)} `,
-          el("span", { class: same(sim, bar.score) ? "ok" : "bad" }, same(sim, bar.score) ? "일치" : "어긋남"),
-          `, 이진 점수 ${fmt(bar.scoreBin)} / ${fmt(Math.round(simBin * 1e4) / 1e4)} `,
-          el("span", { class: same(simBin, bar.scoreBin) ? "ok" : "bad" }, same(simBin, bar.scoreBin) ? "일치" : "어긋남")),
-        grids(gridBox("봉 벡터", barV), gridBox("원형", memV), gridBox("다른 칸(주황)", barV, "", diff))] },
-    { title: "⑧ 판정", op: "일반 계산", why: judge,
-      body: () => [el("div", { class: "values" },
-        el("span", { class: "chip" }, "점수 ", el("b", {}, fmt(sim))),
-        el("span", { class: "chip" }, "이상 경계 ", el("b", {}, fmt(th.alert))),
-        el("span", { class: "chip" }, "주의 경계 ", el("b", {}, fmt(th.watch))),
-        el("span", { class: "chip" }, "판정 ", el("b", {}, verdict)),
-        el("span", { class: "chip" }, `반년 ${F.bars.length}개 중 순위 `, el("b", {}, `${bar.rank}위`)),
-        el("span", { class: "chip" }, "이진 점수로는 ", el("b", {}, `${bar.rankBin}위`)))] },
-  ];
-  F.label = label;
-  showFrame(0);
+async function setupFlow(trace, stockDir) {
+  F.trace = trace;
+  F.model = await getJSON(`${stockDir}/model.json`);
+  F.raw = await getJSON(`${stockDir}/raw.json`);
+  const tbl = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "봉별 점수");
+  const c = Object.fromEntries(tbl.columns.map((k, i) => [k, i]));
+  F.bars = tbl.rows.map((r) => ({ date: r[c["날짜"]], wd: r[c["요일"]], hour: r[c["시간대"]], vol: r[c["거래량"]], ratio: r[c["배율"]],
+    level: r[c["단계"]], score: r[c["점수"]], scoreBin: r[c["이진 점수"]], rank: r[c["순위"]], verdict: r[c["판정"]] }));
+  const dates = [...new Set(F.bars.map((b) => b.date))].sort().reverse();
+  const rare = F.bars.find((b) => b.rank === 1);
+  const sel = $("#pick-date");
+  sel.replaceChildren(...dates.map((d) => {
+    const day = F.bars.filter((b) => b.date === d);
+    const worst = day.reduce((a, b) => (b.score < a.score ? b : a));
+    return el("option", { value: d }, `${d}(${day[0].wd}) ${worst.verdict === "평소" ? "" : `${worst.verdict} 있음`}`);
+  }));
+  sel.onchange = () => { F.date = sel.value; F.hour = null; drawFlow(); };
+  $("#pick-rare").onclick = () => { sel.value = rare.date; F.date = rare.date; F.hour = rare.hour; drawFlow(); };
+  F.date = dates[0];
+  sel.value = F.date;
+  await drawFlow();
 }
 
-function showFrame(i) {
-  F.i = Math.max(0, Math.min(F.frames.length - 1, i));
-  const f = F.frames[F.i];
-  $("#follow-stage").replaceChildren(
-    el("div", { class: "frame-step" }, F.label),
-    el("div", { class: "gear-head", style: `--op-color: var(${OP_COLOR[f.op]})` },
-      el("span", { class: "frame-title" }, f.title), el("span", { class: "op" }, f.op)),
-    whyList(f.why), ...f.body());
-  $("#follow-pos").textContent = `${F.i + 1} / ${F.frames.length}`;
-  $("#follow-prev").disabled = F.i === 0;
-  $("#follow-next").disabled = F.i === F.frames.length - 1;
+async function drawFlow() {
+  const m = F.model, t = F.trace, dim = m.dim;
+  const day = F.bars.filter((b) => b.date === F.date).sort((a, b) => a.hour - b.hour);
+  if (F.hour == null) F.hour = day.reduce((a, b) => (b.score < a.score ? b : a)).hour;
+  const bar = day.find((b) => b.hour === F.hour) || day[0];
+  const hours = m.sessions;
+  const hi = hours.indexOf(bar.hour);
+  const raw = Object.fromEntries(F.raw.hourly.filter((r) => r.date === F.date).map((r) => [r.hour, r]));
+  const ol = $("#flow");
+  ol.replaceChildren(el("li", { class: "hint" }, "벡터를 만드는 중..."));
+
+  const ladder = await cached("ladder", () => H.levelVectors(m.ladder, m.levels, dim));
+  const dayV = await cached(`d${bar.wd}`, () => H.makeVector(`요일:${bar.wd}`, dim));
+  const hv = {};
+  for (const h of hours) hv[h] = await cached(`h${h}`, () => H.makeVector(`시간대:${h}`, dim));
+  const full = H.Memory.fromJSON(m.memory);
+  // 그날 봉마다 브라우저에서 다시 채점(자기 제외)
+  const scoreOf = async (b) => {
+    const v = H.bind(H.bind(dayV, hv[b.hour]), ladder.vectors[b.level - 1]);
+    const mem = H.Memory.fromJSON(m.memory); mem.add(v, -1);
+    let dot = 0, sq = 0;
+    for (let i = 0; i < dim; i++) { const c = mem.counts[i]; dot += (v[i] ? 1 : -1) * c; sq += c * c; }
+    const proto = await mem.toVector();
+    return { v, mem, proto, dot, sim: dot / (Math.sqrt(dim) * Math.sqrt(sq)), simBin: H.similarity(v, proto) };
+  };
+  const res = {};
+  for (const b of day) res[b.hour] = await scoreOf(b);
+  const r = res[bar.hour];
+  const lv = ladder.vectors[bar.level - 1];
+  const ds = H.bind(dayV, hv[bar.hour]);
+  const diff = H.bind(r.v, r.proto);
+  const same = (a, b) => Math.abs(a - b) < 1e-4;
+  const allOk = day.every((b) => same(res[b.hour].sim, b.score) && same(res[b.hour].simBin, b.scoreBin));
+  const th = m.thresholds;
+  const S = (test) => stepOf(t, test);
+  const pick = el("div", { class: "hour-pick" }, "따라갈 시간: ", hours.map((h) => el("button", {
+    class: h === bar.hour ? "on" : "", onclick: () => { F.hour = h; drawFlow(); } }, `${h}시`)));
+
+  ol.replaceChildren(
+    card("①", "받은 자료 (시간봉)", "일반 계산", S((s) => s.name.startsWith("원자료")),
+      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
+        ["거래량", ...hours.map((h) => raw[h]?.volume)]], hi)),
+    card("②", "평소 거래량 (반년 중앙값)", "일반 계산", S((s) => s.name.includes("중앙값")),
+      rowTable(["시간", ...hours.map((h) => `${h}시`)], [["중앙값", ...hours.map((h) => Math.round(m.medians[h].median))]], hi)),
+    card("③", "평소의 몇 배 → 12단계", "일반 계산", S((s) => s.name.includes("단계 나누기")),
+      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
+        ["배율", ...day.map((b) => r2(b.ratio, 1))], ["단계", ...day.map((b) => b.level)]], hi)),
+    el("li", {}, pick),
+    card("④", `${bar.hour}시 봉의 재료 벡터 꺼내기`, "벡터 생성", S((s) => s.op === "벡터 생성"),
+      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hv[bar.hour] },
+        { name: `${bar.level}단계`, bits: lv }], dim)),
+    card("⑤", "묶기 (XOR)", "묶기", S((s) => s.op === "묶기"),
+      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hv[bar.hour] },
+        { name: "요일 ⊕ 시간대", bits: ds, line: true }], dim),
+      bitRows([{ name: "요일 ⊕ 시간대", bits: ds }, { name: `${bar.level}단계`, bits: lv },
+        { name: "봉 벡터", bits: r.v, line: true }], dim)),
+    card("⑥", `프로토타입 (${fmt(r.mem.n)}개 봉의 합, 이 봉 제외)`, "더하기", S((s) => s.op === "더하기"),
+      bitRows([{ name: "정수 프로토타입", vals: r.mem.counts }, { name: "이진 프로토타입", bits: r.proto, line: true }], dim, 3, 3)),
+    card("⑦", "비교 → 점수", "비교", S((s) => s.op === "비교"),
+      bitRows([{ name: "봉 ±1", vals: Array.from(r.v, (x) => (x ? 1 : -1)) }, { name: "정수 프로토타입", vals: r.mem.counts },
+        { name: "곱", vals: Array.from(r.v, (x, i) => (x ? 1 : -1) * r.mem.counts[i]), line: true }], dim, 3, 3),
+      el("div", { class: "values" }, el("span", { class: "chip" }, "곱의 합 ", el("b", {}, fmt(r.dot))),
+        el("span", { class: "chip" }, "정수 점수(코사인) ", el("b", {}, fmt(r.sim)))),
+      bitRows([{ name: "봉 벡터", bits: r.v }, { name: "이진 프로토타입", bits: r.proto },
+        { name: "다른 칸", bits: diff, mark: diff, line: true }], dim),
+      el("div", { class: "values" }, el("span", { class: "chip" }, "다른 칸 ", el("b", {}, fmt(H.ones(diff)))),
+        el("span", { class: "chip" }, "이진 점수 ", el("b", {}, fmt(r.simBin))))),
+    card("⑧", "그날의 점수와 판정", "일반 계산", S((s) => s.name.startsWith("판정")),
+      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
+        ["정수 점수", ...day.map((b) => r2(res[b.hour].sim, 3))], ["이진 점수", ...day.map((b) => r2(res[b.hour].simBin, 3))],
+        ["판정", ...day.map((b) => b.verdict)], ["순위", ...day.map((b) => b.rank)]], hi),
+      el("p", { class: "hint" }, `순위는 반년 ${F.bars.length}개 봉 중 정수 점수가 낮은 순.`),
+      el("div", { class: "values" }, el("span", { class: "chip" }, "이상 경계 ", el("b", {}, fmt(th.alert))),
+        el("span", { class: "chip" }, "주의 경계 ", el("b", {}, fmt(th.watch)))),
+      el("div", { class: "check" }, "파이썬 계산과 이 브라우저 계산(그날 5개 봉, 두 점수) ",
+        el("span", { class: allOk ? "ok" : "bad" }, allOk ? "모두 일치" : "어긋남 있음"))),
+  );
 }
 
 // ---------- 문자판 ----------
@@ -348,8 +323,12 @@ async function show() {
   await renderDial(stock, trainTrace);
   if (!run) { $("#gears").replaceChildren(el("li", {}, "아직 실행 기록이 없습니다.")); return; }
   const trace = run === trainRun ? trainTrace : await getJSON(run.trace);
+  const isTrain = kind === "volume.train";
+  $("#flow-wrap").hidden = !isTrain;
+  $("#gears-title").textContent = isTrain ? "전체 계산 기록 (가장 최근 실행, 숫자 전체와 소스)" : "단계별 실제 자료 (가장 최근 실행)";
+  $("#gears-wrap").open = !isTrain;
+  if (isTrain) await setupFlow(trace, `data/volume/${stock}`);
   renderGears(trace, run.trace);
-  await setupFollow(trace, `data/volume/${stock}`);
 }
 
 async function main() {

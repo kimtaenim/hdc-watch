@@ -1,4 +1,4 @@
-"""거래량 원자료 받기와 하루 봉 만들기, 단계 나누기.
+"""거래량 원자료 받기와 하루 봉 만들기(10-14시대), 단계 나누기.
 
 HDC 연산은 없다. 숫자를 HDC가 다룰 수 있는 이름표(요일, 시간대, 단계)로 바꾸는 앞단이다.
 """
@@ -42,12 +42,6 @@ def complete_days(hourly, daily, now: dt.datetime, close_hour: int = 16):
     return [d for d in days if d < today or (d == today and now.astimezone(KST).hour >= close_hour)]
 
 
-def after_break(day: str, days) -> bool:
-    """day가 쉬는 날(주말, 휴일) 바로 다음 거래일인가: 전날이 거래일 목록에 없으면 참."""
-    prev = (dt.date.fromisoformat(day) - dt.timedelta(days=1)).isoformat()
-    return prev not in days
-
-
 def window(days, end: str, months: int):
     """end를 포함해 거슬러 months개월 사이의 날짜. (end - months개월) 당일은 빼고 그 다음 날부터."""
     e = dt.date.fromisoformat(end)
@@ -58,49 +52,23 @@ def window(days, end: str, months: int):
     return [d for d in days if start.isoformat() < d <= end], start.isoformat()
 
 
-def build_bars(hourly, daily, dates, sessions, derived_session, zero_is_missing=(), hourly_sessions=None):
-    """날짜마다 봉을 만든다. 시간봉 시간대는 그대로, 15시대는 '일별 - 시간봉 합'으로 역산.
-
-    sessions: 봉으로 만들 시간대들. hourly_sessions: 역산에서 빼는 시간봉 시간대들(없으면 sessions에서 역산 시간대를 뺀 것).
-      봉으로 만들지 않는 시간대(예: 9시대)도 역산할 때는 빼야, 그 거래량이 역산 봉에 섞이지 않는다.
-    zero_is_missing: 거래량 0을 자료 누락으로 보는 시간대들. 그 봉과 그날 역산 봉을 결측으로 둔다.
-      (야후 시간봉은 쉬는 날 다음 첫 거래일의 9시대를 0으로 내는데, 같은 날 30분봉·5분봉에는 거래가 있다.
-       빠진 거래량은 일별에는 들어 있어 역산 봉을 부풀린다.)
-
-    봉: {"date", "weekday", "hour", "volume"(없으면 None), "source": "시간봉"|"역산", "missing": 이유 또는 None}
-    """
-    by_key = {(r["date"], r["hour"]): r["volume"] for r in hourly}
-    regular = hourly_sessions or [s for s in sessions if s != derived_session]
-    bars, problems = [], []
+def build_bars(hourly, dates, sessions):
+    """날짜마다 정해진 시간대의 시간봉을 봉으로 만든다.
+    봉: {"date", "weekday", "hour", "volume"(없으면 None), "missing": 이유 또는 None}
+    (9시대는 야후 시간봉이 쉬는 날 다음 거래일마다 0으로 나와 쓰지 않는다. 15시대는 시간봉이 없고,
+     일별 거래량에서 역산하면 9시대 누락이 섞여 정확하지 않아 쓰지 않는다. 2026-11-11 의장님 결정.)"""
+    by_key = {(r["date"], r["hour"]): r for r in hourly}
+    bars = []
     for d in dates:
         wd = WEEKDAYS[dt.date.fromisoformat(d).weekday()]
-        vols = [by_key.get((d, s)) for s in regular]
-        zeroed = [s for s, v in zip(regular, vols) if v == 0 and s in zero_is_missing]
-        for s, v in zip(regular, vols):
-            if s not in sessions:
-                continue  # 역산에만 쓰고 봉으로는 만들지 않는 시간대
-            miss = "시간봉 없음" if v is None else (f"{s}시대 0주: 시간봉 누락으로 봄" if s in zeroed else None)
-            bars.append({"date": d, "weekday": wd, "hour": s, "volume": v, "source": "시간봉", "missing": miss})
-        for s in zeroed:
-            problems.append({"date": d, "reason": f"{s}시대 시간봉 0주(누락으로 봄)"})
-        reason, derived = None, None
-        if any(v is None for v in vols):
-            reason = f"시간봉 {len(regular)}개가 다 있지 않아 역산 불가"
-        elif zeroed:
-            reason = f"{zeroed[0]}시대 시간봉 누락: 빠진 거래량이 역산값에 섞임"
-        elif d not in daily:
-            reason = "일별 거래량 없음"
-        else:
-            derived = daily[d] - sum(vols)
-            if derived < 0:
-                reason = f"역산값이 음수({derived:,}): 시간봉 합 {sum(vols):,} > 일별 {daily[d]:,}"
-                derived = None
-        if reason:
-            problems.append({"date": d, "reason": reason})
-        bars.append({"date": d, "weekday": wd, "hour": derived_session, "volume": derived, "source": "역산",
-                     "daily": daily.get(d), "hourly_sum": sum(v for v in vols if v is not None),
-                     "missing": reason})
-    return bars, problems
+        for s in sessions:
+            r = by_key.get((d, s))
+            bar = {"date": d, "weekday": wd, "hour": s, "volume": r["volume"] if r else None,
+                   "missing": None if r else "시간봉 없음"}
+            if r and "close" in r:
+                bar["ohlc"] = [r["open"], r["high"], r["low"], r["close"]]
+            bars.append(bar)
+    return bars
 
 
 def session_medians(bars, sessions):

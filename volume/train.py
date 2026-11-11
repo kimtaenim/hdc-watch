@@ -1,4 +1,4 @@
-"""거래량 모델 학습: 최근 반년 봉을 모두 더해 기억을 만들고, 그 반년을 다시 채점한다.
+"""거래량 모델 학습: 최근 반년 봉을 모두 더해 프로토타입을 만들고, 그 반년을 다시 채점한다.
 
 실행: python -m volume.train [--stock 045510.KQ] [--end YYYY-MM-DD] [--raw 저장된원자료.json]
 결과: docs/data/volume/<종목>/model.json, bars.json, raw.json, traces/train-*.json, docs/data/runs.json
@@ -46,7 +46,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     cfg = json.load(open(CONFIG, encoding="utf-8"))
     stock = next(s for s in cfg["stocks"] if s["id"] == stock_id)
     vc = cfg["volume"]
-    sessions, levels, dsess = vc["sessions"], vc["levels"], vc["derived_session"]
+    sessions, levels = vc["sessions"], vc["levels"]
     now = dt.datetime.now(data.KST)
     stamp = now.strftime("%Y%m%d-%H%M%S")
     out = stock_dir(stock_id)
@@ -90,41 +90,20 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                 {"type": "value", "name": "받은 시각", "value": fetched_at}],
        source=data.fetch)
 
-    # ② 하루 봉 만들기 (15시대 역산)
-    zero_missing = vc.get("zero_is_missing_sessions", [])
-    hsess = vc.get("hourly_sessions") or [s for s in sessions if s != dsess]
-    regular_s = [s for s in sessions if s != dsess]
-    span = f"{regular_s[0]}-{regular_s[-1]}시대"
-    hspan = f"{hsess[0]}-{hsess[-1]}시대"
-    skipped = [s for s in hsess if s not in sessions]
-    bars, problems = data.build_bars(hourly, daily, dates, sessions, dsess, zero_missing, hsess)
-    derived = [b for b in bars if b["source"] == "역산"]
-    ok = [b for b in derived if b["missing"] is None]
-    sums_ok = sum(1 for b in ok if b["volume"] + b["hourly_sum"] == b["daily"])
-    for p in problems:
-        t.failure("봉 만들기", f"{p['date']}: {p['reason']}")
-    zero_days = sorted({p["date"] for p in problems if "0주" in p["reason"]})
-    n_zero = len(zero_days)
-    after_break = sum(1 for d in zero_days if data.after_break(d, days))
-    n_neg = sum(1 for b in derived if b["missing"] and "음수" in b["missing"])
+    # ② 하루 봉 만들기
+    bars = data.build_bars(hourly, dates, sessions)
+    span = f"{sessions[0]}-{sessions[-1]}시대"
+    for b in bars:
+        if b["missing"]:
+            t.failure("봉 만들기", f"{b['date']} {b['hour']}시대: {b['missing']}")
     t.step(f"하루 {len(sessions)}개 봉 만들기", "일반 계산", [
-        why("설계 선택", f"{span} {len(regular_s)}개는 시간봉 그대로 쓰고, {dsess}시대(마감 동시호가) 봉은 시간봉에 없어 "
-                       f"'일별 거래량 - {hspan} 시간봉 {len(hsess)}개 합'으로 역산한다. 역산값이 음수면 그 봉은 결측으로 둔다."),
-        why("설계 선택", f"{', '.join(map(str, skipped))}시대는 봉으로 만들지 않는다(2026-11-11 의장님 결정). "
-                       "다만 역산할 때는 빼야 그 거래량이 역산 봉에 섞이지 않는다.") if skipped else
-        why("설계 선택", "모든 시간봉 시간대를 봉으로 만든다."),
-        why("이 데이터에서 관찰",
-            f"{len(dates)}일 중 {n_zero}일은 {', '.join(map(str, zero_missing))}시대 시간봉이 0주였다. 그중 {after_break}일이 쉬는 날 바로 다음 거래일이고, "
-            "같은 날 30분봉·5분봉에는 9시대 거래가 있다(2026-11-11 최근 60일 대조). 그래서 그날 역산 봉을 결측으로 둔다."),
-        why("이 데이터에서 관찰",
-            f"{n_neg}일은 시간봉 {len(hsess)}개 합이 일별 거래량보다 커서 역산할 수 없었다. 원인은 확인하지 못했다."),
+        why("설계 선택", f"{span} 시간봉 {len(sessions)}개를 그대로 쓴다. 9시대는 야후 시간봉이 쉬는 날 다음 거래일마다 0으로 나와 빼고, "
+                       "15시대(마감 동시호가)는 시간봉이 없어 뺀다(2026-11-11 결정)."),
     ], outputs=[{"type": "value", "name": "만든 봉", "value": len(bars)},
-                {"type": "value", "name": f"역산한 {dsess}시대 봉", "value": len(ok)},
-                {"type": "table", "name": "결측으로 둔 봉", "columns": ["날짜", "시간대", "이유"],
-                 "rows": [[b["date"], b["hour"], b["missing"]] for b in bars if b["missing"]]},
-                {"type": "table", "name": "역산 예시(최근 5일)", "columns": ["날짜", "일별", f"시간봉 {len(hsess)}개 합", "역산"],
-                 "rows": [[b["date"], b["daily"], b["hourly_sum"], b["volume"]] for b in ok[-5:]]}],
-       check=check(f"역산 {dsess}시대 + 시간봉 {len(hsess)}개 = 일별 거래량인 날 수", len(ok), sums_ok),
+                {"type": "value", "name": "빠진 봉", "value": sum(1 for b in bars if b["missing"])},
+                {"type": "table", "name": "최근 하루", "columns": ["날짜", "요일", "시간대", "거래량"],
+                 "rows": [[b["date"], b["weekday"], b["hour"], b["volume"]] for b in bars[-len(sessions):]]}],
+       check=check("만든 봉 수 = 거래일 수 × 시간대 수", len(dates) * len(sessions), len(bars)),
        source=data.build_bars)
 
     # ③ 시간대 중앙값
@@ -139,31 +118,29 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     # ④ 단계 나누기
     edges = 2.0 ** np.array(vc["ratio_edge_exponents"], dtype=float)
     data.assign_levels(bars, meds, edges)
-    regular = [b["level"] for b in bars if b["hour"] != dsess and b["level"]]
-    last = [b["level"] for b in bars if b["hour"] == dsess and b["level"]]
+    regular = [b["level"] for b in bars if b["level"]]
     dist_reg = np.bincount(regular, minlength=levels + 1)[1:].tolist()
-    dist_last = np.bincount(last, minlength=levels + 1)[1:].tolist()
     bounds_txt = ["0"] + [f"{e:g}" for e in edges] + ["∞"]
     t.step("거래량 단계 나누기", "일반 계산", [
         why("설계 선택", f"배율의 경계를 2의 {vc['ratio_edge_exponents'][0]}제곱부터 {vc['ratio_edge_exponents'][-1]}제곱까지 2배 간격으로 두어 "
                        f"{levels}단계로 나눈다. 6단계가 평소(1배-2배)다. 경계값은 위 단계에 넣는다."),
         why("설계 선택", "2배 간격은 '평소의 2배'와 '평소의 4배'를 같은 거리로 본다는 뜻이다(로그 눈금)."),
     ], outputs=[{"type": "table", "name": "단계별 배율 구간과 봉 수",
-                 "columns": ["단계", "배율 구간", f"{span} 봉", f"{dsess}시대 봉"],
-                 "rows": [[k + 1, f"{bounds_txt[k]} - {bounds_txt[k + 1]}", dist_reg[k], dist_last[k]]
+                 "columns": ["단계", "배율 구간", "봉 수"],
+                 "rows": [[k + 1, f"{bounds_txt[k]} - {bounds_txt[k + 1]}", dist_reg[k]]
                           for k in range(levels)]}],
-       check=check(f"{span} 봉 수 = 단계별 봉 수 합", sum(1 for b in bars if b["hour"] != dsess and b["level"]),
+       check=check("봉 수 = 단계별 봉 수 합", sum(1 for b in bars if b["level"]),
                    sum(dist_reg)),
        source=data.level_of)
 
-    # ⑤ 기본 벡터 꺼내기 (item memory)
-    t.section("시간대 모델", "Binary Spatter Code. 봉 하나 = 요일 ⊕ 시간대 ⊕ 거래량 단계(binding). "
-                         "기억 = 봉들의 bundling. '이 요일·시간대에 이 거래량이 흔했나'를 묻는 원형 기반 이상탐지.")
+    # ⑤ 기본 벡터 꺼내기
+    t.section("시간대 모델", "바이너리 스패터 코드. 봉 하나 = 요일 ⊕ 시간대 ⊕ 거래량 단계. "
+                         "프로토타입 = 봉 벡터들을 더한 것. '이 요일·시간대에 이 거래량이 흔했나'를 묻는 프로토타입 기반 이상탐지.")
     cb = model.Codebook(sessions, levels, D)
     base = list(cb.days.values()) + list(cb.sessions.values())
     sims_ds = [similarity(x, y) for i, x in enumerate(base) for j, y in enumerate(base) if i < j]
     n_base, n_pairs = len(base), len(sims_ds)
-    t.step(f"요일 벡터 {len(cb.days)}개, 시간대 벡터 {len(cb.sessions)}개 꺼내기 (item memory)", "벡터 생성", [
+    t.step(f"요일 벡터 {len(cb.days)}개, 시간대 벡터 {len(cb.sessions)}개 꺼내기", "벡터 생성", [
         why("설계 선택", "요일과 시간대는 이름의 SHA-256에서 만든 서로 무관한 벡터다. 월요일과 화요일이 가깝다는 식의 순서 정보는 넣지 않았다."),
         why("수학적 사실", f"무작위 벡터 두 개의 유사도는 평균 0, 표준편차 1/√D = {noise_level(D):.2f}인 분포를 따른다(근사). "
                        "SHA-256 출력을 무작위로 볼 수 있다는 것은 증명된 정리가 아니라 널리 받아들이는 가정이다."),
@@ -176,9 +153,9 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
        source=model.Codebook)
 
     lv_sims = [round(similarity(cb.level(1), cb.level(k)), 4) for k in range(1, levels + 1)]
-    t.step(f"수준 벡터 {levels}단계 만들기 (level hypervectors)", "뒤집기", [
+    t.step(f"수준 벡터 {levels}단계 만들기", "뒤집기", [
         why("설계 선택", f"1단계는 '{model.LADDER_NAME}'에서 꺼낸 벡터. 한 단계 오를 때마다 아직 안 뒤집은 칸을 약 {D // 2 // (levels - 1)}개씩 뒤집는다. "
-                       "HDC 문헌의 level hypervector와 같은 방식이다."),
+                       "HDC 문헌의 수준 벡터와 같은 방식이다."),
         why("수학적 사실", f"뒤집은 칸이 겹치지 않으므로 두 단계의 해밍 거리는 그 사이에 뒤집은 칸 수와 정확히 같다. "
                        f"그래서 유사도는 단계 차이에 따라 일정하게 줄고, 1단계와 {levels}단계는 정확히 절반이 달라 유사도 0이다."),
     ], outputs=[vec_info(f"{k}단계", cb.level(k), full=True) for k in range(1, levels + 1)]
@@ -220,13 +197,13 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     ds = bind(dv, sv)
     bv = bind(ds, lv)
     back = nearest(bind(bv, ds), {f"{k}단계": cb.level(k) for k in range(1, levels + 1)})
-    t.step("봉 하나를 벡터 하나로 묶기 (binding)", "묶기", [
-        why("설계 선택", "봉 하나 = 요일 ⊕ 시간대 ⊕ 단계. 세 벡터를 XOR로 묶어 1만 비트 하나로 만든다(역할 셋을 한 레코드로 묶는 binding)."),
+    t.step("봉 하나를 벡터 하나로 묶기", "묶기", [
+        why("설계 선택", "봉 하나 = 요일 ⊕ 시간대 ⊕ 단계. 세 벡터를 XOR로 묶어 1만 비트 하나로 만든다."),
         why("수학적 사실", "XOR로 묶은 벡터는 무작위 재료와 무관해진다(유사도 0 근처). 같은 열쇠(요일 ⊕ 시간대)로 묶은 두 봉의 해밍 거리는 "
                        "두 단계 벡터의 해밍 거리와 정확히 같다. 그래서 같은 요일·시간대 안에서는 단계끼리 닮은 만큼만 닮는다."),
-        why("수학적 사실", "묶은 벡터를 (요일 ⊕ 시간대)로 다시 XOR하면(unbinding) 단계 벡터가 그대로 나온다."),
+        why("수학적 사실", "묶은 벡터를 (요일 ⊕ 시간대)로 다시 XOR하면 단계 벡터가 그대로 나온다."),
         why("수학적 사실", "요일 ⊕ 시간대 열쇠들은 쌍마다 거의 무관하지만 서로 독립은 아니다. 예: (월 ⊕ 10시) ⊕ (월 ⊕ 11시) ⊕ (화 ⊕ 10시) = 화 ⊕ 11시. "
-                       "그래서 다른 칸 봉들이 섞어 넣는 잡음(crosstalk)은 무작위가 아니라 구조를 가진다."),
+                       "그래서 다른 칸 봉들이 섞어 넣는 잡음은 무작위가 아니라 구조를 가진다."),
     ], inputs=[{"type": "value", "name": "예시 봉(가장 드문 봉)",
                 "value": f"{ex['date']} ({ex['weekday']}) {ex['hour']}시대 {ex['volume']:,}주, 중앙값의 {ex['ratio']:.2f}배, {ex['level']}단계"},
                vec_info(model.day_name(ex["weekday"]), dv, full=True),
@@ -244,25 +221,25 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     nonempty = [n for n in ctx.values() if n]
     loo_ties = float(np.mean([int((model.without(mem, v).counts == 0).sum()) for v in vecs]))
     hist_counts = np.bincount(np.abs(mem.counts))
-    t.step("모든 봉을 기억에 더하기 (bundling)", "더하기", [
-        why("설계 선택", f"학습 기간의 봉 {mem.n}개(결측 제외)를 칸마다 +1/-1로 누적한다. 이 누산기(accumulator)가 기억이다. "
-                       "다수결로 0/1을 정하면 원형(prototype) 벡터가 된다."),
-        why("수학적 사실", "기억(누산기)은 새 봉의 +1/-1을 더하기만 하면 갱신되고, 더하는 순서와 무관하다. "
+    t.step("모든 봉을 프로토타입에 더하기", "더하기", [
+        why("설계 선택", f"학습 기간의 봉 {mem.n}개(결측 제외)를 칸마다 +1/-1로 누적한다. 이것이 정수 프로토타입이다. "
+                       "다수결로 0/1을 정하면 이진 프로토타입이 된다."),
+        why("수학적 사실", "정수 프로토타입은 새 봉의 +1/-1을 더하기만 하면 갱신되고, 더하는 순서와 무관하다. "
                        "다만 중앙값, 단계 경계, 판정 기준은 자료가 늘면 다시 계산해야 한다."),
-        why("설계 선택", "다수결에서 0:0으로 비긴 칸은 고정된 동점깨기 벡터를 따른다. 모든 원형이 이 벡터 쪽으로 조금 치우치는 대가가 있다."),
+        why("설계 선택", "다수결에서 0:0으로 비긴 칸은 고정된 동점깨기 벡터를 따른다. 모든 이진 프로토타입이 이 벡터 쪽으로 조금 치우치는 대가가 있다."),
         why("이 데이터에서 관찰", f"요일·시간대 칸마다 봉 수는 {min(nonempty)}-{max(nonempty)}개다. "
                                + (f"{', '.join(empty)}에는 봉이 하나도 없다(월요일은 늘 주말 다음 날이라 9시대 시간봉이 0으로 나오고, 그날 15시대 역산 봉을 결측으로 두기 때문이다). "
                                   "이 칸의 새 봉은 비교할 같은 칸 봉이 없다." if empty else "")),
     ], inputs=[{"type": "value", "name": "더한 봉 수", "value": mem.n}],
-       outputs=[{"type": "value", "name": "누산기 범위", "value": [int(mem.counts.min()), int(mem.counts.max())]},
-                {"type": "value", "name": "모든 봉이 같은 값이던 칸 수(|누산기| = 봉 수)", "value": int((np.abs(mem.counts) == mem.n).sum())},
-                {"type": "table", "name": "누산기 절댓값 분포", "columns": ["|누산기|", "칸 수"],
+       outputs=[{"type": "value", "name": "정수 프로토타입 범위", "value": [int(mem.counts.min()), int(mem.counts.max())]},
+                {"type": "value", "name": "모든 봉이 같은 값이던 칸 수(|정수 프로토타입| = 봉 수)", "value": int((np.abs(mem.counts) == mem.n).sum())},
+                {"type": "table", "name": "정수 프로토타입 절댓값 분포", "columns": ["|정수 프로토타입|", "칸 수"],
                  "rows": [[i, int(c)] for i, c in enumerate(hist_counts) if c]},
-                {"type": "value", "name": "전체 기억의 동점(0) 칸 수", "value": mem.tie_count()},
-                {"type": "value", "name": "자기 제외 기억의 동점 칸 수(평균)", "value": round(loo_ties, 1)},
+                {"type": "value", "name": "전체 프로토타입의 동점(0) 칸 수", "value": mem.tie_count()},
+                {"type": "value", "name": "자기 제외 프로토타입의 동점 칸 수(평균)", "value": round(loo_ties, 1)},
                 {"type": "table", "name": "요일·시간대 칸별 봉 수", "columns": ["요일"] + [f"{h}시대" for h in sessions],
                  "rows": [[w] + [ctx[(w, h)] for h in sessions] for w in "월화수목금"]},
-                vec_info("원형(다수결)", mv, full=True)],
+                vec_info("이진 프로토타입", mv, full=True)],
        check=check("더한 봉 수 = 결측 아닌 봉 수", len(used), mem.n),
        source=model.train)
 
@@ -270,26 +247,26 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     rho_c = model.spearman(scores, [b["count_sum"] for b in used])
     rho_b = model.spearman(bins, [b["count_sum"] for b in used])
     rho_cb = model.spearman(scores, bins)
-    t.step("반년을 다시 채점하기: 누산기 점수와 이진 점수", "비교", [
-        why("설계 선택", "본 점수 = 봉 벡터(0→-1, 1→+1)와 누산기의 코사인. 비교용 점수 = 봉 벡터와 0/1 원형의 해밍 유사도(BSC 원형 그대로). "
-                       "둘 다 그 봉 자신을 누산기에서 뺀 뒤 잰다."),
-        why("수학적 사실", "봉 벡터를 무작위로 뽑는다고 보면, 누산기 점수의 기댓값은 같은 요일·시간대 다른 봉들의 '단계 가까움' 합에 비례한다. "
+    t.step("반년을 다시 채점하기: 정수 점수와 이진 점수", "비교", [
+        why("설계 선택", "본 점수 = 봉 벡터(0→-1, 1→+1)와 정수 프로토타입의 코사인. 비교용 점수 = 봉 벡터와 이진 프로토타입의 해밍 유사도(바이너리 스패터 코드 본래 방식). "
+                       "둘 다 그 봉 자신을 정수 프로토타입에서 뺀 뒤 잰다."),
+        why("수학적 사실", "봉 벡터를 무작위로 뽑는다고 보면, 정수 점수의 기댓값은 같은 요일·시간대 다른 봉들의 '단계 가까움' 합에 비례한다. "
                        "다수결을 거친 이진 점수는 이 합의 비선형 함수라 순서가 달라진다."),
-        why("이 데이터에서 관찰", f"단순 카운트(가까움 합)와의 순위 상관: 누산기 점수 {rho_c:.2f}, 이진 점수 {rho_b:.2f}. "
+        why("이 데이터에서 관찰", f"단순 카운트(가까움 합)와의 순위 상관: 정수 점수 {rho_c:.2f}, 이진 점수 {rho_b:.2f}. "
                                f"두 점수끼리의 순위 상관은 {rho_cb:.2f}다. 다수결에서 잃는 정보가 크다."),
-        why("수학적 사실", f"점수에 섞이는 잡음(crosstalk)의 크기는 약 1/√D = {noise:.3f}(근사)다. 이 잡음은 실행마다 바뀌지 않는다. "
+        why("수학적 사실", f"점수에 섞이는 잡음의 크기는 약 1/√D = {noise:.3f}(근사)다. 이 잡음은 실행마다 바뀌지 않는다. "
                        "벡터 이름이 정해지면 고정되는 치우침이라, 같은 조합은 늘 같은 방향으로 틀린다."),
-    ], outputs=[{"type": "table", "name": "누산기 점수 분포", "columns": ["구간 시작", "봉 수"], "rows": histogram(scores)},
-                {"type": "value", "name": "누산기 점수와 카운트 순위 상관", "value": round(rho_c, 3)},
+    ], outputs=[{"type": "table", "name": "정수 점수 분포", "columns": ["구간 시작", "봉 수"], "rows": histogram(scores)},
+                {"type": "value", "name": "정수 점수와 카운트 순위 상관", "value": round(rho_c, 3)},
                 {"type": "value", "name": "이진 점수와 카운트 순위 상관", "value": round(rho_b, 3)},
                 {"type": "value", "name": "두 점수의 순위 상관", "value": round(rho_cb, 3)},
                 {"type": "table", "name": "봉별 점수",
-                 "columns": ["날짜", "요일", "시간대", "거래량", "출처", "배율", "단계", "점수", "이진 점수",
+                 "columns": ["날짜", "요일", "시간대", "거래량", "배율", "단계", "점수", "이진 점수",
                              "카운트 가까움 합", "같은 단계 수", "같은 칸 봉 수", "순위", "이진 순위", "판정"],
-                 "rows": [[b["date"], b["weekday"], b["hour"], b["volume"], b["source"], round(b["ratio"], 4),
+                 "rows": [[b["date"], b["weekday"], b["hour"], b["volume"], round(b["ratio"], 4),
                            b["level"], b["score"], b["score_bin"], b["count_sum"], b["count_same"],
                            b["count_peers"], b["rank"], b["rank_bin"], b["verdict"]] for b in used]}],
-       check=check("카운트 하위 30개(가장 드문 30개) 중 누산기 점수 하위 30개에 든 수", 30,
+       check=check("카운트 하위 30개(가장 드문 30개) 중 정수 점수 하위 30개에 든 수", 30,
                    len({id(b) for b in sorted(used, key=lambda b: b["count_sum"])[:30]} & {id(b) for b in ranked[:30]})),
        source=model.counter_score_leave_one_out)
 
@@ -312,7 +289,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     n_alert = sum(b["verdict"] == "이상" for b in used)
     n_watch = sum(b["verdict"] == "주의" for b in used)
     t.step("판정 기준 정하기", "일반 계산", [
-        why("설계 선택", f"학습 봉 누산기 점수의 하위 {vc['alert_percentile']}% 지점을 '이상', 하위 {vc['watch_percentile']}% 지점을 '주의' 경계로 삼는다. "
+        why("설계 선택", f"학습 봉 정수 점수의 하위 {vc['alert_percentile']}% 지점을 '이상', 하위 {vc['watch_percentile']}% 지점을 '주의' 경계로 삼는다. "
                        "기준이 이 종목의 자기 데이터에서 나오므로 종목마다 다르다."),
         why("이 데이터에서 관찰", f"같은 점수인 봉이 있어 정확히 {vc['alert_percentile']}%가 되지는 않는다. 이번에는 '이상' {n_alert}개, '주의' {n_watch}개다."),
     ], outputs=[{"type": "value", "name": "이상 경계(점수 이하)", "value": round(alert, 4)},
@@ -322,10 +299,10 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                  "rows": [[v, sum(b["verdict"] == v for b in used)] for v in ("이상", "주의", "평소")]}],
        source=run)
 
-    big = [b for b in used if b["hour"] != dsess and b["ratio"] >= 16]
+    big = [b for b in used if b["ratio"] >= 16]
     count_rank = {id(b): i + 1 for i, b in enumerate(sorted(used, key=lambda b: b["count_sum"]))}
     t.step("가장 드문 봉 순위", "일반 계산", [
-        why("설계 선택", "누산기 점수가 낮은 순으로 줄 세운다. 옆에 이진 점수 순위와 단순 카운트 순위를 둔다."),
+        why("설계 선택", "정수 점수가 낮은 순으로 줄 세운다. 옆에 이진 점수 순위와 단순 카운트 순위를 둔다."),
         why("이 데이터에서 관찰", "점수가 묻는 것은 '이 요일·시간대에 이 단계가 흔했나'다. '중앙값의 몇 배인가'와 같은 질문이 아니다. "
                                "그래서 거래가 거의 없던 봉(1-2단계)도 폭증한 봉만큼 낮은 점수를 받는다(1단계와 12단계가 평소에서 비슷하게 멀다)."),
     ], outputs=[{"type": "table", "name": "하위 30",
@@ -353,7 +330,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
         "stock": stock_id, "name": stock["name"], "dim": D, "levels": levels, "sessions": sessions,
         "ladder": model.LADDER_NAME, "edges": edges.tolist(),
         "medians": {str(s): meds[s] for s in sessions},
-        "score": "누산기 코사인(자기 제외). 이진 점수는 비교용",
+        "score": "정수 프로토타입 코사인(자기 제외). 이진 점수는 비교용",
         "thresholds": {"alert": round(alert, 4), "watch": round(watch, 4),
                        "alert_bin": round(alert_b, 4), "watch_bin": round(watch_b, 4),
                        "alert_percentile": vc["alert_percentile"], "watch_percentile": vc["watch_percentile"]},

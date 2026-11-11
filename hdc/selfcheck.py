@@ -76,15 +76,15 @@ def run(path: str = OUT) -> dict:
     mv = m.to_vector()
     q = unbind(mv, bind(make_vector("요일:수"), make_vector("시간대:14")))
     ranking = nearest(q, {f"{k + 1}단계": v for k, v in enumerate(levels)})
-    t.step("기억에 더하고 풀어서 묻기", "더하기", [
-        why("설계 선택", "세 조합(요일×시간대×단계)을 칸마다 +1/-1 누산기로 더해(bundling) 기억 하나에 담는다. "
+    t.step("프로토타입에 더하고 풀어서 묻기", "더하기", [
+        why("설계 선택", "세 조합(요일×시간대×단계)을 칸마다 +1/-1로 더해 정수 프로토타입 하나에 담는다. "
                        "비교할 때는 다수결로 0/1 벡터로 만들고, 비긴 칸은 고정된 동점깨기 벡터를 따른다."),
-        why("수학적 사실", "기억을 (수×14시대)로 풀면 수×14시대에 묶였던 단계 벡터는 비슷하게 남고, "
+        why("수학적 사실", "이진 프로토타입을 (수×14시대)로 풀면 수×14시대에 묶였던 단계 벡터는 비슷하게 남고, "
                        "나머지 두 조합은 무관한 잡음이 된다. 그래서 높은 확률로 가장 가까운 단계가 저장했던 단계다(확실한 것은 아니다)."),
     ], inputs=[{"type": "table", "name": "더한 조합", "rows": [[d, hr, lv] for (d, hr), lv in stored.items()]}],
-       outputs=[{"type": "value", "name": "기억 카운터 동점 칸 수", "value": m.tie_count()},
-                vec_info("기억(다수결)", mv, full=True),
-                vec_info("기억 ⊕ (수×14시대)", q, full=True),
+       outputs=[{"type": "value", "name": "정수 프로토타입의 동점 칸 수", "value": m.tie_count()},
+                vec_info("이진 프로토타입", mv, full=True),
+                vec_info("이진 프로토타입 ⊕ (수×14시대)", q, full=True),
                 {"type": "table", "name": "풀어 물은 결과와 단계별 유사도", "rows": ranking}],
        check=check("수요일 14시대에 저장한 단계", "9단계", ranking[0][0]),
        source=source_of(Memory))
