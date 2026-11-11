@@ -1,6 +1,6 @@
 """매물벽 찾기: 어느 가격에 닿으면 밀려 내려오는가.
 
-일봉으로 본다. 가격을 2% 폭의 칸으로 나누고, 날마다 주가가 닿은 칸마다
+최근 반년 일봉으로 본다. 가격을 2% 폭의 칸으로 나누고, 날마다 주가가 닿은 칸마다
 '가격칸 ⊕ 결과(밀림·안착·돌파) ⊕ 거래량 단계'를 기억에 더한다.
 기억에 '밀림 ⊕ 큰 거래량'으로 풀어 물으면 그런 일이 잦았던 가격칸이 떠오른다.
 
@@ -68,17 +68,13 @@ def touches(day: dict, width: float):
     return out
 
 
-def volume_levels(days, lookback: int, edges):
-    """그날 거래량 ÷ 직전 lookback거래일 거래량 중앙값 → 12단계. 직전 자료가 부족하면 None."""
-    for i, d in enumerate(days):
-        prev = [x["volume"] for x in days[max(0, i - lookback):i] if x["volume"] > 0]
-        if len(prev) < lookback // 2:
-            d["vol_ratio"], d["level"] = None, None
-            continue
-        med = float(np.median(prev))
-        d["vol_ratio"] = d["volume"] / med if med else None
-        d["level"] = data.level_of(d["vol_ratio"], edges) if med else None
-    return days
+def volume_levels(days, edges):
+    """그날 거래량 ÷ 반년 일별 거래량 중앙값 → 12단계(시간대 모델과 같은 방식)."""
+    med = float(np.median([d["volume"] for d in days]))
+    for d in days:
+        d["vol_ratio"] = d["volume"] / med
+        d["level"] = data.level_of(d["vol_ratio"], edges)
+    return med
 
 
 # ---------- HDC ----------
@@ -116,7 +112,7 @@ def count_weight(level: int, query_level: int, levels: int) -> float:
 def fetch_daily(ticker: str):
     import yfinance as yf
 
-    d = yf.Ticker(ticker).history(period="5y", interval="1d", auto_adjust=False)
+    d = yf.Ticker(ticker).history(period="1y", interval="1d", auto_adjust=False)
     if d.empty:
         raise RuntimeError("빈 응답: 일봉 0행")
     return [{"date": ts.strftime("%Y-%m-%d"), "open": float(r.Open), "high": float(r.High),
@@ -229,7 +225,7 @@ def run(stock_id: str):
     trace_path = os.path.join(out, "traces", f"walls-{now.strftime('%Y%m%d-%H%M%S')}.json")
     t = Trace("volume.walls", subject={"type": "stock", "id": stock_id, "code": stock["code"], "name": stock["name"]},
               params={"D": D, "cell_width": wc["cell_width"], "windows": wc["windows"], "query_level": wc["query_level"],
-                      "volume_lookback": wc["volume_lookback"]})
+                      "train_months": vc["train_months"]})
     t.section("공통: 일봉과 거래량 단계")
     try:
         days = fetch_daily(stock_id)
@@ -239,23 +235,24 @@ def run(stock_id: str):
         append_run({"at": now.isoformat(timespec="seconds"), "kind": "volume.walls", "subject": stock_id,
                     "fetched": {}, "failures": [f"수집 실패: {e}"], "trace": rel(trace_path)})
         raise
-    days = [d for d in days if d["volume"] > 0 and d["high"] > 0]
-    complete = [d for d in days if d["date"] < now.strftime("%Y-%m-%d") or now.hour >= 16]
     t.fetched("일봉", len(days))
+    ok = [d for d in days if d["volume"] > 0 and d["high"] > 0]
+    finished = [d["date"] for d in ok if d["date"] < now.strftime("%Y-%m-%d") or now.hour >= 16]
+    dates, start = data.window(finished, finished[-1], vc["train_months"])
+    complete = [d for d in ok if d["date"] in set(dates)]
+    days = complete
     t.step("일봉 받기", "일반 계산", [
-        why("설계 선택", "매물벽은 일봉으로 본다. 일봉은 5년치가 있고, 시간봉의 9시대 누락 문제가 없다."),
+        why("설계 선택", f"매물벽은 일봉으로 본다. 시간대 모델과 같은 최근 {vc['train_months']}개월만 쓴다. 시간봉의 9시대 누락 문제가 없다."),
         why("설계 선택", "거래가 없던 날(거래량 0)은 뺀다. 오늘 자료는 장 마감 뒤(16시 이후)에만 쓴다."),
-    ], outputs=[{"type": "value", "name": "받은 일봉", "value": len(days)},
-                {"type": "value", "name": "기간", "value": f"{days[0]['date']} - {days[-1]['date']}"},
-                {"type": "value", "name": "쓰는 일봉", "value": len(complete)}],
+    ], outputs=[{"type": "value", "name": "쓰는 일봉", "value": len(complete)},
+                {"type": "value", "name": "기간", "value": f"{complete[0]['date']} - {complete[-1]['date']}"}],
        source=fetch_daily)
 
-    volume_levels(complete, wc["volume_lookback"], edges)
+    med = volume_levels(complete, edges)
     t.step("날마다 거래량 단계 매기기", "일반 계산", [
-        why("설계 선택", f"그날 거래량 ÷ 직전 {wc['volume_lookback']}거래일 거래량 중앙값을 시간대 모델과 같은 12단계로 나눈다. "
-                       "'평소'가 시기마다 달라지므로 직전 기간과 비교한다."),
+        why("설계 선택", f"그날 거래량 ÷ 반년 일별 거래량 중앙값({med:,.0f}주)을 시간대 모델과 같은 12단계로 나눈다."),
     ], outputs=[{"type": "table", "name": "최근 10일", "columns": ["날짜", "거래량", "평소 대비 배율", "단계"],
-                 "rows": [[d["date"], d["volume"], round(d["vol_ratio"], 2) if d["vol_ratio"] else None, d["level"]]
+                 "rows": [[d["date"], d["volume"], round(d["vol_ratio"], 2), d["level"]]
                           for d in complete[-10:]]}],
        source=volume_levels)
 

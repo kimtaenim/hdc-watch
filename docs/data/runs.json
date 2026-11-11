@@ -461,5 +461,15 @@
    "봉 만들기: 2026-11-09: 9시대 시간봉 누락: 빠진 거래량이 역산값에 섞임"
   ],
   "trace": "data/volume/045510.KQ/traces/train-20261111-194928.json"
+ },
+ {
+  "at": "2026-11-11T19:50:37+09:00",
+  "kind": "volume.walls",
+  "subject": "045510.KQ",
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/walls-20261111-195037.json"
  }
 ]
