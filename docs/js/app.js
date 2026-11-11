@@ -172,7 +172,7 @@ function renderRuns(runs) {
 }
 
 // ---------- 톱니바퀴: 고른 날의 실제 자료가 단계마다 바뀌는 모습 ----------
-const F = { cache: {}, trace: null, model: null, raw: null, bars: [], date: null, hour: null };
+const F = { cache: {}, trace: null, model: null, raw: null, bars: [], date: null, slot: null };
 
 const r2 = (v, d) => (v == null ? "" : Number(v.toFixed(d)));
 const stepOf = (t, test) => t.steps.find(test) || { why: [] };
@@ -186,11 +186,12 @@ function card(no, title, op, why, ...body) {
     el("div", { class: "gear-head" }, el("span", { class: "gear-no" }, no), el("span", { class: "gear-name" }, title), el("span", { class: "op" }, op)),
     ...body, whyBox(why));
 }
-// 가로로 놓는 작은 표: 첫 칸은 줄 이름
-function rowTable(head, rows, hlCol = null) {
-  return el("div", { class: "table-wrap flat" }, el("table", { class: "rowtable" },
-    el("thead", {}, el("tr", {}, el("th", {}, head[0]), head.slice(1).map((h, i) => el("th", { class: i === hlCol ? "sel" : "" }, h)))),
-    el("tbody", {}, rows.map((r) => el("tr", {}, el("th", {}, r[0]), r.slice(1).map((v, i) => el("td", { class: i === hlCol ? "sel" : "" }, fmt(v))))))));
+// 세로 표: 줄마다 시간 하나. 줄을 누르면 그 시간 봉을 따라간다.
+function colTable(head, rows, selIdx, onPick) {
+  return el("div", { class: "table-wrap flat" }, el("table", { class: "coltable" },
+    el("thead", {}, el("tr", {}, head.map((h) => el("th", {}, h)))),
+    el("tbody", {}, rows.map((r, i) => el("tr", { class: i === selIdx ? "sel" : "", onclick: () => onPick(i) },
+      r.map((v, j) => (j === 0 ? el("th", {}, v) : el("td", {}, fmt(v)))))))));
 }
 async function cached(key, fn) {
   if (!(key in F.cache)) F.cache[key] = await fn();
@@ -203,7 +204,7 @@ async function setupFlow(trace, stockDir) {
   F.raw = await getJSON(`${stockDir}/raw.json`);
   const tbl = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "봉별 점수");
   const c = Object.fromEntries(tbl.columns.map((k, i) => [k, i]));
-  F.bars = tbl.rows.map((r) => ({ date: r[c["날짜"]], wd: r[c["요일"]], hour: r[c["시간대"]], vol: r[c["거래량"]], ratio: r[c["배율"]],
+  F.bars = tbl.rows.map((r) => ({ date: r[c["날짜"]], wd: r[c["요일"]], slot: r[c["시간대"]], vol: r[c["거래량"]], ratio: r[c["배율"]],
     level: r[c["단계"]], score: r[c["점수"]], scoreBin: r[c["이진 점수"]], rank: r[c["순위"]], verdict: r[c["판정"]] }));
   const dates = [...new Set(F.bars.map((b) => b.date))].sort().reverse();
   const rare = F.bars.find((b) => b.rank === 1);
@@ -213,8 +214,8 @@ async function setupFlow(trace, stockDir) {
     const worst = day.reduce((a, b) => (b.score < a.score ? b : a));
     return el("option", { value: d }, `${d}(${day[0].wd}) ${worst.verdict === "평소" ? "" : `${worst.verdict} 있음`}`);
   }));
-  sel.onchange = () => { F.date = sel.value; F.hour = null; drawFlow(); };
-  $("#pick-rare").onclick = () => { sel.value = rare.date; F.date = rare.date; F.hour = rare.hour; drawFlow(); };
+  sel.onchange = () => { F.date = sel.value; F.slot = null; drawFlow(); };
+  $("#pick-rare").onclick = () => { sel.value = rare.date; F.date = rare.date; F.slot = rare.slot; drawFlow(); };
   F.date = dates[0];
   sel.value = F.date;
   await drawFlow();
@@ -222,23 +223,24 @@ async function setupFlow(trace, stockDir) {
 
 async function drawFlow() {
   const m = F.model, t = F.trace, dim = m.dim;
-  const day = F.bars.filter((b) => b.date === F.date).sort((a, b) => a.hour - b.hour);
-  if (F.hour == null) F.hour = day.reduce((a, b) => (b.score < a.score ? b : a)).hour;
-  const bar = day.find((b) => b.hour === F.hour) || day[0];
-  const hours = m.sessions;
-  const hi = hours.indexOf(bar.hour);
-  const raw = Object.fromEntries(F.raw.hourly.filter((r) => r.date === F.date).map((r) => [r.hour, r]));
+  const day = F.bars.filter((b) => b.date === F.date).sort((a, b) => a.slot.localeCompare(b.slot));
+  if (F.slot == null) F.slot = day.reduce((a, b) => (b.score < a.score ? b : a)).slot;
+  const bar = day.find((b) => b.slot === F.slot) || day[0];
+  const slots = day.map((b) => b.slot);
+  const hi = slots.indexOf(bar.slot);
+  const go = (i) => { F.slot = slots[i]; drawFlow(); };
+  const raw = Object.fromEntries(F.raw.slots.filter((r) => r.date === F.date).map((r) => [r.slot, r]));
   const ol = $("#flow");
   ol.replaceChildren(el("li", { class: "hint" }, "벡터를 만드는 중..."));
 
   const ladder = await cached("ladder", () => H.levelVectors(m.ladder, m.levels, dim));
   const dayV = await cached(`d${bar.wd}`, () => H.makeVector(`요일:${bar.wd}`, dim));
   const hv = {};
-  for (const h of hours) hv[h] = await cached(`h${h}`, () => H.makeVector(`시간대:${h}`, dim));
+  for (const h of slots) hv[h] = await cached(`h${h}`, () => H.makeVector(`시간대:${h}`, dim));
   const full = H.Memory.fromJSON(m.memory);
   // 그날 봉마다 브라우저에서 다시 채점(자기 제외)
   const scoreOf = async (b) => {
-    const v = H.bind(H.bind(dayV, hv[b.hour]), ladder.vectors[b.level - 1]);
+    const v = H.bind(H.bind(dayV, hv[b.slot]), ladder.vectors[b.level - 1]);
     const mem = H.Memory.fromJSON(m.memory); mem.add(v, -1);
     let dot = 0, sq = 0;
     for (let i = 0; i < dim; i++) { const c = mem.counts[i]; dot += (v[i] ? 1 : -1) * c; sq += c * c; }
@@ -246,33 +248,29 @@ async function drawFlow() {
     return { v, mem, proto, dot, sim: dot / (Math.sqrt(dim) * Math.sqrt(sq)), simBin: H.similarity(v, proto) };
   };
   const res = {};
-  for (const b of day) res[b.hour] = await scoreOf(b);
-  const r = res[bar.hour];
+  for (const b of day) res[b.slot] = await scoreOf(b);
+  const r = res[bar.slot];
   const lv = ladder.vectors[bar.level - 1];
-  const ds = H.bind(dayV, hv[bar.hour]);
+  const ds = H.bind(dayV, hv[bar.slot]);
   const diff = H.bind(r.v, r.proto);
   const same = (a, b) => Math.abs(a - b) < 1e-4;
-  const allOk = day.every((b) => same(res[b.hour].sim, b.score) && same(res[b.hour].simBin, b.scoreBin));
+  const allOk = day.every((b) => same(res[b.slot].sim, b.score) && same(res[b.slot].simBin, b.scoreBin));
   const th = m.thresholds;
   const S = (test) => stepOf(t, test);
-  const pick = el("div", { class: "hour-pick" }, "따라갈 시간: ", hours.map((h) => el("button", {
-    class: h === bar.hour ? "on" : "", onclick: () => { F.hour = h; drawFlow(); } }, `${h}시`)));
 
   ol.replaceChildren(
     card("①", "받은 자료 (5분봉을 시간대별로 합침)", "일반 계산", S((s) => s.name.startsWith("원자료")),
-      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
-        ["거래량", ...hours.map((h) => raw[h]?.volume)], ["5분봉 수", ...hours.map((h) => raw[h]?.n5)]], hi)),
+      colTable(["시간", "거래량", "5분봉 수"], slots.map((h) => [h, raw[h]?.volume ?? 0, raw[h]?.n5 ?? 0]), hi, go)),
     card("②", "평소 거래량 (학습 기간 중앙값)", "일반 계산", S((s) => s.name.includes("중앙값")),
-      rowTable(["시간", ...hours.map((h) => `${h}시`)], [["중앙값", ...hours.map((h) => Math.round(m.medians[h].median))]], hi)),
+      colTable(["시간", "중앙값"], slots.map((h) => [h, Math.round(m.medians[h].median)]), hi, go)),
     card("③", "평소의 몇 배 → 12단계", "일반 계산", S((s) => s.name.includes("단계 나누기")),
-      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
-        ["배율", ...day.map((b) => r2(b.ratio, 1))], ["단계", ...day.map((b) => b.level)]], hi)),
-    el("li", {}, pick),
-    card("④", `${bar.hour}시 봉의 재료 벡터 꺼내기`, "벡터 생성", S((s) => s.op === "벡터 생성"),
-      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hv[bar.hour] },
+      colTable(["시간", "배율", "단계"], day.map((b) => [b.slot, r2(b.ratio, 2), b.level]), hi, go),
+      el("p", { class: "hint" }, "줄을 누르면 그 시간 봉을 아래 ④-⑦에서 따라갑니다.")),
+    card("④", `${bar.slot} 봉의 재료 벡터 꺼내기`, "벡터 생성", S((s) => s.op === "벡터 생성"),
+      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.slot}`, bits: hv[bar.slot] },
         { name: `${bar.level}단계`, bits: lv }], dim)),
     card("⑤", "묶기 (XOR)", "묶기", S((s) => s.op === "묶기"),
-      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hv[bar.hour] },
+      bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.slot}`, bits: hv[bar.slot] },
         { name: "요일 ⊕ 시간대", bits: ds, line: true }], dim),
       bitRows([{ name: "요일 ⊕ 시간대", bits: ds }, { name: `${bar.level}단계`, bits: lv },
         { name: "봉 벡터", bits: r.v, line: true }], dim)),
@@ -288,9 +286,8 @@ async function drawFlow() {
       el("div", { class: "values" }, el("span", { class: "chip" }, "다른 칸 ", el("b", {}, fmt(H.ones(diff)))),
         el("span", { class: "chip" }, "이진 점수 ", el("b", {}, fmt(r.simBin))))),
     card("⑧", "그날의 점수와 판정", "일반 계산", S((s) => s.name.startsWith("판정")),
-      rowTable(["시간", ...hours.map((h) => `${h}시`)], [
-        ["정수 점수", ...day.map((b) => r2(res[b.hour].sim, 3))], ["이진 점수", ...day.map((b) => r2(res[b.hour].simBin, 3))],
-        ["판정", ...day.map((b) => b.verdict)], ["순위", ...day.map((b) => b.rank)]], hi),
+      colTable(["시간", "정수 점수", "이진 점수", "판정", "순위"],
+        day.map((b) => [b.slot, r2(res[b.slot].sim, 3), r2(res[b.slot].simBin, 3), b.verdict, b.rank]), hi, go),
       el("p", { class: "hint" }, `순위는 학습 기간 ${F.bars.length}개 봉 중 정수 점수가 낮은 순.`),
       el("div", { class: "values" }, el("span", { class: "chip" }, "이상 경계 ", el("b", {}, fmt(th.alert))),
         el("span", { class: "chip" }, "주의 경계 ", el("b", {}, fmt(th.watch)))),

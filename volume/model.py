@@ -20,8 +20,8 @@ def day_name(wd: str) -> str:
     return f"요일:{wd}"
 
 
-def session_name(hour: int) -> str:
-    return f"시간대:{hour}"
+def session_name(slot: str) -> str:
+    return f"시간대:{slot}"
 
 
 class Codebook:
@@ -38,9 +38,9 @@ class Codebook:
         return self.levels[k - 1]
 
 
-def bar_vector(cb: Codebook, weekday: str, hour: int, level: int) -> np.ndarray:
+def bar_vector(cb: Codebook, weekday: str, slot: str, level: int) -> np.ndarray:
     """봉 하나를 벡터 하나로: 요일 ⊕ 시간대 ⊕ 단계."""
-    return bind(bind(cb.days[weekday], cb.sessions[hour]), cb.level(level))
+    return bind(bind(cb.days[weekday], cb.sessions[slot]), cb.level(level))
 
 
 def train(cb: Codebook, bars) -> Memory:
@@ -48,7 +48,7 @@ def train(cb: Codebook, bars) -> Memory:
     m = Memory(cb.dim)
     for b in bars:
         if b["level"] is not None:
-            m.add(bar_vector(cb, b["weekday"], b["hour"], b["level"]))
+            m.add(bar_vector(cb, b["weekday"], b["slot"], b["level"]))
     return m
 
 
@@ -86,7 +86,7 @@ def count_closeness(bars, target, levels: int):
     """
     peers = [b["level"] for b in bars
              if b is not target and b["level"] is not None
-             and b["weekday"] == target["weekday"] and b["hour"] == target["hour"]]
+             and b["weekday"] == target["weekday"] and b["slot"] == target["slot"]]
     if not peers:
         return None, 0, 0, 0.0
     lv = target["level"]

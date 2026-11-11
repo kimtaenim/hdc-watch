@@ -11,19 +11,21 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from hdc import Memory, similarity
 from volume import data, model, walls
 
-SESSIONS = [10, 11, 12, 13, 14]
+SESSIONS = [f"{h:02d}:{m:02d}" for h in range(9, 15) for m in (0, 30)]
 EDGES = 2.0 ** np.arange(-4, 7)
 
 
 class TestBars(unittest.TestCase):
-    def test_build_bars(self):
-        hourly = [{"date": "2026-11-10", "hour": h, "volume": 100 * h} for h in range(9, 15)]
-        bars = data.build_bars(hourly, ["2026-11-10", "2026-11-11"], [10, 11, 12, 13, 14])
-        self.assertEqual(len(bars), 10)
-        self.assertEqual([b["hour"] for b in bars[:5]], [10, 11, 12, 13, 14])
-        self.assertEqual(bars[0]["volume"], 1000)
+    def test_slots_and_bars(self):
+        self.assertEqual(data.slot_of("09:45"), "09:30")
+        self.assertEqual(data.slot_of("14:05"), "14:00")
+        five = [{"date": "2026-11-10", "time": t, "volume": v, "open": 1, "high": 2, "low": 1, "close": 2}
+                for t, v in [("09:00", 10), ("09:25", 5), ("09:30", 7)]]
+        sl = data.slots_from_5m(five, 30)
+        self.assertEqual([(x["slot"], x["volume"], x["n5"]) for x in sl], [("09:00", 15, 2), ("09:30", 7, 1)])
+        bars = data.build_bars(sl, ["2026-11-10"], ["09:00", "09:30", "10:00"])
+        self.assertEqual([b["volume"] for b in bars], [15, 7, 0])  # 5분봉이 없는 칸은 거래 0
         self.assertEqual(bars[0]["weekday"], "화")
-        self.assertIsNotNone(bars[5]["missing"])  # 11일 자료 없음
 
     def test_levels(self):
         self.assertEqual(data.level_of(0.0, EDGES), 1)
@@ -45,20 +47,20 @@ class TestModel(unittest.TestCase):
     def test_rare_level_scores_lower(self):
         """같은 요일·시간대에 6단계만 쌓인 기억에서, 6단계 새 봉은 높게, 12단계 새 봉은 낮게 나와야 한다."""
         cb = model.Codebook(SESSIONS, 12, 10000)
-        bars = [{"weekday": wd, "hour": h, "level": 6} for wd in "월화수목금" for h in SESSIONS for _ in range(5)]
+        bars = [{"weekday": wd, "slot": h, "level": 6} for wd in "월화수목금" for h in SESSIONS for _ in range(5)]
         mem = model.train(cb, bars)
         mv = mem.to_vector()
-        usual = model.score(mv, model.bar_vector(cb, "수", 14, 6))
-        near = model.score(mv, model.bar_vector(cb, "수", 14, 7))
-        rare = model.score(mv, model.bar_vector(cb, "수", 14, 12))
+        usual = model.score(mv, model.bar_vector(cb, "수", "14:00", 6))
+        near = model.score(mv, model.bar_vector(cb, "수", "14:00", 7))
+        rare = model.score(mv, model.bar_vector(cb, "수", "14:00", 12))
         self.assertGreater(usual, near)
         self.assertGreater(near, rare)
 
     def test_leave_one_out_equals_training_without_it(self):
         cb = model.Codebook(SESSIONS, 12, 2000)
-        bars = [{"weekday": wd, "hour": 10 + i % 5, "level": 1 + i % 12} for i, wd in enumerate("월화수목금" * 7)]
+        bars = [{"weekday": wd, "slot": SESSIONS[i % 12], "level": 1 + i % 12} for i, wd in enumerate("월화수목금" * 7)]
         mem = model.train(cb, bars)
-        v = model.bar_vector(cb, bars[3]["weekday"], bars[3]["hour"], bars[3]["level"])
+        v = model.bar_vector(cb, bars[3]["weekday"], bars[3]["slot"], bars[3]["level"])
         without = model.train(cb, bars[:3] + bars[4:])
         self.assertEqual(model.score_leave_one_out(mem, v), similarity(v, without.to_vector()))
 
