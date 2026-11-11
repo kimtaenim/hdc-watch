@@ -16,8 +16,9 @@ def fetch(ticker: str):
     """yfinance로 1시간봉과 일봉을 받는다. 비공식 경로라 실패할 수 있으므로 예외를 그대로 올린다.
 
     돌려주는 값
-      hourly: [{"date": "2026-11-10", "hour": 9, "volume": 1234}, ...]
-      daily:  {"2026-11-10": 32059, ...}
+      hourly: [{"date": "2026-11-10", "hour": 9, "volume": 1234, "open", "high", "low", "close"}, ...]
+      daily:  {"2026-11-10": 32059, ...}            일별 거래량
+      closes: {"2026-11-10": 1057.0, ...}           일별 종가
     """
     import yfinance as yf  # 수집할 때만 필요
 
@@ -26,10 +27,30 @@ def fetch(ticker: str):
     d = t.history(period="1y", interval="1d", auto_adjust=False)
     if h.empty or d.empty:
         raise RuntimeError(f"빈 응답: 시간봉 {len(h)}행, 일봉 {len(d)}행")
-    hourly = [{"date": ts.strftime("%Y-%m-%d"), "hour": ts.hour, "volume": int(v)}
-              for ts, v in zip(h.index.tz_convert("Asia/Seoul"), h["Volume"])]
+    hourly = [{"date": ts.strftime("%Y-%m-%d"), "hour": ts.hour, "volume": int(r.Volume),
+               "open": float(r.Open), "high": float(r.High), "low": float(r.Low), "close": float(r.Close)}
+              for ts, r in zip(h.index.tz_convert("Asia/Seoul"), h.itertuples())]
     daily = {ts.strftime("%Y-%m-%d"): int(v) for ts, v in zip(d.index, d["Volume"])}
-    return hourly, daily
+    closes = {ts.strftime("%Y-%m-%d"): float(v) for ts, v in zip(d.index, d["Close"])}
+    return hourly, daily, closes
+
+
+def attach_prices(bars, hourly, closes, derived_session):
+    """봉마다 대표 가격을 붙인다.
+    시간봉: (고가 + 저가 + 종가) / 3. 역산 봉(마감 동시호가): 그날 종가. 동시호가는 한 가격(종가)에 체결된다."""
+    by_key = {(r["date"], r["hour"]): r for r in hourly}
+    for b in bars:
+        if b["hour"] == derived_session:
+            b["price"] = closes.get(b["date"])
+            b["price_basis"] = "일봉 종가"
+        else:
+            r = by_key.get((b["date"], b["hour"]))
+            ok = r is not None and "high" in r and r["high"] > 0
+            b["price"] = (r["high"] + r["low"] + r["close"]) / 3 if ok else None
+            b["price_basis"] = "(고가+저가+종가)/3" if ok else "가격 없음"
+            if ok:
+                b["ohlc"] = [r["open"], r["high"], r["low"], r["close"]]
+    return bars
 
 
 def complete_days(hourly, daily, now: dt.datetime, close_hour: int = 16):

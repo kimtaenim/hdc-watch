@@ -9,7 +9,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from hdc import similarity
-from volume import data, model
+from volume import data, model, zone
 
 SESSIONS = [9, 10, 11, 12, 13, 14, 15]
 EDGES = 2.0 ** np.arange(-4, 7)
@@ -84,6 +84,38 @@ class TestModel(unittest.TestCase):
     def test_spearman(self):
         self.assertAlmostEqual(model.spearman([1, 2, 3, 4], [10, 20, 30, 40]), 1.0)
         self.assertAlmostEqual(model.spearman([1, 2, 3, 4], [4, 3, 2, 1]), -1.0)
+
+
+class TestZone(unittest.TestCase):
+    def test_edges_and_zone(self):
+        e = zone.zone_edges(700, 1400, 12)
+        self.assertAlmostEqual(e[0], 700)
+        self.assertAlmostEqual(e[-1], 1400)
+        self.assertAlmostEqual(e[1] / e[0], e[12] / e[11])  # 로그 눈금: 칸마다 같은 비율
+        self.assertEqual(zone.zone_of(700, e), (1, False))
+        self.assertEqual(zone.zone_of(1400, e), (12, False))
+        self.assertEqual(zone.zone_of(600, e), (1, True))
+        self.assertEqual(zone.zone_of(2000, e), (12, True))
+
+    def test_majority_keeps_only_larger_of_two_repeated(self):
+        """수학적 사실: 서로 다른 벡터 두 개를 60번, 20번 더하면 다수결 결과는 60번 쪽 벡터와 똑같다."""
+        cb = model.Codebook(SESSIONS, 12, 10000)
+        zcb = zone.ZoneCodebook(12, cb.levels, 10000)
+        mv = zone.train(zcb, [{"zone": 2, "level": 3}] * 20 + [{"zone": 9, "level": 10}] * 60).to_vector()
+        self.assertTrue(np.array_equal(mv, zone.bar_vector(zcb, 9, 10)))
+
+    def test_ask_zone_separates_zones(self):
+        """가격대 2에는 2-4단계, 가격대 9에는 9-11단계를 쌓으면 풀어 묻기가 각각의 가운데 단계를 돌려줘야 한다.
+        봉 수가 달라도(20 대 60) 되는지 본다. 다만 '같은 벡터만 반복'이면 다수결이 많은 쪽만 남기므로 단계를 섞는다."""
+        cb = model.Codebook(SESSIONS, 12, 10000)
+        zcb = zone.ZoneCodebook(12, cb.levels, 10000)
+        bars = ([{"zone": 2, "level": lv} for lv in (2, 3, 3, 4)] * 5
+                + [{"zone": 9, "level": lv} for lv in (9, 10, 10, 11)] * 15)
+        bars += [{"zone": z, "level": 1 + (z * 7 + i) % 12} for i in range(40) for z in (5, 7, 11, 12)]
+        mv = zone.train(zcb, bars).to_vector()
+        for z, lv in ((2, 3), (9, 10)):
+            _, sims = zone.ask_zone(zcb, mv, z)
+            self.assertEqual(int(np.argmax(sims)) + 1, lv)
 
 
 if __name__ == "__main__":

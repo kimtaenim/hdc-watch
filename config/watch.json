@@ -19,6 +19,7 @@
     "_zero_is_missing_sessions": "이 시간대의 0주 시간봉은 자료 누락으로 보고, 그날 15시대 역산 봉을 결측 처리. 근거: 30분봉·5분봉 대조",
     "levels": 12,
     "ratio_edge_exponents": [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6],
+    "zone": {"zones": 12, "_설명": "매물대: 학습 기간 최저가-최고가를 로그 눈금 같은 간격으로 나눈 칸 수"},
     "alert_percentile": 1,
     "watch_percentile": 5
   },

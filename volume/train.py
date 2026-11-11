@@ -12,9 +12,9 @@ import traceback
 
 import numpy as np
 
-from hdc import D, bind, hamming, nearest, noise_level, similarity
+from hdc import D, bind, hamming, level_vectors, nearest, noise_level, similarity
 from hdc.trace import REPO_ROOT, Trace, check, source_of, vec_info, why
-from volume import data, model
+from volume import data, model, zone
 
 CONFIG = os.path.join(REPO_ROOT, "config", "watch.json")
 
@@ -48,7 +48,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     vc = cfg["volume"]
     sessions, levels, dsess = vc["sessions"], vc["levels"], vc["derived_session"]
     now = dt.datetime.now(data.KST)
-    stamp = now.strftime("%Y%m%d-%H%M")
+    stamp = now.strftime("%Y%m%d-%H%M%S")
     out = stock_dir(stock_id)
     trace_path = os.path.join(out, "traces", f"train-{stamp}.json")
 
@@ -57,17 +57,19 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
               params={"D": D, "levels": levels, "sessions": sessions, "train_months": vc["train_months"],
                       "ratio_edge_exponents": vc["ratio_edge_exponents"]})
 
+    t.section("공통: 자료와 거래량 단계", "두 모델이 함께 쓰는 앞단. HDC 연산 없이 숫자를 이름표로 바꾼다.")
     # ① 원자료 받기
     try:
         if raw_path:
             raw = json.load(open(raw_path, encoding="utf-8"))
             hourly, daily, fetched_at = raw["hourly"], raw["daily"], raw.get("fetched_at")
+            closes = raw.get("closes", {})
             t.note(f"저장된 원자료 사용: {raw_path}")
         else:
-            hourly, daily = data.fetch(stock_id)
+            hourly, daily, closes = data.fetch(stock_id)
             fetched_at = now.isoformat(timespec="seconds")
     except Exception as e:
-        t.failure("yfinance 수집", f"{type(e).__name__}: {e}")
+        t.failure("저장된 원자료 읽기" if raw_path else "yfinance 수집", f"{type(e).__name__}: {e}")
         t.save(trace_path)
         append_run({"at": now.isoformat(timespec="seconds"), "kind": "volume.train", "subject": stock_id,
                     "fetched": {}, "failures": [f"수집 실패: {e}"], "trace": rel(trace_path)})
@@ -155,6 +157,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
        source=data.level_of)
 
     # ⑤ 기본 벡터 꺼내기
+    t.section("시간대 모델", "봉 하나 = 요일 ⊕ 시간대 ⊕ 거래량 단계. '이 요일·시간대에 이 거래량이 흔했나'를 묻는다.")
     cb = model.Codebook(sessions, levels, D)
     sims_ds = [similarity(a, b) for i, a in enumerate(list(cb.days.values()) + list(cb.sessions.values()))
                for j, b in enumerate(list(cb.days.values()) + list(cb.sessions.values())) if i < j]
@@ -290,13 +293,18 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                    sum(1 for b in big if b["rank"] <= 30)),
        source=model.score_leave_one_out)
 
+    # 매물대 모델
+    data.attach_prices(bars, hourly, closes, dsess)
+    zone_json = zone_steps(t, vc, used, cb, now)
+
     # 저장
     os.makedirs(out, exist_ok=True)
     window_set = set(dates)
     with open(os.path.join(out, "raw.json"), "w", encoding="utf-8") as f:
         json.dump({"fetched_at": fetched_at, "stock": stock_id,
                    "hourly": [r for r in hourly if r["date"] in window_set],
-                   "daily": {k: v for k, v in daily.items() if k in window_set}}, f, ensure_ascii=False)
+                   "daily": {k: v for k, v in daily.items() if k in window_set},
+                   "closes": {k: v for k, v in closes.items() if k in window_set}}, f, ensure_ascii=False)
     with open(os.path.join(out, "bars.json"), "w", encoding="utf-8") as f:
         json.dump({"stock": stock_id, "bars": bars}, f, ensure_ascii=False)
     model_json = {
@@ -312,12 +320,178 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     }
     with open(os.path.join(out, "model.json"), "w", encoding="utf-8") as f:
         json.dump(model_json, f, ensure_ascii=False, separators=(",", ":"))
+    if zone_json:
+        with open(os.path.join(out, "model_zone.json"), "w", encoding="utf-8") as f:
+            json.dump(zone_json, f, ensure_ascii=False, separators=(",", ":"))
     t.save(trace_path)
     append_run({"at": now.isoformat(timespec="seconds"), "kind": "volume.train", "subject": stock_id,
                 "fetched": t.data["log"]["fetched"],
                 "failures": [f"{x['what']}: {x['detail']}" for x in t.data["log"]["failures"]],
                 "trace": rel(trace_path)})
     return t.data, ranked, big
+
+
+def zone_steps(t: Trace, vc: dict, used, cb: model.Codebook, now):
+    """매물대 모델 단계들. 시간대 모델과 같은 봉·같은 거래량 단계를 쓰고 기억만 따로 둔다."""
+    zc = vc.get("zone", {"zones": 12})
+    nz, levels = zc["zones"], vc["levels"]
+    t.section("매물대 모델", "봉 하나 = 가격대 ⊕ 거래량 단계. '이 가격대에서 이 거래량이 흔했나'를 묻는다. 시간대 모델에 더해 따로 둔다.")
+
+    priced = [b for b in used if b.get("price")]
+    if not priced:
+        t.failure("매물대", "가격이 있는 봉이 없다(원자료에 가격이 없음)")
+        return None
+    lows = [b["ohlc"][2] for b in priced if "ohlc" in b] + [b["price"] for b in priced]
+    highs = [b["ohlc"][1] for b in priced if "ohlc" in b] + [b["price"] for b in priced]
+    edges = zone.zone_edges(min(lows), max(highs), nz)
+    for b in priced:
+        b["zone"], _ = zone.zone_of(b["price"], edges)
+    t.step("봉마다 가격 붙이기", "일반 계산", [
+        why("설계 선택", "시간봉은 (고가 + 저가 + 종가) / 3을 그 봉의 대표 가격으로 쓴다. 한 시간 동안 거래가 이 범위에서 일어났기 때문이다."),
+        why("수학적 사실", "15시대(마감 동시호가)는 모든 주문이 한 가격에 체결되고 그 가격이 그날 종가다. 그래서 역산 봉은 일봉 종가를 쓴다."),
+        why("수학적 사실", "거래 한 건에는 사는 쪽과 파는 쪽이 하나씩 있다. 거래량만으로는 '매물이 쏟아졌는지(파는 쪽이 몰렸는지)' 알 수 없고, "
+                       "이 모델이 보는 것은 '그 가격대에서 거래가 평소보다 많았는가'다."),
+    ], outputs=[{"type": "value", "name": "가격이 있는 봉", "value": len(priced)},
+                {"type": "value", "name": "가격이 없는 봉", "value": len(used) - len(priced)},
+                {"type": "table", "name": "가격 예시(최근 6개)", "columns": ["날짜", "시간대", "기준", "가격"],
+                 "rows": [[b["date"], b["hour"], b["price_basis"], round(b["price"], 1)] for b in priced[-6:]]}],
+       source=data.attach_prices)
+
+    rows = []
+    for k in range(1, nz + 1):
+        inz = [b for b in priced if b["zone"] == k]
+        rows.append([k, round(edges[k - 1]), round(edges[k]), len(inz), sum(b["volume"] for b in inz),
+                     sum(1 for b in inz if b["level"] >= 9)])
+    t.step("가격대 나누기", "일반 계산", [
+        why("설계 선택", f"학습 기간의 최저가 {edges[0]:,.0f}원부터 최고가 {edges[-1]:,.0f}원까지를 로그 눈금으로 같은 간격 {nz}칸으로 나눈다. "
+                       f"한 칸의 폭은 약 {100 * (edges[1] / edges[0] - 1):.1f}%다. 기준이 이 종목의 자기 가격에서 나온다."),
+        why("설계 선택", "앞으로 이 범위 밖 가격이 나오면 맨 끝 칸에 넣고 그 사실을 기록한다."),
+    ], outputs=[{"type": "table", "name": "가격대별 봉 수와 거래량 합계(단순 카운트로 그린 매물대)",
+                 "columns": ["가격대", "하한(원)", "상한(원)", "봉 수", "거래량 합계(주)", "8배 이상 봉 수"], "rows": rows}],
+       check=check("가격대별 봉 수 합 = 가격이 있는 봉 수", len(priced), sum(r[3] for r in rows)),
+       source=zone.zone_edges)
+
+    zcb = zone.ZoneCodebook(nz, cb.levels, cb.dim)
+    zl = list(zcb.zones)
+    zsims = [similarity(zl[i], zl[j]) for i in range(nz) for j in range(i + 1, nz)]
+    # 사다리로 만들었다면 어땠을지: 묶은 벡터끼리의 유사도 = 재료 유사도의 곱
+    lad, _ = level_vectors("가격대사다리(비교용)", nz, cb.dim)
+    demo = [(4, 6, 7, 2), (1, 3, 9, 6)]
+    demo_rows = []
+    for zi, lj, zk, lm in demo:
+        s_l = similarity(cb.levels[lj - 1], cb.levels[lm - 1])
+        s_lad = similarity(bind(lad[zi - 1], cb.levels[lj - 1]), bind(lad[zk - 1], cb.levels[lm - 1]))
+        s_rnd = similarity(bind(zcb.zone(zi), cb.levels[lj - 1]), bind(zcb.zone(zk), cb.levels[lm - 1]))
+        demo_rows.append([f"가격대 {zi} ⊕ {lj}단계", f"가격대 {zk} ⊕ {lm}단계",
+                          round(similarity(lad[zi - 1], lad[zk - 1]) * s_l, 4), round(s_lad, 4), round(s_rnd, 4)])
+    t.step(f"가격대 벡터 {nz}개 꺼내기", "벡터 생성", [
+        why("설계 선택", f"가격대마다 '{zone.ZONE_PREFIX}:1' - '{zone.ZONE_PREFIX}:{nz}' 이름에서 서로 무관한 벡터를 꺼낸다. 시간대 벡터와 같은 방식이다."),
+        why("수학적 사실", "묶은 벡터끼리의 유사도는 재료 유사도의 곱이다: sim(a⊕b, c⊕d) ≈ sim(a, c) × sim(b, d). "
+                       "가격대를 수준 벡터(이웃끼리 닮게)로 만들면, 가격대가 다른 봉끼리도 서로 닮아 기억 속에서 섞인다."),
+        why("이 데이터에서 관찰", "처음 시도(2026-11-11)에서 가격대를 수준 벡터로 만들었더니, 가격대마다 풀어 물은 답이 12칸 모두 6단계로 같았다. "
+                               "그래서 무관한 벡터로 바꿨다. 대신 '이웃 가격대는 비슷하다'는 정보는 쓰지 않는다."),
+    ], outputs=[vec_info(zone.zone_name(k), zcb.zone(k), full=True) for k in range(1, nz + 1)]
+               + [{"type": "value", "name": f"{len(zsims)}쌍 유사도 범위", "value": [round(min(zsims), 4), round(max(zsims), 4)]},
+                  {"type": "table", "name": "묶은 벡터의 유사도: 사다리 가격대와 무작위 가격대 비교",
+                   "columns": ["봉 A", "봉 B", "곱으로 예측(사다리)", "사다리 실측", "무작위 실측"], "rows": demo_rows}],
+       check=check(f"{len(zsims)}쌍 모두 |유사도| ≤ 0.03인가", True, bool(max(abs(x) for x in zsims) <= 0.03)),
+       source=zone.ZoneCodebook)
+
+    ex = max(priced, key=lambda b: b["ratio"])
+    zv, lv = zcb.zone(ex["zone"]), zcb.level(ex["level"])
+    bv = zone.bar_vector(zcb, ex["zone"], ex["level"])
+    back = nearest(bind(bv, zv), {f"{k}단계": zcb.level(k) for k in range(1, levels + 1)})
+    t.step("봉 하나를 가격대 ⊕ 단계로 묶기", "묶기", [
+        why("설계 선택", "봉 하나 = 가격대 ⊕ 거래량 단계. 요일과 시간대는 넣지 않는다. 거래량 단계에는 이미 '그 시간대 평소의 몇 배'가 들어 있다."),
+    ], inputs=[{"type": "value", "name": "예시 봉(배율이 가장 큰 봉)",
+                "value": f"{ex['date']} {ex['hour']}시대, 가격 {ex['price']:,.0f}원(가격대 {ex['zone']}), 중앙값의 {ex['ratio']:.1f}배({ex['level']}단계)"},
+               vec_info(f"가격대 {ex['zone']}", zv, full=True), vec_info(f"{ex['level']}단계", lv, full=True)],
+       outputs=[vec_info("봉 벡터", bv, full=True)],
+       check=check("봉 벡터 ⊕ 가격대에 가장 가까운 단계", f"{ex['level']}단계", back[0][0]),
+       source=zone.bar_vector)
+
+    zmem = zone.train(zcb, priced)
+    zmv = zmem.to_vector()
+    t.step("매물대 기억에 더하기", "더하기", [
+        why("설계 선택", f"가격이 있는 봉 {zmem.n}개를 따로 둔 기억(카운터)에 더한다. 시간대 모델의 기억과 섞지 않는다."),
+    ], outputs=[{"type": "value", "name": "더한 봉 수", "value": zmem.n},
+                {"type": "value", "name": "동점(0) 칸 수", "value": zmem.tie_count()},
+                vec_info("매물대 기억(다수결)", zmv, full=True)],
+       check=check("더한 봉 수 = 가격이 있는 봉 수", len(priced), zmem.n),
+       source=zone.train)
+
+    ask_rows, agree = [], 0
+    noise = noise_level(cb.dim)
+    for k in range(1, nz + 1):
+        _, sims = zone.ask_zone(zcb, zmv, k)
+        peak = int(np.argmax(sims)) + 1
+        inz = [b["level"] for b in priced if b["zone"] == k]
+        med = int(np.median(inz)) if inz else None
+        agree += (inz and abs(peak - med) <= 1)
+        ask_rows.append([k, round(edges[k - 1]), round(edges[k]), len(inz), peak, round(max(sims), 4),
+                         med, round(float(np.mean(inz)), 2) if inz else None, [round(x, 4) for x in sims]])
+    filled = sum(1 for r in ask_rows if r[3])
+    t.step("가격대마다 풀어 묻기: 이 가격대의 평소 거래량은?", "비교", [
+        why("수학적 사실", "기억을 가격대 k 벡터로 XOR하면, 가격대 k에 있던 봉들의 단계 벡터가 겹쳐 남고 다른 가격대 봉들은 잡음이 된다. "
+                       "남은 것과 12개 단계 벡터를 비교해 가장 닮은 단계가 'HDC가 본 이 가격대의 평소 거래량'이다."),
+        why("수학적 사실", f"봉이 하나도 없던 가격대는 잡음만 남아 모든 단계와의 유사도가 0 근처(흔들림 약 {noise:.2f})다."),
+        why("설계 선택", "옆에 단순 카운트 정답(그 가격대 봉들의 단계 중앙값과 평균)을 둔다. 거래량 단계 벡터는 이웃끼리 닮아 있어, "
+                       "HDC 답은 겹친 단계들의 가운데쯤에서 봉우리가 된다. 그래서 중앙값과 1단계 이내면 일치로 센다."),
+    ], outputs=[{"type": "table", "name": "가격대별 풀어 묻기 결과",
+                 "columns": ["가격대", "하한(원)", "상한(원)", "봉 수", "HDC 답(단계)", "HDC 최고 유사도",
+                             "카운트 중앙값(단계)", "카운트 평균(단계)", "단계 1-12와의 유사도"], "rows": ask_rows},
+                {"type": "value", "name": "잡음 수준(1/√D)", "value": noise}],
+       check=check("봉이 있는 가격대 중 HDC 답이 카운트 중앙값과 1단계 이내인 수", filled, int(agree)),
+       source=zone.ask_zone)
+
+    for b in priced:
+        b["zone_score"] = round(zone.score_leave_one_out(zmem, zone.bar_vector(zcb, b["zone"], b["level"])), 4)
+    zs = np.array([b["zone_score"] for b in priced])
+    alert = float(np.percentile(zs, vc["alert_percentile"]))
+    watch = float(np.percentile(zs, vc["watch_percentile"]))
+    zranked = sorted(priced, key=lambda b: b["zone_score"])
+    for i, b in enumerate(zranked):
+        b["zone_rank"] = i + 1
+        b["zone_verdict"] = "이상" if b["zone_score"] <= alert else "주의" if b["zone_score"] <= watch else "평소"
+
+    def chg(b):
+        return round(100 * (b["ohlc"][3] / b["ohlc"][0] - 1), 1) if "ohlc" in b and b["ohlc"][0] else None
+
+    zone_size = {k: sum(1 for b in priced if b["zone"] == k) for k in range(1, nz + 1)}
+    rho_size = model.spearman([zone_size[b["zone"]] for b in priced], zs)
+    t.step("반년을 다시 채점하기: 이 가격대에서 이 거래량이 드물었나", "비교", [
+        why("설계 선택", "점수 = 봉 벡터(가격대 ⊕ 단계)와 매물대 기억의 유사도. 그 봉 자신은 기억에서 빼고 잰다. 낮을수록 그 가격대에서 드물던 거래량이다."),
+        why("이 데이터에서 관찰", f"가격대마다 봉 수가 {min(zone_size.values())}개부터 {max(zone_size.values())}개까지 크게 다르다. "
+                               f"봉이 많은 가격대일수록 기억 속 몫이 커서 점수가 높게 나온다(봉 수와 점수의 순위 상관 {rho_size:.2f}). "
+                               "그래서 이 점수는 '그 가격대에서 그 거래량이 드물었나'와 '그 가격대에 머문 적이 드물었나'가 섞여 있다. "
+                               "시간대 모델에서는 요일·시간대마다 봉 수가 비슷해(약 25개) 이 문제가 작았다."),
+        why("설계 선택", f"판정 기준도 같은 방식: 학습 점수 하위 {vc['alert_percentile']}%가 이상, {vc['watch_percentile']}%가 주의."),
+    ], outputs=[{"type": "value", "name": "이상 경계(점수 이하)", "value": round(alert, 4)},
+                {"type": "value", "name": "주의 경계(점수 이하)", "value": round(watch, 4)},
+                {"type": "table", "name": "상위 30",
+                 "columns": ["순위", "날짜", "시간대", "가격(원)", "가격대", "배율", "단계", "봉 안 등락(%)", "점수", "판정"],
+                 "rows": [[b["zone_rank"], b["date"], b["hour"], round(b["price"]), b["zone"], round(b["ratio"], 2),
+                           b["level"], chg(b), b["zone_score"], b["zone_verdict"]] for b in zranked[:30]]}],
+       source=zone.score_leave_one_out)
+
+    heavy = sorted([b for b in priced if b["level"] >= 10], key=lambda b: -b["ratio"])
+    t.step("거래가 쏟아진 봉의 가격", "일반 계산", [
+        why("설계 선택", "평소의 16배 이상(10단계 이상)이던 봉을 가격과 함께 모은다. HDC 계산이 아니라 바로 세어 본 표다."),
+        why("수학적 사실", "봉 안 등락(시가 대비 종가)이 음수라고 해서 파는 쪽이 몰렸다고 증명되지는 않는다. "
+                       "'거래 폭증 + 하락 = 매물 출회'는 시장의 관례적인 해석이다."),
+    ], outputs=[{"type": "table", "name": "16배 이상 봉",
+                 "columns": ["날짜", "시간대", "배율", "가격(원)", "가격대", "시가", "고가", "저가", "종가", "봉 안 등락(%)", "매물대 점수 순위"],
+                 "rows": [[b["date"], b["hour"], round(b["ratio"], 1), round(b["price"]), b["zone"]]
+                          + ([round(x) for x in b["ohlc"]] if "ohlc" in b else [None] * 4)
+                          + [chg(b), b["zone_rank"]] for b in heavy]}],
+       source=zone_steps)
+
+    return {"stock": t.data["subject"]["id"], "dim": cb.dim, "zones": nz, "zone_vector_prefix": zone.ZONE_PREFIX,
+            "level_ladder": model.LADDER_NAME, "edges": edges,
+            "thresholds": {"alert": round(alert, 4), "watch": round(watch, 4)},
+            "trained": {"bars": zmem.n, "at": now.isoformat(timespec="seconds")},
+            "history": [{"at": now.isoformat(timespec="seconds"), "kind": "학습", "added": zmem.n, "n_after": zmem.n}],
+            "memory": zmem.to_json()}
 
 
 def main():

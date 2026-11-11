@@ -1,0 +1,57 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "volume.train",
+ "subject": {
+  "type": "stock",
+  "id": "045510.KQ",
+  "code": "045510",
+  "name": "정원엔시스"
+ },
+ "started_at": "2026-11-11T18:53:59+09:00",
+ "finished_at": "2026-11-11T18:53:59+09:00",
+ "params": {
+  "D": 10000,
+  "levels": 12,
+  "sessions": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   15
+  ],
+  "train_months": 6,
+  "ratio_edge_exponents": [
+   -4,
+   -3,
+   -2,
+   -1,
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "sections": [
+  {
+   "title": "공통: 자료와 거래량 단계",
+   "text": "두 모델이 함께 쓰는 앞단. HDC 연산 없이 숫자를 이름표로 바꾼다.",
+   "from_index": 1
+  }
+ ],
+ "steps": [],
+ "log": {
+  "fetched": {},
+  "failures": [
+   {
+    "at": "2026-11-11T18:53:59+09:00",
+    "what": "yfinance 수집",
+    "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/raw-prices.json'"
+   }
+  ],
+  "notes": []
+ }
+}

@@ -12,6 +12,7 @@
   "steps": [
     {
       "index": 1,
+      "section": "시간대 모델" 같은 묶음 이름(sections 참고),
       "name": "단계 이름",
       "op": "벡터 생성" | "뒤집기" | "묶기" | "더하기" | "비교" | "일반 계산",
       "why": [{"kind": "수학적 사실"|"이 데이터에서 관찰"|"비유"|"설계 선택", "text": "..."}],
@@ -91,9 +92,15 @@ class Trace:
             "started_at": now_kst(),
             "finished_at": None,
             "params": params or {},
+            "sections": [],
             "steps": [],
             "log": {"fetched": {}, "failures": [], "notes": []},
         }
+
+    def section(self, title: str, text: str = "") -> None:
+        """여기서부터의 단계가 속한 묶음(예: '시간대 모델', '매물대 모델')."""
+        self.data["sections"].append({"title": title, "text": text, "from_index": len(self.data["steps"]) + 1})
+        self._section = title
 
     def step(self, name, op, why_list, inputs=None, outputs=None, check=None, source=None) -> dict:
         assert op in OPS, op
@@ -101,6 +108,7 @@ class Trace:
             source = source_of(source)
         s = {
             "index": len(self.data["steps"]) + 1,
+            "section": getattr(self, "_section", None),
             "name": name,
             "op": op,
             "why": why_list,
