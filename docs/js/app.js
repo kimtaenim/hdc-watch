@@ -68,6 +68,17 @@ function gridBox(name, bits, extra = "", highlight = null) {
     el("div", { class: "gname" }, name), el("div", {}, `1의 개수 ${H.ones(bits).toLocaleString("ko-KR")}`), extra ? el("div", {}, extra) : null);
 }
 
+// ---------- 숫자 줄: 앞 n칸 ··· 뒤 tail칸을 위아래로 맞춰 ----------
+function bitRows(rows, dim, n = 8, tail = 4) {
+  const cols = [...Array(n).keys(), null, ...Array.from({ length: tail }, (_, i) => dim - tail + i)];
+  const head = el("tr", {}, el("th", {}, "칸"), cols.map((c) => el("th", { class: "pos" }, c === null ? "" : c + 1)));
+  const body = rows.map((r) => el("tr", { class: r.line ? "result" : "" }, el("th", { class: "rname" }, r.name),
+    cols.map((c) => c === null ? el("td", { class: "dots" }, "···")
+      : el("td", { class: r.mark && r.mark[c] ? "hl" : "" },
+        r.vals ? (r.vals[c] > 0 ? `+${r.vals[c]}` : `${r.vals[c]}`) : r.bits[c]))));
+  return el("div", { class: "bitrows" }, el("table", {}, el("thead", {}, head), el("tbody", {}, body)));
+}
+
 // ---------- 표 ----------
 function tableEl(cols, rows, limit = null) {
   const shown = limit ? rows.slice(0, limit) : rows;
@@ -104,8 +115,7 @@ function renderGear(step, code) {
     el("span", { class: "chip" }, `${v.name} `, el("b", {}, fmt(v.value))))));
 
   const withBits = vectors.filter((v) => v.bits_b64);
-  if (withBits.length) li.append(el("div", { class: "grids" }, withBits.slice(0, 4).map((v) =>
-    gridBox(v.name, H.bitsFromB64(v.bits_b64, v.dim)))));
+  if (withBits.length) li.append(bitRows(withBits.slice(0, 4).map((v) => ({ name: v.name, bits: H.bitsFromB64(v.bits_b64, v.dim) })), withBits[0].dim));
   if (step.check) {
     const c = step.check;
     li.append(el("div", { class: "check" }, `확인: ${c.question}. 단순 카운트 정답 `, el("b", {}, fmt(c.count_answer)),
@@ -117,11 +127,12 @@ function renderGear(step, code) {
   }
 
   // 펼치면 숫자 전체
-  const more = el("details", { class: "more" }, el("summary", {}, "숫자 전체와 소스 코드"));
+  const more = el("details", { class: "more" }, el("summary", {}, "숫자 전체, 격자 그림, 소스 코드"));
   more.addEventListener("toggle", () => {
     if (!more.open || more.dataset.done) return;
     more.dataset.done = "1";
-    if (withBits.length > 4) more.append(el("div", { class: "grids" }, withBits.slice(4).map((v) => gridBox(v.name, H.bitsFromB64(v.bits_b64, v.dim)))));
+    if (withBits.length > 4) more.append(bitRows(withBits.slice(4).map((v) => ({ name: v.name, bits: H.bitsFromB64(v.bits_b64, v.dim) })), withBits[0].dim));
+    if (withBits.length) more.append(el("div", { class: "grids" }, withBits.map((v) => gridBox(v.name, H.bitsFromB64(v.bits_b64, v.dim)))));
     for (const v of vectors) more.append(el("div", { class: "head-bits" }, `${v.name}: 1의 개수 ${v.ones}, 앞 64비트 ${v.head}`));
     for (const t of tables) more.append(el("div", { class: "tname" }, `${t.name} (${t.rows.length}행)`), tableEl(t.columns || [], t.rows));
     for (const o of all.filter((o) => o.type === "flips")) more.append(el("div", { class: "head-bits" }, `${o.name}: ${o.cells.length}칸 (${o.cells.slice(0, 40).join(", ")} ...)`));
@@ -229,38 +240,49 @@ async function buildFrames(bar) {
     addStep = stepOf(t, "더하기"), cmpStep = stepOf(t, "비교"), judge = stepOf(t, "일반 계산", "판정");
   const label = `${bar.date}(${bar.wd}) ${bar.hour}시대, ${fmt(bar.vol)}주, 그 시간대 중앙값의 ${fmt(bar.ratio)}배 → ${bar.level}단계`;
 
+  const memAfter = mem.counts;
+  const grids = (...boxes) => el("details", { class: "more" }, el("summary", {}, `${dim.toLocaleString("ko-KR")}칸 전체를 격자로 보기`),
+    el("div", { class: "grids" }, ...boxes));
   F.frames = [
     { title: "① 요일 벡터 꺼내기", op: "벡터 생성", why: genStep,
-      body: () => [el("div", { class: "grids" }, gridBox(`요일:${bar.wd}`, dayV))] },
+      body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }], dim), grids(gridBox(`요일:${bar.wd}`, dayV))] },
     { title: "② 시간대 벡터 꺼내기", op: "벡터 생성", why: genStep,
-      body: () => [el("div", { class: "grids" }, gridBox(`시간대:${bar.hour}`, hourV),
-        el("div", { class: "chip" }, `요일 벡터와의 유사도 `, el("b", {}, fmt(H.similarity(dayV, hourV)))))] },
+      body: () => [bitRows([{ name: `요일:${bar.wd}`, bits: dayV }, { name: `시간대:${bar.hour}`, bits: hourV }], dim),
+        el("div", { class: "values" }, el("span", { class: "chip" }, "두 줄이 다른 칸 ", el("b", {}, fmt(H.hamming(dayV, hourV)))),
+          el("span", { class: "chip" }, "유사도 ", el("b", {}, fmt(H.similarity(dayV, hourV))))),
+        grids(gridBox(`요일:${bar.wd}`, dayV), gridBox(`시간대:${bar.hour}`, hourV))] },
     { title: `③ ${bar.level}단계 벡터 꺼내기`, op: "뒤집기", why: flipStep,
-      body: () => [el("div", { class: "grids" }, gridBox("1단계", lv1),
-        gridBox(`${bar.level}단계`, lvk, `1단계에서 뒤집힌 칸 ${H.ones(flipped).toLocaleString("ko-KR")}개(주황)`, flipped)),
-        el("div", { class: "chip" }, `1단계와의 유사도 `, el("b", {}, fmt(H.similarity(lv1, lvk))))] },
+      body: () => [bitRows([{ name: "1단계", bits: lv1 }, { name: `${bar.level}단계`, bits: lvk, mark: flipped }], dim),
+        el("div", { class: "values" }, el("span", { class: "chip" }, "1단계에서 뒤집힌 칸(주황) ", el("b", {}, fmt(H.ones(flipped)))),
+          el("span", { class: "chip" }, "1단계와의 유사도 ", el("b", {}, fmt(H.similarity(lv1, lvk))))),
+        grids(gridBox("1단계", lv1), gridBox(`${bar.level}단계`, lvk, "뒤집힌 칸 주황", flipped))] },
     { title: "④ 묶기: 요일 ⊕ 시간대", op: "묶기", why: bindStep,
-      body: () => [el("div", { class: "grids" }, gridBox("A 요일", dayV), el("span", { class: "grid-op" }, "⊕"),
-        gridBox("B 시간대", hourV), el("span", { class: "grid-op" }, "="), gridBox("A ⊕ B", ds, "두 칸이 다르면 1")),
-        el("div", { class: "chip" }, `결과와 A의 유사도 `, el("b", {}, fmt(H.similarity(ds, dayV))))] },
+      body: () => [bitRows([{ name: "A 요일", bits: dayV }, { name: "B 시간대", bits: hourV }, { name: "A ⊕ B", bits: ds, line: true }], dim),
+        el("p", { class: "hint" }, "세로로 한 칸씩 보면: 위 두 숫자가 같으면 0, 다르면 1."),
+        el("div", { class: "values" }, el("span", { class: "chip" }, "결과와 A의 유사도 ", el("b", {}, fmt(H.similarity(ds, dayV)))),
+          el("span", { class: "chip" }, "결과와 B의 유사도 ", el("b", {}, fmt(H.similarity(ds, hourV))))),
+        grids(gridBox("A 요일", dayV), gridBox("B 시간대", hourV), gridBox("A ⊕ B", ds))] },
     { title: "⑤ 묶기: (요일 ⊕ 시간대) ⊕ 단계 = 봉 벡터", op: "묶기", why: bindStep,
-      body: () => [el("div", { class: "grids" }, gridBox("요일 ⊕ 시간대", ds), el("span", { class: "grid-op" }, "⊕"),
-        gridBox(`${bar.level}단계`, lvk), el("span", { class: "grid-op" }, "="), gridBox("봉 벡터", barV)),
+      body: () => [bitRows([{ name: "요일 ⊕ 시간대", bits: ds }, { name: `${bar.level}단계`, bits: lvk }, { name: "봉 벡터", bits: barV, line: true }], dim),
         el("div", { class: "chip" }, "되돌려 보기: 봉 벡터 ⊕ (요일 ⊕ 시간대) = ", el("b", {},
-          H.hamming(H.bind(barV, ds), lvk) === 0 ? `${bar.level}단계 벡터와 모든 칸이 같음` : "다름"))] },
+          H.hamming(H.bind(barV, ds), lvk) === 0 ? `${bar.level}단계 벡터와 모든 칸이 같음` : "다름")),
+        grids(gridBox("요일 ⊕ 시간대", ds), gridBox(`${bar.level}단계`, lvk), gridBox("봉 벡터", barV))] },
     { title: "⑥ 기억 꺼내기(이 봉 자신은 뺀다)", op: "더하기", why: addStep,
-      body: () => [el("div", { class: "grids" }, gridBox("기억(다수결)", memV)),
+      body: () => [bitRows([{ name: "카운터", vals: memAfter }, { name: "기억", bits: memV, line: true }], dim, 4, 2),
+        el("p", { class: "hint" }, `카운터는 칸마다 ${fmt(mem.n)}개 봉의 투표 합(1이면 +1, 0이면 -1). 양수면 기억의 그 칸이 1, 음수면 0.`),
         el("div", { class: "values" }, el("span", { class: "chip" }, "더해 둔 봉 ", el("b", {}, fmt(m.memory.n))),
-          el("span", { class: "chip" }, "이 봉을 뺀 뒤 ", el("b", {}, fmt(mem.n))))] },
+          el("span", { class: "chip" }, "이 봉을 뺀 뒤 ", el("b", {}, fmt(mem.n)))),
+        grids(gridBox("기억(다수결)", memV))] },
     { title: "⑦ 비교: 봉 벡터와 기억", op: "비교", why: cmpStep,
-      body: () => [el("div", { class: "grids" }, gridBox("봉 벡터", barV), el("span", { class: "grid-op" }, "vs"),
-        gridBox("기억", memV), el("span", { class: "grid-op" }, "→"), gridBox("다른 칸(주황)", barV, `${d.toLocaleString("ko-KR")}칸이 다름`, diff)),
+      body: () => [bitRows([{ name: "봉 벡터", bits: barV }, { name: "기억", bits: memV }, { name: "다른 칸", bits: diff, mark: diff, line: true }], dim),
         el("div", { class: "values" },
-          el("span", { class: "chip" }, "해밍 거리 ", el("b", {}, fmt(d))),
+          el("span", { class: "chip" }, "다른 칸(해밍 거리) ", el("b", {}, fmt(d))),
+          el("span", { class: "chip" }, "무관하면 약 ", el("b", {}, fmt(dim / 2))),
           el("span", { class: "chip" }, `유사도 = 1 - 2 × ${d} / ${dim} = `, el("b", {}, fmt(sim))),
           el("span", { class: "chip" }, "잡음 수준 ", el("b", {}, fmt(H.noiseLevel(dim))))),
         el("div", { class: "check" }, `확인: 파이썬이 낸 점수 ${fmt(bar.score)}, 이 브라우저 ${fmt(Math.round(sim * 1e4) / 1e4)} `,
-          el("span", { class: Math.abs(sim - bar.score) < 1e-4 ? "ok" : "bad" }, Math.abs(sim - bar.score) < 1e-4 ? "일치" : "어긋남"))] },
+          el("span", { class: Math.abs(sim - bar.score) < 1e-4 ? "ok" : "bad" }, Math.abs(sim - bar.score) < 1e-4 ? "일치" : "어긋남")),
+        grids(gridBox("봉 벡터", barV), gridBox("기억", memV), gridBox("다른 칸(주황)", barV, "", diff))] },
     { title: "⑧ 판정", op: "일반 계산", why: judge,
       body: () => [el("div", { class: "values" },
         el("span", { class: "chip" }, "점수 ", el("b", {}, fmt(sim))),

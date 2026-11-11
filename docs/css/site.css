@@ -120,3 +120,13 @@ th { position: sticky; top: 0; background: var(--card); }
 
 .runs td.fail { color: var(--bad); white-space: normal; min-width: 180px; }
 .foot { text-align: center; color: var(--muted); font-size: .8rem; padding: 18px 16px 28px; }
+
+/* 숫자 줄: 앞 8칸 ··· 뒤 8칸 */
+.bitrows { overflow-x: auto; margin: 8px 0; }
+.bitrows table { width: auto; border-collapse: collapse; font-family: ui-monospace, Menlo, monospace; font-size: .82rem; }
+.bitrows th, .bitrows td { border: 0; padding: 1px 2px; text-align: center; position: static; background: none; }
+.bitrows th.pos { font-size: .55rem; color: var(--muted); font-weight: 400; }
+.bitrows th.rname { text-align: right; font-family: system-ui, sans-serif; font-size: .7rem; font-weight: 600; padding-right: 6px; white-space: normal; max-width: 64px; word-break: keep-all; line-height: 1.2; }
+.bitrows td.dots { color: var(--muted); }
+.bitrows td.hl { color: #fff; background: var(--hl); border-radius: 3px; }
+.bitrows tr.result td, .bitrows tr.result th { border-top: 1px solid var(--ink); }
