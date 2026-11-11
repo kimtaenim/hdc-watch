@@ -1,0 +1,29 @@
+# RSS 제목 수집과 트렌드 문맥 분석. 매일 3시간마다(한국 시각 7:20, 10:20, 13:20, 16:20, 19:20, 22:20).
+# 예약 시각은 UTC. 수십 분 밀리거나 빠질 수 있고, 그 기록은 docs/data/runs.json에 남는다.
+name: 트렌드 수집과 분석
+on:
+  schedule:
+    - cron: "20 22,1,4,7,10,13 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: data-commit
+jobs:
+  trend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m trend.analyze --collect
+      - name: 결과 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "트렌드 수집 $(TZ=Asia/Seoul date +%Y-%m-%dT%H:%M)"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 5)); done
+          exit 1

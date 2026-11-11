@@ -139,5 +139,55 @@
       ],
       "_주의": "ESS는 합치지 않음(의장님 결정)"
     }
-  ]
+  ],
+  "trend": {
+    "_설명": "RSS 제목 수집과 문맥 탐지 설정. 주소는 2026-11-11 GitHub Actions에서 열리는지 확인(docs/data/trend/feed_check.json)",
+    "feeds": [
+      {
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/feed/all-news"
+      },
+      {
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/feed/it"
+      },
+      {
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/rss/30000001/"
+      },
+      {
+        "source": "이데일리",
+        "url": "http://rss.edaily.co.kr/edaily_news.xml",
+        "_주의": "robots.txt를 읽지 못함(HTTP 오류). 공식 RSS라 사용"
+      },
+      {
+        "source": "지디넷코리아",
+        "url": "https://feeds.feedburner.com/zdkorea"
+      },
+      {
+        "source": "블로터",
+        "url": "https://www.bloter.net/rss/allArticle.xml"
+      },
+      {
+        "source": "전자신문",
+        "url": "https://rss.etnews.com/Section901.xml"
+      },
+      {
+        "source": "뉴시스",
+        "url": "https://newsis.com/RSS/sokbo.xml"
+      },
+      {
+        "source": "뉴시스",
+        "url": "https://newsis.com/RSS/economy.xml"
+      }
+    ],
+    "past_days": 28,
+    "_past_days": "과거 프로토타입에 넣는 기간(오늘 제외 최근 며칠). 기간을 나눠 관리해 용량 한계를 늦춘다",
+    "min_today": 2,
+    "_min_today": "오늘 이 횟수 이상 나온 조합만 새 조합 후보로 본다",
+    "noise_k": 3,
+    "_noise_k": "잡음 수준 = noise_k / √D. 과거 점수가 이보다 낮으면 과거에 없던 것으로 본다",
+    "warmup_days": 14,
+    "_warmup_days": "과거 자료가 이 일수보다 적으면 '아직 과거가 얕음(예열 중)'으로 표시"
+  }
 }

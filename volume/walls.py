@@ -109,7 +109,8 @@ def bipolar(v: np.ndarray) -> np.ndarray:
 
 def ask_walls_counter(cb: WallCodebook, counts: np.ndarray, outcome: str, level: int):
     """정수판(본 점수): 정수 프로토타입에 결과·단계를 ±1로 곱해 풀고, 가격칸 벡터(±1)마다 코사인.
-    0/1의 XOR은 ±1의 곱과 같으므로 이진판과 같은 연산을 다수결 전 숫자에 한 것이다."""
+    0을 -1, 1을 +1로 볼 때 세 벡터의 XOR은 칸끼리의 곱과 같다(두 벡터면 곱에 -1이 붙는다).
+    닿음 벡터가 세 벡터의 XOR이므로, 결과·단계 두 개를 곱해 풀면 부호 없이 가격칸 벡터의 합이 남는다."""
     q = counts * bipolar(cb.outcomes[outcome]) * bipolar(cb.level(level))
     norm = float(np.sqrt((q.astype(np.float64) ** 2).sum())) * np.sqrt(len(q))
     return q, {k: float((q * bipolar(v)).sum()) / norm for k, v in cb.cells.items()}

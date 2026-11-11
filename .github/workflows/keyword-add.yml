@@ -1,0 +1,35 @@
+# 키워드 추가(수동 버튼). Actions → "키워드 추가" → Run workflow 에서 입력한다.
+name: 키워드 추가
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "영문 id (소문자, 숫자, 하이픈). 예: cooling"
+        required: true
+      name:
+        description: "화면에 보일 이름. 예: 액침냉각"
+        required: true
+      variants:
+        description: "같은 말로 볼 표기들, 쉼표로. 예: 액침냉각, 액침 냉각"
+        required: false
+permissions:
+  contents: write
+concurrency: data-commit
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy
+      - run: python -m trend.add_keyword --id "${{ inputs.id }}" --name "${{ inputs.name }}" --variants "${{ inputs.variants }}"
+      - name: 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/watch.json
+          git commit -m "키워드 추가: ${{ inputs.name }}"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 5)); done
+          exit 1
