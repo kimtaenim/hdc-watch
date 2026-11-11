@@ -1,4 +1,4 @@
-"""거래량 원자료 받기와 하루 7개 봉 만들기, 단계 나누기.
+"""거래량 원자료 받기와 하루 봉 만들기, 단계 나누기.
 
 HDC 연산은 없다. 숫자를 HDC가 다룰 수 있는 이름표(요일, 시간대, 단계)로 바꾸는 앞단이다.
 """
@@ -55,9 +55,11 @@ def window(days, end: str, months: int):
     return [d for d in days if start.isoformat() < d <= end], start.isoformat()
 
 
-def build_bars(hourly, daily, dates, sessions, derived_session, zero_is_missing=()):
-    """날짜마다 7개 봉을 만든다. 9-14시대는 시간봉 그대로, 15시대는 '일별 - 시간봉 6개 합'으로 역산.
+def build_bars(hourly, daily, dates, sessions, derived_session, zero_is_missing=(), hourly_sessions=None):
+    """날짜마다 봉을 만든다. 시간봉 시간대는 그대로, 15시대는 '일별 - 시간봉 합'으로 역산.
 
+    sessions: 봉으로 만들 시간대들. hourly_sessions: 역산에서 빼는 시간봉 시간대들(없으면 sessions에서 역산 시간대를 뺀 것).
+      봉으로 만들지 않는 시간대(예: 9시대)도 역산할 때는 빼야, 그 거래량이 역산 봉에 섞이지 않는다.
     zero_is_missing: 거래량 0을 자료 누락으로 보는 시간대들. 그 봉과 그날 역산 봉을 결측으로 둔다.
       (야후 시간봉은 쉬는 날 다음 첫 거래일의 9시대를 0으로 내는데, 같은 날 30분봉·5분봉에는 거래가 있다.
        빠진 거래량은 일별에는 들어 있어 역산 봉을 부풀린다.)
@@ -65,20 +67,22 @@ def build_bars(hourly, daily, dates, sessions, derived_session, zero_is_missing=
     봉: {"date", "weekday", "hour", "volume"(없으면 None), "source": "시간봉"|"역산", "missing": 이유 또는 None}
     """
     by_key = {(r["date"], r["hour"]): r["volume"] for r in hourly}
-    regular = [s for s in sessions if s != derived_session]
+    regular = hourly_sessions or [s for s in sessions if s != derived_session]
     bars, problems = [], []
     for d in dates:
         wd = WEEKDAYS[dt.date.fromisoformat(d).weekday()]
         vols = [by_key.get((d, s)) for s in regular]
         zeroed = [s for s, v in zip(regular, vols) if v == 0 and s in zero_is_missing]
         for s, v in zip(regular, vols):
+            if s not in sessions:
+                continue  # 역산에만 쓰고 봉으로는 만들지 않는 시간대
             miss = "시간봉 없음" if v is None else (f"{s}시대 0주: 시간봉 누락으로 봄" if s in zeroed else None)
             bars.append({"date": d, "weekday": wd, "hour": s, "volume": v, "source": "시간봉", "missing": miss})
-            if s in zeroed:
-                problems.append({"date": d, "reason": f"{s}시대 시간봉 0주(누락으로 봄)"})
+        for s in zeroed:
+            problems.append({"date": d, "reason": f"{s}시대 시간봉 0주(누락으로 봄)"})
         reason, derived = None, None
         if any(v is None for v in vols):
-            reason = "시간봉 6개가 다 있지 않아 역산 불가"
+            reason = f"시간봉 {len(regular)}개가 다 있지 않아 역산 불가"
         elif zeroed:
             reason = f"{zeroed[0]}시대 시간봉 누락: 빠진 거래량이 역산값에 섞임"
         elif d not in daily:

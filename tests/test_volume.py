@@ -37,6 +37,13 @@ class TestBars(unittest.TestCase):
         self.assertTrue(data.after_break("2026-11-09", ["2026-11-06", "2026-11-09"]))
         self.assertFalse(data.after_break("2026-11-10", ["2026-11-09", "2026-11-10"]))
 
+    def test_session_used_only_for_derivation(self):
+        hourly = [{"date": "2026-11-10", "hour": h, "volume": 1000} for h in range(9, 15)]
+        bars, _ = data.build_bars(hourly, {"2026-11-10": 9000}, ["2026-11-10"], [10, 11, 12, 13, 14, 15], 15,
+                                  [9], [9, 10, 11, 12, 13, 14])
+        self.assertEqual([b["hour"] for b in bars], [10, 11, 12, 13, 14, 15])
+        self.assertEqual(bars[-1]["volume"], 3000)  # 9시대 1000주도 뺀다
+
     def test_levels(self):
         self.assertEqual(data.level_of(0.0, EDGES), 1)
         self.assertEqual(data.level_of(1.0, EDGES), 6)

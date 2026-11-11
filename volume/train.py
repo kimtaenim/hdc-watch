@@ -88,33 +88,41 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                 {"type": "value", "name": "받은 시각", "value": fetched_at}],
        source=data.fetch)
 
-    # ② 하루 7개 봉 (15시대 역산)
+    # ② 하루 봉 만들기 (15시대 역산)
     zero_missing = vc.get("zero_is_missing_sessions", [])
-    bars, problems = data.build_bars(hourly, daily, dates, sessions, dsess, zero_missing)
+    hsess = vc.get("hourly_sessions") or [s for s in sessions if s != dsess]
+    regular_s = [s for s in sessions if s != dsess]
+    span = f"{regular_s[0]}-{regular_s[-1]}시대"
+    hspan = f"{hsess[0]}-{hsess[-1]}시대"
+    skipped = [s for s in hsess if s not in sessions]
+    bars, problems = data.build_bars(hourly, daily, dates, sessions, dsess, zero_missing, hsess)
     derived = [b for b in bars if b["source"] == "역산"]
     ok = [b for b in derived if b["missing"] is None]
     sums_ok = sum(1 for b in ok if b["volume"] + b["hourly_sum"] == b["daily"])
     for p in problems:
         t.failure("봉 만들기", f"{p['date']}: {p['reason']}")
-    zero_days = sorted({b["date"] for b in bars if b["missing"] and "0주" in b["missing"]})
+    zero_days = sorted({p["date"] for p in problems if "0주" in p["reason"]})
     n_zero = len(zero_days)
     after_break = sum(1 for d in zero_days if data.after_break(d, days))
     n_neg = sum(1 for b in derived if b["missing"] and "음수" in b["missing"])
-    t.step("하루 7개 봉 만들기", "일반 계산", [
-        why("설계 선택", f"9시대-14시대 6개는 시간봉 그대로 쓰고, {dsess}시대(마감 동시호가) 봉은 시간봉에 없어 "
-                       "'일별 거래량 - 시간봉 6개 합'으로 역산한다. 역산값이 음수면 그 봉은 결측으로 둔다."),
+    t.step(f"하루 {len(sessions)}개 봉 만들기", "일반 계산", [
+        why("설계 선택", f"{span} {len(regular_s)}개는 시간봉 그대로 쓰고, {dsess}시대(마감 동시호가) 봉은 시간봉에 없어 "
+                       f"'일별 거래량 - {hspan} 시간봉 {len(hsess)}개 합'으로 역산한다. 역산값이 음수면 그 봉은 결측으로 둔다."),
+        why("설계 선택", f"{', '.join(map(str, skipped))}시대는 봉으로 만들지 않는다(2026-11-11 의장님 결정). "
+                       "다만 역산할 때는 빼야 그 거래량이 역산 봉에 섞이지 않는다.") if skipped else
+        why("설계 선택", "모든 시간봉 시간대를 봉으로 만든다."),
         why("이 데이터에서 관찰",
             f"{len(dates)}일 중 {n_zero}일은 {', '.join(map(str, zero_missing))}시대 시간봉이 0주였다. 그중 {after_break}일이 쉬는 날 바로 다음 거래일이고, "
-            "같은 날 30분봉·5분봉에는 9시대 거래가 있다(2026-11-11 최근 60일 대조). 그래서 그 봉과 그날 역산 봉을 결측으로 둔다."),
+            "같은 날 30분봉·5분봉에는 9시대 거래가 있다(2026-11-11 최근 60일 대조). 그래서 그날 역산 봉을 결측으로 둔다."),
         why("이 데이터에서 관찰",
-            f"{n_neg}일은 시간봉 6개 합이 일별 거래량보다 커서 역산할 수 없었다. 원인은 확인하지 못했다."),
+            f"{n_neg}일은 시간봉 {len(hsess)}개 합이 일별 거래량보다 커서 역산할 수 없었다. 원인은 확인하지 못했다."),
     ], outputs=[{"type": "value", "name": "만든 봉", "value": len(bars)},
                 {"type": "value", "name": f"역산한 {dsess}시대 봉", "value": len(ok)},
                 {"type": "table", "name": "결측으로 둔 봉", "columns": ["날짜", "시간대", "이유"],
                  "rows": [[b["date"], b["hour"], b["missing"]] for b in bars if b["missing"]]},
-                {"type": "table", "name": "역산 예시(최근 5일)", "columns": ["날짜", "일별", "시간봉 6개 합", "역산"],
+                {"type": "table", "name": "역산 예시(최근 5일)", "columns": ["날짜", "일별", f"시간봉 {len(hsess)}개 합", "역산"],
                  "rows": [[b["date"], b["daily"], b["hourly_sum"], b["volume"]] for b in ok[-5:]]}],
-       check=check(f"역산 {dsess}시대 + 시간봉 6개 = 일별 거래량인 날 수", len(ok), sums_ok),
+       check=check(f"역산 {dsess}시대 + 시간봉 {len(hsess)}개 = 일별 거래량인 날 수", len(ok), sums_ok),
        source=data.build_bars)
 
     # ③ 시간대 중앙값
@@ -139,10 +147,10 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                        f"{levels}단계로 나눈다. 6단계가 평소(1배-2배)다. 경계값은 위 단계에 넣는다."),
         why("설계 선택", "2배 간격은 '평소의 2배'와 '평소의 4배'를 같은 거리로 본다는 뜻이다(로그 눈금)."),
     ], outputs=[{"type": "table", "name": "단계별 배율 구간과 봉 수",
-                 "columns": ["단계", "배율 구간", "9-14시대 봉", f"{dsess}시대 봉"],
+                 "columns": ["단계", "배율 구간", f"{span} 봉", f"{dsess}시대 봉"],
                  "rows": [[k + 1, f"{bounds_txt[k]} - {bounds_txt[k + 1]}", dist_reg[k], dist_last[k]]
                           for k in range(levels)]}],
-       check=check("9-14시대 봉 수 = 단계별 봉 수 합", sum(1 for b in bars if b["hour"] != dsess and b["level"]),
+       check=check(f"{span} 봉 수 = 단계별 봉 수 합", sum(1 for b in bars if b["hour"] != dsess and b["level"]),
                    sum(dist_reg)),
        source=data.level_of)
 
@@ -150,14 +158,16 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
     cb = model.Codebook(sessions, levels, D)
     sims_ds = [similarity(a, b) for i, a in enumerate(list(cb.days.values()) + list(cb.sessions.values()))
                for j, b in enumerate(list(cb.days.values()) + list(cb.sessions.values())) if i < j]
-    t.step("요일 벡터 5개, 시간대 벡터 7개 꺼내기", "벡터 생성", [
+    n_base = len(cb.days) + len(cb.sessions)
+    n_pairs = n_base * (n_base - 1) // 2
+    t.step(f"요일 벡터 {len(cb.days)}개, 시간대 벡터 {len(cb.sessions)}개 꺼내기", "벡터 생성", [
         why("설계 선택", "요일과 시간대는 서로 독립인 무작위 벡터다. 월요일과 화요일이 가깝다는 식의 순서 정보는 넣지 않았다."),
-        why("수학적 사실", f"이름이 다르면 벡터는 서로 무관하다. 12개 벡터의 66쌍 유사도는 0 근처이고 흔들림은 약 {noise_level(D):.2f}이다."),
+        why("수학적 사실", f"이름이 다르면 벡터는 서로 무관하다. {n_base}개 벡터의 {n_pairs}쌍 유사도는 0 근처이고 흔들림은 약 {noise_level(D):.2f}이다."),
     ], outputs=[vec_info(model.day_name(k), v, full=True) for k, v in cb.days.items()]
                + [vec_info(model.session_name(k), v, full=True) for k, v in cb.sessions.items()]
-               + [{"type": "value", "name": "66쌍 유사도 범위",
+               + [{"type": "value", "name": f"{n_pairs}쌍 유사도 범위",
                    "value": [round(min(sims_ds), 4), round(max(sims_ds), 4)]}],
-       check=check("66쌍 모두 |유사도| ≤ 0.03인가", True, bool(max(abs(s) for s in sims_ds) <= 0.03)),
+       check=check(f"{n_pairs}쌍 모두 |유사도| ≤ 0.03인가", True, bool(max(abs(s) for s in sims_ds) <= 0.03)),
        source=model.Codebook)
 
     lv_sims = [round(similarity(cb.level(1), cb.level(k)), 4) for k in range(1, levels + 1)]
@@ -272,7 +282,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
                  "columns": ["순위", "날짜", "요일", "시간대", "거래량", "배율", "단계", "점수", "판정", "카운트 순위"],
                  "rows": [[b["rank"], b["date"], b["weekday"], b["hour"], b["volume"], round(b["ratio"], 2),
                            b["level"], b["score"], b["verdict"], count_rank[id(b)]] for b in ranked[:30]]},
-                {"type": "table", "name": "평소의 16배 이상이던 9-14시대 봉",
+                {"type": "table", "name": f"평소의 16배 이상이던 {span} 봉",
                  "columns": ["순위", "날짜", "요일", "시간대", "배율", "단계", "점수", "카운트 순위"],
                  "rows": [[b["rank"], b["date"], b["weekday"], b["hour"], round(b["ratio"], 1), b["level"],
                            b["score"], count_rank[id(b)]] for b in sorted(big, key=lambda b: b["rank"])]}],
