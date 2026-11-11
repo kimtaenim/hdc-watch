@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-11T23:00:44+09:00",
- "finished_at": "2026-11-11T23:00:56+09:00",
+ "started_at": "2026-11-11T23:02:35+09:00",
+ "finished_at": "2026-11-11T23:02:37+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-11",
@@ -24,8 +24,8 @@
   "noise_k": 3
  },
  "code": {
-  "commit": "519f4e17ae848f718a8aedfbf143f46cbad04130",
-  "dirty": false
+  "commit": "2af03902f16092f0bf996f022a12e9bdfbe9ac87",
+  "dirty": true
  },
  "sections": [
   {
@@ -100,46 +100,17 @@
       "매체",
       "받은 글"
      ],
-     "rows": [
-      [
-       "한국경제",
-       100
-      ],
-      [
-       "매일경제",
-       50
-      ],
-      [
-       "이데일리",
-       50
-      ],
-      [
-       "지디넷코리아",
-       30
-      ],
-      [
-       "블로터",
-       50
-      ],
-      [
-       "전자신문",
-       30
-      ],
-      [
-       "뉴시스",
-       200
-      ]
-     ]
+     "rows": []
     },
     {
      "type": "value",
      "name": "새로 쌓은 제목",
-     "value": 501
+     "value": 0
     },
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 410
+     "value": 492
     },
     {
      "type": "value",
@@ -161,29 +132,29 @@
      ],
      "rows": [
       [
-       "09:00",
-       "뉴시스",
-       "정부, '국민일자리 프로젝트' 조속 마련…청년·중장년 고용 지원"
+       "15:17",
+       "블로터",
+       "[어바웃C] 송치영 포스코이앤씨 대표, 흑자경영 속 '안전대책' 관심"
       ],
       [
-       "08:17",
-       "뉴시스",
-       "10월 취업자 13만9000명↑…청년 고용률 30개월째 하락(2보)"
+       "15:14",
+       "블로터",
+       "[의료로봇 줌인] 큐렉소, 美 로봇기업 616억 투자 '장부가 0원' 부메랑"
       ],
       [
-       "08:02",
-       "뉴시스",
-       "[속보]20대 취업자 20만3000명 감소…청년 고용률 1.7%p 하락"
+       "15:11",
+       "블로터",
+       "박현근 LH 공공주택본부장, 취임 한달 '연간 착공 목표' 달성할까"
       ],
       [
-       "08:00",
-       "뉴시스",
-       "10월 취업자 13만9000명↑…제조업 한 달 만에 감소 전환(1보)"
+       "15:11",
+       "블로터",
+       "비즈인게이지, 흩어진 AI 도구 엮는 '마케팅OS' 제시[DMTS27]"
       ],
       [
-       "07:00",
-       "뉴시스",
-       "에너지바우처 예산 500억 남는데…기초수급 10곳 중 3곳 지원 못받아"
+       "15:01",
+       "블로터",
+       "[단독] 코오롱 자체 AI '코코' 시험…바이오 제조 AX는 별도 추진"
       ]
      ]
     }
@@ -191,7 +162,7 @@
    "check": null,
    "source": {
     "file": "trend/collect.py",
-    "line": 55,
+    "line": 69,
     "function": "collect"
    }
   },
@@ -919,7 +890,7 @@
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 3
+     "value": 5
     },
     {
      "type": "value",
@@ -968,6 +939,30 @@
         "미래",
         "성장동력"
        ]
+      ],
+      [
+       "블로터",
+       "[의료로봇 줌인] 리브스메드, 공모자금 절반 소진 '현금흐름' 경고등",
+       [
+        "줌인",
+        "리브스메드",
+        "공모자금",
+        "절반",
+        "소진",
+        "현금흐름",
+        "경고"
+       ]
+      ],
+      [
+       "블로터",
+       "[의료로봇 줌인] 큐렉소, 美 로봇기업 616억 투자 '장부가 0원' 부메랑",
+       [
+        "줌인",
+        "큐렉소",
+        "투자",
+        "장부",
+        "부메랑"
+       ]
       ]
      ]
     }
@@ -1005,26 +1000,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:네이버",
+     "name": "단어:줌인",
      "dim": 10000,
-     "ones": 4969,
-     "head": "0000001100000000011001110110011110010111011001001001010111010001",
-     "bits_b64": "AwBnZ5dkldGXKTdJP7RDSlXV7AIfg7I1Wh9tJ9/RaOAvmnd4BoBF8hymd0ypds5C3t1+RUXXRaWVFKgnf/CxylWm3IMpoJmro0jNsgEvp/vJE0Wq3utd8IFIOJA8T1G5y/WkqPONrOns9qMkC4V7jvxK0zOJC1z1r/Vq4MIHcpJA7TZ26sjyhBNCY2ZbNUH2j+XbNtNjwPmif2+eGfft0IoLmSAhg8oKEy4i5bgb3aOviq9urHUvwaBkjRAtwM1Y8UxGmFk4HWKnqRHDk/I8Gd9bxtUNhC+pM+GbuJXKKpoyzEpjrx8kgTebsX9Up2vL0oYCeLIKV/Bx3iGPmtf1xr7UWSHy6Gn9z1anAfQw+NfamcuBYTyhS4Mv+hdvRWXFJZ44+vEeICwEYdR55EFi1K5So0AEVYlcQmzpuLPQYgBkyh0YYqUh+yCdHrkwp9MQiFSEZQJ3+qbJ3lr5n1WTWVbc/xBwshu2Hc21v4f0BntbCHYNUCqp6rO5iB1zt5RE9W7p8K7xhotpt0Y5/T77UmwGaPDdpfTlooe3bxlerjNF+JRKB4mSSPo/9MnjqmeyD37GwRQ+WS2Ni0y+W87rqMc2/X+/9QqYAX3rsLxuPZXhM1UDfxkT2ZzYEc4llx29vMgJ/rhzb4PGBBONP4kQtI7zugKx9S2HJTBwwWpHyhAo90cRgU0tyiHrb+HCj4WmsdGIRsOTt+ihMqmhBdWA+BastUwGDeKu0Fabt/2YeQgJhMUQ5BN77w6gPwTTqOCuJBF/jcRPA0uvOS5mFqMk3ohXifla5oAsKnq4VaOXy8EIbS9iAeiFTShwcwaYBTquGzZk2xLrGCBB/dN5wfMd5ZoVaAA9VI4ioWdLcbDDy2lvyY8gqwufFeDdZfZ1CUASOanpWYKc0Wt5rVngwFrvuoPierGWCpbnRDNIPc0BJDwp1QigMU2rHWnJ5pkKdrhmnWCKHl1ifAjaamGEDIYe53tmiEXrgSEbCr5Bij8jopa2ATdywKE0ZkravwmRezacdPmEz9c3ZM9pVY6AConDxOm1Rf5sNldd56Gk31p/DXi+krh4Ka25cMv5j78VLTZcXrOHgYFhT6au/7sMkce+91eEAaTZ3P9r3SpelZE2cpeSt4TaHxo8xGMFoaonqyvCDHoc0iKd4grWJMVENCjrPOoabBknIqmljIwhYQuLEA4o1ILi3Yw8arGzObF7Sa5fYsPMHyTTfljbnTDRWRwPPdyiQ8Zu66Z+G6/v13+AwKLUklndRZgM+jDiHSN4WEJNhIEU+Lt45zTr7CdSsWoCo+nctdM5RdL5j//isc3OkCY8SgGu1wdcQRA4davm7DEusWYmgpBGWBL7axr0KXI3z7oUz6cTgMwbS8fB43giW3UH+IFki+zYuWZ+x3Dp2brKpFr+rEqM/Fv59F4pvGEuzDQBh/Qwt2JAOMf9376E50/7LV20S6VXUTBIFR3sPQQNaeVP2R1YBe5XC0PJJDeCLVWBYM/GyvzLmH4ONT3UxXSnH4HA/xGtW+eWpz+NkoVWa5gg5z+zGqR8wgEeX8Hp1Bq6tRq+W6Dg5djc+VvuAqNlaR9q55kwNgFqLe5G4AaWhCGIcotz6JhVeP7oPU34kRewJnM5n5BCzF4kYmztDt9Kn+cMWvVqz01268RNwLw3S18="
+     "ones": 5033,
+     "head": "1011111001101110001110101110011000111101000001110100001111010010",
+     "bits_b64": "vm465j0HQ9JwbjytTrySqgOS0vjlBbKaHj7V1l70poyqRfWY2pH+QE5YZwwJhM1/g0McmPizIaU+9r3z7noYRM7iFjRJ63T0npNIJurOd/uk/RvO+PO9kxPeUCQdGS/sW0ZB/FWEw5H0QEbB4ibYM0sIk+F08ITbaVG5ACCsybaEmcxIhHczVyMjHb1I3be85UJkPExvfoAphCrGALdKomW3rGzknFy39faHKakPBy9YWKQB0fHrGi+X+XYyE4lroyUIaKL++DNTtaFQTYDSMgu3WeljiTUvgjf1sTgwmH1eSwZbko6f1p6+bDsOjGStAXwXZpNHU/a2L/mBoSDrIUMub1IbKiVWrI5w/3jFH40S9hzifIVuhBxm9pT7u5W8nvZKjkDJznXYUgLhs8MfEHORf12a3htriuq/SALGvY1UgzPJX5Wt6JryKQFRtDjXTKwiE3lt7c451nP+VtcIm7qHsnE+0SIoywPfdBj+7jH1btImSg5FSWKypta74/qVUx9hjqmVZySF6jEYPV7QptJOo7J8sombN9BkLcn7jqVrhvaZgcmu4QRYMpg9Jsl8G0lfHzLDZAn+5uugwwFoByotY1ot+kFsnosEPLG8ab3hL/LAugfZDv39USusb0sFe2+CSVeR1nJw+m0YQpkizGCkbPgmeRCR/vg57oj+e7f9V1LmP99taKsyZljoZ1f/IKRmgwXH+t0f/CK7TyMgfhNCYyp3yWxkfGwONJ7ZMR1NOibzOyvvppteh5HeCLqhFsoeE+tYSpE00cLJ9EhAlNdZFSqxf8hNR1GGrE3G536yJKjy0/4D6ukEMyAsY8HIA2oJYlv8Jcv/xD1+uP+g4DjO+9LKOLD1yaOopVe0JkQwaWyqYbOXbmzajpa34CJ4mjdkAqoAT0U+kOsERGW+80rPDmz3R7FGb1pHyUF6G10OWTXHuiWXPSe1Sf7fdMlgohMRWuzpziHuSZfjvvGUmRuFlcnhLzh9r2PDub/Vgg6JBkOQDYYR11IWfsQJlVDp9jdCKoIZIb1dDN7yd3dnd/IL9xZAh4lCbsQgsha1xZQV9Pq/UaELxF1qRYZAVqlZ+kig0EOdOm2CZFHs7LRlNb5ShByPej9k3VTe+pixVFKAvuNAPR/1W6OR2chDZA6upHnpsxLAMDkfDKI+R+Au60On6h/OPZvGmlWOUS/v78LDsAaMToXGMKzTjY3xn2K+5CnLP9VYdrLIW7ZOpWHO//wVucOT3mRDCOhkp1/EKu++zQz7HIXs+bqg/dpBR/z22cdMIzYIL9V7qVb0bX4yMNN/KWtwzoxaIwHWAJSbruwSPbiagQiceLq9Vfra3JAJKbh6ZlGLWEoJ3XCOzybCPG+96FEc9RZrs5A0v/cXddAM+F3WNA5ReHEjsX4VTvVJOAroN49J2FJ11eXnhO+HCQ1zoqSCYIFfxx+nqwR5ScSYaBJXTk9L2ITuIgxAeYEg2Bet65zXfpcKqXV5x/nK6e6Q97Ec9egs1dmHAbyLy/8ek7zEY2nhr0UdIyhgONL8jUmLzH+59sK2D4I193NiMuTHcRIrYgeCB5q92bFhzGU7q5CiE7OwSN4vDZ5xrPTIeDkLE1BRrVTcFZ+/UobA2MSKYXe+4ciXfs9K0L5HcabTVVSpE/k2p3kKtE1RoQ0m5Z8="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:robot ⊕ 단어:네이버",
+     "name": "키워드:robot ⊕ 단어:줌인",
      "dim": 10000,
-     "ones": 5095,
-     "head": "0000011111011100110110001011100111000001011110010101001011001000",
-     "bits_b64": "B9zYucF5Usi2QqG75nSvS70JgAkxTlGmWDD7pdKQqWPVecBjq7XOO5vsTcJbbQUoRQTP9nM1AEg2wfeaVDA7mzGy72v7gHmCuUNYY7MTt8Wolh4XQZQTr0lnGZq6wcplJgyJfPsNBfBlpG8dfIhiWTvh9AD6Vvb4JKfZGdcD1ambxf3JU4nnHR/hF+keIccDtDEYnaLb6mlWg+j1Q+V2gTk8gxiXEpSRLm7XHu1I6oP7x48MJPTzKRIIU9mqLjoOXrc7vDTspiPlpgZkjVZuzIIe5+do1wXc/XBHN13PwebvMtnkhLrBQ1dEf1oMJ1soFAu12nOGf6uGg9exh5LAlGUo1uOqb2Je/FB4mtN3bBeqtmnc/JqyXdO/5YO60Tskm+lZPX52Oje/Ad/Ic6SIH4iMczC2xy98iWDS9gim1mE0mmudV5Er5iXFdFBiOkxrMSkpAol/x0hBfOphBYf4qx0j12w/kcA+x0mT/zx5EpLDU7eDJNq2gQudoSg58sLTaDfDK6T74VWVXsaOx/hIcVxD3YLHEjDYmLTj51P3HJkZ6DDIQjziCbfYocOcRS75xxbucWU4xHgA+Bt2VA0OxRYYLSWl3pTz+fObaR0ra0cCn1k9A1igSGW9V6RtjXHq7dZNfM3xx49kgzw2Htm4bL/F5jNpWeEzkyO9GAbrGD/IaN8wck449gxgpFldd9cwbzC9dflMaEkA5hD2BcuefQrHbs336xjmc4ojbfzdnxxRe1MfW98UUGsea5/630XlErNuz8TfnR9Jqygd2OfxdK2MSsm3/yyAI7YKfI2/ZQwVKPs6/99vqHkJ74QT6s4LduE/mEmL/emDv+/jzUU+vw9Zu2KE/LlVFs9bpNqATiGqzg4iAZXMevDo1lUigSTetet0i3GhwKkQMK0YHXTp1fzFS3z2tifsSvD366HJysB+StRPanFOfbtJvHkYxeQbGc9WrLOpgzed9Az7y8FZh1f9S31vF1lrPhU/WgildSxwpHIc3++XfUzIyMBb3XGvXAsIHxvpunTrlA7jYpTFcNXNKEdj37j0AiBvGNtSQBS+zO4r4fBsGmAnAE+yJnyEIeCSxjt9GKzjs9vvG5V0aSSrui9nBjQZnaIArDQyQeb6HbXCp6qaVg3RMFdO3kfdMVoHaaOaDyq4Mp+5W0Qgya8nN9ZU8Ob/PUIhd5fSPbvvNNl6T7w5+6Cm11OQ58QPBWtFOTUw6AAWUQ1W3+7tAUmnkToDvm0pBTyF4YsS3XBKa3tg89FGm/9mYHNpjdjOZgsesDZBvHy/fB39b0XIPwkYV1VsTYJcu8LUxSaqKX5LAse2JCSnetYasYF6pbWwY36V4vZsUsO/OKbYJ83iMHy4X7YXVO5xtw+TZ71ruA+DJGlo5ZXUneeShZe1BcMSN9nPi6UWGeyv6O8oD92ve3xNp2GROs/JB1TTGFMhVD2gIr2quE4J0W1cDOzvsd39rmJQD49qqhI2n3qnrxr8VwcNdK3ZJXu+z2gNxk0tpaK0+lzXFCv0jvLFQysXBBOiIvbXd/m8OmBLoMloioOe2QM7VdwxOrQh3owdANgnS7VJfOV7U59qVIWoU32ZuViSGwhP9Wci6CLjfPwYUSWcQ260/IJNE5Sg/hNtSmA7TC3MGIzsJfULKZ6/teWcg4CgNpo="
+     "ones": 5031,
+     "head": "1011101010110010100001010011100001101011000110101000010011001011",
+     "bits_b64": "urKFOGsahMtRBapfl3x+q+tOvvPLyFEJHBFDVFO1Zw9QpkKDd6R1ickSXYL7nwYVGJqtK85RZEidI+JOxbqSFar2Jdyby5TdhJjd91jyZ8XFeEBzZ4zzzNvxcS6bl7Qwtr9sKF0Eaoh9Eor4lSvB5IyjtNIHrS7W4gMK+TWobo1fsQf3PTYmzi+AaTINyTFJ3panlz3XVBDdeK2tWqXR89aAtlRSDQIsyLZy0vxcMA8MFYRjWXA38p37J7+1/X49DN51TM8qQ3IRurb3UySA51byeNsG2h9aTKYpPvA1cwGDtZXcuSt6FP5hoh5WDFROx/GgxFLLe61Bcg+/vGXec5jS4JBDrS71n4ivZF+Ci01i2b6/4SN9kkz26QAuL8tdIIErSc+h1G5jMglQJCb121VPry0oTL1LQeaEBrmwCewE00VMaqGn9Z+qQ+gDKaes9dGPdPJl0CCxdMNmzAVjafF4mg1x8vmgEYf5NKNz+thtNROoPv5aItqWj+PxpqwCzkZLVaOfAPp5A7GvB5hjheILFsBmBU2mDeMwpYNSPA83llIbxHzeoEm/Z5JCyYA30yF3r0PF+VxzlbxozMKNavsDswA30d8HZgV05RD5P28Cg/7+xkZqnwSYF0HkdSdSKnHGyyITfn7SfUKjY8mKFFGSMMn+1dwlSOv0N+RSqZgdyMrHzNx4VIa5reB3nwVp/kVTsD8YJXy+KJvsTz0++w8puKuGL5Ys37C27p+c1wkVxbD8hOeAGf7g0wr3fx/qIGgPUevI1MXSQ8SyOgyVPvKC1hpcZmThTp00hWPuSbOvYXyqLcnpD7h9r6KnjDVtbr1SIQCcwAI9hgHktEmDuq2CKLBzkIeCfgu4cD33owz1bu2oyy3EAXzvPTXgaEa0FnX50Fk9XodXDR/8mUu4nDXoP6GX+wBNYZn4Hy2y9aFZxuko4RlyXfU1Ex7Nx5UdJrzN6AIiMR6p1/qcebbT+TceVvFluUANm8i9aYhTVbRPowb+EsiyzFQECQ3DMxfa3sXO+k7H/wbfzV6RH2phw85zmq9Pbmbri0XrdZeYiPgVqqzsmfzerva0ynbnXeOBhRu1l/mBbWfPKDEPZuavq819P5cxoPQWndyAwz21ZyPoFNJYha9Tyc1FSDUqEWKxmVnyCJPH3RlxGvjDKIzlHgaasdC979ScK5uOR7O2wncEUF0U3LXDob3GY28aMQjug4FCGcS74OoFl4vJI5Msw2kQaz/+i68UFnsOkatWNz0gNC5GqsymmHUkgIpQkmZ1O01Ga7sxdJ0vOWxbs1H4rDO7y+0lxtz/FzzgdH//F7RldX6CcitnQ3yfkdBGlRSX+6DJBjehUptNjsyiwZkXw6kReEAYITQBT1hmOzJelqqIJLXaWnddXPDP85lJkoyRq4nZEGDTPeUjyVTmN1MGvkU/gjEj7SzW+IyJbOnc+rbDZ/JJvaQVWNn6O/1D9VjQH5CyPQ7l0WtrPUwXTNS0k7wc49MDGm9Zgs+E8sxyqykNdmHTiFO4elBOxzz6rkQIxCd8XLm21gaBbUpDIjEVP/1GkdSkAxNDPM58IDKohXMXvmqzp7XqKlrtcw2u9arM5xDMlLwAre5qEZ1PPu6kCr2Ou4bKbcx1TIID+LKRM1RV0j9JbPlXQarD6myA4jGxmFo="
     },
     {
      "type": "value",
      "name": "오늘 더한 조합 수",
-     "value": 16
+     "value": 28
     },
     {
      "type": "value",
@@ -1083,9 +1078,27 @@
      ],
      "rows": [
       [
+       "줌인",
+       3,
+       0.5146,
+       0,
+       -0.0074,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "리브스메드",
+       2,
+       0.3361,
+       0,
+       0.0049,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "네이버",
        1,
-       0.2428,
+       0.1599,
        1,
        0.3788,
        "",
@@ -1094,7 +1107,7 @@
       [
        "하트",
        1,
-       0.2428,
+       0.16,
        0,
        -0.0021,
        "",
@@ -1103,7 +1116,7 @@
       [
        "지멘스",
        1,
-       0.2405,
+       0.1557,
        1,
        0.3728,
        "",
@@ -1112,34 +1125,16 @@
       [
        "회장",
        1,
-       0.248,
+       0.167,
        1,
        0.3719,
        "",
        ""
       ],
       [
-       "줌인",
-       1,
-       0.2712,
-       0,
-       -0.0074,
-       "",
-       ""
-      ],
-      [
-       "리브스메드",
-       1,
-       0.2551,
-       0,
-       0.0049,
-       "",
-       ""
-      ],
-      [
        "코스닥",
        1,
-       0.2397,
+       0.1668,
        0,
        0.0001,
        "",
@@ -1148,7 +1143,7 @@
       [
        "입성",
        1,
-       0.2428,
+       0.1493,
        0,
        0.0117,
        "",
@@ -1157,7 +1152,7 @@
       [
        "성적표",
        1,
-       0.2529,
+       0.17,
        0,
        0.0035,
        "",
@@ -1166,7 +1161,7 @@
       [
        "흑자경영",
        1,
-       0.257,
+       0.1748,
        0,
        -0.0119,
        "",
@@ -1175,7 +1170,7 @@
       [
        "차세대",
        1,
-       0.2621,
+       0.189,
        0,
        -0.0067,
        "",
@@ -1184,7 +1179,7 @@
       [
        "센서",
        1,
-       0.2565,
+       0.1739,
        0,
        0.0009,
        "",
@@ -1193,7 +1188,7 @@
       [
        "액추에이터",
        1,
-       0.2455,
+       0.164,
        0,
        0.0036,
        "",
@@ -1202,7 +1197,7 @@
       [
        "이차전지",
        1,
-       0.2289,
+       0.1449,
        0,
        -0.0187,
        "",
@@ -1211,7 +1206,7 @@
       [
        "미래",
        1,
-       0.2504,
+       0.1739,
        0,
        0.018,
        "",
@@ -1220,9 +1215,90 @@
       [
        "성장동력",
        1,
-       0.2258,
+       0.1484,
        0,
        -0.018,
+       "",
+       ""
+      ],
+      [
+       "공모자금",
+       1,
+       0.1668,
+       0,
+       -0.0001,
+       "",
+       ""
+      ],
+      [
+       "절반",
+       1,
+       0.1671,
+       0,
+       0.0059,
+       "",
+       ""
+      ],
+      [
+       "소진",
+       1,
+       0.1699,
+       0,
+       -0.0024,
+       "",
+       ""
+      ],
+      [
+       "현금흐름",
+       1,
+       0.1561,
+       0,
+       0.0092,
+       "",
+       ""
+      ],
+      [
+       "경고",
+       1,
+       0.1491,
+       0,
+       -0.007,
+       "",
+       ""
+      ],
+      [
+       "큐렉소",
+       1,
+       0.1709,
+       0,
+       -0.0187,
+       "",
+       ""
+      ],
+      [
+       "투자",
+       1,
+       0.1445,
+       0,
+       -0.0096,
+       "",
+       ""
+      ],
+      [
+       "장부",
+       1,
+       0.164,
+       0,
+       -0.0073,
+       "",
+       ""
+      ],
+      [
+       "부메랑",
+       1,
+       0.168,
+       0,
+       0.0126,
        "",
        ""
       ]
@@ -1241,8 +1317,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 16,
-    "hdc_answer": 16,
+    "count_answer": 25,
+    "hdc_answer": 25,
     "agree": true
    },
    "source": {
@@ -1271,12 +1347,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.278
+     "value": 0.1799
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.2835
+     "value": 0.189
     }
    ],
    "check": null,
@@ -2152,10 +2228,10 @@
       ],
       [
        "로봇",
-       3,
+       5,
        1,
-       0,
-       0.278,
+       2,
+       0.18,
        "예열 중"
       ],
       [
@@ -2210,15 +2286,7 @@
   }
  ],
  "log": {
-  "fetched": {
-   "한국경제": 100,
-   "매일경제": 50,
-   "이데일리": 50,
-   "지디넷코리아": 30,
-   "블로터": 50,
-   "전자신문": 30,
-   "뉴시스": 200
-  },
+  "fetched": {},
   "failures": [],
   "notes": []
  }

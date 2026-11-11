@@ -153,7 +153,9 @@
       },
       {
         "source": "매일경제",
-        "url": "https://www.mk.co.kr/rss/30000001/"
+        "url": "https://www.mk.co.kr/rss/30000001/",
+        "pubdate_kst": true,
+        "_pubdate_kst": "발행 시각이 한국 시각인데 +0000(UTC)으로 적혀 있음(2026-11-11 확인). 시간대 표시를 무시하고 한국 시각으로 읽는다"
       },
       {
         "source": "이데일리",
@@ -166,7 +168,9 @@
       },
       {
         "source": "블로터",
-        "url": "https://www.bloter.net/rss/allArticle.xml"
+        "url": "https://www.bloter.net/rss/allArticle.xml",
+        "pubdate_kst": true,
+        "_pubdate_kst": "발행 시각이 한국 시각인데 +0000(UTC)으로 적혀 있음(2026-11-11 확인). 시간대 표시를 무시하고 한국 시각으로 읽는다"
       },
       {
         "source": "전자신문",

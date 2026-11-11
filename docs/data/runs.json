@@ -726,5 +726,23 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261111.json",
   "note": "새 제목 501개"
+ },
+ {
+  "at": "2026-11-11T23:02:08+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {},
+  "failures": [],
+  "trace": "data/trend/traces/trend-20261111.json",
+  "note": null
+ },
+ {
+  "at": "2026-11-11T23:02:35+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {},
+  "failures": [],
+  "trace": "data/trend/traces/trend-20261111.json",
+  "note": null
  }
 ]

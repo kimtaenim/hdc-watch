@@ -296,6 +296,64 @@ async function drawFlow() {
   );
 }
 
+// ---------- 트렌드: 키워드 하나의 오늘 제목이 지나가는 길 ----------
+async function setupTrend(trace) {
+  const cfgRows = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "요약")?.rows || [];
+  const ids = trace.subject.id;
+  const sel = $("#pick-kw");
+  sel.replaceChildren(...ids.map((id, i) => el("option", { value: id }, `${cfgRows[i]?.[0] ?? id} (새 조합 ${cfgRows[i]?.[3] ?? 0})`)));
+  sel.onchange = () => drawTrend(sel.value, trace);
+  await drawTrend(ids[0], trace);
+}
+
+async function drawTrend(kid, trace) {
+  const ol = $("#trend-flow");
+  ol.replaceChildren(el("li", { class: "hint" }, "불러오는 중..."));
+  const day = await getJSON(`data/trend/${kid}/day.json`);
+  const proto = await getJSON(`data/trend/${kid}/proto.json`);
+  const dim = proto.today.dim;
+  const kv = await H.makeVector(`키워드:${kid}`, dim);
+  const sec = (trace.sections || []).find((x) => x.title.endsWith(day.name));
+  const steps = sec ? trace.steps.filter((s) => s.index >= sec.from_index).slice(0, 4) : [];
+  const S = (op) => steps.find((s) => s.op === op);
+  const top = day.rows[0]?.[0];
+  const wv = top ? await H.makeVector(`단어:${top}`, dim) : null;
+  const pair = wv ? H.bind(kv, wv) : null;
+  // 브라우저에서 과거 점수를 다시 계산(정수 프로토타입을 키워드로 풀고 코사인)
+  const past = proto.past.counts, today = proto.today.counts;
+  const norm = Math.sqrt(past.reduce((a, c) => a + c * c, 0));
+  const askPast = async (w) => {
+    if (!norm) return 0;
+    const v = await H.makeVector(`단어:${w}`, dim);
+    let dot = 0;
+    for (let i = 0; i < dim; i++) dot += -past[i] * (kv[i] ? 1 : -1) * (v[i] ? 1 : -1);
+    return dot / (Math.sqrt(dim) * norm);
+  };
+  const rows = day.rows.slice(0, 15);
+  const mine = [];
+  for (const r of rows) mine.push(await askPast(r[0]));
+  const ok = rows.every((r, i) => Math.abs(r[4] - mine[i]) < 1e-4);
+  ol.replaceChildren(
+    day.warmup ? el("li", { class: "check" }, `예열 중: 과거 자료가 있는 날이 ${day.past_days_with}일뿐이라 과거 프로토타입이 얕다. 대부분 새 조합으로 보인다.`) : null,
+    card("①", `오늘 '${day.name}'이 든 제목 ${day.titles_today}개 → 명사`, "일반 계산", S("일반 계산"),
+      el("ul", { class: "titles" }, day.titles.slice(0, 8).map((x) => el("li", {},
+        el("span", { class: "hint" }, `${x[0]} ${x[1]} `), x[2], el("div", { class: "nouns" }, "→ ", x[4].join(", ") || "(명사 없음)"))))),
+    pair ? card("②", `묶기: 키워드 ⊕ '${top}'`, "묶기", S("묶기"),
+      bitRows([{ name: `키워드:${day.name}`, bits: kv }, { name: `단어:${top}`, bits: wv }, { name: "묶은 결과", bits: pair, line: true }], dim)) : null,
+    card("③", `정수 프로토타입: 오늘 ${proto.today.n}개, 과거 ${proto.past.n}개 조합`, "더하기", S("묶기"),
+      bitRows([{ name: "오늘", vals: today }, { name: "과거", vals: past }], dim, 3, 3)),
+    card("④", "과거에 물어보기", "비교", S("비교"),
+      colTable(["단어", "오늘", "과거 횟수", "과거 점수", "판정"],
+        rows.map((r, i) => [r[0], r[1], r[3], Number(mine[i].toFixed(3)), r[5] || (r[1] >= 2 ? "" : "")]), -1, () => {}),
+      el("div", { class: "values" }, el("span", { class: "chip" }, "잡음 수준(판정선) ", el("b", {}, fmt(day.threshold))),
+        day.one_past ? el("span", { class: "chip" }, "과거에 한 번 나온 단어의 점수(약) ", el("b", {}, fmt(Number(day.one_past.toFixed(4))))) : null),
+      el("div", { class: "check" }, "파이썬 계산과 이 브라우저 계산(과거 점수) ", el("span", { class: ok ? "ok" : "bad" }, ok ? "모두 일치" : "어긋남 있음"))),
+    card("⑤", "오늘 문맥과 과거 문맥 전체 비교", "비교", steps.filter((s) => s.op === "비교")[1],
+      el("div", { class: "values" }, el("span", { class: "chip" }, "HDC 코사인 ", el("b", {}, day.cos_hdc == null ? "없음" : fmt(Number(day.cos_hdc.toFixed(3))))),
+        el("span", { class: "chip" }, "단어 횟수(BoW) 코사인 ", el("b", {}, day.cos_bow == null ? "없음" : fmt(Number(day.cos_bow.toFixed(3))))))),
+  );
+}
+
 // ---------- 오늘(장중 채점) ----------
 async function renderToday(stockDir) {
   const wrap = $("#today-wrap");
@@ -327,14 +385,17 @@ async function renderDial(stockId, trainTrace, today = null) {
     $("#dial-score").replaceChildren(`거래량 점수 `, el("b", {}, fmt(last[c["점수"]])),
       ` ${last[c["판정"]]} (${last[c["날짜"]]} ${last[c["시간대"]]})`);
   }
-  $("#dial-trend").replaceChildren("오늘의 새 조합 ", el("b", {}, "준비 중(⑤ 단계)"));
+  try {
+    const sm = await getJSON("data/trend/summary.json");
+    $("#dial-trend").replaceChildren("오늘의 새 조합 ", el("b", {}, `${sm.new_total}개`), sm.warmup ? " (예열 중)" : "");
+  } catch { $("#dial-trend").replaceChildren("오늘의 새 조합 ", el("b", {}, "자료 없음")); }
 }
 
 // ---------- 시작 ----------
 async function show() {
   const stock = $("#pick-stock").value, kind = $("#pick-view").value;
   usedTerms.clear();
-  const pick = (k) => [...RUNS].reverse().find((r) => r.subject === stock && r.kind === k && r.trace && !(r.failures || []).some((f) => f.startsWith("수집 실패")));
+  const pick = (k) => [...RUNS].reverse().find((r) => (k === "trend" || r.subject === stock) && r.kind === k && r.trace && !(r.failures || []).some((f) => f.startsWith("수집 실패")));
   const trainRun = pick("volume.train"), run = pick(kind);
   const trainTrace = trainRun ? await getJSON(trainRun.trace) : null;
   const today = await renderToday(`data/volume/${stock}`);
@@ -343,6 +404,8 @@ async function show() {
   const trace = run === trainRun ? trainTrace : await getJSON(run.trace);
   const isTrain = kind === "volume.train";
   $("#flow-wrap").hidden = !isTrain;
+  $("#trend-wrap").hidden = kind !== "trend";
+  if (kind === "trend") await setupTrend(trace);
   $("#gears-title").textContent = isTrain ? "전체 계산 기록 (가장 최근 실행, 숫자 전체와 소스)" : "단계별 실제 자료 (가장 최근 실행)";
   $("#gears-wrap").open = !isTrain;
   if (isTrain) await setupFlow(trace, `data/volume/${stock}`);
