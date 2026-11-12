@@ -175,16 +175,4 @@ export async function renderCheck(root, ctx) {
   }
   root.append(box("③", "트렌드: HDC가 고른 새 낱말과 센 답(과거 0번)이 고른 새 낱말",
     table(["키워드", "둘 다", "HDC만", "센 답만"], tr, (x) => x[2] !== "-" || x[3] !== "-")));
-
-  // ④ 날짜별 나란히
-  const days = [...new Set(B.map((x) => x.date))].sort().reverse().slice(0, 20);
-  let daily = {};
-  try { daily = await (await fetch("data/trend/daily.json", { cache: "no-cache" })).json(); } catch {}
-  root.append(box("④", "날짜별로 나란히: 거래량에서 가장 드문 봉과 그날 새 낱말 수",
-    el("p", { class: "hint" }, "둘은 나란히 놓았을 뿐이고, 서로 관계가 있다고 말하지 않는다."),
-    table(["날짜", "가장 드문 봉", "점수", "판정", "새 낱말"], days.map((d) => {
-      const w = B.filter((x) => x.date === d).reduce((p, q) => (q.score < p.score ? q : p));
-      const t = daily[d];
-      return [d.slice(5), w.slot, w.score, w.verdict, t ? `${t.new_total}${t.warmup ? " (예열)" : ""}` : "-"];
-    }), (x) => x[3] !== "평소")));
 }
