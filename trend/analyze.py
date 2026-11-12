@@ -205,6 +205,13 @@ def run(date: str | None = None, do_collect: bool = False):
     t.step("키워드별 오늘의 새 조합", "일반 계산", [why("설계 선택", "키워드마다 새 조합 수와 문맥 코사인을 모은다.")],
            outputs=[{"type": "table", "name": "요약", "columns": ["키워드", "오늘 제목", "과거 제목", "새 조합", "문맥 코사인", "상태"], "rows": summary}],
            source=run)
+    dpath = os.path.join(OUT, "daily.json")
+    daily = json.load(open(dpath, encoding="utf-8")) if os.path.exists(dpath) else {}
+    daily[today] = {"new_total": sum(r[3] for r in summary), "warmup": warm}
+    with open(dpath, "w", encoding="utf-8") as f:
+        json.dump(dict(sorted(daily.items())), f, ensure_ascii=False)
+    with open(os.path.join(OUT, "keywords.json"), "w", encoding="utf-8") as f:
+        json.dump([{"id": k["id"], "name": k["name"]} for k in keywords], f, ensure_ascii=False)
     with open(os.path.join(OUT, "summary.json"), "w", encoding="utf-8") as f:
         json.dump({"date": today, "at": now.isoformat(timespec="minutes"), "warmup": warm,
                    "new_total": sum(r[3] for r in summary), "rows": summary, "trace": rel(trace_path)}, f, ensure_ascii=False)

@@ -155,3 +155,14 @@ th { position: sticky; top: 0; background: var(--card); }
 .titles { list-style: none; padding: 0; margin: 6px 0; font-size: .82rem; }
 .titles li { margin: 0 0 6px; }
 .titles .nouns { color: var(--op-bind); font-size: .78rem; }
+
+/* 실험대 */
+.lab-in { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 0; font-size: .85rem; }
+.lab-in input { font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; width: 9em; }
+.hbars { margin: 6px 0; font-size: .76rem; }
+.hbar { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+.hbar .hl { width: 6.5em; flex: 0 0 auto; color: var(--muted); text-align: right; }
+.hbar .track { flex: 1 1 auto; min-width: 0; }
+.hbar .hb { display: block; height: 10px; background: var(--op-cmp); border-radius: 2px; }
+.hbar .hv { flex: 0 0 4.5em; }
+.hbar .hv { font-variant-numeric: tabular-nums; }

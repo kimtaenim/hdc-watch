@@ -19,6 +19,8 @@
       <option value="volume.train">시간대 이상탐지</option>
       <option value="volume.walls">매물벽 찾기</option>
       <option value="trend">트렌드 문맥</option>
+      <option value="lab">실험대</option>
+      <option value="check">확인</option>
     </select></label>
   </div>
 </header>
@@ -42,6 +44,11 @@
     <h2>톱니바퀴: 오늘 제목이 지나가는 길</h2>
     <div class="flow-pick"><select id="pick-kw" aria-label="키워드"></select></div>
     <ol id="trend-flow" class="gears"></ol>
+  </section>
+
+  <section id="lab-wrap" class="panel" hidden>
+    <h2 id="lab-title">실험대</h2>
+    <ol id="lab" class="gears"></ol>
   </section>
 
   <details id="gears-wrap" class="panel">

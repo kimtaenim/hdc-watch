@@ -744,5 +744,23 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261111.json",
   "note": null
+ },
+ {
+  "at": "2026-11-12T10:27:48+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {},
+  "failures": [],
+  "trace": "data/trend/traces/trend-20261111.json",
+  "note": null
+ },
+ {
+  "at": "2026-11-12T10:28:13+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {},
+  "failures": [],
+  "trace": "data/trend/traces/trend-20261111.json",
+  "note": null
  }
 ]

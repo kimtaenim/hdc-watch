@@ -1,6 +1,7 @@
 // 화면: 추적 기록(trace)만 읽어 그린다. 설명 문구는 모두 추적 기록에서 온다.
 // 한 건 따라가기는 같은 HDC 부품(hdc.js)으로 브라우저에서 다시 계산하고, 파이썬이 낸 점수와 맞춰 본다.
 import * as H from "./hdc.js";
+import { renderLab, renderCheck } from "./lab.js";
 
 const $ = (s) => document.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => {
@@ -392,8 +393,31 @@ async function renderDial(stockId, trainTrace, today = null) {
 }
 
 // ---------- 시작 ----------
+async function showLab(kind, stock, trainRun) {
+  for (const id of ["#flow-wrap", "#trend-wrap", "#gears-wrap"]) $(id).hidden = true;
+  $("#lab-wrap").hidden = false;
+  $("#lab-title").textContent = kind === "lab" ? "실험대: 같은 부품을 직접 만져 보기" : "확인: HDC 답과 단순히 센 답";
+  $("#lab").replaceChildren(el("li", { class: "hint" }, "계산 중..."));
+  const trace = await getJSON(trainRun.trace);
+  const tbl = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "봉별 점수");
+  const c = Object.fromEntries(tbl.columns.map((k, i) => [k, i]));
+  const bars = tbl.rows.map((r) => ({ date: r[c["날짜"]], wd: r[c["요일"]], slot: r[c["시간대"]], level: r[c["단계"]],
+    score: r[c["점수"]], countSum: r[c["카운트 가까움 합"]], verdict: r[c["판정"]] }));
+  const model = await getJSON(`data/volume/${stock}/model.json`);
+  let keywords = [];
+  try { keywords = await getJSON("data/trend/keywords.json"); } catch {}
+  await (kind === "lab" ? renderLab : renderCheck)($("#lab"), { model, bars, keywords });
+}
+
 async function show() {
   const stock = $("#pick-stock").value, kind = $("#pick-view").value;
+  if (kind === "lab" || kind === "check") {
+    const trainRun = [...RUNS].reverse().find((r) => r.subject === stock && r.kind === "volume.train" && r.trace);
+    await renderDial(stock, trainRun ? await getJSON(trainRun.trace) : null, await renderToday(`data/volume/${stock}`));
+    return showLab(kind, stock, trainRun);
+  }
+  $("#lab-wrap").hidden = true;
+  $("#gears-wrap").hidden = false;
   usedTerms.clear();
   const pick = (k) => [...RUNS].reverse().find((r) => (k === "trend" || r.subject === stock) && r.kind === k && r.trace && !(r.failures || []).some((f) => f.startsWith("수집 실패")));
   const trainRun = pick("volume.train"), run = pick(kind);

@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-11T23:02:35+09:00",
- "finished_at": "2026-11-11T23:02:37+09:00",
+ "started_at": "2026-11-12T10:28:13+09:00",
+ "finished_at": "2026-11-12T10:28:14+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-11",
@@ -24,7 +24,7 @@
   "noise_k": 3
  },
  "code": {
-  "commit": "2af03902f16092f0bf996f022a12e9bdfbe9ac87",
+  "commit": "e521f74851c4855fa76c608e4c11c4ddabc6e91b",
   "dirty": true
  },
  "sections": [
