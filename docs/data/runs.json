@@ -815,5 +815,17 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261112.json",
   "note": "새 제목 482개"
+ },
+ {
+  "at": "2026-11-13T00:56:22+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 0
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261113-005622.json",
+  "delay_min": 21,
+  "note": "오늘 5분봉이 없다(휴장일이거나 아직 장 전이거나 야후 지연)."
  }
 ]
