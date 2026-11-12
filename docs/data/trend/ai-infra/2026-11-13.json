@@ -1,0 +1,1 @@
+{"keyword": "ai-infra", "name": "AI 인프라", "date": "2026-11-13", "warmup": true, "past_days_with": 3, "titles_today": 0, "titles_past": 1, "threshold": 0.03, "one_past": 0.3333333333333333, "new": [], "rows": [], "cos_hdc": null, "cos_bow": null, "trace": "data/trend/traces/trend-20261113.json", "titles": []}

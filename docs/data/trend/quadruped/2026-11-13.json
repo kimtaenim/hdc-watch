@@ -1,0 +1,1 @@
+{"keyword": "quadruped", "name": "사족보행 로봇", "date": "2026-11-13", "warmup": true, "past_days_with": 3, "titles_today": 0, "titles_past": 0, "threshold": 0.03, "one_past": null, "new": [], "rows": [], "cos_hdc": null, "cos_bow": null, "trace": "data/trend/traces/trend-20261113.json", "titles": []}
