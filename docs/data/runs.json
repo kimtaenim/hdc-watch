@@ -774,5 +774,29 @@
   "trace": "data/volume/045510.KQ/traces/live-20261112-112805.json",
   "delay_min": 23,
   "note": null
+ },
+ {
+  "at": "2026-11-12T16:02:24+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 33
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(11:28)과 274분 간격: 사이 실행 8번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/close-20261112-160224.json",
+  "delay_min": 27,
+  "note": "프로토타입에 12개 더함"
+ },
+ {
+  "at": "2026-11-12T16:02:25+09:00",
+  "kind": "volume.walls",
+  "subject": "045510.KQ",
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/walls-20261112-160225.json"
  }
 ]
