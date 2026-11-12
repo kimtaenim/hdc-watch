@@ -762,5 +762,17 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261111.json",
   "note": null
+ },
+ {
+  "at": "2026-11-12T11:28:05+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 15
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261112-112805.json",
+  "delay_min": 23,
+  "note": null
  }
 ]
