@@ -1,1 +1,1 @@
-{"keyword": "bess", "name": "BESS", "date": "2026-11-11", "warmup": true, "past_days_with": 1, "titles_today": 0, "titles_past": 0, "threshold": 0.03, "one_past": null, "new": [], "rows": [], "cos_hdc": null, "cos_bow": null, "trace": "data/trend/traces/trend-20261111.json", "titles": []}
+{"keyword": "bess", "name": "BESS", "date": "2026-11-12", "warmup": true, "past_days_with": 2, "titles_today": 0, "titles_past": 0, "threshold": 0.03, "one_past": null, "new": [], "rows": [], "cos_hdc": null, "cos_bow": null, "trace": "data/trend/traces/trend-20261112.json", "titles": []}
