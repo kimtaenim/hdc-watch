@@ -911,5 +911,23 @@
   "trace": "data/volume/045510.KQ/traces/live-20261114-001914.json",
   "delay_min": 14,
   "note": "오늘 5분봉이 없다(휴장일이거나 아직 장 전이거나 야후 지연)."
+ },
+ {
+  "at": "2026-11-14T05:54:42+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {
+   "한국경제": 100,
+   "매일경제": 50,
+   "이데일리": 50,
+   "지디넷코리아": 30,
+   "블로터": 50,
+   "뉴시스": 200
+  },
+  "failures": [
+   "RSS 수집: 전자신문 https://rss.etnews.com/Section901.xml: URLError: <urlopen error timed out>"
+  ],
+  "trace": "data/trend/traces/trend-20261114.json",
+  "note": "새 제목 171개"
  }
 ]
