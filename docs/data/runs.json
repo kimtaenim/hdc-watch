@@ -875,5 +875,29 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261113.json",
   "note": "새 제목 473개"
+ },
+ {
+  "at": "2026-11-13T23:53:28+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 40
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(15:30)과 503분 간격: 사이 실행 15번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/close-20261113-235328.json",
+  "delay_min": 18,
+  "note": null
+ },
+ {
+  "at": "2026-11-13T23:53:30+09:00",
+  "kind": "volume.walls",
+  "subject": "045510.KQ",
+  "fetched": {
+   "일봉": 245
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/walls-20261113-235330.json"
  }
 ]
