@@ -844,5 +844,19 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261113.json",
   "note": "새 제목 261개"
+ },
+ {
+  "at": "2026-11-13T15:30:53+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 40
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(00:56)과 875분 간격: 사이 실행 28번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/close-20261113-153053.json",
+  "delay_min": 25,
+  "note": "프로토타입에 12개 더함"
  }
 ]
