@@ -24,9 +24,9 @@ jobs:
       - run: pip install -r requirements.txt
       - name: 채점 (15:30 이후 실행이면 마감 갱신)
         run: python -m volume.live
-      - name: 매물벽 찾기 (마감 뒤만)
+      - name: 매물벽 찾기 (15:30 이후, 마감 갱신과 같은 조건)
         run: |
-          if [ "$(TZ=Asia/Seoul date +%H)" -ge 16 ]; then python -m volume.walls; fi
+          if [ "$(TZ=Asia/Seoul date +%H%M)" -ge 1530 ]; then python -m volume.walls; fi
       - name: 결과 커밋
         run: |
           git config user.name "github-actions[bot]"
