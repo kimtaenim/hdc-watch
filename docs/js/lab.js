@@ -113,7 +113,7 @@ export async function renderLab(root, ctx) {
   const out4 = el("div");
   const run4 = async () => {
     const dv = await H.makeVector(`요일:${wsel.value}`, dim), sv = await H.makeVector(`시간대:${ssel.value}`, dim);
-    const sims = askContext(model.memory.counts, dv, sv, ladder.vectors);
+    const sims = askContext((model.memory_train || model.memory).counts, dv, sv, ladder.vectors);
     const best = sims.indexOf(Math.max(...sims)) + 1;
     const lv = ctx.bars.filter((x) => x.wd === wsel.value && x.slot === ssel.value).map((x) => x.level).sort((p, q) => p - q);
     const cnt = Array.from({ length: model.levels }, (_, k) => lv.filter((x) => x === k + 1).length);
@@ -150,7 +150,7 @@ export async function renderCheck(root, ctx) {
     const dv = await H.makeVector(`요일:${w}`, dim);
     for (const s of model.sessions) {
       const sv = await H.makeVector(`시간대:${s}`, dim);
-      const sims = askContext(model.memory.counts, dv, sv, ladder.vectors);
+      const sims = askContext((model.memory_train || model.memory).counts, dv, sv, ladder.vectors);
       const best = sims.indexOf(Math.max(...sims)) + 1;
       const lv = B.filter((x) => x.wd === w && x.slot === s).map((x) => x.level).sort((p, q) => p - q);
       if (!lv.length) continue;

@@ -360,6 +360,7 @@ def run(stock_id: str, end: str | None, raw_path: str | None):
         "dates": dates,
         "history": [{"at": now.isoformat(timespec="seconds"), "kind": "학습", "added": mem.n, "n_after": mem.n}],
         "memory": mem.to_json(),
+        "memory_train": mem.to_json(),  # 학습 때 그대로. 마감 갱신은 memory에만 더한다(화면의 학습 기간 대조용)
     }
     with open(os.path.join(out, "model.json"), "w", encoding="utf-8") as f:
         json.dump(model_json, f, ensure_ascii=False, separators=(",", ":"))

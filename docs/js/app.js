@@ -238,11 +238,11 @@ async function drawFlow() {
   const dayV = await cached(`d${bar.wd}`, () => H.makeVector(`요일:${bar.wd}`, dim));
   const hv = {};
   for (const h of slots) hv[h] = await cached(`h${h}`, () => H.makeVector(`시간대:${h}`, dim));
-  const full = H.Memory.fromJSON(m.memory);
+  const full = H.Memory.fromJSON(m.memory_train || m.memory);
   // 그날 봉마다 브라우저에서 다시 채점(자기 제외)
   const scoreOf = async (b) => {
     const v = H.bind(H.bind(dayV, hv[b.slot]), ladder.vectors[b.level - 1]);
-    const mem = H.Memory.fromJSON(m.memory); mem.add(v, -1);
+    const mem = H.Memory.fromJSON(m.memory_train || m.memory); mem.add(v, -1);
     let dot = 0, sq = 0;
     for (let i = 0; i < dim; i++) { const c = mem.counts[i]; dot += (v[i] ? 1 : -1) * c; sq += c * c; }
     const proto = await mem.toVector();
