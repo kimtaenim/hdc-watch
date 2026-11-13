@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-13T06:28:40+09:00",
- "finished_at": "2026-11-13T06:28:52+09:00",
+ "started_at": "2026-11-13T19:59:02+09:00",
+ "finished_at": "2026-11-13T19:59:15+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-13",
@@ -24,7 +24,7 @@
   "noise_k": 3
  },
  "code": {
-  "commit": "8868f07151078a721925087a048237bf1dffbda3",
+  "commit": "59e86a83027ab8bd9e734c7fa2f10f868de57596",
   "dirty": false
  },
  "sections": [
@@ -41,42 +41,42 @@
   {
    "title": "키워드: AI 인프라",
    "text": "표기: AI 인프라, AI인프라, 인공지능 인프라, 인공지능인프라",
-   "from_index": 5
+   "from_index": 6
   },
   {
    "title": "키워드: 로봇",
    "text": "표기: 로봇, 로보틱스, Robot, Robotics",
-   "from_index": 8
+   "from_index": 9
   },
   {
    "title": "키워드: 휴머노이드",
    "text": "표기: 휴머노이드, Humanoid",
-   "from_index": 11
+   "from_index": 13
   },
   {
    "title": "키워드: 사족보행 로봇",
    "text": "표기: 사족보행 로봇, 사족보행로봇, 사족로봇, 4족 보행 로봇, 4족보행로봇, 로봇개",
-   "from_index": 14
+   "from_index": 17
   },
   {
    "title": "키워드: AMR",
    "text": "표기: AMR, 자율이동로봇, 자율 이동 로봇",
-   "from_index": 17
+   "from_index": 20
   },
   {
    "title": "키워드: 배터리",
    "text": "표기: 배터리, 이차전지, 2차전지",
-   "from_index": 20
+   "from_index": 23
   },
   {
    "title": "키워드: BESS",
    "text": "표기: BESS, 배터리 에너지저장장치, 배터리에너지저장장치",
-   "from_index": 24
+   "from_index": 27
   },
   {
    "title": "요약",
    "text": "",
-   "from_index": 27
+   "from_index": 30
   }
  ],
  "steps": [
@@ -134,12 +134,12 @@
     {
      "type": "value",
      "name": "새로 쌓은 제목",
-     "value": 261
+     "value": 473
     },
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 180
+     "value": 653
     },
     {
      "type": "value",
@@ -161,29 +161,29 @@
      ],
      "rows": [
       [
-       "01:01",
+       "09:00",
        "뉴시스",
-       "\"걸으면 저리고 앉으면 편해져요\"…'이 질환' 의심"
+       "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수"
       ],
       [
-       "00:44",
+       "08:12",
        "뉴시스",
-       "트럼프, 차기 엔비디아 CEO 추천…\"젠슨 황 이을 사람은 애플 팀 쿡뿐\""
+       "예천 소 농장서 구제역 확진…양성 8마리 처분 유예"
       ],
       [
-       "00:32",
+       "07:58",
        "뉴시스",
-       "[속보] 트럼프 \"젠슨 황 이을 사람은 단 한 명…애플 팀 쿡\""
+       "젠슨 황 떠난 엔비디아, 장중 시총 801조원 날아갔다"
       ],
       [
-       "00:01",
+       "06:30",
        "뉴시스",
-       "엔비디아, 젠슨 황 사임에 8% 하락 출발…나스닥 0.52%↓"
+       "국민평형 제친 '소형 아파트'…전용 60㎡ 이하 서울 상승세 주도"
       ],
       [
-       "00:00",
+       "06:28",
        "뉴시스",
-       "옥주현도 못 버틴 레버리지 덫…\"일반인 부동산 법인 투자 위험\""
+       "뉴욕증시, 젠슨황 사임·유가상승에 일제 하락 마감…나스닥 0.4%↓"
       ]
      ]
     }
@@ -211,7 +211,7 @@
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 0
+     "value": 1
     },
     {
      "type": "value",
@@ -226,7 +226,20 @@
       "제목",
       "명사"
      ],
-     "rows": []
+     "rows": [
+      [
+       "전자신문",
+       "日정부, 엔비디아 사태 주시…'피지컬 AI' 영향 우려",
+       [
+        "정부",
+        "엔비디아",
+        "사태",
+        "주시",
+        "영향",
+        "우려"
+       ]
+      ]
+     ]
     }
    ],
    "check": null,
@@ -238,6 +251,71 @@
   },
   {
    "index": 3,
+   "section": "키워드: 피지컬 AI",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:physical-ai",
+     "dim": 10000,
+     "ones": 4981,
+     "head": "1001011110100000101110100100010111011100011011010100100011000110",
+     "bits_b64": "l6C6RdxtSMZJBRUxadND8sLO/eGrLuOQbmllc27RAZtbjiHXYoZpkBjNDr6Xinun1AX9Wc1kZ7jMgnmZeIKem1V9lEZewJJ4z197w3NCwUsSN/lOWpwwLbDxIG1YKli2uxjpvir5wLaVJPuJlEq9AYtspABPA569JmRFBonJMmS3XzDjA0Vzr/guLcMNlhjxxoA4AxtS7uiJjwc+OPaF5zKnu3F7ErTuaRvSpJTLPlb0rR2Q5LCyyNdtEcaUzJjaFQKd6a0CwxS7UZ8g7F7Pi8zili/X6QdXc48BAd5f4QFQfP8P9vzPlixagwxB9J5YzQwlJuujXYw/RI45b7xFMw0S1BH4JLLy/U/wDtFUYN9lJAnFR9vZ2H0zXT0W2Rmedx2a2bVTPKnB1dQCEcZOx+xHTz4lPbZE02pskSuCWHpR7n3CjfP60kzO7i+jTCw4FqOwnURjDyaqu8Uh1FXI6Q5hQBQjpwa1gIAQLib92820bqsQTnOwotZg8j+LK+okfsh6wUp/d6pZAzjIWfX1hTKg6u3veQRvOCd/ydRFoLWtVtpg7tH0PI+++wR1QiRkJguNcHs/cUz+5YqJV0jtVeWYogFCMXyWJ43Xas5VAAXU6KbVPBvVer7tv8mlKHIiXxiJ/pn3Crj7SGYlebCM56RBypBxHXwDxF0XM/tj+Vg5ewjbx+r+iPOjKUQnUtNTaxeAiu84/8UPl9Ek+/UP7K576iEkpSV24ts855q8juBXD3BeF3WoDWFPuSJdfyTRNLyOBJnpslWAAoKhX2ZKz2xZfXVH9pqdi4UYFSwqCUtyF1w4+HCPPCahsL3ssIwcqwFN5kQ1qZlDJqGI07d7yyTv9thFFV7q26Y7Fwf+AL9zZZ1Sl5S8pB6E2HeK4BR31o6Fb7Gow48h2QUfiha41F34i/pCChGrSIPYt+tFo9CF/VnuRJMMTX9pevIcNRY3DlyYoiYBYEpkW37UrqvJv2rMcAzb4En0WDkWlV2oC8uGekJLo9FRZyIjUX3B7KB9R08Ldzqkj1aUiUDl9gMBXrGy5k/hb9d3Ki071C5iL3G56lR5+60+QlAMuA68Mz+9pkrJYYr1ngAOYYuujg7LBGXtV49XCZqftvSfJmfaQCwWejjCw/gBE+YlzLwsBhD4sCkUSnO33ZQsAwxbVbRXpU+cATZy4C2if2jj2ivx9F1BJor3BYHNhM7TdGIsVvVqHsoKkTksVSsrK7gVzgty4tlfqTvafXhhIyFX091sqFS5NddiplP0uQe4Zr0E2/ijkR+XNfwrVX3lVrO1dc19lHmIcpcVGNpR3UZo5BTNhx7hLC7b/TjqVWIfQRTw6YwHANJoTkZNdKTiNXj80tAc+bS69zGE7lyNMNJzksYJ0/pTdRWcnkX9Q0K6LgAyx0fdPjHpoBuRAMjXyQDhCT9pp3ckO9hFeqykV4iP8R4BmlNc7AQEo7TNB3vpiCzfJHBmNKfwNtcRLuGMyyCY4Rj4BFtzExAA/gK0jrhXKotveJITu/q8vwo1DrEoeLGfJjXiYgc58sY2mI7QZH8iHYyf8v+ZzbCjuyDEtkw/VkzXAa6Tr77vw376S5X6IpthjGggXVLk8vuIKZhw54iWF1ud1SZ/0gLNf655fXjOnVOvJURatbC2LZ6c3B3EeBJzhkls7jI="
+    },
+    {
+     "type": "vector",
+     "name": "단어:정부",
+     "dim": 10000,
+     "ones": 5023,
+     "head": "0001101011101011110011001101001111001000010010111110101111000110",
+     "bits_b64": "GuvM08hL68Z4pQzVDGL1DiYclacgpjs33EwrXKbPpsY3LU3p4fOxtP7e7Qu2KzVYw5xKtaM6YUgQggvWdpzAiOXrnpqKYM60Nk3TGgV0VdXPxrO4+gaAQukasGTJse/+X6evMKqR/0DWEUb+WoSNjt3j9BPzVT8gzf0CqFdLqk5YVQM8iTPoFfi4ox2jmvNsrCg/3eRdC5cpamFWD1JCilkq84lrJ2taYrmHR9GeIdInJEBakLu1pYC6EKPMcoTYpbC3L+d8c6OQaSBXRWduqFaQ88mwyX2eoSSWVMswR9D41N0QcsXbVwz/8XH5PTSJXQCxdeZj2pVnglWdXK/fyCVw6lYAWbDAfByboHR2nal0H7tBOfIOx9dOZBk5+NF23kYVORN2lZCszTus9Aaka1Ndhw/SUEx04dwyJOncjcPD1iYjt8XlXcsWCR00E+dd7gNs+5FszrN/IU8l6rcnRNMMP9/E1i3g5MlbA7eaVmP9C4i36Rs7eC9ftzzRJ6KyOdhoNPzX/OuLQfRl4/8HD2AujQFzsJTbquCzWcHuo6mjklJLN9+JWEbR7tgrcX5DmXG9dGVbSO1YlPqq/mkFJ2ROnicbu5UVbiyjQvv3ZTodwzXzw4APFowaf9k2/Cxmbj3v+EgvqOHtmz4i7ftECJaEOYKZ2iFatD2O2TXe66E7dwHYFkLgDzXtNT4G6aAcmGoUq41YxyH4DWrzNzD6vavQlc1yl4/Fe3v4Mk4KwMOZIgqm7EIwp1PMiD/jMZ+qvfwpdxPRyOMiHNffF6mBeL25byqdEPwoo6SxEQOdJXQ5QyN4LVzHbt3TxO2WBLESszMu0yVi1Auo0z0W9RmMxHk35WhuvtqNc0dxrSwM4zwRWEtD8i9sMWsbRt6VIessdOjdM/CBq/NbKq88bIyuWHvWzXm6MoBNP/d/zFbkKB19bNPuucMvXET1TWzyUASwleb3dtck8x+Ccxl+6QipjLjJp9xAH3EedIsT/8ACDR3mi32t1kpYYzXYpK+K5LwDtczaI4oZGP0jCmHwwLnsdLuYUz20FWI5HpIzZsFqlblh0xuaUvNA0kxrld8fKCSGYRLrULFWUNKSXYbSKwKZOkMU+OkqpHwyaVdj1oorxsBtBkpwcjbvj0zc559wenhSljP7DODsmfwgtEYs6VuDr99AL2nakgFZbcGkbFw0D+fIBJSy7MemxvCEPhNEGjgOFnJHd7r/05dEB11HJ5hT55SveIT0Ody2JsvSitzQs6XoyHEkkJuf6vPxVMT3Q8iQHYjAFJklTZyHiYoDUxpwbryM6JJdfmSAWC0Px6IWYkSec+qteCxdHPQgQheqaP0E9H5ATZQWTbfhxyu6/pUmwpby/PKBW3+LVTjJB32kWLm3g8UsF7h33YK+GzPmL0HPXt94pnvrCO9S9SXGYJxRiHmB4F8fT4OlIxT850KGf0Dofag2OugHLvHdglmYA2XflzenogXRpYtZGkE0wYBB0G9fMloBTjynkGOYrbDfmv6ybQcIqJG1blF8fR1Wj6xLfLyEQqtJvvav2NM40TeS7dadsMGBcyi+A0hXP50d8K0H/bOMskJ8WW6aPnBkLhkTQsBG4xfOQqP1nRsCjmM10fWApAGIFMh8bm1yFzRfLAXvqYUPL38gsyU+mBNzlbbOm80="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:physical-ai ⊕ 단어:정부",
+     "dim": 10000,
+     "ones": 4960,
+     "head": "1000110101001011011101101001011000010100001001101010001100000000",
+     "bits_b64": "jUt2lhQmowAxoBnkZbG2/OTSaEaLiNinsiVOL8gep11so2w+g3XYJOYT47UhoU7/F5m37G5eBvDcAHJPDh5eE7CWCtzUoFzM+RKo2XY2lJ7d8Ur2oJqwb1nrkAmRm7dI5L9GjoBoP/ZDNb13zs4wj1aPUBO8VqGd65lHrt6CmCrvCjPfinabugCWjt6uDOudaqgH3v8P5X+g5WZoN6THbWuNSPgQNd+0C6JV40VVH4TTiV3KdAsHbVfXAWVYvhwCsLIqxkp+sLcrOL93qTmhI5pyZeZnIHrJ0quXVRVvptGoqCIfhDkUwSClcn24yarRkAyUUw3AhxlYxtukMxOa+yhiPkf4fQIygVNrrqUi/XYRO7KEfinXH6p9OSQvIcjoqVuP4KYlqTltGO+u5cDqrL8ayDH3bfowMrZetcJe1bmSOFvhOjYfj4fY5zKXX8tl+KDcZtUPwZXVmooEPuLvrd1tf8vncStVZElLLZFnja5JZSOnp2iL2vk/RQNaDEiWRxAS9baoi0HSQsytugryilKOZ+ycyZC0ksfMkBWrAxwOxIgr2Q59ZMlvFdxeM1onv3owBB5kOaGmcXAjqSHocoHWPCZZiumDSaF0KDWiZT/JK5Mm/5vabDL3wBCT1F5EMSVmBtHYolkW01gHlEvI7zLF8xLox11ZcGCZ6s69EvkCDAkD0ageh8ZOHHohu3NP832UIWJgOOT3mrvXzMX1UQWrf+xWMqqzmaDE1dS2TiPOLXr4+zeYqjKDMR2+Trt7iUCnc4o4eraiHlV+SM/Lt9HgEl/a5ma1KCGpBC+3LD9LVH9A1SxIUvtydFB6tD0OGDJjNWFXfZLr9ZyeJq73D13YE7Arq4RnqOFKuivy44NiPdYRZbvQlXWfnqkfwf9bomZYXEEpaHx686oj5poWjCYuRoP4OJHmd3Sne72hi834kYoA/VAjETucN57uZRKHm7pv1PElk1XmKGeqR6NgM9IF19Cb/zjqLLIFap2qBtZg8T/mdZsJBBf79dJLCBx+8oPRVLC9l6u3gyEVNrrtKgoqtXJVerVONL8Isu8IusjYOU/jqV5+kBxnLdGjGxs7x1giMTujztKcPA18pQxSPib5r2Z9reat36P88O3xhux7fHKysc7unKr5KyNcfGiqJhrvRpNbRGgMt0p3vO/UCpDcLl+ociz7EqlHtnfF+7qJIh5F6UZrQj5XSnFoTM1kCLhN5oPThrxvLOVS6ZMhBU3w0b8uRKTXBeqFWQG8G/FR/aZGNshrU/RJMnnzmDAzjJdXIWUOGOFi3zm2JtcN+sUEmgVIZr7RhWtnI7bb5Vp/X8R2hRS3SZY/AwNagXED9KwoA9JbORMD8lNGLEU6OyJIC8MFtSMGZeq6lbuti0Pk9tCwif2KnsAENTPU6AYSYO6RBmB6CCeFPCUnaaM4Lw6l24daNS8BdJxzFlyH5RO0kawymVzKKYo0CnVHJxW5o5BXlNLAi2rV0WGsIJi51DQsIUoBsD4THtvPhzuw4myh1v20F5uAYOBUBazJqZmpHru9sG1/Jnh/vKwazLsNHykEfXEiyAh6tQRoadHK8QOUUg1jcTyGEvtgHOsFonEzH5KiEexGazuFepOUmTioBNP/dgNFa2YFExW8imfwCUG1HDW5AuG8bzj64AEAE/+idf8="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 6
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 36
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 4,
    "section": "키워드: 피지컬 AI",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
@@ -273,7 +351,62 @@
       "HDC 판정",
       "카운트 판정"
      ],
-     "rows": []
+     "rows": [
+      [
+       "정부",
+       1,
+       0.4071,
+       0,
+       -0.0052,
+       "",
+       ""
+      ],
+      [
+       "엔비디아",
+       1,
+       0.4103,
+       0,
+       -0.0156,
+       "",
+       ""
+      ],
+      [
+       "사태",
+       1,
+       0.4077,
+       0,
+       -0.0085,
+       "",
+       ""
+      ],
+      [
+       "주시",
+       1,
+       0.4276,
+       0,
+       -0.004,
+       "",
+       ""
+      ],
+      [
+       "영향",
+       1,
+       0.4138,
+       0,
+       0.0156,
+       "",
+       ""
+      ],
+      [
+       "우려",
+       1,
+       0.426,
+       0,
+       -0.0005,
+       "",
+       ""
+      ]
+     ]
     },
     {
      "type": "value",
@@ -288,8 +421,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 0,
-    "hdc_answer": 0,
+    "count_answer": 6,
+    "hdc_answer": 6,
     "agree": true
    },
    "source": {
@@ -299,7 +432,7 @@
    }
   },
   {
-   "index": 4,
+   "index": 5,
    "section": "키워드: 피지컬 AI",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
@@ -318,12 +451,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": null
+     "value": -0.0073
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": null
+     "value": 0.0
     }
    ],
    "check": null,
@@ -334,7 +467,7 @@
    }
   },
   {
-   "index": 5,
+   "index": 6,
    "section": "키워드: AI 인프라",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
@@ -375,7 +508,7 @@
    }
   },
   {
-   "index": 6,
+   "index": 7,
    "section": "키워드: AI 인프라",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
@@ -437,7 +570,7 @@
    }
   },
   {
-   "index": 7,
+   "index": 8,
    "section": "키워드: AI 인프라",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
@@ -472,7 +605,7 @@
    }
   },
   {
-   "index": 8,
+   "index": 9,
    "section": "키워드: 로봇",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
@@ -487,7 +620,7 @@
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 0
+     "value": 2
     },
     {
      "type": "value",
@@ -502,7 +635,30 @@
       "제목",
       "명사"
      ],
-     "rows": []
+     "rows": [
+      [
+       "블로터",
+       "[의료로봇 줌인] 리브스메드, FI '스톤브릿지' 가고 '타임폴리오' 왔다",
+       [
+        "줌인",
+        "리브스메드",
+        "FI",
+        "스톤브릿지",
+        "타임폴리오"
+       ]
+      ],
+      [
+       "뉴시스",
+       "울산 남구, 中상하이 '휴머노이드 로봇 실증기지' 찾았다",
+       [
+        "울산",
+        "남구",
+        "상하이",
+        "휴머노이드",
+        "실증기지"
+       ]
+      ]
+     ]
     }
    ],
    "check": null,
@@ -513,7 +669,72 @@
    }
   },
   {
-   "index": 9,
+   "index": 10,
+   "section": "키워드: 로봇",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:robot",
+     "dim": 10000,
+     "ones": 4944,
+     "head": "0000010011011100101111111101111001010110000111011100011100011001",
+     "bits_b64": "BNy/3lYdxxkha5by2cDsAejcbAsuzeOTAi+Wgg1BwYP647cbrTWLyYdKOo7yG8tqm9mxszbiRe2j1V+9K8CKUWQUM+jSIOApGguV0bI8ED5hhVu9n39OX8gvIQqGjpvc7fkt1AiAqRmJUsw5dw0Z18erJzNzXaoNi1Kz+RUEpzvbKMu/uUEVmQyjdI9FFIb1O9TDq3G4KpD0/IdrWhKbUbM3Gji2kV6bPUD1+1VTNyBUTSBiiIHc6LJs3smH7vdWr/t9JG3Uu0FCDxenHqRS1V1FITJlUyp1zpHcj8gF63zd/pOHK6XlwmDfziVYgDDjxo23osGMKFv3XfY+HUU1Utv8j8JYhwujMwbfmydHlMBwL6JdnaYTFlCQH5TVlF7hvndhx49oGhu7YAuxl+Xqyybe0HCykqYgyww7Trt2tGFQUHaFNTQKHQVYaulSnZ97uX2tZ4sIPe6IorCYmtJr8kv/KHxPI9uI2oQmQLuNFOmYW8GOdPAfa7gkKTVKRVaXnVkq2woKZ9786YC3OsazIzBFtXIat8Q9OjNUiEqpsqpcEKSCRbVwQU3nVQp/70lLyGgosHEGnVWNc1fID8PlbdEu0FoaK55r+I5w2aFFVtLjrAw+fEGzkfllRmpIGmxXUR5EgnWCqAyihy+7IVCo2DE2XDHYrMy0thPN2Wys0i/gn5gh8wMVPC2Ly7if+FKW3uE1Mzrf36Gh1LlXAB4ehRxr24Hx5vpIo9y42gFF5hRY/5YPv8xvv2W+VJspd6VLNqIRQgCQnlTmkgZ7zkTVqiXbwzDtGaysCcyyKS4ors0dRdRY/jfq5VF5nIKL7/SlbddbQ1tg5cnCQjyaDLYjWpVM02K5qDd3t6gQ1WpDhUjFB4ECqp5TbxA1s6NXiGTMjEKd0vM9EcJpnfT43S4Gb38nMc1gvLELDsO/1mzI7vxXn9zvWzzlYNKAWuASs1x9hK/csu7L/z9Hnm1/x0dHYCybwziElnhwNKt+0DeG17rGpUVuH06jGwYSd8nKpkczKPKM0Mze3ruCwYBjaB0GtDx4bbkP6e+p5YHLx4EtTWwAXlZTyF3Vaqvej/CnC0rYf1MVR7ocVwpNTGDjilLKnnMvu4u+2styQIheOaUEM3FoqjEYuLCmkm7Ukf1pdWwfPSAbu4EH7SBuFlr9b2zL9UU9W89z0k9asc4AFpxZLbXH4FuYkjAFkREV7uLrrmpQZ6iJJhHjlljNzD2HhvLiPJUF0vxtVctXHpNqNvSSHdKe+SK9tklKYc+EfVAR1ZqD4ooKSI05W0hUkDqv3i/KnODE4oZVCFClND02dOtkuVh3SMYY8yP7O8YixCqcSYSe0hizYGYqCtFEU7wsDr/V/8askBEE1CJq/MhShMVJ43qE3OgMbnkMJIHsQudc3HnYk4MxJ++a5bdWHLEBs7yBt0hMIJWhja2JP5Mux+2ls3JbD+Ae8+tegF0UGfEDjNnwx4cf1pIyr/xhlDluiy1+elKMFGIf74d1VxYD83D5YNYT5d0X6zpZ1RVT5BSalpb0SW73kMYPIMQ3Ysh21UJ3DRmB4MaPYRTBO1TB+YPJSRYsFfoRtAZaYoTCfpPfWV4EnynHh+xRALq2BALwbGhk0nkE2vF0jATiMk1JKAzWQvKGh2vgfwBh5tPJXiHRQzyXfcU="
+    },
+    {
+     "type": "vector",
+     "name": "단어:줌인",
+     "dim": 10000,
+     "ones": 5033,
+     "head": "1011111001101110001110101110011000111101000001110100001111010010",
+     "bits_b64": "vm465j0HQ9JwbjytTrySqgOS0vjlBbKaHj7V1l70poyqRfWY2pH+QE5YZwwJhM1/g0McmPizIaU+9r3z7noYRM7iFjRJ63T0npNIJurOd/uk/RvO+PO9kxPeUCQdGS/sW0ZB/FWEw5H0QEbB4ibYM0sIk+F08ITbaVG5ACCsybaEmcxIhHczVyMjHb1I3be85UJkPExvfoAphCrGALdKomW3rGzknFy39faHKakPBy9YWKQB0fHrGi+X+XYyE4lroyUIaKL++DNTtaFQTYDSMgu3WeljiTUvgjf1sTgwmH1eSwZbko6f1p6+bDsOjGStAXwXZpNHU/a2L/mBoSDrIUMub1IbKiVWrI5w/3jFH40S9hzifIVuhBxm9pT7u5W8nvZKjkDJznXYUgLhs8MfEHORf12a3htriuq/SALGvY1UgzPJX5Wt6JryKQFRtDjXTKwiE3lt7c451nP+VtcIm7qHsnE+0SIoywPfdBj+7jH1btImSg5FSWKypta74/qVUx9hjqmVZySF6jEYPV7QptJOo7J8sombN9BkLcn7jqVrhvaZgcmu4QRYMpg9Jsl8G0lfHzLDZAn+5uugwwFoByotY1ot+kFsnosEPLG8ab3hL/LAugfZDv39USusb0sFe2+CSVeR1nJw+m0YQpkizGCkbPgmeRCR/vg57oj+e7f9V1LmP99taKsyZljoZ1f/IKRmgwXH+t0f/CK7TyMgfhNCYyp3yWxkfGwONJ7ZMR1NOibzOyvvppteh5HeCLqhFsoeE+tYSpE00cLJ9EhAlNdZFSqxf8hNR1GGrE3G536yJKjy0/4D6ukEMyAsY8HIA2oJYlv8Jcv/xD1+uP+g4DjO+9LKOLD1yaOopVe0JkQwaWyqYbOXbmzajpa34CJ4mjdkAqoAT0U+kOsERGW+80rPDmz3R7FGb1pHyUF6G10OWTXHuiWXPSe1Sf7fdMlgohMRWuzpziHuSZfjvvGUmRuFlcnhLzh9r2PDub/Vgg6JBkOQDYYR11IWfsQJlVDp9jdCKoIZIb1dDN7yd3dnd/IL9xZAh4lCbsQgsha1xZQV9Pq/UaELxF1qRYZAVqlZ+kig0EOdOm2CZFHs7LRlNb5ShByPej9k3VTe+pixVFKAvuNAPR/1W6OR2chDZA6upHnpsxLAMDkfDKI+R+Au60On6h/OPZvGmlWOUS/v78LDsAaMToXGMKzTjY3xn2K+5CnLP9VYdrLIW7ZOpWHO//wVucOT3mRDCOhkp1/EKu++zQz7HIXs+bqg/dpBR/z22cdMIzYIL9V7qVb0bX4yMNN/KWtwzoxaIwHWAJSbruwSPbiagQiceLq9Vfra3JAJKbh6ZlGLWEoJ3XCOzybCPG+96FEc9RZrs5A0v/cXddAM+F3WNA5ReHEjsX4VTvVJOAroN49J2FJ11eXnhO+HCQ1zoqSCYIFfxx+nqwR5ScSYaBJXTk9L2ITuIgxAeYEg2Bet65zXfpcKqXV5x/nK6e6Q97Ec9egs1dmHAbyLy/8ek7zEY2nhr0UdIyhgONL8jUmLzH+59sK2D4I193NiMuTHcRIrYgeCB5q92bFhzGU7q5CiE7OwSN4vDZ5xrPTIeDkLE1BRrVTcFZ+/UobA2MSKYXe+4ciXfs9K0L5HcabTVVSpE/k2p3kKtE1RoQ0m5Z8="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:robot ⊕ 단어:줌인",
+     "dim": 10000,
+     "ones": 5031,
+     "head": "1011101010110010100001010011100001101011000110101000010011001011",
+     "bits_b64": "urKFOGsahMtRBapfl3x+q+tOvvPLyFEJHBFDVFO1Zw9QpkKDd6R1ickSXYL7nwYVGJqtK85RZEidI+JOxbqSFar2Jdyby5TdhJjd91jyZ8XFeEBzZ4zzzNvxcS6bl7Qwtr9sKF0Eaoh9Eor4lSvB5IyjtNIHrS7W4gMK+TWobo1fsQf3PTYmzi+AaTINyTFJ3panlz3XVBDdeK2tWqXR89aAtlRSDQIsyLZy0vxcMA8MFYRjWXA38p37J7+1/X49DN51TM8qQ3IRurb3UySA51byeNsG2h9aTKYpPvA1cwGDtZXcuSt6FP5hoh5WDFROx/GgxFLLe61Bcg+/vGXec5jS4JBDrS71n4ivZF+Ci01i2b6/4SN9kkz26QAuL8tdIIErSc+h1G5jMglQJCb121VPry0oTL1LQeaEBrmwCewE00VMaqGn9Z+qQ+gDKaes9dGPdPJl0CCxdMNmzAVjafF4mg1x8vmgEYf5NKNz+thtNROoPv5aItqWj+PxpqwCzkZLVaOfAPp5A7GvB5hjheILFsBmBU2mDeMwpYNSPA83llIbxHzeoEm/Z5JCyYA30yF3r0PF+VxzlbxozMKNavsDswA30d8HZgV05RD5P28Cg/7+xkZqnwSYF0HkdSdSKnHGyyITfn7SfUKjY8mKFFGSMMn+1dwlSOv0N+RSqZgdyMrHzNx4VIa5reB3nwVp/kVTsD8YJXy+KJvsTz0++w8puKuGL5Ys37C27p+c1wkVxbD8hOeAGf7g0wr3fx/qIGgPUevI1MXSQ8SyOgyVPvKC1hpcZmThTp00hWPuSbOvYXyqLcnpD7h9r6KnjDVtbr1SIQCcwAI9hgHktEmDuq2CKLBzkIeCfgu4cD33owz1bu2oyy3EAXzvPTXgaEa0FnX50Fk9XodXDR/8mUu4nDXoP6GX+wBNYZn4Hy2y9aFZxuko4RlyXfU1Ex7Nx5UdJrzN6AIiMR6p1/qcebbT+TceVvFluUANm8i9aYhTVbRPowb+EsiyzFQECQ3DMxfa3sXO+k7H/wbfzV6RH2phw85zmq9Pbmbri0XrdZeYiPgVqqzsmfzerva0ynbnXeOBhRu1l/mBbWfPKDEPZuavq819P5cxoPQWndyAwz21ZyPoFNJYha9Tyc1FSDUqEWKxmVnyCJPH3RlxGvjDKIzlHgaasdC979ScK5uOR7O2wncEUF0U3LXDob3GY28aMQjug4FCGcS74OoFl4vJI5Msw2kQaz/+i68UFnsOkatWNz0gNC5GqsymmHUkgIpQkmZ1O01Ga7sxdJ0vOWxbs1H4rDO7y+0lxtz/FzzgdH//F7RldX6CcitnQ3yfkdBGlRSX+6DJBjehUptNjsyiwZkXw6kReEAYITQBT1hmOzJelqqIJLXaWnddXPDP85lJkoyRq4nZEGDTPeUjyVTmN1MGvkU/gjEj7SzW+IyJbOnc+rbDZ/JJvaQVWNn6O/1D9VjQH5CyPQ7l0WtrPUwXTNS0k7wc49MDGm9Zgs+E8sxyqykNdmHTiFO4elBOxzz6rkQIxCd8XLm21gaBbUpDIjEVP/1GkdSkAxNDPM58IDKohXMXvmqzp7XqKlrtcw2u9arM5xDMlLwAre5qEZ1PPu6kCr2Ou4bKbcx1TIID+LKRM1RV0j9JbPlXQarD6myA4jGxmFo="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 10
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 63
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
+   "index": 11,
    "section": "키워드: 로봇",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
@@ -549,7 +770,98 @@
       "HDC 판정",
       "카운트 판정"
      ],
-     "rows": []
+     "rows": [
+      [
+       "줌인",
+       1,
+       0.3151,
+       5,
+       0.5069,
+       "",
+       ""
+      ],
+      [
+       "리브스메드",
+       1,
+       0.3125,
+       3,
+       0.3098,
+       "",
+       ""
+      ],
+      [
+       "FI",
+       1,
+       0.3269,
+       0,
+       0.0091,
+       "",
+       ""
+      ],
+      [
+       "스톤브릿지",
+       1,
+       0.3079,
+       0,
+       0.0073,
+       "",
+       ""
+      ],
+      [
+       "타임폴리오",
+       1,
+       0.3165,
+       0,
+       -0.0085,
+       "",
+       ""
+      ],
+      [
+       "울산",
+       1,
+       0.3159,
+       0,
+       0.017,
+       "",
+       ""
+      ],
+      [
+       "남구",
+       1,
+       0.3219,
+       0,
+       -0.0243,
+       "",
+       ""
+      ],
+      [
+       "상하이",
+       1,
+       0.3266,
+       0,
+       0.0123,
+       "",
+       ""
+      ],
+      [
+       "휴머노이드",
+       1,
+       0.3184,
+       0,
+       0.003,
+       "",
+       ""
+      ],
+      [
+       "실증기지",
+       1,
+       0.3156,
+       0,
+       -0.012,
+       "",
+       ""
+      ]
+     ]
     },
     {
      "type": "value",
@@ -564,8 +876,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 0,
-    "hdc_answer": 0,
+    "count_answer": 10,
+    "hdc_answer": 10,
     "agree": true
    },
    "source": {
@@ -575,7 +887,7 @@
    }
   },
   {
-   "index": 10,
+   "index": 12,
    "section": "키워드: 로봇",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
@@ -594,12 +906,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": null
+     "value": 0.2582
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": null
+     "value": 0.2543
     }
    ],
    "check": null,
@@ -607,149 +919,11 @@
     "file": "trend/analyze.py",
     "line": 53,
     "function": "cosine"
-   }
-  },
-  {
-   "index": 11,
-   "section": "키워드: 휴머노이드",
-   "name": "키워드가 든 제목과 같이 나온 명사",
-   "op": "일반 계산",
-   "why": [
-    {
-     "kind": "설계 선택",
-     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
-    }
-   ],
-   "inputs": [],
-   "outputs": [
-    {
-     "type": "value",
-     "name": "오늘 제목",
-     "value": 0
-    },
-    {
-     "type": "value",
-     "name": "과거 제목",
-     "value": 0
-    },
-    {
-     "type": "table",
-     "name": "오늘 제목과 명사",
-     "columns": [
-      "매체",
-      "제목",
-      "명사"
-     ],
-     "rows": []
-    }
-   ],
-   "check": null,
-   "source": {
-    "file": "trend/text.py",
-    "line": 38,
-    "function": "nouns"
-   }
-  },
-  {
-   "index": 12,
-   "section": "키워드: 휴머노이드",
-   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
-   "op": "비교",
-   "why": [
-    {
-     "kind": "설계 선택",
-     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
-    },
-    {
-     "kind": "수학적 사실",
-     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
-    },
-    {
-     "kind": "이 데이터에서 관찰",
-     "text": "과거 자료가 없다."
-    },
-    {
-     "kind": "이 데이터에서 관찰",
-     "text": "과거 자료가 있는 날이 3일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
-    }
-   ],
-   "inputs": [],
-   "outputs": [
-    {
-     "type": "table",
-     "name": "오늘 단어",
-     "columns": [
-      "단어",
-      "오늘 횟수",
-      "오늘 점수",
-      "과거 횟수",
-      "과거 점수",
-      "HDC 판정",
-      "카운트 판정"
-     ],
-     "rows": []
-    },
-    {
-     "type": "value",
-     "name": "잡음 수준(판정선)",
-     "value": 0.03
-    },
-    {
-     "type": "value",
-     "name": "과거에 한 번 나온 단어의 점수(약)",
-     "value": null
-    }
-   ],
-   "check": {
-    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 0,
-    "hdc_answer": 0,
-    "agree": true
-   },
-   "source": {
-    "file": "trend/analyze.py",
-    "line": 42,
-    "function": "ask"
    }
   },
   {
    "index": 13,
    "section": "키워드: 휴머노이드",
-   "name": "오늘 문맥과 과거 문맥 전체 비교",
-   "op": "비교",
-   "why": [
-    {
-     "kind": "설계 선택",
-     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
-    },
-    {
-     "kind": "수학적 사실",
-     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
-    }
-   ],
-   "inputs": [],
-   "outputs": [
-    {
-     "type": "value",
-     "name": "HDC 코사인",
-     "value": null
-    },
-    {
-     "type": "value",
-     "name": "단어 횟수(BoW) 코사인",
-     "value": null
-    }
-   ],
-   "check": null,
-   "source": {
-    "file": "trend/analyze.py",
-    "line": 53,
-    "function": "cosine"
-   }
-  },
-  {
-   "index": 14,
-   "section": "키워드: 사족보행 로봇",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
    "why": [
@@ -763,7 +937,7 @@
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 0
+     "value": 1
     },
     {
      "type": "value",
@@ -778,7 +952,19 @@
       "제목",
       "명사"
      ],
-     "rows": []
+     "rows": [
+      [
+       "뉴시스",
+       "울산 남구, 中상하이 '휴머노이드 로봇 실증기지' 찾았다",
+       [
+        "울산",
+        "남구",
+        "상하이",
+        "로봇",
+        "실증기지"
+       ]
+      ]
+     ]
     }
    ],
    "check": null,
@@ -789,8 +975,73 @@
    }
   },
   {
+   "index": 14,
+   "section": "키워드: 휴머노이드",
+   "name": "키워드 ⊕ 단어로 묶어 더하기",
+   "op": "묶기",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "같이 나온 명사마다 '키워드 ⊕ 단어'를 오늘 또는 과거 정수 프로토타입에 더한다. 오늘과 과거는 따로 둔다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "같은 키워드로 묶었으므로, 정수 프로토타입을 키워드로 다시 풀면 단어 벡터들의 합이 남는다. 0을 -1, 1을 +1로 볼 때 두 벡터의 XOR은 칸끼리 곱에 -1을 곱한 것이라, 풀 때 -1을 곱해 맞춘다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "vector",
+     "name": "키워드:humanoid",
+     "dim": 10000,
+     "ones": 5008,
+     "head": "1110110000110110111111100010001010100010010100111011110111011100",
+     "bits_b64": "7Db+IqJTvdyPWnKN8rV5zn8keHOzMftRy++vjEPFBUpRHQP2iLlhT+0R8S9N+3ZVlIYZ79YmtrIUJr39uI2nfvQBLMfLnzIEB+7dix5zF0yJs5cL/IooErEDgcqjtvqC8tJPgWQQnE7g861VCQiAsqg5b6cKqvgbACXo3QaGSWMTVBe9+tqL+MSbs534JWYtcKJLkxRrQ6iFtsRo1uj2ZRld3kTV45XEypo9m21VG8oPDfx76/CMosuIBtrb0HuSCJ/p1MbfjTBs40IRh7yMAzxeA9xx91FrES29nqJ2CepS7YeWgJCchhxbATvBDUQ/kQB8XOqCuYGLi+ZHTJ1NzsXbWc/N7hRWzMfR8hiYN0RH4gdyxwzR5abLFTnXT1zy8N42dgB2nBbU0lw9lEWLRuu1vLWKe73pBN2XVhlO1TOHhZ8Lm9XM2LWBd7a7N+SXFiTMCfrQmm9f/kxRpCw1Stv6m9Bq6Vy5GxTDMv/JqrKuLkXacaKQVgcj+a1EN0/quZS6XkggMnTWCuMxBL/XkKQ/RroEDGTGT58jA4pH61Az0YafHQ8ilAY9GBAQj2FuorFj2LpMPu4n8I/v+sX57P3UwPdZG3eonNErH7Ewc6Henaa8rELyI3Cyh57v7AvUOOcPQ9uHzvR/NNo7YnplLPiGlEO3ZHbqcQM8qjb3RnG02tcaXPRS79+FwWZ8xdBt1n8JFvhsuEtdJxQGOqdzH9WmctNz1Pq2VNEMLhuN2f7O9N59sZSqT9DfM3gCxLYOvyROfCxSRH5SyP5domG5XdBqmc1CA5acsGSxHx52lh7qC2KWgV2+yrVz/SljD8qJm2Okq2YIQfjJUgOivjbwfvBRn148dYAEE8xfKO5zHrQ9zkYzy/5kicO6ccYIRHpEDeN5MeQKA8SB6fDY3W3Ura0yTMdjqAHj5G/67nJJWtJwQ2z1uEyuc14lIOR1EtzOBxuBlQNmpgrcAtx7Mf0SpvkYIGI9Z3A8sRgCAYkT1mMoPHqsDePmhJqSFf3CoQI4UC7B0ey9KQ7f0jUy4hjpktAnXLl2Tg69ditDBl9WBYRcrUtQecJdHD/O2AE37TyTxbo9psCqOXdmSLkW1x9ld8QWZECAi9oQ0tZHYdSyEhwr5zPspS6rodMccPPhqFx3Y8qH1gIF1X8RRH5VXzv0EaG4GrbDRZo9goSMLNRoN5WvUhvWATENY9EuV8WNDxPs5xKay/nrGzr/Pq4uPyNAaB7BF+ZO7MfdSDGDEuYDNljMPaHRBoUpYkRaQl3kvQb+G4v2B27avXZmQLs5RWOE9fGlvybTpr0FxFiiYLqCdAuAxnzRMByJf9b39s4hDbUbv6un+hgvwfC7awN2oRCdFzPH2gYyn7UWBP0mFVZSWmy94A0RGDDHnuWRJj7305e0kN61eJUNf9eihPQpsSwZ1q56S73v2x+yu6GmkJTYcU/clrk6yKc8lHTpWgPhJuoSQVC0PS3px1GiHZmodgqxJtK3fKsiH0cKUbA6o0HFUrMNwDGTPrs0rThqni1Wp8Pppc8+1KWtBjrsep9jrXLa0oTnE5+2Edzp6jXgae6633UmFFkXgvJBfSYPpE+lJRSU+/UKZQlgMeYhTZYN5458KzjeB0fg709WQ4UuaIEuBvSaSUcMc20pCUq8HwBM5sib7Ns="
+    },
+    {
+     "type": "vector",
+     "name": "단어:울산",
+     "dim": 10000,
+     "ones": 4905,
+     "head": "1100101011111011000110001011011110001101100101000001011000001000",
+     "bits_b64": "yvsYt42UFgjIwNKsG4wKJcqrcHSjspmEmGMX+A0sIgr7wDwk/OKqUC8zVzW8S4UnX/tBSFFIGW2Q9Qz7XSGjGVNIm22sRo0s4vbui335NPCD/3jX/OI8QSpgmJiknPG/QEv8ZSbYk5sCDEKpt324JXmn6ddNR+QSr8ht+EsJiDcaw6++6y/lmhhLFsmlD0IlzcWxxIbVLqHPGgJD4rtTOu/tKB52NWeZ5iRmeSyL4itS+mUHxldGP9nUnXUQ0uSDwlKwlY1qaNEZkx2+xtanfbZVNWOn1UyoWQRZItFv+R/PFeihp3gvOtQU/yffTLhOczRJZJ7tr7k5UOKhQRSdsg4t4FtwaYbPJAQkNEj4LkV4kCd7iH9HY1mV8/WQbmUmPx98zBgilBVwVo0VjEaE2p9wtjDgxkzdAuweEPjn05y194eKIQzn6GfqQKZ3hfZYcWJR8ODdJ9wEsU+1aY3SpYVxNlfv5tA0tuRVtWFyJEBTLE4BJgiAcBN1wNR779gVYsCTXPByNmVKQtB3eqSoNeIVKbLvIoudD8JinvE/AM9vDNHJwNprhj7NE59yWlHTwt+8/ANhTuEKVJIyzFnpS/K2T/NkJcqM1qpEGSK5iglLxQysQe5Y3nYgCLxxdctpzwsGX7jSNIypMkijsGLtsLFaFWdJzxPSd44QBphSM0euy+9Lw/Rw28kD3rkNvWB6fDQ2BBkBGNG+zsV6RU6kj8/qVDSsHVgado6gAytPx+uzdIBt66b1BqUtdZQHYdk83UOHG+tV5baddARVWheRkpZo1fJZeECTtQw2icd7bPlFMN5SjXt+SilWhC0Esh3nwIH8kQ0vEagyCgi+ai52tmClpYnXC6qLxEgye9gijDlMVV1gnzaQSap5pfeTHooUmPtZwG1axrgf7yziFMu1PzCF4IEkJ1VbQIgPvvrYfiuoz81Vq+uTqS0GtG7/ksYXdQLVUgnq9CEG/4nfRh4yFx9LdAsws2smzow/q6OeJr1wl9omYbX9jbhK2ZM/3keOZhIz3l8YrvBJAjDonL6u92nSAw4S7wpKKZj57XSzDT2jo5YzkgGD1Sr7W1No6MH5nEG2r4TD+JuQbq/3xXBV00m/TA6zig6RAjhWw7Eqi9cXGXTBG0L1jbg3n/sLWiJRiJrKTwn1LsQmQ1bARAGfeUlO/HQEHbT2SFGCxJo5DoFhdIOaaZtNI2yAysg0A3XkY9FAG8tvWviJ09mnDWWTa3lB/yHhbZTkuOWtxNnjkt2iP60ns61kTaWBaxsGtiTV3CPdGIJHBhbeS6w92jYe4q8nsEJXGAE1Ua9Ikzx7aus/a2z1ncqrH9Pak6y5eWag9NEhebAcYNPXikukd6I21GOtWJy/5QTKUTJ/GhvRT+UWEeCh0A9YnD5JvAne295ybnVq0zGZt0S2Ao201mVA4nlXb/7hEUJprsoKDRJF6MLTM73HGZxGIUrjByGBLeZMdCIN0CEsKHsi6VRJkAKqbF6EaIBqsZm/2m6BAWVqGeGa7KXCE56IFBbciT10UeekSNb+cKq0JzXn4g+E5xhgETyhkIxlwAIqk0q/8H80n1fh961byLq13d4sENfHwEmqEcOL1GLbGCy0BVVKCHR70eKQpeZZXDMdqTRNh1WV6/L7Ozf4b3/MPQhI4ZXF1M/3OPM="
+    }
+   ],
+   "outputs": [
+    {
+     "type": "vector",
+     "name": "키워드:humanoid ⊕ 단어:울산",
+     "dim": 10000,
+     "ones": 4969,
+     "head": "0010011011001101111001101001010100101111110001111010101111010100",
+     "bits_b64": "Js3mlS/Hq9RHmqAh6Tlz67WPCAcQg2LVU4y4dE7pJ0Cq3T/SdFvLH8IiphrxsPNyy31Yp4dur9+E07EG5awEZ6dJt6pn2b8o5RgzAGOKI7wKTO/cAGgUU5tjGVIHKgs9spmz5ELID9Xi/+/8vnU4l9GehnBH7RwJr+2FJU2PwVQJl7gDEfVuYtzQpVRdKiQIvWf6V5K+bQlKrMYrNFOlX/aw9lqj1vJdLL5b4kHe+eFd95l8LafKnRJcm6/LAp8Rys1ZQUu15eF1cF+vQWorfooLNr/WIh3DSCnkvHMZ8PWd+G83J+izvMhP/hweQfxx4jQ1OHRvFjiy2wTmDYnQfMv2uZS9h5KZ6MP1xlBgGQE/ciAJT3OWhv9e5sxHITnUz8FKuhhUCAOkhNEoGAMPnHTFCoVqvfE0BjGJRuGpBq8ychiButkrMNJrNxDMshLPZ0ad+RoNvbNbTwPkzaHn716LrYeFD4yNrfCWh567jvL9AgvbV6oQJhRWOXk/2Jf/21QpArhSBBGcSDNGfht/pUYqbwjrLu9bQF1BnXt4659c3VdW3dVJEjjwC49i1TC9YG7fJLktcA8tpB3dNpwQpw9ijwQ9Pr0kSntvBpOJ+aiVWKoQ7ayq/QaSjyKemcC99+wJHGNV+njWBpKY0hiInEncgST+q2U4Bo0srK6ldTYaEThRnwAiNBaGH99xeLAXqks/EuFtoJrj6dF8f+nXkBpMJuffyaKsIl+sLTDCHhV9gF4QWjJfSXXyRuwFpW8yYmfJZ8cHocjPvPoI+HYoz0YCTD8be9YPBWiHltkN+uevO7zEDCbAgJwleQRnvdduW+JYOmsnUFD7WAsc1BiGyJD0OtfrfiqP14RtUzZRko1xmxtTVMj0wGnD1DGbWvBQlRgg8YlQxXyeBtw6yaZhkp23rEZHj1S4pOf1UIiRJPnYjKGgE6c92nMjlIqKgBrZchlUxwqMUiva/VWkd+MgseZTVGkN1Bsaf5Q9qiqN8N5Yq6CKbFYbCSLYzG79f0W2NjzyD7Olh/6W0AXafqZHZbn1X7dkoQT3X7O66yvlCLn/Dt1j68PeyRU1g1JfBf1qWfuLCURpwez2JhbhEm8wpI2pKE4zAdSB0O4RomWYmcs8/kctvmxeLGsr7wjq8n4m61BNmQvw+7s3ByiVGzpraOj25sLHWC7LytUO6E5RORTOJphMaKpAQL2unQ25DGYIhMPa0DKEQcJ27XeJMkbTA2eA6MevgVM58NQu1j/gpIVuAgz2tShNL+HbKUbiCyIrx6grH+ydu2C4CxcEn1WaF16CD2SEvrwwlffq84b5HuC/rRAkrdYiYAUtZWKYdNO7S3qGg6gzoSNs4UjS1rKrw1BqgpqNerHcVc9ZD02DFYmr8e2wyD+fAtvYmjcpCEnG/qvfq6SUyJMUhnmdZ0lZNNctJEMOyl3bFWusnYadmY0PpQT90Tt6tT4KXSJgCwxeNXK57QzF7yqA9M3h5ggbSowzFCtIrt61i967oiSvS1KXLJRRLSW8uS62FxAi9iRN7RnApA8ZIQ8LmJDnSmq6w7hGgxPT0d7DeX9fmZGOQCLH4/RMSkj0oPgjtJhi5V0+6jaBsWu7KcqVSMNH7/oH+tpOoqG5s3xL6rFj79S77QZhcnD0HBLlNEL0/pWJMgds1Cg="
+    },
+    {
+     "type": "value",
+     "name": "오늘 더한 조합 수",
+     "value": 5
+    },
+    {
+     "type": "value",
+     "name": "과거 더한 조합 수",
+     "value": 0
+    }
+   ],
+   "check": {
+    "question": "묶은 벡터 ⊕ 키워드 = 단어 벡터인가",
+    "count_answer": true,
+    "hdc_answer": true,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 16,
+    "function": "bind"
+   }
+  },
+  {
    "index": 15,
-   "section": "키워드: 사족보행 로봇",
+   "section": "키워드: 휴머노이드",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
    "why": [
@@ -825,7 +1076,53 @@
       "HDC 판정",
       "카운트 판정"
      ],
-     "rows": []
+     "rows": [
+      [
+       "울산",
+       1,
+       0.4401,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "남구",
+       1,
+       0.46,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "상하이",
+       1,
+       0.4572,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "로봇",
+       1,
+       0.4493,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "실증기지",
+       1,
+       0.4439,
+       0,
+       0.0,
+       "",
+       ""
+      ]
+     ]
     },
     {
      "type": "value",
@@ -840,8 +1137,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 0,
-    "hdc_answer": 0,
+    "count_answer": 5,
+    "hdc_answer": 5,
     "agree": true
    },
    "source": {
@@ -852,7 +1149,7 @@
   },
   {
    "index": 16,
-   "section": "키워드: 사족보행 로봇",
+   "section": "키워드: 휴머노이드",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
    "why": [
@@ -887,7 +1184,7 @@
   },
   {
    "index": 17,
-   "section": "키워드: AMR",
+   "section": "키워드: 사족보행 로봇",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
    "why": [
@@ -928,7 +1225,7 @@
   },
   {
    "index": 18,
-   "section": "키워드: AMR",
+   "section": "키워드: 사족보행 로봇",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
    "why": [
@@ -990,7 +1287,7 @@
   },
   {
    "index": 19,
-   "section": "키워드: AMR",
+   "section": "키워드: 사족보행 로봇",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
    "why": [
@@ -1025,6 +1322,144 @@
   },
   {
    "index": 20,
+   "section": "키워드: AMR",
+   "name": "키워드가 든 제목과 같이 나온 명사",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, 그 키워드의 표기 부분만 뺀다. 같은 제목 안에서 같은 명사는 한 번만 센다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "오늘 제목",
+     "value": 0
+    },
+    {
+     "type": "value",
+     "name": "과거 제목",
+     "value": 0
+    },
+    {
+     "type": "table",
+     "name": "오늘 제목과 명사",
+     "columns": [
+      "매체",
+      "제목",
+      "명사"
+     ],
+     "rows": []
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/text.py",
+    "line": 38,
+    "function": "nouns"
+   }
+  },
+  {
+   "index": 21,
+   "section": "키워드: AMR",
+   "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "과거 점수 = 과거 정수 프로토타입을 키워드로 풀어 단어 벡터와 잰 코사인. 오늘 2번 이상 나왔고 과거 점수가 잡음 수준(3 × 1/√D = 0.030) 아래면 새 조합이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "과거에 없던 단어의 점수는 0 근처에서 약 1/√D 흔들린다(근사). 과거에 c번 나온 단어의 점수는 대략 c / √(과거 단어별 횟수의 제곱합)이다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 없다."
+    },
+    {
+     "kind": "이 데이터에서 관찰",
+     "text": "과거 자료가 있는 날이 3일로 14일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 단어",
+     "columns": [
+      "단어",
+      "오늘 횟수",
+      "오늘 점수",
+      "과거 횟수",
+      "과거 점수",
+      "HDC 판정",
+      "카운트 판정"
+     ],
+     "rows": []
+    },
+    {
+     "type": "value",
+     "name": "잡음 수준(판정선)",
+     "value": 0.03
+    },
+    {
+     "type": "value",
+     "name": "과거에 한 번 나온 단어의 점수(약)",
+     "value": null
+    }
+   ],
+   "check": {
+    "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
+    "count_answer": 0,
+    "hdc_answer": 0,
+    "agree": true
+   },
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 42,
+    "function": "ask"
+   }
+  },
+  {
+   "index": 22,
+   "section": "키워드: AMR",
+   "name": "오늘 문맥과 과거 문맥 전체 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "오늘 정수 프로토타입과 과거 정수 프로토타입의 코사인. 낮으면 키워드 옆 단어들이 통째로 바뀐 날이다."
+    },
+    {
+     "kind": "수학적 사실",
+     "text": "둘 다 같은 키워드로 묶였으므로, 이 코사인은 오늘과 과거의 단어 묶음(BoW) 코사인을 근사한다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "HDC 코사인",
+     "value": null
+    },
+    {
+     "type": "value",
+     "name": "단어 횟수(BoW) 코사인",
+     "value": null
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "trend/analyze.py",
+    "line": 53,
+    "function": "cosine"
+   }
+  },
+  {
+   "index": 23,
    "section": "키워드: 배터리",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
@@ -1039,7 +1474,7 @@
     {
      "type": "value",
      "name": "오늘 제목",
-     "value": 1
+     "value": 2
     },
     {
      "type": "value",
@@ -1067,6 +1502,15 @@
         "우려",
         "제기"
        ]
+      ],
+      [
+       "매일경제",
+       "\"이차전지·SW가 내년 유망株\"",
+       [
+        "SW",
+        "내년",
+        "유망"
+       ]
       ]
      ]
     }
@@ -1079,7 +1523,7 @@
    }
   },
   {
-   "index": 21,
+   "index": 24,
    "section": "키워드: 배터리",
    "name": "키워드 ⊕ 단어로 묶어 더하기",
    "op": "묶기",
@@ -1123,7 +1567,7 @@
     {
      "type": "value",
      "name": "오늘 더한 조합 수",
-     "value": 7
+     "value": 10
     },
     {
      "type": "value",
@@ -1144,7 +1588,7 @@
    }
   },
   {
-   "index": 22,
+   "index": 25,
    "section": "키워드: 배터리",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
@@ -1184,7 +1628,7 @@
       [
        "정부",
        1,
-       0.3774,
+       0.3182,
        0,
        -0.0053,
        "",
@@ -1193,7 +1637,7 @@
       [
        "WTO",
        1,
-       0.3839,
+       0.3195,
        0,
        0.0173,
        "",
@@ -1202,7 +1646,7 @@
       [
        "EU",
        1,
-       0.3917,
+       0.3312,
        0,
        0.0181,
        "",
@@ -1211,7 +1655,7 @@
       [
        "철강",
        1,
-       0.3957,
+       0.3345,
        0,
        -0.0009,
        "",
@@ -1220,7 +1664,7 @@
       [
        "기술규제",
        1,
-       0.3699,
+       0.3064,
        0,
        0.0145,
        "",
@@ -1229,7 +1673,7 @@
       [
        "우려",
        1,
-       0.3775,
+       0.3161,
        0,
        -0.0092,
        "",
@@ -1238,9 +1682,36 @@
       [
        "제기",
        1,
-       0.3904,
+       0.3322,
        0,
        0.0055,
+       "",
+       ""
+      ],
+      [
+       "SW",
+       1,
+       0.2988,
+       0,
+       -0.0027,
+       "",
+       ""
+      ],
+      [
+       "내년",
+       1,
+       0.3084,
+       0,
+       0.0001,
+       "",
+       ""
+      ],
+      [
+       "유망",
+       1,
+       0.3089,
+       0,
+       0.0166,
        "",
        ""
       ]
@@ -1259,8 +1730,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 7,
-    "hdc_answer": 7,
+    "count_answer": 10,
+    "hdc_answer": 10,
     "agree": true
    },
    "source": {
@@ -1270,7 +1741,7 @@
    }
   },
   {
-   "index": 23,
+   "index": 26,
    "section": "키워드: 배터리",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
@@ -1289,7 +1760,7 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.0148
+     "value": 0.017
     },
     {
      "type": "value",
@@ -1305,7 +1776,7 @@
    }
   },
   {
-   "index": 24,
+   "index": 27,
    "section": "키워드: BESS",
    "name": "키워드가 든 제목과 같이 나온 명사",
    "op": "일반 계산",
@@ -1346,7 +1817,7 @@
    }
   },
   {
-   "index": 25,
+   "index": 28,
    "section": "키워드: BESS",
    "name": "과거 프로토타입에 물어보기: 오늘 단어가 과거에도 있었나",
    "op": "비교",
@@ -1408,7 +1879,7 @@
    }
   },
   {
-   "index": 26,
+   "index": 29,
    "section": "키워드: BESS",
    "name": "오늘 문맥과 과거 문맥 전체 비교",
    "op": "비교",
@@ -1443,7 +1914,7 @@
    }
   },
   {
-   "index": 27,
+   "index": 30,
    "section": "요약",
    "name": "키워드별 오늘의 새 조합",
    "op": "일반 계산",
@@ -1469,10 +1940,10 @@
      "rows": [
       [
        "피지컬 AI",
-       0,
+       1,
        5,
        0,
-       null,
+       -0.007,
        "예열 중"
       ],
       [
@@ -1485,15 +1956,15 @@
       ],
       [
        "로봇",
-       0,
+       2,
        10,
        0,
-       null,
+       0.258,
        "예열 중"
       ],
       [
        "휴머노이드",
-       0,
+       1,
        0,
        0,
        null,
@@ -1517,10 +1988,10 @@
       ],
       [
        "배터리",
-       1,
+       2,
        1,
        0,
-       0.015,
+       0.017,
        "예열 중"
       ],
       [
