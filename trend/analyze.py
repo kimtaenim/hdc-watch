@@ -125,13 +125,16 @@ def run(date: str | None = None, do_collect: bool = False):
 
     noise = noise_level(D)
     thr = tc["noise_k"] * noise
-    warm = past_days_with < tc["warmup_days"]
+    any_warm = False
     summary = []
     os.makedirs(OUT, exist_ok=True)
     for kw in keywords:
         kid = kw["id"]
         t.section(f"키워드: {kw['name']}", f"표기: {', '.join(kw['variants'])}")
         pt, pp = pairs_of(titles_recent, kw), pairs_of(titles_past, kw)
+        kw_days = len({x["date"] for x, _ in pp})  # 이 키워드가 든 제목이 있었던 과거 날 수
+        warm = kw_days < tc["warmup_days"]
+        any_warm = any_warm or warm
         ct, cp = word_counts(pt), word_counts(pp)
         t.step("키워드가 든 제목과 같이 나온 명사", "일반 계산", [
             why("설계 선택", "키워드는 제목 원문에서 표기 사전으로 찾고, 명사는 kiwipiepy로 뽑는다. 띄어쓰기 없이 붙은 조각은 합치고, "
@@ -185,7 +188,7 @@ def run(date: str | None = None, do_collect: bool = False):
             why("이 데이터에서 관찰", (f"과거에 한 번 나온 단어의 점수는 약 {one:.3f}로, 잡음 수준 {thr:.3f}"
                                     + ("보다 크다. 한 번 나온 것도 구별된다." if one > thr else "보다 작다. 과거가 쌓여 한 번 나온 단어는 잡음에 묻힌다(용량의 한계). 그래서 과거를 최근 며칠로 나눠 둔다."))
                                    if one else "과거 자료가 없다."),
-        ] + ([why("이 데이터에서 관찰", f"과거 자료가 있는 날이 {past_days_with}일로 {tc['warmup_days']}일보다 적다. 아직 과거가 얕아(예열 중) 대부분 새 조합으로 보인다.")] if warm else []),
+        ] + ([why("이 데이터에서 관찰", f"과거 4주 중 이 키워드 제목이 있었던 날이 {kw_days}일로 {tc['warmup_days']}일보다 적다. 아직 과거가 얕아(예열 중) 새 조합이 많이 나오기 쉽다.")] if warm else []),
            outputs=[{"type": "table", "name": f"{RL} 단어",
                      "columns": ["단어", "최근 횟수", "최근 점수", "과거 횟수", "과거 점수", "HDC 판정", "카운트 판정"], "rows": rows},
                     {"type": "value", "name": "잡음 수준(판정선)", "value": round(thr, 4)},
@@ -205,7 +208,7 @@ def run(date: str | None = None, do_collect: bool = False):
 
         kdir = os.path.join(OUT, kid)
         os.makedirs(kdir, exist_ok=True)
-        day = {"keyword": kid, "name": kw["name"], "date": today, "warmup": warm, "past_days_with": past_days_with,
+        day = {"keyword": kid, "name": kw["name"], "date": today, "warmup": warm, "past_days_with": kw_days,
                "recent_days": rd, "recent_from": recent_dates[0], "past_from": past_dates[0], "past_to": past_dates[-1],
                "titles_recent": len(pt), "titles_past": len(pp), "threshold": round(thr, 4), "one_past": one,
                "new": new, "rows": rows, "cos_hdc": cos_h, "cos_bow": cos_c, "trace": rel(trace_path),
@@ -225,13 +228,13 @@ def run(date: str | None = None, do_collect: bool = False):
            source=run)
     dpath = os.path.join(OUT, "daily.json")
     daily = json.load(open(dpath, encoding="utf-8")) if os.path.exists(dpath) else {}
-    daily[today] = {"new_total": sum(r[3] for r in summary), "warmup": warm}
+    daily[today] = {"new_total": sum(r[3] for r in summary), "warmup": any_warm}
     with open(dpath, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(daily.items())), f, ensure_ascii=False)
     with open(os.path.join(OUT, "keywords.json"), "w", encoding="utf-8") as f:
         json.dump([{"id": k["id"], "name": k["name"]} for k in keywords], f, ensure_ascii=False)
     with open(os.path.join(OUT, "summary.json"), "w", encoding="utf-8") as f:
-        json.dump({"date": today, "at": now.isoformat(timespec="minutes"), "warmup": warm,
+        json.dump({"date": today, "at": now.isoformat(timespec="minutes"), "warmup": any_warm,
                    "new_total": sum(r[3] for r in summary), "rows": summary, "trace": rel(trace_path)}, f, ensure_ascii=False)
     t.save(trace_path)
     append_run({"at": now.isoformat(timespec="seconds"), "kind": "trend", "subject": "키워드",

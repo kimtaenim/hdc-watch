@@ -383,7 +383,7 @@ async function setupTrend(trace) {
     });
     $("#kw-summary").replaceChildren(
       el("div", { class: "kw-head" }, el("b", {}, day.name), ` 최근 ${day.recent_days}일 제목 ${day.titles_recent}개 · 그 전 4주 ${day.titles_past}개`,
-        day.warmup ? el("span", { class: "hint" }, ` (예열 중: 과거 자료가 있는 날 ${day.past_days_with}일)`) : null),
+        day.warmup ? el("span", { class: "hint" }, ` (예열 중: 과거 4주 중 이 키워드 제목이 있었던 날 ${day.past_days_with}일)`) : null),
       el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "새로 붙은 낱말"),
         fresh.size ? [...fresh].map((w) => el("span", { class: "chip new" }, w)) : el("span", { class: "hint" }, "없음")),
       el("div", { class: "tname" }, `같이 나온 낱말 ${day.rows.length}개 (누르면 제목이 펼쳐짐)`),
@@ -478,7 +478,7 @@ async function renderDial(stockId, trainTrace, today = null) {
   }
   try {
     const sm = await getJSON("data/trend/summary.json");
-    $("#dial-trend").replaceChildren("최근 7일 새 낱말 ", el("b", {}, `${sm.new_total}개`), sm.warmup ? " (예열 중)" : "");
+    $("#dial-trend").replaceChildren("최근 7일 새 낱말 ", el("b", {}, `${sm.new_total}개`), sm.warmup ? " (예열 중인 키워드 있음)" : "");
   } catch { $("#dial-trend").replaceChildren("최근 7일 새 낱말 ", el("b", {}, "자료 없음")); }
 }
 
