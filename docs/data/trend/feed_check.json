@@ -1,286 +1,168 @@
 {
- "at": "2026-11-14T11:15:20+09:00",
+ "at": "2026-11-14T11:56:08+09:00",
  "feeds": {
-  "한국경제 산업": [
+  "The Robot Report": [
    {
-    "url": "https://www.hankyung.com/feed/industry",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
-   }
-  ],
-  "매일경제 기업": [
-   {
-    "url": "https://www.mk.co.kr/rss/50100032/",
+    "url": "https://www.therobotreport.com/feed/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
-    "items": 50,
+    "items": 15,
     "sample": [
-     "냉장고 문 말고 따로 여는 작은 문…근데 그거 뭐지? [그거사전2]",
-     "“남의 집 불륜에 불똥 맞을라”…‘깐부 동맹’ 삼전닉스에 쏠린 눈",
-     "“이륙하지 말고 대기”…美 전역 항공기 운항 중단 지시"
+     "Six AGIBOT G2 Robots Complete 1,730 Tasks in 24-Hour Shanghai Convenience Store Trial",
+     "How Rhoda AI is using video data to create generalized AI models for robots",
+     "Narwal builds robot vacuums to serve regional needs"
     ],
-    "first_date": "Sat, 14 Nov 2026 09:04:26 +09:00",
-    "last_date": "Fri, 13 Nov 2026 10:11:12 +09:00"
-   },
-   {
-    "url": "https://www.mk.co.kr/rss/50200011/",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "“10년 모은 4억이 1억으로…” 반도체 레버리지 투자에 무너진 30대 직장인의 눈물",
-     "AI 기판 수요에…이수페타시스, 한주 새 42% ‘껑충’ [이주의 Bull기둥]",
-     "‘젠슨황 스캔들’에 서학개미들이 1000억원 ‘폭풍 매수’한 종목은"
-    ],
-    "first_date": "Sat, 14 Nov 2026 11:05:44 +09:00",
-    "last_date": "Thu, 12 Nov 2026 17:30:07 +09:00"
+    "first_date": "Fri, 13 Nov 2026 16:32:58 +0000",
+    "last_date": "Mon, 09 Nov 2026 18:34:38 +0000"
    }
   ],
-  "전자신문 분야": [
+  "IEEE Spectrum 로봇": [
    {
-    "url": "https://rss.etnews.com/Section902.xml",
+    "url": "https://spectrum.ieee.org/feeds/topic/robotics.rss",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 30,
     "sample": [
-     "[세종만사]“핵심 사업 놓칠라”…미래대응기금 사수에 안간힘",
-     "더보이즈 에릭 만나자! 첫 국내 단독 팬미팅 개최",
-     "'3D 디지털 휴먼' 지상파 데뷔...오모션·KBS 합작"
+     "Video Friday: NASA PROMISEs a New Moon Rover",
+     "Can Agentic Robotics Solve Robotics’ Data-Scaling Problem?",
+     "Video Friday: Room-Scale Cable-Driven Home Robot Tidies Up"
     ],
-    "first_date": "Sat, 14 Nov 2026 11:00:00 +0900",
-    "last_date": "Fri, 13 Nov 2026 18:17:20 +0900"
-   },
+    "first_date": "Fri, 13 Nov 2026 17:30:03 +0000",
+    "last_date": "Fri, 28 Aug 2026 16:00:03 +0000"
+   }
+  ],
+  "TechCrunch 로봇": [
    {
-    "url": "https://rss.etnews.com/Section903.xml",
+    "url": "https://techcrunch.com/category/robotics/feed/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 20,
     "sample": [
-     "WSJ “젠슨 황에 앨리스 황 소개한 건 남편\"…AI 칩 사업으로 연결",
-     "타마시골프, 블랙프라이데이 최대 73% 파격 할인… 인기 고반발 아이언 '선착순 10세트' 한정 특가",
-     "삼성전기 유리기판 공급망 윤곽…레이저 LPKF, 식각 태성, 검사는 테크밸리·이노메트리"
+     "Ring, known for its doorbell cameras, launches a home security drone and an enterprise security robot",
+     "Physicl raises $10M to make the digital world real enough for robots",
+     "Serve Robotics launches new business to become the AWS for robots"
     ],
-    "first_date": "Thu, 12 Nov 2026 16:52:38 +0900",
-    "last_date": "Wed, 11 Nov 2026 07:05:16 +0900"
-   },
+    "first_date": "Tue, 10 Nov 2026 13:30:00 +0000",
+    "last_date": "Tue, 13 Oct 2026 18:30:03 +0000"
+   }
+  ],
+  "Mobile Robot Guide": [
    {
-    "url": "https://rss.etnews.com/Section904.xml",
+    "url": "https://www.mobilerobotguide.com/feed/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
-    "items": 28,
+    "items": 10,
     "sample": [
-     "친청, '최민희 감찰'에 최고위 대신 기자회견…빛바랜 李 '경제' 행보",
-     "50대 청소부 외모가 배우급…“기억을 잃은 재벌 회장님 아니냐” SNS 난리",
-     "우울증·골다골증 경고에도…日 2030 여성, 저체중에 목숨 거는 까닭"
+     "FlexLink designs robotic palletizer to balance safety and throughput",
+     "GXO to deploy up to 1,000 Apollo humanoids from Apptronik in the next four years",
+     "Symbotic CTO James Kuffner sees strong prospects for warehouse automation"
     ],
-    "first_date": "Sat, 14 Nov 2026 07:10:00 +0900",
-    "last_date": "Fri, 13 Nov 2026 11:05:00 +0900"
+    "first_date": "Fri, 13 Nov 2026 18:33:54 +0000",
+    "last_date": "Fri, 06 Nov 2026 13:30:00 +0000"
    }
   ],
-  "로봇신문": [
+  "Robotics 24/7": [
    {
-    "url": "https://www.irobotnews.com/rss/allArticle.xml",
+    "url": "https://www.robotics247.com/rss/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "국내 최대 로봇경진대회 '2026 국제로봇콘테스트(IRC)' 13일 대구 엑스코에서 개막",
-     "티로보틱스, KAIST 제조피지컬AI연구소와 MOU 체결… 피지컬 AI 사업화 협력 강화",
-     "브릴스, ‘2026 대한민국 디지털 이노베이션 어워드’ 부총리 표창 수상"
-    ],
-    "first_date": "2026-11-13 23:48:00",
-    "last_date": "2026-11-10 23:23:10"
-   }
-  ],
-  "디일렉": [
-   {
-    "url": "https://www.thelec.kr/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "세미파이브, 3분기 신규 수주 1784억 '역대 최대'…매출도 첫 500억 돌파",
-     "에코앤드림, 새만금 공장 가동 확대에 매출 회복세",
-     "LG엔솔 버테크, ESS 운영 효율 높이는 소프트웨어 출시"
-    ],
-    "first_date": "2026-11-14 10:21:53",
-    "last_date": "2026-11-12 18:16:41"
-   }
-  ],
-  "에너지신문": [
-   {
-    "url": "https://www.energy-news.co.kr/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "[부고] 디앨(주) 임근영 대표이사 별세",
-     "12차 석유 최고가격 동결…중동 불안·운송비 급등 불구",
-     "재생전력 남으면 수소 생산 늘린다...제주, 수전해 통합 실증"
-    ],
-    "first_date": "2026-11-14 09:50:29",
-    "last_date": "2026-11-12 15:50:44"
-   }
-  ],
-  "에너지경제": [
-   {
-    "url": "https://www.ekn.kr/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
     "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
+    "error": "ParseError: not well-formed (invalid token): line 55, column 70"
    }
   ],
-  "테크엠": [
+  "Energy-Storage.news": [
    {
-    "url": "https://www.techm.kr/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "[주말에 뭐먹지] \"직접 만든 것보단 덜하지만\"...감바스 짜파게티에 숨겨진 1인치 꿀팁",
-     "[주말에 뭐하지] POE·카스·대항해시대 즐겨볼까...카제나·제우스 신규 콘텐츠도 확장",
-     "'라그나로크 IP'로 실적 키운 그라비티...3Q 영업익 35% '껑충'"
-    ],
-    "first_date": "2026-11-14 08:56:51",
-    "last_date": "2026-11-12 17:14:22"
-   }
-  ],
-  "아이뉴스24": [
-   {
-    "url": "https://www.inews24.com/rss/news_it.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 100,
-    "sample": [
-     "[겜별사] 탄탄한 전투와 사냥 손맛…수렵 재미 구현한 &apos;몬스터헌터 아웃랜더스&apos;",
-     "美, 중국의 해외 AI 반도체 사용 막는다…동남아 AIDC &apos;대출 리스크&apos; 부상",
-     "젠슨 황, 불명예 퇴진에 실리콘밸리 술렁…일각선 &apos;황어게인&apos;"
-    ],
-    "first_date": "Fri, 13 Nov 2026 23:10:32 GMT",
-    "last_date": "Thu, 12 Nov 2026 01:00:00 GMT"
-   },
-   {
-    "url": "https://www.inews24.com/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
-   }
-  ],
-  "디지털타임스": [
-   {
-    "url": "https://www.dt.co.kr/rss/all.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
-   },
-   {
-    "url": "https://www.dt.co.kr/rss/it.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
-   }
-  ],
-  "머니투데이": [
-   {
-    "url": "https://rss.mt.co.kr/mt_news.xml",
+    "url": "https://www.energy-storage.news/feed/",
     "robots": null,
-    "robots_note": "robots.txt 못 읽음: URLError",
-    "ok": false,
-    "error": "URLError: <urlopen error timed out>"
-   }
-  ],
-  "조선비즈": [
-   {
-    "url": "https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
+    "robots_note": "robots.txt 못 읽음: HTTPError",
     "status": 200,
     "ok": true,
-    "items": 100,
+    "items": 300,
     "sample": [
-     "エヌビディアCEO復帰要請書偽造判明 支持は一部社内に限定",
-     "엔비디아 ‘젠슨 황 복귀’ 서한은 가짜…오픈AI 직원 서한 짜깁기",
-     "‘충격적인 빅찬스 미스’ 너무 아쉬웠던 손흥민 “저라고 무조건 골 넣을 수 있는 건 아니다…동료들에게 미안”"
+     "The next phase of ESS: LG Energy Solution’s strategy for an evolving energy market",
+     "Toll makes way for floor, offtake contracting beginning to standardise in UK BESS market",
+     "Sunrun closes preferred equity investment for US distributed energy resources, totalling 110MWh of batteries"
     ],
-    "first_date": "Sat, 14 Nov 2026 01:55:12 +0000",
-    "last_date": "Fri, 13 Nov 2026 21:00:00 +0000"
+    "first_date": "Fri, 13 Nov 2026 14:14:09 +0000",
+    "last_date": "Tue, 15 Sep 2026 14:27:25 +0000"
    }
   ],
-  "서울경제": [
+  "pv magazine 저장": [
    {
-    "url": "https://www.sedaily.com/rss/newsall",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "“쿰쿰한 냄새 잡으려다 폐 망가진다”…담배 4개비 맞먹는 ‘이것’ [헬시타임]",
-     "음원앱 경쟁 치열한데…‘멜론’ 해외 팬덤서 돌파구 찾았다",
-     "李 대통령 “유통주식 10% 미만 상장사 퇴출 검토”"
-    ],
-    "first_date": "Sat, 14 Nov 2026 11:01:40 +0900",
-    "last_date": "Sat, 14 Nov 2026 07:00:05 +0900"
-   },
-   {
-    "url": "https://www.sedaily.com/RSS/S11.xml",
+    "url": "https://www.pv-magazine.com/category/energy-storage/feed/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "ok": false,
     "error": "HTTPError: HTTP Error 404: Not Found"
    }
   ],
-  "헬로티": [
+  "Electrek": [
    {
-    "url": "https://www.hellot.net/rss/allArticle.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": false,
-    "error": "ParseError: not well-formed (invalid token): line 54, column 62"
-   }
-  ],
-  "인더스트리뉴스": [
-   {
-    "url": "https://www.industrynews.co.kr/rss/allArticle.xml",
+    "url": "https://electrek.co/feed/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
-    "items": 50,
+    "items": 150,
     "sample": [
-     "김해시, 2조 5838억 재정 승부수…민생·일자리·공직혁신 ‘3각 드라이브’",
-     "기장군, 재정 효율·복지 안전망 강화…‘군민 삶의 질’ 제고",
-     "창원시, 장애인 체육·기업 성장·공공건축 혁신 ‘3각 행정’ 속도"
+     "Tesla Cybercab orders open at $29,990 + $299/mo, only in Robotaxi zones",
+     "Rinnai’s new heat pump water heaters get smarter – and easier to install",
+     "Volkswagen may have just hinted at the name of its next affordable EV"
     ],
-    "first_date": "2026-11-14 00:19:28",
-    "last_date": "2026-11-13 11:34:38"
+    "first_date": "Sat, 14 Nov 2026 02:11:39 +0000",
+    "last_date": "Mon, 02 Nov 2026 14:05:31 +0000"
+   }
+  ],
+  "Battery Technology": [
+   {
+    "url": "https://www.batterytechonline.com/rss.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 403: Forbidden"
+   }
+  ],
+  "DCD": [
+   {
+    "url": "https://www.datacenterdynamics.com/en/rss/",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 20,
+    "sample": [
+     "DCD Connect Virginia 2026: It’s all about the power (and public perception)",
+     "Charlotte Hornets taps Boldyn Networks for cellular 5G",
+     "Integrated data center infrastructure"
+    ],
+    "first_date": "Fri, 13 Nov 2026 18:04:32 +0000",
+    "last_date": "Fri, 13 Nov 2026 10:05:00 +0000"
+   }
+  ],
+  "The Next Platform": [
+   {
+    "url": "https://www.nextplatform.com/feed/",
+    "robots": false,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 87,
+    "sample": [
+     "Cerebras Readies CS-5 Systems For 2027 Launch As It Bags Another Hyperscaler",
+     "The Nvidia Machine Is Self-Sustaining – And Was Already Facing A Tougher Future",
+     "CoreWeave Is Accelerating To Escape Velocity Thanks To GPU Shortages"
+    ],
+    "first_date": "Sat, 14 Nov 2026 00:40:35 +0000",
+    "last_date": "Fri, 07 Aug 2026 20:22:18 +0100"
    }
   ]
  }
