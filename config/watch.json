@@ -76,7 +76,9 @@
         "AI 인프라",
         "AI인프라",
         "인공지능 인프라",
-        "인공지능인프라"
+        "인공지능인프라",
+        "AI infrastructure",
+        "AI infra"
       ],
       "_확인필요": "이대로 둘지"
     },
@@ -95,7 +97,8 @@
       "name": "휴머노이드",
       "variants": [
         "휴머노이드",
-        "Humanoid"
+        "Humanoid",
+        "humanoid robot"
       ]
     },
     {
@@ -107,7 +110,12 @@
         "사족로봇",
         "4족 보행 로봇",
         "4족보행로봇",
-        "로봇개"
+        "로봇개",
+        "quadruped",
+        "quadruped robot",
+        "robot dog",
+        "robotic dog",
+        "legged robot"
       ]
     },
     {
@@ -116,7 +124,8 @@
       "variants": [
         "AMR",
         "자율이동로봇",
-        "자율 이동 로봇"
+        "자율 이동 로봇",
+        "autonomous mobile robot"
       ],
       "_주의": "AMR은 항생제 내성(Antimicrobial Resistance)의 약자로도 쓰임. 실제 제목에서 확인할 것"
     },
@@ -126,7 +135,9 @@
       "variants": [
         "배터리",
         "이차전지",
-        "2차전지"
+        "2차전지",
+        "battery",
+        "batteries"
       ]
     },
     {
@@ -135,7 +146,9 @@
       "variants": [
         "BESS",
         "배터리 에너지저장장치",
-        "배터리에너지저장장치"
+        "배터리에너지저장장치",
+        "battery energy storage",
+        "battery storage"
       ],
       "_주의": "ESS는 합치지 않음(의장님 결정)"
     }
@@ -218,6 +231,49 @@
         "source": "서울경제",
         "url": "https://www.sedaily.com/rss/newsall",
         "_added": "2026-11-14"
+      },
+      {
+        "source": "The Robot Report",
+        "url": "https://www.therobotreport.com/feed/",
+        "lang": "en",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "IEEE Spectrum",
+        "url": "https://spectrum.ieee.org/feeds/topic/robotics.rss",
+        "lang": "en",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "TechCrunch",
+        "url": "https://techcrunch.com/category/robotics/feed/",
+        "lang": "en",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "Mobile Robot Guide",
+        "url": "https://www.mobilerobotguide.com/feed/",
+        "lang": "en",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "Energy-Storage.news",
+        "url": "https://www.energy-storage.news/feed/",
+        "lang": "en",
+        "_added": "2026-11-14",
+        "_주의": "robots.txt를 읽지 못함. 공식 RSS라 사용"
+      },
+      {
+        "source": "Electrek",
+        "url": "https://electrek.co/feed/",
+        "lang": "en",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "DCD",
+        "url": "https://www.datacenterdynamics.com/en/rss/",
+        "lang": "en",
+        "_added": "2026-11-14"
       }
     ],
     "past_days": 28,
@@ -229,6 +285,9 @@
     "recent_days": 7,
     "_recent_days": "최근 며칠을 한 묶음으로 볼지(2026-11-14 하루 → 7일). 키워드 제목이 하루 몇 개뿐이라 하루로는 판단할 재료가 모자랐다",
     "min_recent": 2,
-    "_min_recent": "최근 기간에 이 횟수 이상 나온 조합만 새 조합 후보"
-  }
+    "_min_recent": "최근 기간에 이 횟수 이상 나온 조합만 새 조합 후보",
+    "max_age_days": 3,
+    "_max_age_days": "발행일이 수집 시각보다 이 일수 넘게 지난 글은 뺀다. 몇 달 치를 한꺼번에 주는 영어 피드가 있어서(2026-11-14). 지난 것을 채우지 않고 쌓아 가기로 한 결정과 맞춘다"
+  },
+  "_keywords": "2026-11-14 영어 표기 추가. 영어 표기는 낱말 전체로만 센다(robotaxi는 robot 아님), 끝의 s·es는 허용"
 }

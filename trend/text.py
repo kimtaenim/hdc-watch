@@ -17,10 +17,31 @@ def kiwi():
     return _kiwi
 
 
+# 영어 제목에서 뺄 흔한 낱말. 형태소 분석기는 영어 품사를 가리지 않아(모두 '외국어'), 명사를 고르는 대신 이 목록을 뺀다.
+# 그래서 영어 쪽 '같이 나온 낱말'에는 명사 아닌 낱말도 섞일 수 있다.
+EN_STOP = set("""
+a an the and or but nor for of in on at to from by with as is are was were be been being it its this that these those
+into over under about after before up down out off than then now just also via vs amid among per new more most less
+how why what when where who whom which will can could would should may might must not no yes all any some each every
+our your their his her we you they he she i my me us them here there s says said say get gets got has have had having
+do does did done make makes made take takes took see sees seen show shows set sets use uses using used plan plans
+launch launches launched announce announces announced unveil unveils unveiled win wins won add adds added open opens
+first top big latest inside week weeks year years day days today news report reports update updates one two three
+""".split())
+
+
+def is_ascii(text: str) -> bool:
+    return all(ord(c) < 128 for c in text)
+
+
 def variant_pattern(variant: str) -> re.Pattern:
-    """표기 하나 → 정규식. 영문은 대소문자 무시, 공백은 있거나 없거나."""
+    """표기 하나 → 정규식. 영문은 대소문자 무시, 공백은 있거나 없거나.
+    영어 표기는 다른 낱말 속에 들어간 것은 세지 않는다(robotaxi는 robot이 아님). 끝의 s, es(복수)는 허용."""
     parts = [re.escape(p) for p in variant.split()]
-    return re.compile(r"\s*".join(parts), re.IGNORECASE)
+    core = r"\s*".join(parts)
+    if is_ascii(variant):
+        return re.compile(r"(?<![A-Za-z])" + core + r"(?:s|es)?(?![A-Za-z])", re.IGNORECASE)
+    return re.compile(core, re.IGNORECASE)
 
 
 def find_keywords(title: str, keywords) -> dict:
@@ -51,7 +72,11 @@ def nouns(title: str, skip_spans=()) -> list[str]:
     for form, s, e in merged:
         if any(s < b and a < e for a, b in skip_spans):
             continue
-        if len(form) < 2:
+        if is_ascii(form):
+            form = form.lower()  # 영어는 소문자로 맞춘다(AI와 ai를 한 낱말로)
+            if form in EN_STOP or len(form) < 2 or not any(c.isalpha() for c in form):
+                continue
+        elif len(form) < 2:
             continue
         if form not in out:
             out.append(form)

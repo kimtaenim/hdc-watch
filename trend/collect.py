@@ -68,11 +68,13 @@ def known_keys() -> set:
     return keys
 
 
-def collect(feeds, now: dt.datetime | None = None):
-    """모든 피드를 받아 새 링크만 날짜별 파일에 더한다. (매체별 받은 수, 새 제목 수, 실패 목록)을 돌려준다."""
+def collect(feeds, now: dt.datetime | None = None, max_age_days: int = 3):
+    """모든 피드를 받아 새 링크만 날짜별 파일에 더한다. 발행일이 수집 시각보다 max_age_days일 넘게 지난 글은 뺀다.
+    (매체별 받은 수, 새 제목 수, 실패 목록, 오래돼서 뺀 수)를 돌려준다."""
     now = now or dt.datetime.now(KST)
     seen = known_keys()
     got, new, fails = {}, {}, []
+    skipped_old = 0
     for f in feeds:
         try:
             items = fetch_feed(f["url"], f["source"], now, f.get("pubdate_kst", False))
@@ -80,7 +82,11 @@ def collect(feeds, now: dt.datetime | None = None):
             fails.append(f"{f['source']} {f['url']}: {type(e).__name__}: {e}"[:200])
             continue
         got[f["source"]] = got.get(f["source"], 0) + len(items)
+        oldest = (now - dt.timedelta(days=max_age_days)).strftime("%Y-%m-%d")
         for x in items:
+            if x["date"] < oldest:
+                skipped_old += 1  # 몇 달 치를 한꺼번에 주는 피드가 있다. 지난 것을 채우지 않고 쌓아 가기로 했으므로 뺀다
+                continue
             if x["link"] in seen or (x["source"], x["title"]) in seen:
                 continue
             seen.add(x["link"])
@@ -93,7 +99,7 @@ def collect(feeds, now: dt.datetime | None = None):
         old = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else []
         with open(path, "w", encoding="utf-8") as fh:
             json.dump(old + rows, fh, ensure_ascii=False, indent=0)
-    return got, sum(len(v) for v in new.values()), fails
+    return got, sum(len(v) for v in new.values()), fails, skipped_old
 
 
 def load_titles(days):

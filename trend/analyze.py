@@ -94,7 +94,9 @@ def run(date: str | None = None, do_collect: bool = False):
 
     t.section("수집", "RSS 제목을 받아 링크로 중복을 거르고 날짜별로 쌓는다.")
     if do_collect:
-        got, n_new, fails = collect.collect(tc["feeds"], now)
+        got, n_new, fails, n_old = collect.collect(tc["feeds"], now, tc.get("max_age_days", 3))
+        if n_old:
+            t.note(f"발행일이 {tc.get('max_age_days', 3)}일 넘게 지난 글 {n_old}개는 뺐다(지난 것을 채우지 않고 쌓아 감)")
         for f in fails:
             t.failure("RSS 수집", f)
         for k, v in got.items():

@@ -29,6 +29,20 @@ class TestText(unittest.TestCase):
         self.assertNotIn("AI", ws)
 
 
+class TestEnglish(unittest.TestCase):
+    def test_english_keyword_whole_word(self):
+        kw = [{"id": "robot", "name": "로봇", "variants": ["로봇", "Robot", "Robotics"]}]
+        self.assertIn("robot", text.find_keywords("New robots for warehouses", kw))
+        self.assertNotIn("robot", text.find_keywords("Robotaxi rollout expands", kw))
+        self.assertIn("robot", text.find_keywords("로봇개 상용화", kw))  # 한국어 표기는 붙은 말도 센다
+
+    def test_english_words(self):
+        title = "Fluence wins 400MWh BESS contract in Australia"
+        kw = [{"id": "bess", "name": "BESS", "variants": ["BESS"]}]
+        ws = text.nouns(title, text.find_keywords(title, kw)["bess"])
+        self.assertEqual(ws, ["fluence", "mwh", "contract", "australia"])  # wins, in은 흔한 낱말이라 뺀다
+
+
 class TestNewCombination(unittest.TestCase):
     def test_new_word_detected(self):
         with tempfile.TemporaryDirectory() as tmp:
