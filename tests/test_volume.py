@@ -25,7 +25,8 @@ class TestBars(unittest.TestCase):
         sl = data.slots_from_5m(five, 30)
         self.assertEqual([(x["slot"], x["volume"], x["n5"]) for x in sl], [("09:00", 15, 2), ("09:30", 7, 1)])
         bars = data.build_bars(sl, ["2026-11-10"], ["09:00", "09:30", "10:00"])
-        self.assertEqual([b["volume"] for b in bars], [15, 7, 0])  # 5분봉이 없는 칸은 거래 0
+        self.assertEqual([b["volume"] for b in bars], [15, 7, None])  # 5분봉이 없는 칸은 결측(거래 없음과 누락을 구분 못 함)
+        self.assertIsNotNone(bars[2]["missing"])
         self.assertEqual(bars[0]["weekday"], "화")
 
     def test_levels(self):

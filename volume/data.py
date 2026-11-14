@@ -78,8 +78,10 @@ def build_bars(slotted, dates, sessions):
         wd = WEEKDAYS[dt.date.fromisoformat(d).weekday()]
         for s in sessions:
             r = by_key.get((d, s))
-            bar = {"date": d, "weekday": wd, "slot": s, "volume": r["volume"] if r else 0, "n5": 0,
-                   "missing": None}
+            # 5분봉이 하나도 없는 칸은 '거래 없음'과 '야후 자료 누락'을 구분할 수 없다(2026-11-13 14:30처럼
+            # 평소 수천 주인 칸이 통째로 비는 일이 있었다). 0주로 두지 않고 결측으로 둔다.
+            bar = {"date": d, "weekday": wd, "slot": s, "volume": r["volume"] if r else None, "n5": 0,
+                   "missing": None if r else "5분봉 없음(거래 없음 또는 자료 누락)"}
             if r:
                 bar["ohlc"] = [r["open"], r["high"], r["low"], r["close"]]
                 bar["n5"] = r["n5"]

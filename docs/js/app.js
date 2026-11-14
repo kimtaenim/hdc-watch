@@ -2,6 +2,7 @@
 // 한 건 따라가기는 같은 HDC 부품(hdc.js)으로 브라우저에서 다시 계산하고, 파이썬이 낸 점수와 맞춰 본다.
 import * as H from "./hdc.js";
 import { renderLab, renderCheck } from "./lab.js";
+import { overviewChart, dayCharts, dayTable } from "./volchart.js";
 
 const $ = (s) => document.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => {
@@ -217,9 +218,10 @@ async function setupFlow(trace, stockDir) {
   }));
   sel.onchange = () => { F.date = sel.value; F.slot = null; drawFlow(); };
   $("#pick-rare").onclick = () => { sel.value = rare.date; F.date = rare.date; F.slot = rare.slot; drawFlow(); };
+  $("#flow-wrap").ontoggle = () => { if ($("#flow-wrap").open) drawFlow(); };
   F.date = dates[0];
   sel.value = F.date;
-  await drawFlow();
+  if ($("#flow-wrap").open) await drawFlow();
 }
 
 async function drawFlow() {
@@ -297,18 +299,91 @@ async function drawFlow() {
   );
 }
 
-// ---------- 트렌드: 키워드 하나의 오늘 제목이 지나가는 길 ----------
-async function setupTrend(trace) {
-  const cfgRows = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "요약")?.rows || [];
-  const ids = trace.subject.id;
-  const sel = $("#pick-kw");
-  sel.replaceChildren(...ids.map((id, i) => el("option", { value: id }, `${cfgRows[i]?.[0] ?? id} (새 조합 ${cfgRows[i]?.[3] ?? 0})`)));
-  sel.onchange = () => drawTrend(sel.value, trace);
-  await drawTrend(ids[0], trace);
+// ---------- 거래량 이상: 그래프와 표 ----------
+const V = { days: [], byDate: {}, medians: {}, selected: null };
+
+async function setupVol(trace, stockDir, model, today) {
+  const tbl = trace.steps.flatMap((x) => x.outputs).find((o) => o.name === "봉별 점수");
+  const c = Object.fromEntries(tbl.columns.map((k, i) => [k, i]));
+  const raw = await getJSON(`${stockDir}/raw.json`);
+  const price = Object.fromEntries((raw.slots || []).map((r) => [`${r.date} ${r.slot}`, r]));
+  const by = {};
+  for (const r of tbl.rows) {
+    const d = r[c["날짜"]], s = r[c["시간대"]], p = price[`${d} ${s}`];
+    (by[d] ||= []).push({ date: d, slot: s, volume: r[c["거래량"]], ratio: r[c["배율"]], verdict: r[c["판정"]], status: "확정",
+      open: p?.open ?? null, close: p?.close ?? null });
+  }
+  const liveDates = (model.history || []).filter((h) => h.kind === "장 마감 갱신").map((h) => h.date);
+  if (today) liveDates.push(today.date);
+  for (const d of [...new Set(liveDates)]) {
+    if (by[d]) continue;
+    try {
+      const day = d === today?.date ? today : await getJSON(`${stockDir}/live/${d}.json`);
+      by[d] = day.bars.filter((b) => b.status !== "아직").map((b) => ({ ...b }));
+    } catch {}
+  }
+  for (const k of Object.keys(by)) by[k].sort((a, b) => a.slot.localeCompare(b.slot));
+  V.byDate = by;
+  V.medians = Object.fromEntries(Object.entries(model.medians).map(([k, v]) => [k, v.median]));
+  V.days = Object.keys(by).sort().map((d) => {
+    const bs = by[d], last = [...bs].reverse().find((b) => b.close != null);
+    return { date: d, close: last?.close ?? null, alert: bs.filter((b) => b.verdict === "이상").length, watch: bs.filter((b) => b.verdict === "주의").length };
+  });
+  $("#vol-title").textContent = `거래량 이상: ${trace.subject.name}`;
+  pickVolDay(V.days.at(-1).date);
 }
 
-async function drawTrend(kid, trace) {
+function pickVolDay(date) {
+  V.selected = date;
+  $("#vol-over").replaceChildren(overviewChart(V.days, date, pickVolDay),
+    el("p", { class: "hint" }, "빨간 점: 이상이 있던 날, 주황 점: 주의가 있던 날. 그래프를 누르면 그날을 아래에 보입니다."));
+  const bs = V.byDate[date] || [];
+  const first = bs.find((b) => b.open != null), last = [...bs].reverse().find((b) => b.close != null);
+  const wd = "일월화수목금토"[new Date(date + "T00:00:00Z").getUTCDay()];  // 보는 사람의 시간대와 무관하게
+  const nA = bs.filter((b) => b.verdict === "이상").length, nW = bs.filter((b) => b.verdict === "주의").length;
+  $("#vol-day-title").replaceChildren(el("b", {}, `${date} (${wd})`),
+    ` 시가 ${first ? Math.round(first.open).toLocaleString("ko-KR") : "-"}원 → 종가 ${last ? Math.round(last.close).toLocaleString("ko-KR") : "-"}원`,
+    first && last ? ` (${last.close >= first.open ? "+" : ""}${(((last.close - first.open) / first.open) * 100).toFixed(1)}%)` : "",
+    `, 이상 ${nA}개, 주의 ${nW}개`);
+  $("#vol-day").replaceChildren(dayCharts(bs, V.medians), el("div", { class: "tname" }, "주의·이상인 30분"), dayTable(bs, V.medians, true),
+    el("details", { class: "more" }, el("summary", {}, "이날 30분 모두 보기"), dayTable(bs, V.medians, false)));
+  if (V.byDate[date] && $("#pick-date") && [...$("#pick-date").options].some((o) => o.value === date)) {
+    $("#pick-date").value = date; F.date = date; F.slot = null;
+    if ($("#flow-wrap").open) drawFlow();
+  }
+}
+
+// ---------- 트렌드: 키워드 하나의 오늘 제목이 지나가는 길 ----------
+async function setupTrend(trace) {
+  // 키워드마다 결과만: 오늘 제목 수, 새로 붙은 낱말, 자주 같이 나온 낱말. 제목 목록과 계산 과정은 접어 둔다.
+  const ids = trace.subject.id;
   const ol = $("#trend-flow");
+  ol.replaceChildren(el("li", { class: "hint" }, "불러오는 중..."));
+  const cards = [];
+  for (const kid of ids) {
+    let day;
+    try { day = await getJSON(`data/trend/${kid}/day.json`); } catch { continue; }
+    const fresh = day.new.map((x) => x.word);
+    const top = day.rows.slice(0, 8).map((r) => `${r[0]} ${r[1]}`);
+    const steps = el("ol", { class: "gears" });
+    const calc = el("details", { class: "more" }, el("summary", {}, "계산 과정 보기"), steps);
+    calc.addEventListener("toggle", () => { if (calc.open && !steps.childElementCount) drawTrend(kid, trace, steps); });
+    cards.push(el("li", { class: "kw-card" },
+      el("div", { class: "kw-head" }, el("b", {}, day.name), ` 오늘 제목 ${day.titles_today}개 · 지난 4주 ${day.titles_past}개`,
+        day.warmup ? el("span", { class: "hint" }, " (예열 중)") : null),
+      el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "새로 붙은 낱말"),
+        fresh.length ? fresh.map((w) => el("span", { class: "chip new" }, w)) : el("span", { class: "hint" }, "없음")),
+      el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "같이 나온 낱말"),
+        top.length ? el("span", {}, top.join(", ")) : el("span", { class: "hint" }, "없음")),
+      day.titles.length ? el("details", { class: "more" }, el("summary", {}, `오늘 제목 ${day.titles.length}개 보기`),
+        el("ul", { class: "titles" }, day.titles.map((x) => el("li", {}, el("span", { class: "hint" }, `${x[0]} ${x[1]} `),
+          el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]))))) : null,
+      calc));
+  }
+  ol.replaceChildren(...cards);
+}
+
+async function drawTrend(kid, trace, ol) {
   ol.replaceChildren(el("li", { class: "hint" }, "불러오는 중..."));
   const day = await getJSON(`data/trend/${kid}/day.json`);
   const proto = await getJSON(`data/trend/${kid}/proto.json`);
@@ -360,7 +435,7 @@ async function renderToday(stockDir) {
   const wrap = $("#today-wrap");
   let day;
   try { day = await getJSON(`${stockDir}/live.json`); } catch { wrap.hidden = true; return null; }
-  wrap.hidden = false;
+  wrap.hidden = true;  // 오늘 자료는 거래량 그래프에서 보인다
   $("#today-title").textContent = `오늘 ${day.date} (${day.as_of.slice(11, 16)} 기준${day.closing ? ", 마감" : ""}${day.simulated ? ", 모의" : ""})`;
   const shown = day.bars.filter((b) => b.status !== "아직");
   $("#today").replaceChildren(
@@ -394,7 +469,7 @@ async function renderDial(stockId, trainTrace, today = null) {
 
 // ---------- 시작 ----------
 async function showLab(kind, stock, trainRun) {
-  for (const id of ["#flow-wrap", "#trend-wrap", "#gears-wrap"]) $(id).hidden = true;
+  for (const id of ["#flow-wrap", "#trend-wrap", "#gears-wrap", "#vol-wrap"]) $(id).hidden = true;
   $("#lab-wrap").hidden = false;
   $("#lab-title").textContent = kind === "lab" ? "실험대: 같은 부품을 직접 만져 보기" : "확인: HDC 답과 단순히 센 답";
   $("#lab").replaceChildren(el("li", { class: "hint" }, "계산 중..."));
@@ -428,11 +503,15 @@ async function show() {
   const trace = run === trainRun ? trainTrace : await getJSON(run.trace);
   const isTrain = kind === "volume.train";
   $("#flow-wrap").hidden = !isTrain;
+  $("#vol-wrap").hidden = !isTrain;
   $("#trend-wrap").hidden = kind !== "trend";
   if (kind === "trend") await setupTrend(trace);
   $("#gears-title").textContent = isTrain ? "전체 계산 기록 (가장 최근 실행, 숫자 전체와 소스)" : "단계별 실제 자료 (가장 최근 실행)";
   $("#gears-wrap").open = !isTrain;
-  if (isTrain) await setupFlow(trace, `data/volume/${stock}`);
+  if (isTrain) {
+    await setupFlow(trace, `data/volume/${stock}`);
+    await setupVol(trace, `data/volume/${stock}`, F.model, today);
+  }
   renderGears(trace, run.trace);
 }
 

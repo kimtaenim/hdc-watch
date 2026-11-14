@@ -113,13 +113,17 @@ def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = Non
     for s in sessions:
         st = "확정" if closing else slot_status(s, now)
         r = slotted.get(s)
+        if st == "확정" and r is None:
+            st = "자료 없음"  # 5분봉이 하나도 없다: 거래 없음과 자료 누락을 구분할 수 없어 채점·갱신에서 뺀다
         vol = r["volume"] if r else 0
         med = mj["medians"][s]["median"]
         ratio = vol / med if med else None
         bars.append({"date": today, "weekday": wd, "slot": s, "volume": vol, "n5": r["n5"] if r else 0, "status": st,
-                     "ratio": ratio, "level": data.level_of(ratio, edges) if ratio is not None and st != "아직" else None})
+                     "open": r["open"] if r else None, "close": r["close"] if r else None,
+                     "ratio": ratio, "level": data.level_of(ratio, edges) if ratio is not None and st in ("확정", "잠정") else None})
     t.step("오늘 5분봉을 30분 칸으로", "일반 계산", [
-        why("설계 선택", "끝난 30분 칸은 '확정', 지금 진행 중인 칸은 '잠정'(거래량이 아직 다 안 찼다), 시작 전 칸은 '아직'."),
+        why("설계 선택", "끝난 30분 칸은 '확정', 지금 진행 중인 칸은 '잠정'(거래량이 아직 다 안 찼다), 시작 전 칸은 '아직'. "
+                       "끝났는데 5분봉이 하나도 없는 칸은 '자료 없음'으로 두고 채점과 갱신에서 뺀다."),
         why("설계 선택", "평소 거래량(중앙값)과 단계 경계는 학습 때 값을 그대로 쓴다."),
     ], outputs=[{"type": "table", "name": "오늘 봉", "columns": ["시간", "거래량", "5분봉 수", "상태", "배율", "단계"],
                  "rows": [[b["slot"], b["volume"], b["n5"], b["status"], round(b["ratio"], 2) if b["ratio"] is not None else None,

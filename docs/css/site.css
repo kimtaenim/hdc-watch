@@ -1,4 +1,10 @@
 :root {
+  --series-1: #2a78d6;
+  --status-warning: #fab219;
+  --status-critical: #d03b3b;
+  --bar-neutral: #b9b7ae;
+  --grid-line: #e1e0d9;
+  --axis-ink: #898781;
   --bg: #f7f6f2;
   --card: #ffffff;
   --ink: #1d1d1b;
@@ -18,6 +24,9 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
+    --series-1: #3987e5;
+    --bar-neutral: #5d5c57;
+    --grid-line: #2c2c2a;
     --bg: #161614;
     --card: #1f1f1c;
     --ink: #ecebe6;
@@ -166,3 +175,44 @@ th { position: sticky; top: 0; background: var(--card); }
 .hbar .hb { display: block; height: 10px; background: var(--op-cmp); border-radius: 2px; }
 .hbar .hv { flex: 0 0 4.5em; }
 .hbar .hv { font-variant-numeric: tabular-nums; }
+
+/* 거래량 그래프 */
+.chart { position: relative; margin: 6px 0; }
+.plot { width: 100%; height: auto; display: block; overflow: visible; }
+.plot .grid { stroke: var(--grid-line); stroke-width: 1; }
+.plot .baseline { stroke: var(--axis-ink); stroke-width: 1; }
+.plot .axis { fill: var(--axis-ink); font-size: 10px; }
+.plot .price-line { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; }
+.plot .price-dot { fill: var(--series-1); stroke: var(--card); stroke-width: 2; }
+.plot .dot { stroke: var(--card); stroke-width: 2; }
+.plot .dot.v-alert, .plot .vbar.v-alert { fill: var(--status-critical); }
+.plot .dot.v-watch, .plot .vbar.v-watch { fill: var(--status-warning); }
+.plot .vbar.v-normal { fill: var(--bar-neutral); }
+.plot .vbar.provisional { opacity: .45; }
+.plot .median-tick { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.plot .mark-label { fill: var(--ink); font-size: 9px; font-weight: 600; }
+.plot .sel-rule { stroke: var(--axis-ink); stroke-width: 1; stroke-dasharray: 2 2; }
+.plot .hit { fill: transparent; cursor: pointer; }
+.tip { position: absolute; z-index: 3; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 6px;
+  padding: 6px 8px; font-size: .76rem; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,.12); max-width: 240px; }
+.tip .tip-hint { color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: .76rem; color: var(--muted); margin: 2px 0 6px; }
+.legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.legend .sw.v-normal { background: var(--bar-neutral); }
+.legend .sw.v-watch { background: var(--status-warning); }
+.legend .sw.v-alert { background: var(--status-critical); }
+.legend .sw.median { height: 0; border-top: 2px dashed var(--ink); border-radius: 0; vertical-align: 3px; }
+.day-title { font-size: .88rem; margin: 10px 0 4px; }
+.badge { font-weight: 600; }
+.badge.v-alert { color: var(--status-critical); }
+.badge.v-watch { color: #a8700a; }
+@media (prefers-color-scheme: dark) { .badge.v-watch { color: var(--status-warning); } }
+#flow-wrap > summary { cursor: pointer; font-weight: 700; }
+
+/* 트렌드 결과 */
+.kw-list { list-style: none; padding: 0; margin: 0; }
+.kw-card { border-bottom: 1px solid var(--line); padding: 10px 0; }
+.kw-head { font-size: .9rem; margin-bottom: 4px; }
+.kw-line { font-size: .84rem; margin: 3px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline; }
+.kw-label { color: var(--muted); font-size: .78rem; min-width: 6.5em; }
+.chip.new { border-color: var(--series-1); color: var(--series-1); }

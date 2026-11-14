@@ -31,19 +31,25 @@
     <div id="today"></div>
   </section>
 
-  <section id="flow-wrap" class="panel">
-    <h2>톱니바퀴: 하루치 실제 자료가 지나가는 길</h2>
+  <section id="vol-wrap" class="panel">
+    <h2 id="vol-title">거래량 이상</h2>
+    <div id="vol-over"></div>
+    <div id="vol-day-title" class="day-title"></div>
+    <div id="vol-day"></div>
+  </section>
+
+  <details id="flow-wrap" class="panel">
+    <summary>HDC 계산 과정 보기 (고른 날)</summary>
     <div class="flow-pick">
       <select id="pick-date" aria-label="날짜"></select>
       <button id="pick-rare">가장 드문 봉이 있는 날</button>
     </div>
     <ol id="flow" class="gears"></ol>
-  </section>
+  </details>
 
   <section id="trend-wrap" class="panel" hidden>
-    <h2>톱니바퀴: 오늘 제목이 지나가는 길</h2>
-    <div class="flow-pick"><select id="pick-kw" aria-label="키워드"></select></div>
-    <ol id="trend-flow" class="gears"></ol>
+    <h2>트렌드: 키워드 옆에 새로 붙은 낱말</h2>
+    <ol id="trend-flow" class="kw-list"></ol>
   </section>
 
   <section id="lab-wrap" class="panel" hidden>
