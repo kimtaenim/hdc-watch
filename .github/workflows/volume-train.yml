@@ -22,8 +22,6 @@ jobs:
       - name: 학습
         run: |
           if [ -n "${{ inputs.end }}" ]; then python -m volume.train --end "${{ inputs.end }}"; else python -m volume.train; fi
-      - name: 매물벽 찾기
-        run: python -m volume.walls
       - name: 결과 커밋
         run: |
           git config user.name "github-actions[bot]"

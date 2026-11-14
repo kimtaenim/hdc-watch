@@ -1,4 +1,4 @@
-# 장중 30분마다 채점, 장 마감 뒤 프로토타입 갱신과 매물벽 찾기.
+# 장중 30분마다 채점, 장 마감 뒤 프로토타입 갱신. (매물벽 찾기는 2026-11-14 화면에서 빼고 멈춤. 코드는 volume/walls.py에 남김)
 # 예약 시각은 UTC. 한국 시각 = UTC + 9시간.
 #   장중: 평일 09:05-15:35 KST, 매시 5분과 35분 (UTC 00:05-06:35)
 #   마감: 평일 16:10 KST (UTC 07:10)
@@ -24,9 +24,6 @@ jobs:
       - run: pip install -r requirements.txt
       - name: 채점 (15:30 이후 실행이면 마감 갱신)
         run: python -m volume.live
-      - name: 매물벽 찾기 (15:30 이후, 마감 갱신과 같은 조건)
-        run: |
-          if [ "$(TZ=Asia/Seoul date +%H%M)" -ge 1530 ]; then python -m volume.walls; fi
       - name: 결과 커밋
         run: |
           git config user.name "github-actions[bot]"
