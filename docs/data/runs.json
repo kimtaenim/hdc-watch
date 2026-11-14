@@ -1037,5 +1037,36 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261114.json",
   "note": "새 제목 144개"
+ },
+ {
+  "at": "2026-11-14T12:11:50+09:00",
+  "kind": "trend",
+  "subject": "키워드",
+  "fetched": {
+   "한국경제": 100,
+   "매일경제": 50,
+   "이데일리": 50,
+   "지디넷코리아": 30,
+   "블로터": 50,
+   "전자신문": 30,
+   "뉴시스": 200,
+   "로봇신문": 50,
+   "디일렉": 50,
+   "에너지신문": 50,
+   "아이뉴스24": 100,
+   "테크엠": 50,
+   "조선비즈": 100,
+   "서울경제": 50,
+   "The Robot Report": 15,
+   "IEEE Spectrum": 30,
+   "TechCrunch": 20,
+   "Mobile Robot Guide": 10,
+   "Energy-Storage.news": 300,
+   "Electrek": 150,
+   "DCD": 20
+  },
+  "failures": [],
+  "trace": "data/trend/traces/trend-20261114.json",
+  "note": "새 제목 457개"
  }
 ]
