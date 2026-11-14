@@ -13,13 +13,22 @@ from urllib.parse import urlparse
 
 UA = "hdc-watch-study/1.0 (personal HDC learning project)"
 CANDIDATES = {
-    "한국경제": ["https://www.hankyung.com/feed/all-news", "https://www.hankyung.com/feed/economy", "https://www.hankyung.com/feed/it"],
-    "매일경제": ["https://www.mk.co.kr/rss/30000001/", "https://www.mk.co.kr/rss/50300009/", "https://www.mk.co.kr/rss/30100041/"],
-    "이데일리": ["http://rss.edaily.co.kr/edaily_news.xml", "https://rss.edaily.co.kr/edaily_news.xml", "http://rss.edaily.co.kr/economy_news.xml"],
-    "지디넷코리아": ["https://feeds.feedburner.com/zdkorea", "https://zdnet.co.kr/rss/newsall.xml"],
-    "블로터": ["https://www.bloter.net/rss/allArticle.xml", "https://www.bloter.net/feed"],
-    "전자신문": ["http://rss.etnews.com/Section901.xml", "https://rss.etnews.com/Section901.xml", "http://rss.etnews.com/Section902.xml"],
-    "뉴시스": ["https://newsis.com/RSS/sokbo.xml", "https://www.newsis.com/RSS/economy.xml", "https://newsis.com/RSS/economy.xml"],
+    # 2026-11-14 추가 후보: 산업·IT·로봇·에너지 분야
+    "한국경제 산업": ["https://www.hankyung.com/feed/industry"],
+    "매일경제 기업": ["https://www.mk.co.kr/rss/50100032/", "https://www.mk.co.kr/rss/50200011/"],
+    "전자신문 분야": ["https://rss.etnews.com/Section902.xml", "https://rss.etnews.com/Section903.xml", "https://rss.etnews.com/Section904.xml"],
+    "로봇신문": ["https://www.irobotnews.com/rss/allArticle.xml"],
+    "디일렉": ["https://www.thelec.kr/rss/allArticle.xml"],
+    "에너지신문": ["https://www.energy-news.co.kr/rss/allArticle.xml"],
+    "에너지경제": ["https://www.ekn.kr/rss/allArticle.xml"],
+    "테크엠": ["https://www.techm.kr/rss/allArticle.xml"],
+    "아이뉴스24": ["https://www.inews24.com/rss/news_it.xml", "https://www.inews24.com/rss/allArticle.xml"],
+    "디지털타임스": ["https://www.dt.co.kr/rss/all.xml", "https://www.dt.co.kr/rss/it.xml"],
+    "머니투데이": ["https://rss.mt.co.kr/mt_news.xml"],
+    "조선비즈": ["https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml"],
+    "서울경제": ["https://www.sedaily.com/rss/newsall", "https://www.sedaily.com/RSS/S11.xml"],
+    "헬로티": ["https://www.hellot.net/rss/allArticle.xml"],
+    "인더스트리뉴스": ["https://www.industrynews.co.kr/rss/allArticle.xml"],
 }
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "data", "trend", "feed_check.json")
 
@@ -53,7 +62,9 @@ def probe(url: str) -> dict:
             if tt is None:
                 tt = it.find("{http://www.w3.org/2005/Atom}title")
             titles.append((tt.text or "").strip() if tt is not None else "")
-        res.update({"ok": len(items) > 0, "items": len(items), "sample": titles})
+        dates = [(it.findtext("pubDate") or "") for it in items]
+        res.update({"ok": len(items) > 0, "items": len(items), "sample": titles, "first_date": dates[0] if dates else None,
+                    "last_date": dates[-1] if dates else None})
     except Exception as e:
         res.update({"ok": False, "error": f"{type(e).__name__}: {e}"[:200]})
     return res
