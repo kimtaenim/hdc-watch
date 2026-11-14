@@ -55,13 +55,19 @@ def cosine(a: np.ndarray, b: np.ndarray) -> float | None:
     return float((a.astype(np.float64) * b).sum()) / (na * nb) if na and nb else None
 
 
-def pairs_of(titles, kw):
-    """제목마다 (제목, 같이 나온 명사들). 그 키워드의 표기 구간만 명사에서 뺀다."""
+def pairs_of(titles, kw, all_keywords=()):
+    """제목마다 (제목, 같이 나온 명사들). 그 키워드의 표기 구간은 명사에서 뺀다.
+    다른 키워드가 같은 제목에 나오면 쪼개지 않고 그 키워드 이름 하나로 센다('피지컬', 'ai'가 아니라 '피지컬 AI')."""
     out = []
     for t in titles:
-        spans = text.find_keywords(t["title"], [kw]).get(kw["id"])
-        if spans:
-            out.append((t, text.nouns(t["title"], spans)))
+        found = text.find_keywords(t["title"], all_keywords or [kw])
+        spans = found.get(kw["id"]) or text.find_keywords(t["title"], [kw]).get(kw["id"])
+        if not spans:
+            continue
+        others = [k for k in all_keywords if k["id"] != kw["id"] and k["id"] in found]
+        skip = list(spans) + [sp for k in others for sp in found[k["id"]]]
+        words = [k["name"] for k in others] + [w for w in text.nouns(t["title"], skip)]
+        out.append((t, list(dict.fromkeys(words))))
     return out
 
 
@@ -131,7 +137,7 @@ def run(date: str | None = None, do_collect: bool = False):
     for kw in keywords:
         kid = kw["id"]
         t.section(f"키워드: {kw['name']}", f"표기: {', '.join(kw['variants'])}")
-        pt, pp = pairs_of(titles_recent, kw), pairs_of(titles_past, kw)
+        pt, pp = pairs_of(titles_recent, kw, keywords), pairs_of(titles_past, kw, keywords)
         kw_days = len({x["date"] for x, _ in pp})  # 이 키워드가 든 제목이 있었던 과거 날 수
         warm = kw_days < tc["warmup_days"]
         any_warm = any_warm or warm

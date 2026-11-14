@@ -230,3 +230,12 @@ th { position: sticky; top: 0; background: var(--card); }
 .words details.word .chip.new { margin-left: 6px; font-size: .72rem; padding: 0 6px; }
 
 .site-title { max-width: 820px; margin: 2px auto 4px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; }
+
+.words details.word > summary { display: flex; align-items: center; gap: 6px; list-style: none; }
+.words details.word > summary::-webkit-details-marker { display: none; }
+.words .w-name { flex: 0 0 6.5em; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.words .w-bar { flex: 1 1 auto; height: 8px; background: var(--grid-line); border-radius: 2px; min-width: 30px; }
+.words .w-bar > span { display: block; height: 100%; background: var(--series-1); border-radius: 2px; }
+.words .w-n { flex: 0 0 3em; text-align: right; font-variant-numeric: tabular-nums; font-size: .8rem; }
+.words .w-past { flex: 0 0 3.6em; color: var(--muted); font-size: .75rem; }
+.words .once { font-size: .8rem; color: var(--muted); line-height: 1.7; }

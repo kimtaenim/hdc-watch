@@ -6,6 +6,7 @@
 import datetime as dt
 import email.utils
 import glob
+import html
 import json
 import os
 import urllib.request
@@ -47,7 +48,7 @@ def fetch_feed(url: str, source: str, now: dt.datetime, as_kst: bool = False):
         root = ET.fromstring(r.read())
     out = []
     for it in root.findall(".//item"):
-        title = (it.findtext("title") or "").strip()
+        title = html.unescape((it.findtext("title") or "").strip())  # '&apos;' 같은 문자 코드를 그대로 보내는 피드가 있다
         link = (it.findtext("link") or "").strip()
         if not title or not link:
             continue

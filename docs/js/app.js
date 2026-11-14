@@ -370,23 +370,39 @@ async function setupTrend(trace) {
     const day = days[kid];
     const fresh = new Set(day.new.map((x) => x.word));
     // 낱말별 펼치기: 누르면 그 낱말이 키워드와 함께 나온 제목(최근, 과거)과 HDC 점수
-    const words = day.rows.map((r) => {
+    const maxN = Math.max(1, ...day.rows.map((r) => r[1]));
+    const wordEl = (r) => {
       const wt = day.word_titles?.[r[0]] || { recent: [], past: [] };
       return el("details", { class: "word" },
-        el("summary", {}, el("b", {}, r[0]), ` 최근 ${r[1]}번 · 과거 ${r[3]}번`, fresh.has(r[0]) ? el("span", { class: "chip new" }, "새로 붙음") : null),
+        el("summary", {}, el("span", { class: "w-name" }, r[0]),
+          el("span", { class: "w-bar" }, el("span", { style: `width:${(r[1] / maxN) * 100}%` })),
+          el("span", { class: "w-n" }, `${r[1]}번`), el("span", { class: "w-past" }, `과거 ${r[3]}`),
+          fresh.has(r[0]) ? el("span", { class: "chip new" }, "새로 붙음") : null),
         el("div", { class: "values" }, el("span", { class: "chip" }, "과거 점수 ", el("b", {}, fmt(r[4]))),
           el("span", { class: "chip" }, "잡음 수준 ", el("b", {}, fmt(day.threshold)))),
         el("div", { class: "tname" }, "최근 제목"),
         el("ul", { class: "titles" }, wt.recent.map((i) => { const x = day.titles[i]; return titleLi(x[0], x[1], x[2], x[3]); })),
         wt.past.length ? [el("div", { class: "tname" }, "과거 제목(최근 것부터)"),
           el("ul", { class: "titles" }, wt.past.map((x) => titleLi(x[0].slice(5), x[1], x[2], x[3])))] : el("p", { class: "hint" }, "과거 4주에는 이 키워드와 함께 나온 적이 없다."));
-    });
+    };
+    const TOP = 20;
+    const top = day.rows.slice(0, TOP), rest = day.rows.slice(TOP);
+    const restMulti = rest.filter((r) => r[1] >= 2), once = rest.filter((r) => r[1] < 2);
+    const words = [
+      ...top.map(wordEl),
+      restMulti.length ? el("details", { class: "more" }, el("summary", {}, `2번 이상 나온 낱말 ${restMulti.length}개 더 보기`), restMulti.map(wordEl)) : null,
+      once.length ? el("details", { class: "more" }, el("summary", {}, `한 번만 나온 낱말 ${once.length}개`),
+        el("p", { class: "once" }, once.map((r) => r[0]).join(", "))) : null,
+    ].filter(Boolean);
     $("#kw-summary").replaceChildren(
       el("div", { class: "kw-head" }, el("b", {}, day.name), ` 최근 ${day.recent_days}일 제목 ${day.titles_recent}개 · 그 전 4주 ${day.titles_past}개`,
         day.warmup ? el("span", { class: "hint" }, ` (예열 중: 과거 4주 중 이 키워드 제목이 있었던 날 ${day.past_days_with}일)`) : null),
-      el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "새로 붙은 낱말"),
-        fresh.size ? [...fresh].map((w) => el("span", { class: "chip new" }, w)) : el("span", { class: "hint" }, "없음")),
-      el("div", { class: "tname" }, `같이 나온 낱말 ${day.rows.length}개 (누르면 제목이 펼쳐짐)`),
+      el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, `새로 붙은 낱말 ${fresh.size}개`),
+        fresh.size ? [...[...fresh].slice(0, 10).map((w) => el("span", { class: "chip new" }, w)),
+          fresh.size > 10 ? el("details", { class: "more inline" }, el("summary", {}, `${fresh.size - 10}개 더`),
+            [...fresh].slice(10).map((w) => el("span", { class: "chip new" }, w))) : null]
+          : el("span", { class: "hint" }, "없음")),
+      el("div", { class: "tname" }, `같이 나온 낱말 ${day.rows.length}개 중 많이 나온 ${Math.min(20, day.rows.length)}개 (누르면 제목이 펼쳐짐)`),
       words.length ? el("div", { class: "words" }, words) : el("p", { class: "hint" }, "없음"));
     await drawTrend(kid, trace, $("#trend-flow"));
   };
