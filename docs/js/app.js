@@ -441,9 +441,15 @@ async function drawTrend(kid, trace, ol) {
   ol.replaceChildren(...[
     el("li", { class: "section-title" }, "HDC 계산 과정"),
     card("①", `${RL} '${day.name}'이 든 제목 ${day.titles_recent}개 → 명사`, "일반 계산", S("일반 계산"),
-      day.titles.length ? el("ul", { class: "titles" }, day.titles.map((x) => el("li", {},
-        el("span", { class: "hint" }, `${x[0]} ${x[1]} `), el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]),
-        el("div", { class: "nouns" }, "→ 명사: ", x[4].join(", ") || "(없음)"))))
+      day.titles.length ? (() => {
+        // 제목 → 명사가 어떻게 되는지 보이는 데는 몇 개면 충분하다. 나머지는 접는다.
+        const li = (x) => el("li", {}, el("span", { class: "hint" }, `${x[0]} ${x[1]} `),
+          el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]), el("div", { class: "nouns" }, "→ 명사: ", x[4].join(", ") || "(없음)"));
+        const N = 3;
+        return [el("ul", { class: "titles" }, day.titles.slice(0, N).map(li)),
+          day.titles.length > N ? el("details", { class: "more" }, el("summary", {}, `나머지 제목 ${day.titles.length - N}개`),
+            el("ul", { class: "titles" }, day.titles.slice(N).map(li))) : null];
+      })()
         : el("p", { class: "hint" }, `${RL} 동안 이 키워드가 든 제목이 없다.`)),
     pair ? card("②", `묶기: 키워드 ⊕ '${top}'`, "묶기", S("묶기"),
       bitRows([{ name: `키워드:${day.name}`, bits: kv }, { name: `단어:${top}`, bits: wv }, { name: "묶은 결과", bits: pair, line: true }], dim)) : null,
