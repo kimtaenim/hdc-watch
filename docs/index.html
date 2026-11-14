@@ -15,14 +15,21 @@
   </div>
   <div class="pickers">
     <label>종목 <select id="pick-stock"></select></label>
-    <label>보기 <select id="pick-view">
-      <option value="volume.train">시간대 이상탐지</option>
-      <option value="volume.walls">매물벽 찾기</option>
-      <option value="trend">트렌드 문맥</option>
+    <select id="pick-view" hidden aria-hidden="true">
+      <option value="volume.train">거래량</option>
+      <option value="volume.walls">매물벽</option>
+      <option value="trend">트렌드</option>
       <option value="lab">실험대</option>
       <option value="check">확인</option>
-    </select></label>
+    </select>
   </div>
+  <nav class="tabs" role="tablist" aria-label="화면">
+    <button role="tab" data-view="volume.train" aria-selected="true">거래량</button>
+    <button role="tab" data-view="volume.walls">매물벽</button>
+    <button role="tab" data-view="trend">트렌드</button>
+    <button role="tab" data-view="lab">실험대</button>
+    <button role="tab" data-view="check">확인</button>
+  </nav>
 </header>
 
 <main>
@@ -49,7 +56,10 @@
 
   <section id="trend-wrap" class="panel" hidden>
     <h2>트렌드: 키워드 옆에 새로 붙은 낱말</h2>
-    <ol id="trend-flow" class="kw-list"></ol>
+    <p class="hint" id="trend-when"></p>
+    <div class="kw-tabs" id="kw-tabs" role="tablist" aria-label="키워드"></div>
+    <div id="kw-summary"></div>
+    <ol id="trend-flow" class="gears"></ol>
   </section>
 
   <section id="lab-wrap" class="panel" hidden>

@@ -355,34 +355,28 @@ function pickVolDay(date) {
 
 // ---------- 트렌드: 키워드 하나의 오늘 제목이 지나가는 길 ----------
 async function setupTrend(trace) {
-  // 키워드마다 결과만: 오늘 제목 수, 새로 붙은 낱말, 자주 같이 나온 낱말. 제목 목록과 계산 과정은 접어 둔다.
+  // 키워드 탭. 고른 키워드의 결과, 제목 → 명사, HDC 계산 과정을 모두 펼쳐 보인다.
   const ids = trace.subject.id;
-  const ol = $("#trend-flow");
-  ol.replaceChildren(el("li", { class: "hint" }, "불러오는 중..."));
-  const cards = [];
-  for (const kid of ids) {
-    let day;
-    try { day = await getJSON(`data/trend/${kid}/day.json`); } catch { continue; }
+  const days = {};
+  for (const kid of ids) { try { days[kid] = await getJSON(`data/trend/${kid}/day.json`); } catch {} }
+  try { const sm = await getJSON("data/trend/summary.json"); $("#trend-when").textContent = `${sm.date} ${sm.at.slice(11, 16)} 기준. '오늘'은 그날 0시부터 마지막 수집까지 모인 제목이다.`; } catch {}
+  const have = ids.filter((k) => days[k]);
+  const first = [...have].sort((a, b) => (days[b].titles_today * 1000 + days[b].titles_past) - (days[a].titles_today * 1000 + days[a].titles_past))[0];
+  const pick = async (kid) => {
+    $("#kw-tabs").querySelectorAll("button").forEach((x) => x.setAttribute("aria-selected", String(x.dataset.kid === kid)));
+    const day = days[kid];
     const fresh = day.new.map((x) => x.word);
-    const top = day.rows.slice(0, 8).map((r) => `${r[0]} ${r[1]}`);
-    const steps = el("ol", { class: "gears" });
-    const calc = el("details", { class: "more" }, el("summary", {}, "계산 과정 보기"), steps);
-    calc.addEventListener("toggle", () => { if (calc.open && !steps.childElementCount) drawTrend(kid, trace, steps); });
-    cards.push(el("li", { class: "kw-card" },
-      el("div", { class: "kw-head" }, el("b", {}, day.name), ` 오늘 제목 ${day.titles_today}개 · 지난 4주 ${day.titles_past}개`,
-        day.warmup ? el("span", { class: "hint" }, " (예열 중)") : null),
+    $("#kw-summary").replaceChildren(
+      el("div", { class: "kw-head" }, el("b", {}, day.name), ` 오늘 제목 ${day.titles_today}개 · 지난 4주 ${day.titles_past}개`, day.warmup ? el("span", { class: "hint" }, " (예열 중)") : null),
       el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "새로 붙은 낱말"),
         fresh.length ? fresh.map((w) => el("span", { class: "chip new" }, w)) : el("span", { class: "hint" }, "없음")),
       el("div", { class: "kw-line" }, el("span", { class: "kw-label" }, "같이 나온 낱말"),
-        top.length ? el("span", {}, top.join(", ")) : el("span", { class: "hint" }, "없음")),
-      day.titles.length ? el("details", { class: "more" }, el("summary", {}, `오늘 제목 ${day.titles.length}개 보기`),
-        el("ul", { class: "titles" }, day.titles.map((x) => el("li", {}, el("span", { class: "hint" }, `${x[0]} ${x[1]} `),
-          el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]))))) : null,
-      calc));
-  }
-  let when = "";
-  try { const sm = await getJSON("data/trend/summary.json"); when = `${sm.date} ${sm.at.slice(11, 16)} 기준. `; } catch {}
-  ol.replaceChildren(el("li", { class: "hint" }, `${when}'오늘'은 그날 0시부터 마지막 수집까지 모인 제목이다.`), ...cards);
+        day.rows.length ? el("span", {}, day.rows.slice(0, 10).map((r) => `${r[0]} ${r[1]}`).join(", ")) : el("span", { class: "hint" }, "없음")));
+    await drawTrend(kid, trace, $("#trend-flow"));
+  };
+  $("#kw-tabs").replaceChildren(...have.map((kid) => el("button", { role: "tab", "data-kid": kid, onclick: () => pick(kid) },
+    `${days[kid].name} ${days[kid].titles_today}`)));
+  if (first) await pick(first);
 }
 
 async function drawTrend(kid, trace, ol) {
@@ -414,8 +408,10 @@ async function drawTrend(kid, trace, ol) {
   ol.replaceChildren(...[
     day.warmup ? el("li", { class: "check" }, `예열 중: 과거 자료가 있는 날이 ${day.past_days_with}일뿐이라 과거 프로토타입이 얕다. 대부분 새 조합으로 보인다.`) : null,
     card("①", `오늘 '${day.name}'이 든 제목 ${day.titles_today}개 → 명사`, "일반 계산", S("일반 계산"),
-      el("ul", { class: "titles" }, day.titles.slice(0, 8).map((x) => el("li", {},
-        el("span", { class: "hint" }, `${x[0]} ${x[1]} `), x[2], el("div", { class: "nouns" }, "→ ", x[4].join(", ") || "(명사 없음)"))))),
+      day.titles.length ? el("ul", { class: "titles" }, day.titles.map((x) => el("li", {},
+        el("span", { class: "hint" }, `${x[0]} ${x[1]} `), el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]),
+        el("div", { class: "nouns" }, "→ 명사: ", x[4].join(", ") || "(없음)"))))
+        : el("p", { class: "hint" }, "오늘은 아직 이 키워드가 든 제목이 없다.")),
     pair ? card("②", `묶기: 키워드 ⊕ '${top}'`, "묶기", S("묶기"),
       bitRows([{ name: `키워드:${day.name}`, bits: kv }, { name: `단어:${top}`, bits: wv }, { name: "묶은 결과", bits: pair, line: true }], dim)) : null,
     card("③", `정수 프로토타입: 오늘 ${proto.today.n}개, 과거 ${proto.past.n}개 조합`, "더하기", S("묶기"),
@@ -524,6 +520,11 @@ async function main() {
   $("#pick-stock").replaceChildren(...stocks.map((s) => el("option", { value: s }, s)));
   $("#pick-stock").onchange = show;
   $("#pick-view").onchange = show;
+  document.querySelectorAll(".tabs button").forEach((t) => (t.onclick = () => {
+    document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", String(x === t)));
+    $("#pick-view").value = t.dataset.view;
+    show();
+  }));
   await show();
 }
 
