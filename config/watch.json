@@ -141,7 +141,7 @@
     }
   ],
   "trend": {
-    "_설명": "RSS 제목 수집과 문맥 탐지 설정. 주소는 2026-11-11 GitHub Actions에서 열리는지 확인(docs/data/trend/feed_check.json)",
+    "_설명": "RSS 제목 수집과 문맥 탐지 설정. 주소는 GitHub Actions에서 열리는지·robots.txt 허용인지 확인(docs/data/trend/feed_check.json). 2026-11-14 산업·IT·로봇·에너지 매체 7곳 추가",
     "feeds": [
       {
         "source": "한국경제",
@@ -183,6 +183,41 @@
       {
         "source": "뉴시스",
         "url": "https://newsis.com/RSS/economy.xml"
+      },
+      {
+        "source": "로봇신문",
+        "url": "https://www.irobotnews.com/rss/allArticle.xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/rss/allArticle.xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "에너지신문",
+        "url": "https://www.energy-news.co.kr/rss/allArticle.xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "아이뉴스24",
+        "url": "https://www.inews24.com/rss/news_it.xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "테크엠",
+        "url": "https://www.techm.kr/rss/allArticle.xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "조선비즈",
+        "url": "https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml",
+        "_added": "2026-11-14"
+      },
+      {
+        "source": "서울경제",
+        "url": "https://www.sedaily.com/rss/newsall",
+        "_added": "2026-11-14"
       }
     ],
     "past_days": 28,

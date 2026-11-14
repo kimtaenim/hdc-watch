@@ -25,7 +25,9 @@ def parse_date(text: str | None, fallback: dt.datetime, as_kst: bool = False) ->
             return d.replace(tzinfo=KST) if as_kst else d.astimezone(KST)
         except Exception:
             try:
-                return dt.datetime.fromisoformat(text.strip().replace("Z", "+00:00")).astimezone(KST)
+                d = dt.datetime.fromisoformat(text.strip().replace("Z", "+00:00"))
+                # 시간대가 없는 날짜("2026-11-13 23:48:00")는 한국 시각으로 본다(국내 매체, 실행 서버는 UTC)
+                return d.replace(tzinfo=KST) if d.tzinfo is None else d.astimezone(KST)
             except Exception:
                 pass
     return fallback
