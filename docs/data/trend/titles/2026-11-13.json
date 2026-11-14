@@ -7160,5 +7160,261 @@
 "time": "08:00",
 "source": "테크엠",
 "seen_at": "2026-11-14T11:18+09:00"
+},
+{
+"title": "How Rhoda AI is using video data to create generalized AI models for robots",
+"link": "https://www.therobotreport.com/how-rhoda-ai-is-using-video-data-to-create-generalized-ai-models-for-robots/",
+"date": "2026-11-13",
+"time": "22:30",
+"source": "The Robot Report",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Narwal builds robot vacuums to serve regional needs",
+"link": "https://www.therobotreport.com/narwal-builds-robot-vacuums-to-serve-regional-needs/",
+"date": "2026-11-13",
+"time": "22:18",
+"source": "The Robot Report",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "NVIDIA replaces CEO amid China AI and robotics concerns",
+"link": "https://www.therobotreport.com/nvidia-replaces-ceo-amid-china-ai-and-robotics-concerns/",
+"date": "2026-11-13",
+"time": "01:33",
+"source": "The Robot Report",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Symbotic CTO James Kuffner sees strong prospects for warehouse automation",
+"link": "https://www.automatedwarehouseonline.com/symbotic-cto-james-kuffner-sees-strong-prospects-for-warehouse-automation/",
+"date": "2026-11-13",
+"time": "04:45",
+"source": "Mobile Robot Guide",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "The next phase of ESS: LG Energy Solution’s strategy for an evolving energy market",
+"link": "https://www.energy-storage.news/the-next-phase-of-ess-lg-energy-solutions-strategy-for-an-evolving-energy-market/",
+"date": "2026-11-13",
+"time": "23:14",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Toll makes way for floor, offtake contracting beginning to standardise in UK BESS market",
+"link": "https://www.energy-storage.news/toll-makes-way-for-floor-offtake-contracting-beginning-to-standardise-in-uk-bess-market/",
+"date": "2026-11-13",
+"time": "21:24",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Sunrun closes preferred equity investment for US distributed energy resources, totalling 110MWh of batteries",
+"link": "https://www.energy-storage.news/sunrun-closes-preferred-equity-investment-for-us-distributed-energy-resources-totalling-110mwh-of-batteries/",
+"date": "2026-11-13",
+"time": "20:38",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "BESS Industry Buzz: CATL sodium-ion specs, BESS availability and the price of speed-to-power",
+"link": "https://www.energy-storage.news/bess-industry-buzz-catl-sodium-ion-specs-bess-availability-and-the-price-of-speed-to-power/",
+"date": "2026-11-13",
+"time": "19:01",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Lacour Energy refers 4,000MWh wind-plus-storage site to Australia’s EPBC Act",
+"link": "https://www.energy-storage.news/lacour-energy-refers-4000mwh-wind-plus-storage-site-to-australias-epbc-act/",
+"date": "2026-11-13",
+"time": "18:10",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "AirTrunk secures exclusivity on 800MWh+ battery storage as part of 1GW Hunter renewables deal in Australia",
+"link": "https://www.energy-storage.news/airtrunk-secures-exclusivity-on-800mwh-battery-storage-as-part-of-1gw-hunter-renewables-deal-in-australia/",
+"date": "2026-11-13",
+"time": "06:12",
+"source": "Energy-Storage.news",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Zonveer ZX3 review: one of the best-value electric dirt bikes for beginners",
+"link": "https://electrek.co/2026/11/13/zonveer-zx3-review-1299-electric-dirt-bike-beginners/",
+"date": "2026-11-13",
+"time": "23:06",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Wheel-E Podcast: Juiced Scrambler Core, battery passports, Engwe M20, more",
+"link": "https://electrek.co/2026/11/13/wheel-e-podcast-juiced-scrambler-core-battery-passports-engwe-m20-more/",
+"date": "2026-11-13",
+"time": "22:43",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Review: Engwe’s M20 3.0 is a 60V Super73 killer at a fraction of the price",
+"link": "https://electrek.co/2026/11/13/review-engwes-m20-3-0-is-a-60v-super73-killer-at-a-fraction-of-the-price/",
+"date": "2026-11-13",
+"time": "22:32",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "sonnen’s new smart breakers help your home battery last longer",
+"link": "https://electrek.co/2026/11/12/sonnens-new-smart-breakers-help-your-home-battery-last-longer/",
+"date": "2026-11-13",
+"time": "08:22",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "BYD wins round one in Defender-copycat battle as JLR is told to destroy documents",
+"link": "https://electrek.co/2026/11/12/byd-wins-round-one-defender-copycat-battle-jlr-told-to-destroy-documents/",
+"date": "2026-11-13",
+"time": "07:03",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Lunar’s new home DC fast charger puts your EV battery to work",
+"link": "https://electrek.co/2026/11/12/lunars-new-home-dc-fast-charger-puts-your-ev-battery-to-work/",
+"date": "2026-11-13",
+"time": "06:41",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "SpaceX could announce $1.5 trillion Tesla merger in December: report",
+"link": "https://electrek.co/2026/11/12/spacex-tesla-merger-announcement-december-report/",
+"date": "2026-11-13",
+"time": "05:39",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Kia is giving the EV5 an update, and leaked images show what’s next",
+"link": "https://electrek.co/2026/11/12/kia-giving-ev5-update-leaked-images/",
+"date": "2026-11-13",
+"time": "04:39",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Ride1Up VORSA e-bikes at Black Friday lows, EGO Power+ cordless snow blowers $220 off, Bluetti + EcoFlow power stations, more",
+"link": "https://electrek.co/2026/11/12/ride1up-vorsa-e-bikes-ego-power-cordless-snow-blowers-bluetti-ecoflow-power-stations-more/",
+"date": "2026-11-13",
+"time": "04:00",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "BYD’s new 5-seat luxury SUV brings big screens, big range, and starts at about $40,000",
+"link": "https://electrek.co/2026/11/12/byds-new-luxury-suv-brings-big-screens-big-range-starts-at-40000/",
+"date": "2026-11-13",
+"time": "02:46",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Volkswagen’s new electric SUV is taking over where the ID.4 left off",
+"link": "https://electrek.co/2026/11/12/volkswagens-new-electric-suv-taking-over-where-id-4-left-off/",
+"date": "2026-11-13",
+"time": "00:42",
+"source": "Electrek",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Syntys breaks ground on 20MW data center in Qatar",
+"link": "https://www.datacenterdynamics.com/en/news/syntys-breaks-ground-on-20mw-data-center-in-qatar/",
+"date": "2026-11-13",
+"time": "23:47",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Cerebras secures Microsoft as a customer",
+"link": "https://www.datacenterdynamics.com/en/news/cerebras-secures-microsoft-as-a-customer/",
+"date": "2026-11-13",
+"time": "21:37",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "VodafoneThree considers feasibility of UK-Norway subsea cable route",
+"link": "https://www.datacenterdynamics.com/en/news/vodafonethree-considers-feasibility-of-uk-norway-subsea-cable-route/",
+"date": "2026-11-13",
+"time": "21:31",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Poste Italiane establishes €600m co-investment fund to support data center projects",
+"link": "https://www.datacenterdynamics.com/en/news/poste-italiane-establishes-600m-co-investment-fund-to-support-data-center-projects/",
+"date": "2026-11-13",
+"time": "21:26",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Three data center developments in Australia change course after community backlash",
+"link": "https://www.datacenterdynamics.com/en/news/three-data-center-developments-in-australia-change-course-after-community-backlash/",
+"date": "2026-11-13",
+"time": "21:25",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Nokia to support One NZ's network automation goals",
+"link": "https://www.datacenterdynamics.com/en/news/nokia-to-support-one-nzs-network-automation-goals/",
+"date": "2026-11-13",
+"time": "20:16",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Turning cooling into compute",
+"link": "https://www.datacenterdynamics.com/en/whitepapers/turning-cooling-into-compute/",
+"date": "2026-11-13",
+"time": "19:29",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Carrier Connect’s Purecolo appoints Mark Kerr as CEO",
+"link": "https://www.datacenterdynamics.com/en/news/carrier-connects-purecolo-appoints-mark-kerr-as-ceo/",
+"date": "2026-11-13",
+"time": "19:22",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "STTGDC launches 22MW data center in Noida, India",
+"link": "https://www.datacenterdynamics.com/en/news/sttgdc-launches-22mw-data-center-in-noida-india/",
+"date": "2026-11-13",
+"time": "19:16",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Insite DC files for four-building data center campus outside Melbourne, Australia",
+"link": "https://www.datacenterdynamics.com/en/news/insite-dc-files-for-four-building-data-center-campus-outside-melbourne-australia/",
+"date": "2026-11-13",
+"time": "19:05",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
+},
+{
+"title": "Nscale brings online two data centers and 25,000 GPUs in 2.5 months",
+"link": "https://www.datacenterdynamics.com/en/news/nscale-brings-online-two-data-centers-and-25000-gpus-in-25-months/",
+"date": "2026-11-13",
+"time": "19:05",
+"source": "DCD",
+"seen_at": "2026-11-14T11:57+09:00"
 }
 ]
