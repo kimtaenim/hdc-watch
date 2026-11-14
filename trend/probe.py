@@ -13,22 +13,18 @@ from urllib.parse import urlparse
 
 UA = "hdc-watch-study/1.0 (personal HDC learning project)"
 CANDIDATES = {
-    # 2026-11-14 추가 후보: 산업·IT·로봇·에너지 분야
-    "한국경제 산업": ["https://www.hankyung.com/feed/industry"],
-    "매일경제 기업": ["https://www.mk.co.kr/rss/50100032/", "https://www.mk.co.kr/rss/50200011/"],
-    "전자신문 분야": ["https://rss.etnews.com/Section902.xml", "https://rss.etnews.com/Section903.xml", "https://rss.etnews.com/Section904.xml"],
-    "로봇신문": ["https://www.irobotnews.com/rss/allArticle.xml"],
-    "디일렉": ["https://www.thelec.kr/rss/allArticle.xml"],
-    "에너지신문": ["https://www.energy-news.co.kr/rss/allArticle.xml"],
-    "에너지경제": ["https://www.ekn.kr/rss/allArticle.xml"],
-    "테크엠": ["https://www.techm.kr/rss/allArticle.xml"],
-    "아이뉴스24": ["https://www.inews24.com/rss/news_it.xml", "https://www.inews24.com/rss/allArticle.xml"],
-    "디지털타임스": ["https://www.dt.co.kr/rss/all.xml", "https://www.dt.co.kr/rss/it.xml"],
-    "머니투데이": ["https://rss.mt.co.kr/mt_news.xml"],
-    "조선비즈": ["https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml"],
-    "서울경제": ["https://www.sedaily.com/rss/newsall", "https://www.sedaily.com/RSS/S11.xml"],
-    "헬로티": ["https://www.hellot.net/rss/allArticle.xml"],
-    "인더스트리뉴스": ["https://www.industrynews.co.kr/rss/allArticle.xml"],
+    # 2026-11-14 영어 전문 매체 후보: 로봇, 에너지 저장, 배터리, AI 인프라
+    "The Robot Report": ["https://www.therobotreport.com/feed/"],
+    "IEEE Spectrum 로봇": ["https://spectrum.ieee.org/feeds/topic/robotics.rss"],
+    "TechCrunch 로봇": ["https://techcrunch.com/category/robotics/feed/"],
+    "Mobile Robot Guide": ["https://www.mobilerobotguide.com/feed/"],
+    "Robotics 24/7": ["https://www.robotics247.com/rss/"],
+    "Energy-Storage.news": ["https://www.energy-storage.news/feed/"],
+    "pv magazine 저장": ["https://www.pv-magazine.com/category/energy-storage/feed/"],
+    "Electrek": ["https://electrek.co/feed/"],
+    "Battery Technology": ["https://www.batterytechonline.com/rss.xml"],
+    "DCD": ["https://www.datacenterdynamics.com/en/rss/"],
+    "The Next Platform": ["https://www.nextplatform.com/feed/"],
 }
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "data", "trend", "feed_check.json")
 
