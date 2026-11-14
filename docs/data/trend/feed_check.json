@@ -1,247 +1,286 @@
 {
- "at": "2026-11-11T22:56:47+09:00",
+ "at": "2026-11-14T11:15:20+09:00",
  "feeds": {
-  "한국경제": [
+  "한국경제 산업": [
    {
-    "url": "https://www.hankyung.com/feed/all-news",
+    "url": "https://www.hankyung.com/feed/industry",
     "robots": true,
     "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "젠슨황 스캔들 '일파만파'…트럼프와 상무부도 의혹 소용돌이",
-     "\"도둑이 내 아들\"…수사 회피 대신 9개월 뭉갠 경찰관 '덜미'",
-     "\"'암살자(들)' 같은 논란 막자\"…국힘 '제작 가이드라인' 제안"
-    ]
-   },
-   {
-    "url": "https://www.hankyung.com/feed/economy",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "젠슨황 스캔들 후폭…칩보안법 통과확률 80%로 급등",
-     "\"이번엔 학력도 안 본대\"…SK 하이닉스 '킹산직' 채용 공고에 '관심'",
-     "\"빼빼로가 뭐길래\"…카카오톡 선물하기, 한때 35만명 대기"
-    ]
-   },
-   {
-    "url": "https://www.hankyung.com/feed/it",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "해외서 산 마운자로·위고비, 12일부터 국내 반입 가능",
-     "마운자로 열두 병 챙긴다…해외서 처방받은 약 반입 허용",
-     "ETRI 첫 특임고문에 최성현·정송 교수"
-    ]
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
    }
   ],
-  "매일경제": [
+  "매일경제 기업": [
    {
-    "url": "https://www.mk.co.kr/rss/30000001/",
+    "url": "https://www.mk.co.kr/rss/50100032/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 50,
     "sample": [
-     "“도저히 못 살겠다” 최악의 주거난에 ‘폭발’…스페인 노동자들 총파업",
-     "李, 김민석·한병도와 3시간 만찬…“당정 한마음으로 움직여야”",
-     "전주 다가구주택 화장실 비데서 불…소방, 장비 14대 투입"
-    ]
+     "냉장고 문 말고 따로 여는 작은 문…근데 그거 뭐지? [그거사전2]",
+     "“남의 집 불륜에 불똥 맞을라”…‘깐부 동맹’ 삼전닉스에 쏠린 눈",
+     "“이륙하지 말고 대기”…美 전역 항공기 운항 중단 지시"
+    ],
+    "first_date": "Sat, 14 Nov 2026 09:04:26 +09:00",
+    "last_date": "Fri, 13 Nov 2026 10:11:12 +09:00"
    },
    {
-    "url": "https://www.mk.co.kr/rss/50300009/",
+    "url": "https://www.mk.co.kr/rss/50200011/",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 50,
     "sample": [
-     "국토부 \"市, 법 근거없는 절차로 공급 발목\"… 서울시 \"지구 지정부터 늦어\"",
-     "공급 급한 與 \"서울시 주택사업 승인권 회수할 수도\"",
-     "‘속도’에 성패 갈린다는 재개발 … 공공 vs 민간, 어느 쪽이 정말 빠를까 [부동산 심머니]"
-    ]
-   },
-   {
-    "url": "https://www.mk.co.kr/rss/30100041/",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "“통장 만들면 1000원 기부”…DB저축은행, 연말 나눔 캠페인",
-     "유엔참전용사 추모의날 맞아 이중근 회장 국민대표로 헌화",
-     "이중근 부영 회장, ‘유엔참전용사 추모’ 국민대표로 헌화"
-    ]
+     "“10년 모은 4억이 1억으로…” 반도체 레버리지 투자에 무너진 30대 직장인의 눈물",
+     "AI 기판 수요에…이수페타시스, 한주 새 42% ‘껑충’ [이주의 Bull기둥]",
+     "‘젠슨황 스캔들’에 서학개미들이 1000억원 ‘폭풍 매수’한 종목은"
+    ],
+    "first_date": "Sat, 14 Nov 2026 11:05:44 +09:00",
+    "last_date": "Thu, 12 Nov 2026 17:30:07 +09:00"
    }
   ],
-  "이데일리": [
+  "전자신문 분야": [
    {
-    "url": "http://rss.edaily.co.kr/edaily_news.xml",
-    "robots": null,
-    "robots_note": "robots.txt 못 읽음: HTTPError",
+    "url": "https://rss.etnews.com/Section902.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 30,
+    "sample": [
+     "[세종만사]“핵심 사업 놓칠라”…미래대응기금 사수에 안간힘",
+     "더보이즈 에릭 만나자! 첫 국내 단독 팬미팅 개최",
+     "'3D 디지털 휴먼' 지상파 데뷔...오모션·KBS 합작"
+    ],
+    "first_date": "Sat, 14 Nov 2026 11:00:00 +0900",
+    "last_date": "Fri, 13 Nov 2026 18:17:20 +0900"
+   },
+   {
+    "url": "https://rss.etnews.com/Section903.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 20,
+    "sample": [
+     "WSJ “젠슨 황에 앨리스 황 소개한 건 남편\"…AI 칩 사업으로 연결",
+     "타마시골프, 블랙프라이데이 최대 73% 파격 할인… 인기 고반발 아이언 '선착순 10세트' 한정 특가",
+     "삼성전기 유리기판 공급망 윤곽…레이저 LPKF, 식각 태성, 검사는 테크밸리·이노메트리"
+    ],
+    "first_date": "Thu, 12 Nov 2026 16:52:38 +0900",
+    "last_date": "Wed, 11 Nov 2026 07:05:16 +0900"
+   },
+   {
+    "url": "https://rss.etnews.com/Section904.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 28,
+    "sample": [
+     "친청, '최민희 감찰'에 최고위 대신 기자회견…빛바랜 李 '경제' 행보",
+     "50대 청소부 외모가 배우급…“기억을 잃은 재벌 회장님 아니냐” SNS 난리",
+     "우울증·골다골증 경고에도…日 2030 여성, 저체중에 목숨 거는 까닭"
+    ],
+    "first_date": "Sat, 14 Nov 2026 07:10:00 +0900",
+    "last_date": "Fri, 13 Nov 2026 11:05:00 +0900"
+   }
+  ],
+  "로봇신문": [
+   {
+    "url": "https://www.irobotnews.com/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 50,
     "sample": [
-     "에퀴닉스, 싱가포르 데이터센터 개소…3900억원 투입",
-     "'명품 팔아도 남는 게 없다'…한국투자증권, 신세계 목표가 5개월새 반토막",
-     "[개장전특징주]엔비디아, 코어위브, 월마트, TSMC"
-    ]
+     "국내 최대 로봇경진대회 '2026 국제로봇콘테스트(IRC)' 13일 대구 엑스코에서 개막",
+     "티로보틱스, KAIST 제조피지컬AI연구소와 MOU 체결… 피지컬 AI 사업화 협력 강화",
+     "브릴스, ‘2026 대한민국 디지털 이노베이션 어워드’ 부총리 표창 수상"
+    ],
+    "first_date": "2026-11-13 23:48:00",
+    "last_date": "2026-11-10 23:23:10"
+   }
+  ],
+  "디일렉": [
+   {
+    "url": "https://www.thelec.kr/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "세미파이브, 3분기 신규 수주 1784억 '역대 최대'…매출도 첫 500억 돌파",
+     "에코앤드림, 새만금 공장 가동 확대에 매출 회복세",
+     "LG엔솔 버테크, ESS 운영 효율 높이는 소프트웨어 출시"
+    ],
+    "first_date": "2026-11-14 10:21:53",
+    "last_date": "2026-11-12 18:16:41"
+   }
+  ],
+  "에너지신문": [
+   {
+    "url": "https://www.energy-news.co.kr/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "[부고] 디앨(주) 임근영 대표이사 별세",
+     "12차 석유 최고가격 동결…중동 불안·운송비 급등 불구",
+     "재생전력 남으면 수소 생산 늘린다...제주, 수전해 통합 실증"
+    ],
+    "first_date": "2026-11-14 09:50:29",
+    "last_date": "2026-11-12 15:50:44"
+   }
+  ],
+  "에너지경제": [
+   {
+    "url": "https://www.ekn.kr/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ],
+  "테크엠": [
+   {
+    "url": "https://www.techm.kr/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 50,
+    "sample": [
+     "[주말에 뭐먹지] \"직접 만든 것보단 덜하지만\"...감바스 짜파게티에 숨겨진 1인치 꿀팁",
+     "[주말에 뭐하지] POE·카스·대항해시대 즐겨볼까...카제나·제우스 신규 콘텐츠도 확장",
+     "'라그나로크 IP'로 실적 키운 그라비티...3Q 영업익 35% '껑충'"
+    ],
+    "first_date": "2026-11-14 08:56:51",
+    "last_date": "2026-11-12 17:14:22"
+   }
+  ],
+  "아이뉴스24": [
+   {
+    "url": "https://www.inews24.com/rss/news_it.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "status": 200,
+    "ok": true,
+    "items": 100,
+    "sample": [
+     "[겜별사] 탄탄한 전투와 사냥 손맛…수렵 재미 구현한 &apos;몬스터헌터 아웃랜더스&apos;",
+     "美, 중국의 해외 AI 반도체 사용 막는다…동남아 AIDC &apos;대출 리스크&apos; 부상",
+     "젠슨 황, 불명예 퇴진에 실리콘밸리 술렁…일각선 &apos;황어게인&apos;"
+    ],
+    "first_date": "Fri, 13 Nov 2026 23:10:32 GMT",
+    "last_date": "Thu, 12 Nov 2026 01:00:00 GMT"
    },
    {
-    "url": "https://rss.edaily.co.kr/edaily_news.xml",
+    "url": "https://www.inews24.com/rss/allArticle.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ],
+  "디지털타임스": [
+   {
+    "url": "https://www.dt.co.kr/rss/all.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   },
+   {
+    "url": "https://www.dt.co.kr/rss/it.xml",
+    "robots": true,
+    "robots_note": "robots.txt 읽음",
+    "ok": false,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ],
+  "머니투데이": [
+   {
+    "url": "https://rss.mt.co.kr/mt_news.xml",
     "robots": null,
     "robots_note": "robots.txt 못 읽음: URLError",
     "ok": false,
-    "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
-   },
-   {
-    "url": "http://rss.edaily.co.kr/economy_news.xml",
-    "robots": null,
-    "robots_note": "robots.txt 못 읽음: HTTPError",
-    "status": 200,
-    "ok": true,
-    "items": 50,
-    "sample": [
-     "[미리보는 이데일리 신문]알바인 줄 알았더니, 2030 사장님",
-     "한진칼, 지분경쟁 랠리에 급제동…애프터마켓서  17% 급락",
-     "“물량은 6%만, 금리는 3.5%로” 공유…후임에 짬짜미 방법 인수인계도"
-    ]
+    "error": "URLError: <urlopen error timed out>"
    }
   ],
-  "지디넷코리아": [
+  "조선비즈": [
    {
-    "url": "https://feeds.feedburner.com/zdkorea",
+    "url": "https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
-    "items": 30,
+    "items": 100,
     "sample": [
-     "AI스페라, 크리미털IP 위협정보 스플렁크서 활용 앱 출시",
-     "데이터산업진흥원, 'AI·데이터 문제해결은행' 서비스 개편한다",
-     "과기정통부, GS건설 침해사고 직권 조사 결정"
-    ]
-   },
-   {
-    "url": "https://zdnet.co.kr/rss/newsall.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "ok": false,
-    "error": "HTTPError: HTTP Error 404: Not Found"
+     "エヌビディアCEO復帰要請書偽造判明 支持は一部社内に限定",
+     "엔비디아 ‘젠슨 황 복귀’ 서한은 가짜…오픈AI 직원 서한 짜깁기",
+     "‘충격적인 빅찬스 미스’ 너무 아쉬웠던 손흥민 “저라고 무조건 골 넣을 수 있는 건 아니다…동료들에게 미안”"
+    ],
+    "first_date": "Sat, 14 Nov 2026 01:55:12 +0000",
+    "last_date": "Fri, 13 Nov 2026 21:00:00 +0000"
    }
   ],
-  "블로터": [
+  "서울경제": [
    {
-    "url": "https://www.bloter.net/rss/allArticle.xml",
+    "url": "https://www.sedaily.com/rss/newsall",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
     "items": 50,
     "sample": [
-     "국고채 담합에 증권사 과징금 1조3760억…KB·NH·미래에셋 '집중'",
-     "메리츠금융, 3Q 실적 방어 속 주주환원율 50% 원칙 재확인",
-     "메리츠금융, 3Q 누적 순익 647억↓…변동성·투자손실 영향"
-    ]
+     "“쿰쿰한 냄새 잡으려다 폐 망가진다”…담배 4개비 맞먹는 ‘이것’ [헬시타임]",
+     "음원앱 경쟁 치열한데…‘멜론’ 해외 팬덤서 돌파구 찾았다",
+     "李 대통령 “유통주식 10% 미만 상장사 퇴출 검토”"
+    ],
+    "first_date": "Sat, 14 Nov 2026 11:01:40 +0900",
+    "last_date": "Sat, 14 Nov 2026 07:00:05 +0900"
    },
    {
-    "url": "https://www.bloter.net/feed",
+    "url": "https://www.sedaily.com/RSS/S11.xml",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "ok": false,
     "error": "HTTPError: HTTP Error 404: Not Found"
    }
   ],
-  "전자신문": [
+  "헬로티": [
    {
-    "url": "http://rss.etnews.com/Section901.xml",
+    "url": "https://www.hellot.net/rss/allArticle.xml",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
-    "ok": true,
-    "items": 30,
-    "sample": [
-     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
-     "증시 바닥인 줄…“남은 건 반등” 지하 못 본 개미들 '빚투' 자극한 결과",
-     "261만 유튜브 수익 얼마길래?…빠니보틀 “방송보다 훨씬 많이 벌어”"
-    ]
-   },
-   {
-    "url": "https://rss.etnews.com/Section901.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 30,
-    "sample": [
-     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
-     "증시 바닥인 줄…“남은 건 반등” 지하 못 본 개미들 '빚투' 자극한 결과",
-     "261만 유튜브 수익 얼마길래?…빠니보틀 “방송보다 훨씬 많이 벌어”"
-    ]
-   },
-   {
-    "url": "http://rss.etnews.com/Section902.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 30,
-    "sample": [
-     "호박통에 얼굴 끼어 물도 못마신 사슴… 10일 추적 끝에 '극적 구조'",
-     "[ET포토] 사카구치 켄타로, '분위기 있는 하트'",
-     "[ET포토] 사카구치 켄타로, '열도에서 온 미남'"
-    ]
+    "ok": false,
+    "error": "ParseError: not well-formed (invalid token): line 54, column 62"
    }
   ],
-  "뉴시스": [
+  "인더스트리뉴스": [
    {
-    "url": "https://newsis.com/RSS/sokbo.xml",
+    "url": "https://www.industrynews.co.kr/rss/allArticle.xml",
     "robots": true,
     "robots_note": "robots.txt 읽음",
     "status": 200,
     "ok": true,
-    "items": 100,
+    "items": 50,
     "sample": [
-     "놀이방 설치에 40억…자녀 위해 집 꾸미기 거액쓰는 美 부모들",
-     "미·러·우크라 3자 종전협상 종료…대규모 포로 교환 합의(종합)",
-     "전주 다가구주택 화장실서 불…비데 발화 추정"
-    ]
-   },
-   {
-    "url": "https://www.newsis.com/RSS/economy.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 100,
-    "sample": [
-     "韓, 2035년 세계 전력 소비 비중 35% 확대 지지…COP31서 동참 의사",
-     "[올댓차이나] 대만 증시, TSMC 급등에 사흘 연속 상승 마감…3.62%↑",
-     "독일 10월 소비자물가 0.2% '하락'…연 인플레 2.8%"
-    ]
-   },
-   {
-    "url": "https://newsis.com/RSS/economy.xml",
-    "robots": true,
-    "robots_note": "robots.txt 읽음",
-    "status": 200,
-    "ok": true,
-    "items": 100,
-    "sample": [
-     "韓, 2035년 세계 전력 소비 비중 35% 확대 지지…COP31서 동참 의사",
-     "[올댓차이나] 대만 증시, TSMC 급등에 사흘 연속 상승 마감…3.62%↑",
-     "독일 10월 소비자물가 0.2% '하락'…연 인플레 2.8%"
-    ]
+     "김해시, 2조 5838억 재정 승부수…민생·일자리·공직혁신 ‘3각 드라이브’",
+     "기장군, 재정 효율·복지 안전망 강화…‘군민 삶의 질’ 제고",
+     "창원시, 장애인 체육·기업 성장·공공건축 혁신 ‘3각 행정’ 속도"
+    ],
+    "first_date": "2026-11-14 00:19:28",
+    "last_date": "2026-11-13 11:34:38"
    }
   ]
  }
