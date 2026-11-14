@@ -224,3 +224,7 @@ th { position: sticky; top: 0; background: var(--card); }
 .tabs button[aria-selected="true"], .kw-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--series-1); font-weight: 700; }
 .kw-tabs { display: flex; flex-wrap: wrap; gap: 2px 4px; margin: 4px 0 8px; border-bottom: 1px solid var(--line); }
 .kw-tabs button { font-size: .82rem; padding: 4px 8px; }
+
+.words details.word { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.words details.word > summary { cursor: pointer; font-size: .86rem; }
+.words details.word .chip.new { margin-left: 6px; font-size: .72rem; padding: 0 6px; }

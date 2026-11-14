@@ -173,6 +173,6 @@ export async function renderCheck(root, ctx) {
       tr.push([k.name, both, hOnly.join(", ") || "-", cOnly.join(", ") || "-"]);
     } catch { tr.push([k.name, "-", "자료 없음", ""]); }
   }
-  root.append(box("③", "트렌드: HDC가 고른 새 낱말과 센 답(과거 0번)이 고른 새 낱말",
+  root.append(box("③", "트렌드: HDC가 고른 새 낱말과 센 답(과거 4주 0번)이 고른 새 낱말",
     table(["키워드", "둘 다", "HDC만", "센 답만"], tr, (x) => x[2] !== "-" || x[3] !== "-")));
 }
