@@ -1,0 +1,34 @@
+# 영어 제목에서 뺄 낱말(소문자). 한 줄에 여럿, 공백으로 구분. '#' 뒤는 설명.
+# 형태소 분석기가 영어 품사를 가리지 못해, 명사를 고르는 대신 이 목록을 뺀다.
+# 기능어
+a an the and or but nor for of in on at to from by with as is are was were be been being am it its this that these those
+into onto over under about above below after before during until up down out off than then now just also via vs versus amid
+among across around through throughout toward towards within without against between beyond upon per so too very only even
+how why what when where who whom whose which whether while if because since though although unless
+will can could would should may might must shall do does did done doing not no nor yes all any some each every both either
+neither few many much several such own same other another more most less least further
+our your their his her we you they he she i my me us them him here there s t
+# 제목에 흔한 동사(여러 꼴)
+say says said get gets got getting has have had having make makes made making take takes took taken taking
+see sees saw seen seeing show shows showed shown showing set sets setting use uses used using go goes went going
+come comes came coming give gives gave given giving keep keeps kept find finds found look looks looked looking
+plan plans planned planning launch launches launched launching announce announces announced announcing
+unveil unveils unveiled unveiling win wins won winning add adds added adding open opens opened opening
+reach reaches reached reaching secure secures secured securing raise raises raised raising complete completes completed
+deploy deploys deployed deploying expand expands expanded expanding target targets targeted sign signs signed signing
+partner partners partnered acquire acquires acquired select selects selected deliver delivers delivered
+begin begins began beginning start starts started starting hit hits face faces faced cut cuts boost boosts boosted
+eye eyes seek seeks aim aims want wants join joins joined lead leads led grow grows grew growing build builds built building
+bring brings brought offer offers offered enter enters entered enlist enlists enlisted include includes included including
+support supports supported supporting help helps helped helping need needs needed move moves moved moving
+become becomes became turn turns turned explain explains explained reveal reveals revealed report reports reported
+introduce introduces introduced release releases released receive receives received bag bags bagged tap taps tapped
+ready readies readied prepare prepares prepared
+# 흔한 형용사·부사·숫자말
+new next key major global first second third last latest top big biggest large largest small high low early late
+best better good great real full free key main better ahead again already still yet ever never always
+one two three four five six seven eight nine ten hundred thousand million billion trillion
+year years month months week weeks day days today tomorrow yesterday time times
+news update updates inside why
+# 단위·기호 찌꺼기
+us inc ltd co corp

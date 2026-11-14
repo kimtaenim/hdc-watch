@@ -68,7 +68,7 @@ def known_keys() -> set:
     return keys
 
 
-def collect(feeds, now: dt.datetime | None = None, max_age_days: int = 3):
+def collect(feeds, now: dt.datetime | None = None, max_age_days: int | None = None):
     """모든 피드를 받아 새 링크만 날짜별 파일에 더한다. 발행일이 수집 시각보다 max_age_days일 넘게 지난 글은 뺀다.
     (매체별 받은 수, 새 제목 수, 실패 목록, 오래돼서 뺀 수)를 돌려준다."""
     now = now or dt.datetime.now(KST)
@@ -82,7 +82,7 @@ def collect(feeds, now: dt.datetime | None = None, max_age_days: int = 3):
             fails.append(f"{f['source']} {f['url']}: {type(e).__name__}: {e}"[:200])
             continue
         got[f["source"]] = got.get(f["source"], 0) + len(items)
-        oldest = (now - dt.timedelta(days=max_age_days)).strftime("%Y-%m-%d")
+        oldest = (now - dt.timedelta(days=max_age_days)).strftime("%Y-%m-%d") if max_age_days else ""
         for x in items:
             if x["date"] < oldest:
                 skipped_old += 1  # 몇 달 치를 한꺼번에 주는 피드가 있다. 지난 것을 채우지 않고 쌓아 가기로 했으므로 뺀다

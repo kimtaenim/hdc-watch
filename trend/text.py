@@ -17,17 +17,25 @@ def kiwi():
     return _kiwi
 
 
-# 영어 제목에서 뺄 흔한 낱말. 형태소 분석기는 영어 품사를 가리지 않아(모두 '외국어'), 명사를 고르는 대신 이 목록을 뺀다.
-# 그래서 영어 쪽 '같이 나온 낱말'에는 명사 아닌 낱말도 섞일 수 있다.
-EN_STOP = set("""
-a an the and or but nor for of in on at to from by with as is are was were be been being it its this that these those
-into over under about after before up down out off than then now just also via vs amid among per new more most less
-how why what when where who whom which will can could would should may might must not no yes all any some each every
-our your their his her we you they he she i my me us them here there s says said say get gets got has have had having
-do does did done make makes made take takes took see sees seen show shows set sets use uses using used plan plans
-launch launches launched announce announces announced unveil unveils unveiled win wins won add adds added open opens
-first top big latest inside week weeks year years day days today news report reports update updates one two three
-""".split())
+import os
+
+_STOP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stopwords")
+
+
+def _load_stopwords(name: str) -> set:
+    """trend/stopwords/<name>.txt: 한 줄에 여럿, 공백으로 구분, '#' 뒤는 설명."""
+    words = set()
+    with open(os.path.join(_STOP_DIR, name), encoding="utf-8") as f:
+        for line in f:
+            words.update(line.split("#", 1)[0].split())
+    return words
+
+
+# 영어: 형태소 분석기가 품사를 가리지 못해(모두 '외국어'), 명사를 고르는 대신 이 목록을 뺀다.
+# 그래서 영어 쪽 '같이 나온 낱말'에는 목록에 없는 명사 아닌 낱말이 섞일 수 있다.
+EN_STOP = {w.lower() for w in _load_stopwords("en.txt")}
+# 한국어: 명사이지만 내용이 없는 기사 형식어, 때를 나타내는 말, 연재 꼬리표
+KO_STOP = _load_stopwords("ko.txt")
 
 
 def is_ascii(text: str) -> bool:
@@ -76,7 +84,7 @@ def nouns(title: str, skip_spans=()) -> list[str]:
             form = form.lower()  # 영어는 소문자로 맞춘다(AI와 ai를 한 낱말로)
             if form in EN_STOP or len(form) < 2 or not any(c.isalpha() for c in form):
                 continue
-        elif len(form) < 2:
+        elif len(form) < 2 or form in KO_STOP:
             continue
         if form not in out:
             out.append(form)
