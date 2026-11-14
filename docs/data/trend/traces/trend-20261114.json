@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-14T11:16:01+09:00",
- "finished_at": "2026-11-14T11:16:04+09:00",
+ "started_at": "2026-11-14T11:18:14+09:00",
+ "finished_at": "2026-11-14T11:18:30+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-14",
@@ -25,8 +25,8 @@
   "noise_k": 3
  },
  "code": {
-  "commit": "60c43435da0f1ada37c0b18477093a2acb897772",
-  "dirty": true
+  "commit": "29cbcaf64bf19627062f6877f446ed946fef7f69",
+  "dirty": false
  },
  "sections": [
   {
@@ -101,17 +101,74 @@
       "매체",
       "받은 글"
      ],
-     "rows": []
+     "rows": [
+      [
+       "한국경제",
+       100
+      ],
+      [
+       "매일경제",
+       50
+      ],
+      [
+       "이데일리",
+       50
+      ],
+      [
+       "지디넷코리아",
+       30
+      ],
+      [
+       "블로터",
+       50
+      ],
+      [
+       "전자신문",
+       28
+      ],
+      [
+       "뉴시스",
+       200
+      ],
+      [
+       "로봇신문",
+       50
+      ],
+      [
+       "디일렉",
+       50
+      ],
+      [
+       "에너지신문",
+       50
+      ],
+      [
+       "아이뉴스24",
+       100
+      ],
+      [
+       "테크엠",
+       50
+      ],
+      [
+       "조선비즈",
+       100
+      ],
+      [
+       "서울경제",
+       50
+      ]
+     ]
     },
     {
      "type": "value",
      "name": "새로 쌓은 제목",
-     "value": 0
+     "value": 661
     },
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 1888
+     "value": 2549
     },
     {
      "type": "value",
@@ -135,33 +192,33 @@
      "rows": [
       [
        "2026-11-14",
-       "00:00",
-       "뉴시스",
-       "\"한층 더 여리여리해졌네\"…조이, 날씬해진 근황 속 꾸준히 한다는 혈당 관리"
+       "07:04",
+       "서울경제",
+       "“철도 다녀야 경제 살고 집값 오른다”…지자체 유치 경쟁 치열 [집슐랭]"
       ],
       [
        "2026-11-14",
-       "00:00",
-       "뉴시스",
-       "\"아파트 있어야 결혼도 합니다\"…부동산 불평등이 쪼개놓은 청춘"
+       "07:03",
+       "서울경제",
+       "젠슨 황 후폭풍에 AMD도 9% 급락...12월 ‘빅스텝’ 가능성은 후퇴 [데일리국제금융]"
       ],
       [
        "2026-11-14",
-       "00:00",
-       "뉴시스",
-       "\"비위 약해 인공호흡 못 했다\"…아내 살해한 변호사 '징역 25년' 확정"
+       "07:01",
+       "서울경제",
+       "“초중고도 안 다녔다” 20세 청년의 반전…쥐며느리 신종 후보 5종 찾아냈다 [덕후 계산기]"
       ],
       [
        "2026-11-14",
-       "00:00",
-       "뉴시스",
-       "조개구이 리필에 소주·맥주까지…6만7000원 먹고 사라진 남성"
+       "07:00",
+       "서울경제",
+       "루푸스 환자 5년 새 19% 증가…“증상 좋아져도 치료 이어가야”"
       ],
       [
        "2026-11-14",
-       "00:00",
-       "뉴시스",
-       "단기 수익률보다 중요한 '자산의 뼈대'…40대 중후반에 끝내야 할 은퇴 세팅"
+       "07:00",
+       "서울경제",
+       "대장암 수술 후 근감소 위험, 수술 전 혈액검사로 예측[헬시타임]"
       ]
      ]
     }
@@ -169,7 +226,7 @@
    "check": null,
    "source": {
     "file": "trend/collect.py",
-    "line": 69,
+    "line": 71,
     "function": "collect"
    }
   },
@@ -189,7 +246,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 6
+     "value": 14
     },
     {
      "type": "value",
@@ -205,6 +262,18 @@
       "명사"
      ],
      "rows": [
+      [
+       "로봇신문",
+       "유럽 반도체 3사, 피지컬 AI 시장 선점 경쟁 나서",
+       [
+        "유럽",
+        "반도체",
+        "3사",
+        "시장",
+        "선점",
+        "경쟁"
+       ]
+      ],
       [
        "이데일리",
        "“시청 부지에 기업 유치…'피지컬AI 선도도시' 만들 것\"",
@@ -246,6 +315,54 @@
        ]
       ],
       [
+       "로봇신문",
+       "삼현, 차세대 피지컬 AI 핵심 액추에이터 국책과제 주관기관 선정",
+       [
+        "차세대",
+        "핵심",
+        "액추에이터",
+        "국책과제",
+        "주관기관",
+        "선정"
+       ]
+      ],
+      [
+       "로봇신문",
+       "美 패스 로보틱스, 제조업용 피지컬AI 기술로 4000억원 유치",
+       [
+        "패스",
+        "로보틱스",
+        "제조업",
+        "기술",
+        "유치"
+       ]
+      ],
+      [
+       "로봇신문",
+       "NXP 반도체, 통합 로봇 플랫폼 공개…피지컬 AI 개발 기간 단축",
+       [
+        "NXP",
+        "반도체",
+        "통합",
+        "로봇",
+        "플랫폼",
+        "공개",
+        "개발",
+        "기간",
+        "단축"
+       ]
+      ],
+      [
+       "로봇신문",
+       "피지컬 AI 시대 이끌 로봇 인재, 대구에 모인다",
+       [
+        "시대",
+        "로봇",
+        "인재",
+        "대구"
+       ]
+      ],
+      [
        "블로터",
        "[피지컬 AI 생태계] 마술·K팝 로봇에 소울을…갤럭시코퍼레이션의 꿈",
        [
@@ -272,6 +389,37 @@
        ]
       ],
       [
+       "로봇신문",
+       "LG CNS 글로벌 로봇 석학들과 피지컬 AI 산업 적용 해법 모색",
+       [
+        "LG",
+        "CNS",
+        "글로벌",
+        "로봇",
+        "석학",
+        "산업",
+        "적용",
+        "해법",
+        "모색"
+       ]
+      ],
+      [
+       "아이뉴스24",
+       "LG CNS, 로봇 석학들과 피지컬 AI 토론⋯&apos;학습부터 운영&apos; 해법 모색",
+       [
+        "LG",
+        "CNS",
+        "로봇",
+        "석학",
+        "토론",
+        "apos",
+        "학습",
+        "운영",
+        "해법",
+        "모색"
+       ]
+      ],
+      [
        "전자신문",
        "日정부, 엔비디아 사태 주시…'피지컬 AI' 영향 우려",
        [
@@ -281,6 +429,19 @@
         "주시",
         "영향",
         "우려"
+       ]
+      ],
+      [
+       "로봇신문",
+       "티로보틱스, KAIST 제조피지컬AI연구소와 MOU 체결… 피지컬 AI 사업화 협력 강화",
+       [
+        "티로보틱스",
+        "KAIST",
+        "MOU",
+        "체결",
+        "사업",
+        "협력",
+        "강화"
        ]
       ]
      ]
@@ -319,26 +480,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:선도도시",
+     "name": "단어:로봇",
      "dim": 10000,
-     "ones": 5034,
-     "head": "1100001001001101111100111100110101100010100010110000110000000101",
-     "bits_b64": "wk3zzWKLDAV/mWVJth1KrcRM53FE8MnR1NQQIyQgi7gEQBlWVuIzS3XywchFGjknzCG4WgQbCjxVWvDhvfkyXfcg8lYkOU2j9j3NezgSehCqc8XLGDsQbyob5go7IbNFo0ATkRsXOtn1QHYTvVZXeSE5O57RFAH2UNef7YQz+pJvIyeQ4CxsEijgPs1/wG4kIErfrNB8ZBHXadmtEFkjsMgzVJ0gIZnFWaycX1gyzms9s48KiErnj7nlntzBZmeRs2U72nbN1cmcak0odwUqHYFP7Xmcr1bZ5iid+dRLuczT8eog5Ks2Jno0ac2/fy89UQfzDkvDz+oxB5RXGB9qJWhdgIJCwogybZ8La91s02Sse2optMxWbDW33rDkFlwaJOsdOqOt0AuB1jNqHGr70x/L+XS4+nYOzYkePK4OngNFAA9Ua10yZSlaH7jJstSFyqJBfEi48zkfKf6JaOzAVTNB66M2wPGK4Vk7f8XwLLH2cMBta0EkZfVVfwK3PjEWpVA8GzEugM8BG3sq+Mi8Z2N08IvDjUvB/y/q32XeVmepLSeJowJAtM0rm0G8fRyBsBN2Gtwg9WMn9RmlxfKI0xr8ezn/IKnxQtLvS520UcHqn44wLuRRrR0GBr1hg5ytywc7UGaLq1tAlLMiglAvqM+4M+1BA0HL6Db32w2ypdEOh7fi2rVbUUVPJFi57wQttLJq7xaaJfLD1GsNKpBPHjlVY6Umv7Ac5MGyTF1Lc/SpD0Au1WRVAscjTBJJlk86J+y/nMQcvEPSqdUQW0OUzujSyF/eQCX/A+VvbAdh6WhEp8ywdo0Ditx3DyAr2CULV3P8MCFKwRp9x8YyqmIYYDFCdXohHUUji3pK0oXvr/YOlv4CK3Lt24tLkasjaGrDoitp2mdQ1p8K69peBL0fczQt7/V5JL2XE4cksj4vCm5tZ6+iRZM0T90Z75xiJPr5ZlV6GnrYJRgNq/3zCtTDKt8htAHjPv1b3E23Mw0j8N+HoTX9C9dqwFFPdIWM/K9TFp1txFCfIzUya89FnWDYvVSkaFalfuY3plvmNLHw/B/bpGrTeVFE/Tz5y2crYdn3FLIivphuSMbVKXV2dzS9Uto1K4XKtthj5A9dtb1bU4lUqfVGjBKhVAnxjeem73YoBwjTJL1OtX1mHlXoTqe1JVn16Y2mm1zlA0uDR/iC8DzFge1bQhdaCBQSF4Irxsf22LR/31UG9XacF7a3yYNcdc/6wxfKzoI06jTA8FEttuZ5AAaks7C+irbz/vgGmZXWVqKVyj7A/hOqFl2tzqQ/Z7HWo5aoUf5qJLUJ1ILwA3Dta9CuRskOI98YAbM/f7ZK0Sf3ESplkShl9bJnZ+dyuUjBza+xHsbOHzD0Ublnodz9zruUHt/LudAc12mg56/aOn6b9E9SZjnQ+p7oofVbOjz4CqdVnHZmQLJBwZrdu45ous9TR1jt3xGCoCb3wYDAcQkMTft4W/LkQRK8VQ6OGABOAy4yHIzOQQJ9p+MJbPVE56wP2QPGxP+7Qj3K55F4u+7m7nXw5m6Zru5hKUTDoP1erIekwn4qI64cyPNDOpbBYN7qrN6fOVPFuEXAZotQHGQPkEupn+BGxnxby6W9UD7pobIiFkRlzaGtOfLjtMkKt7tD0HRJjkbUjzUpNxH/0fc="
+     "ones": 5055,
+     "head": "1100001011011101110100011110100001111101010101110001010010110011",
+     "bits_b64": "wt3R6H1XFLMrBMMAzQjuUphsUCnavKCGYMVn/ydD9F0gSiS+4Kq29XaodL3uFwO4iq+iUeanmD3gGc/gijT/teRuwed2BgbeBsoPH5bwk1sI+rbGJw4hzoEzI3TZeWkGEHr1rHY4Ja81DlAXYiyQO821nonE5VrZ4oVVxGA9RrgEP6Kx9n0eidjDUWyJbL+PgqGJ2F5gcP06jD7bcVH70ct+8Eht+uzFDq4ejBsAb+e33ZqWbRZsrNv/qz6GHuTm/0BMwLDBulxNMMEVfiX+z0SqR7DvSy5Z2/jNdLxrPeramer6nWmBHhDws5djDqErpNgo2F1f7L1zO1nGwLwEjfzwflCHE9XPitANXwo7z4e3cPyaDzIqTeNHz+S2tAMHYUQLVlWNi0kk9tw+m9DpWt+sptvZE95+2lqw5bGDZcmu6nBuvmX1qKr2Yi77byYW9h8bi7v7VWM2EeeO9Mo1UtfQ+NYBnH0Hdsc6H+a2RbsIWOy/OMZd8YhgdrCoO+D4bt3GoduAk5qr4lurF02VXee2RmMM0h30edQNtglLpfYEmYnSqjTOuXXkiF0fTHA7yXEOhWcOKBbDnJGGvB6kHsyHgIClEp2Smc53DH9WN4yqOEr2y+q7bP+n8XQQx2FEoI0L6riBUds+b/ZrNZvfGEglc8PFOJ0nG/MmtCl3njWC6VPEU/2Kcv1jdXj7RUjFgszjBpENY2BcMtpZa5WIPjhNHf/jgN5k4hXKrnNdOa7/Nqx0dsJenDc1y4lsEif+xoczsvINTTcX3ksVvq8MfrJ+fcQ7ITETpVjksvI/4B34SzFzcQRvN3iZNnUXxPBH5BqiHMt8dw94R9ZcXufAFiGQDotDxRUScyn7MwOMTa+81FqwnQq7G/pD2KvqM5upG/zospZFAuLQa3Pj01U/8mvtHjFrMKLCu6Y/YRvyhtqOzp2jSSgf/VK4B7dcKJw15S0SO/i5iWFszfzc0pr2Qz7B1KWlf4s5x9qjCqCk1fQgLOqVxO/tl9qjdArzssb6dpWiUw41uBtj/DLUA4KllqWw1BQaqCoQtmA+R31laxGAgJgs3rvQMbbW04d4AEIpgb1pAGZVL5ADvrjsixhdCfJTnuEkH0JXcsUpr8Ykpu1sHBhiWFrpEGht336w/lgZ5fr03vHFDE4Qj6VvoVpMLopX7b9vbNksM9xYioXt2zL6kPlAcu/gglIyNQqHsDbdm76eftDWhgRg2ZaYiGs3Y9hUn2VzDCTuCJp+swWgqZgMl7OrUallDKfMO207Y5DTWaU+VK6wd6nFfQYp4hAjpGsx3GrR31n189bv2+Ur9YAhoJUE0vAMlegV+jpKX4yKf3/Ovp/JyCjXd5B4/iQFMvDjSRaUzIJPXQuuijpq/lpYcgYtYHQBFNZOlI99e8dUGgah9uNjd2bXVOG8x7pXTVYC++jWb3zyquGDxNLI/1Lx6Ee3HFwXe8SeSa99Ew3FE8B18EAOQIXE35zAX0KwE3cbdClyU8cWbRkVJJbk1h8H2XDT6bd0m0tuIAnupBNwrHAG1rHR7BR8MVbEFwP66D6qbJmWhARSUJiRolDI8xM+JixJOAvBKhGCxkKfL5iyyE0eAtHoVWSSzNac3w73SKhV8RerR/Jm69ZjxVklYrdXj1fsds07l3ETiqTuj3nTUsg="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:physical-ai ⊕ 단어:선도도시",
+     "name": "키워드:physical-ai ⊕ 단어:로봇",
      "dim": 10000,
-     "ones": 5105,
-     "head": "0101010111101101010010011000100010111110111001100100010011000011",
-     "bits_b64": "Ve1JiL7mRMM2nHB4384JXwaCGpDv3ipBur11UErxiiNfzjiBNGRa220/z3bSkEKAGCRFA8l/bYSZ2Il4xXusxqJdZhB6+d/bOWK2uEtQu1u4RDyFQqcgQprqxmdjC+vzGFj6LzHu+m9gZI2aKRzqeKpVn56eF59LdrPa6w36yPbYfBdz42kfvdDOEw5yVnbV5srnr8suivle5t6TKK+mV/qU7+xbMy0rMLdO+8z58D3JHpKabPpVR26IjxpVqv9LpmemM9vPFt0nO9IIm1vllk2te1ZLRlGOlaec+AoUWM2DjRUvElf5sFZu6sH+i7FlnAvWKKBgkmYOQxpud6MvFmVPVJO65jrAkND7ZQw4s7vJX2Ps8xePtEiEg43yz0WEU/aH4xb+7KJAA+doDay1FPOMtkqdx8BKHuNyrYWMxnkU7nKW5q7It2WU8Zdq/vi93AHx4Qzb/B+1kjuovLkIvD0gq7cVZ/c/YdkrUeMN93xCHmt9JTKUxyM1jT08Fdsy25hG2ntR92VYGEPioT1J4lHUGmYs9E+uxwiVFrGb9tIEe/3pTdO0iEKVYEXJPzjllhj7aqcfhC/ZEJMskrplhv9k2Ti9EdVnZV84IVPhUcQ+dyjlEv+E16PruXTEq+6PlB+yrv98oeO73NUH++CjT2v5+X0wHj3ILGvg6PbRXIk3/L85HV+l2bbsDRyevdd+36XqZfmi2jfMQ7op0WVA8pcuiYQCGpVqBhqOq8f3/RT+ADBwwhH9D6Zs9TAU6WvrE1AxmF31DhZSq1exBCXeAYSLtSqZtr9iiGB3eStL4CM2sJCIjv2MtvrWv53HaKkX/HKx1mV/aIM+4We6edVjqxWtg6JkCBvJUNxxxYIRr0l982NQvOZRf5XPSdypiH60dKXstdb4FRArMt9Bjqunp2nVZA87Lqw8WwT8BdVqqb7omvZMAQA4AqJwlW5+EezOaAniuFzZRVJp8IMnpH8KlbXtxA043rSvhHShplCL+xQB23e2qAY7p3NsJfhNEA8uUdJms2o7rGOm4o+ga2PZ4+UWjhlEETFAjHbd4J+S025iTj6qgvx6v2z1c2mXUuZKsvjr3xKb1sbbSP7Y+Tp2Vr/YfAqdv0L8UvvCk9qBE6VC082ET+qgR+/UQVuK6WbQtyHHbs75aOlKHVmzGxPigBZp6LvUe3FHfCNgndNzBGGEp2esR5aXjNrBY+AHkDKcxn51TmwqoF23PA6iB4gulxalaiwQs/pVyRWXI4xBHrLANdHGFeNKM7FLmEUCQm11x70C/8Lrq25PQO4Yu2lC88he0QG9SSQ7+fNhMJY9hG4MR/51u/Hkdr0HQKfPljpN0fWfX2wo5YyHwMqbtTduQPx7Op418JpDL+KHw39uciauu64IgJo2+pKm+WmSIOgHBE9yVFTDZvEHM54JqMoynUvcMX8Q5trCFzrOMITcId00VstX5Owg2GprKAoo5fCmRa78eyxpdRNoijIktBZ2HFs9ED4y4o56z7oqjWhmFGdXXFazZgnzyk6TOoxVwaSa2enfHLPGfuBJypFDNMhcUgLHYTcHeV7uleIjnr+UOzhSz2AFb6BlcsY/mt6h6uNwQTbrYrAhtng2IfTN3P4ghRiWc7DvaeocsNljpKFMkY1QAgv1/erVUlsQ9ydasViTP8U="
+     "ones": 5052,
+     "head": "0101010101111101011010111010110110100001001110100101110001110101",
+     "bits_b64": "VX1rraE6XHViAdYxpNutoFqirchxkkMWDqwCjEmS9cZ7xAVpgizfZW5legN5nXgfXqpfCCvD/4Usm7Z58rZhLrETVaEoxpSmyZV03OWyUhAazU+IfZIR4zHCAxmBUzGwq2IcElzB5RmgKque9mYtOkbZOomL5sRkxOEQwun0dNyzYJJS9ThtJiDtfK+E+qd+RCGx20UynhWzAznlSad+NvnZSzkW6FgrZ7XMKI/LUbFDcIcGiabeZAySuvgS0nw86kLRKR3DeUj2YV41knsxRIhI0Z84oikOqHfMdWI03OuK5RX1a5VOiDyqMJsi+j9zadQN/rb8sTFMf9f/rwBBvvHiqkF/N2c9d5/9Udtvr1jSVPVfSOnzlZ50ktmgbRqZFlmRj+Det+DlIwg8ihannTPr6eX8Lmg6CTDcdJoBPbP/BA2sM5YPeuY4jAFYIwou4LyrFv+YWkWcqiKvIJ/9u9mxuMIiO3uy9kcqMcBLnna8NkevdrXtU14AhI8jEArcEBW8YJH/5DDy4WNjTrhg2NUWrI7jqxmbQfNyf90OBUOpz1OyROU6hfpac1lqDlRf73qD9RwxWVo9eRsP61ZJSykfIoHnI+EEvkOgZrEDN4l+0Owj9/FuFkFKTr217xNm/5WCFCF2W2PFJ5BOTCtT/+xkuVO0JeEk364xh9IUZ227klsflBd0+g7AXDzcF5uW6dtjjH41nKVTpQt9kGCH0pY2997HJfsSAM72Senht06oOdwqYbf2kVZ6cqsxbQMv8ju9tmvk/2KX3Mm04clGsd4nALF816uOLt38p94V6VaKXG1LiXTgC144hsj7dHxbTxvv+o9J3pY7YXfUjVC73QV/+FMG0Ev4qI/AJARyTRDPscfiCp4Hv+THANxg04/ezXJt3SftwW3xsnb8WUOHJjYVlcspOrNp8yXn1vC3JQoLM8RNDbsTsC3RfUVAHYoC63GKmd646SsIloIIfDE//FQNpKl+n8LNn+O1n/0M3j+mVqjeZz688PiAJXcyXmaHMdqpJDSRN033dXIx9YGkyBQCMlv7x/1nnE0Fk1MHRGA5asxVJRbuc+baa4nEM32UJ/egYeygsZAN3zNCBRaWDZe+yW5zFtjIxDG2iaH+5sF6ZiCgm6LoA45IE8Kc+EjhVdPglIJy0do8jKk09O4bi8XL7IkdjPSOTLS7UK4cL2+7tnO3d24tBpzhQWir5sO3hXSU7+n60y9L8i6NRmBFgQELNl6pcVyPK7spYNjMAcy1omTJ9/qRtaB0XdA/uGhwyLqpYVKbItQgK7Wcl91eMBK5rv3Ex4OkLpCHP/Hmcp7AjLvfL8jmwIoKuy66tgCNf62m8NmEvIw1QuiELPQZy0RZvicQIt7CbdndGPxjLaALBxOx/jH8V5T0uo9PvICJJDdIVvjyd64AneFdzoU+6iEmwDCTFdBW/WkMNczJZQGtBEOzv+jafL93wYOiN32jJ2eFxpcfbmRIFLxYvlpIFyxoZzlyrcWi46FCDh2Lro0UYopvVr1BlfpGWLhxgiaSznc/JHfndJqsVSnmCo9lGsEzoSk1PySW5tSu9Bwf8r2tiZKm+3U7YYR45Nn+o/CSlR/68CpgfPziK14KyFVqnY4qIxVmOFwflq6tWAqKR/MNOudaW1OnS2zX8radCTC/vPo="
     },
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 42
+     "value": 98
     },
     {
      "type": "value",
@@ -397,9 +558,36 @@
      ],
      "rows": [
       [
+       "로봇",
+       5,
+       0.4126,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "반도체",
+       2,
+       0.1861,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "유치",
+       2,
+       0.1656,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "선도도시",
        2,
-       0.2877,
+       0.1835,
        0,
        0.0,
        "새 조합",
@@ -408,7 +596,7 @@
       [
        "경남",
        2,
-       0.2755,
+       0.1605,
        0,
        0.0,
        "새 조합",
@@ -417,7 +605,7 @@
       [
        "디지털",
        2,
-       0.2972,
+       0.174,
        0,
        0.0,
        "새 조합",
@@ -426,16 +614,133 @@
       [
        "혁신거점",
        2,
-       0.2834,
+       0.1616,
        0,
        0.0,
        "새 조합",
        "새 조합"
       ],
       [
+       "제조업",
+       2,
+       0.1475,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "글로벌",
+       2,
+       0.1691,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "협력",
+       2,
+       0.1565,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "LG",
+       2,
+       0.1873,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "CNS",
+       2,
+       0.1533,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "석학",
+       2,
+       0.1638,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "해법",
+       2,
+       0.1802,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "모색",
+       2,
+       0.1617,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "유럽",
+       1,
+       0.0704,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "3사",
+       1,
+       0.0899,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "시장",
+       1,
+       0.0754,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "선점",
+       1,
+       0.0505,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "경쟁",
+       1,
+       0.0743,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
        "시청",
        1,
-       0.1322,
+       0.0707,
        0,
        0.0,
        "",
@@ -444,7 +749,7 @@
       [
        "부지",
        1,
-       0.1439,
+       0.0818,
        0,
        0.0,
        "",
@@ -453,16 +758,7 @@
       [
        "기업",
        1,
-       0.1323,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "유치",
-       1,
-       0.1388,
+       0.0824,
        0,
        0.0,
        "",
@@ -471,7 +767,7 @@
       [
        "세계",
        1,
-       0.1346,
+       0.0796,
        0,
        0.0,
        "",
@@ -480,7 +776,7 @@
       [
        "주목",
        1,
-       0.1408,
+       0.0769,
        0,
        0.0,
        "",
@@ -489,7 +785,7 @@
       [
        "대표",
        1,
-       0.1486,
+       0.0906,
        0,
        0.0,
        "",
@@ -498,7 +794,7 @@
       [
        "행사",
        1,
-       0.1329,
+       0.0701,
        0,
        0.0,
        "",
@@ -507,7 +803,7 @@
       [
        "The",
        1,
-       0.1388,
+       0.0953,
        0,
        0.0,
        "",
@@ -516,7 +812,7 @@
       [
        "NEXT",
        1,
-       0.1278,
+       0.0956,
        0,
        0.0,
        "",
@@ -525,16 +821,7 @@
       [
        "AI",
        1,
-       0.1544,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "제조업",
-       1,
-       0.1323,
+       0.0961,
        0,
        0.0,
        "",
@@ -543,16 +830,178 @@
       [
        "중심지",
        1,
-       0.1305,
+       0.0745,
        0,
        0.0,
        "",
        ""
       ],
       [
-       "글로벌",
+       "차세대",
        1,
-       0.1466,
+       0.0735,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "핵심",
+       1,
+       0.0671,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "액추에이터",
+       1,
+       0.0759,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "국책과제",
+       1,
+       0.0801,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "주관기관",
+       1,
+       0.0853,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "선정",
+       1,
+       0.0894,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "패스",
+       1,
+       0.0741,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "로보틱스",
+       1,
+       0.0796,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기술",
+       1,
+       0.089,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "NXP",
+       1,
+       0.0981,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "통합",
+       1,
+       0.0903,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "플랫폼",
+       1,
+       0.0911,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "공개",
+       1,
+       0.0734,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "개발",
+       1,
+       0.0952,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기간",
+       1,
+       0.0962,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "단축",
+       1,
+       0.0853,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "시대",
+       1,
+       0.0836,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인재",
+       1,
+       0.0963,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "대구",
+       1,
+       0.0881,
        0,
        0.0,
        "",
@@ -561,7 +1010,7 @@
       [
        "생태",
        1,
-       0.142,
+       0.0812,
        0,
        0.0,
        "",
@@ -570,7 +1019,7 @@
       [
        "마술",
        1,
-       0.1677,
+       0.1029,
        0,
        0.0,
        "",
@@ -579,16 +1028,7 @@
       [
        "K팝",
        1,
-       0.1443,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "로봇",
-       1,
-       0.1416,
+       0.0817,
        0,
        0.0,
        "",
@@ -597,7 +1037,7 @@
       [
        "소울",
        1,
-       0.1401,
+       0.0895,
        0,
        0.0,
        "",
@@ -606,7 +1046,7 @@
       [
        "갤럭시코퍼레이션",
        1,
-       0.1412,
+       0.072,
        0,
        0.0,
        "",
@@ -615,7 +1055,7 @@
       [
        "마음AI",
        1,
-       0.1121,
+       0.0669,
        0,
        0.0,
        "",
@@ -624,7 +1064,7 @@
       [
        "국방AX",
        1,
-       0.1414,
+       0.0744,
        0,
        0.0,
        "",
@@ -633,7 +1073,7 @@
       [
        "협의체",
        1,
-       0.1379,
+       0.078,
        0,
        0.0,
        "",
@@ -642,7 +1082,7 @@
       [
        "회원사",
        1,
-       0.126,
+       0.0756,
        0,
        0.0,
        "",
@@ -651,7 +1091,7 @@
       [
        "참여",
        1,
-       0.1506,
+       0.094,
        0,
        0.0,
        "",
@@ -660,16 +1100,7 @@
       [
        "국방",
        1,
-       0.146,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "협력",
-       1,
-       0.1293,
+       0.0981,
        0,
        0.0,
        "",
@@ -678,7 +1109,61 @@
       [
        "확대",
        1,
-       0.1464,
+       0.0866,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "산업",
+       1,
+       0.093,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "적용",
+       1,
+       0.0744,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "토론",
+       1,
+       0.0706,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "apos",
+       1,
+       0.073,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "학습",
+       1,
+       0.092,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "운영",
+       1,
+       0.0743,
        0,
        0.0,
        "",
@@ -687,7 +1172,7 @@
       [
        "정부",
        1,
-       0.139,
+       0.0869,
        0,
        0.0,
        "",
@@ -696,7 +1181,7 @@
       [
        "엔비디아",
        1,
-       0.1304,
+       0.0721,
        0,
        0.0,
        "",
@@ -705,7 +1190,7 @@
       [
        "사태",
        1,
-       0.1361,
+       0.0726,
        0,
        0.0,
        "",
@@ -714,7 +1199,7 @@
       [
        "주시",
        1,
-       0.1474,
+       0.0816,
        0,
        0.0,
        "",
@@ -723,7 +1208,7 @@
       [
        "영향",
        1,
-       0.1608,
+       0.0967,
        0,
        0.0,
        "",
@@ -732,7 +1217,61 @@
       [
        "우려",
        1,
-       0.1501,
+       0.0937,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "티로보틱스",
+       1,
+       0.0915,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "KAIST",
+       1,
+       0.1004,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "MOU",
+       1,
+       0.0806,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "체결",
+       1,
+       0.0812,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "사업",
+       1,
+       0.0896,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "강화",
+       1,
+       0.0653,
        0,
        0.0,
        "",
@@ -753,8 +1292,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 38,
-    "hdc_answer": 38,
+    "count_answer": 80,
+    "hdc_answer": 80,
     "agree": true
    },
    "source": {
@@ -814,7 +1353,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 2
+     "value": 5
     },
     {
      "type": "value",
@@ -843,6 +1382,49 @@
         "헬릭",
         "자금납입",
         "연기"
+       ]
+      ],
+      [
+       "아이뉴스24",
+       "[컨콜 종합] 네이버 &quot;2조원 규모 AI 인프라 계약⋯물류 자회사 설립, 배송 경쟁력 강화&quot;",
+       [
+        "컨콜",
+        "종합",
+        "네이버",
+        "quot",
+        "규모",
+        "계약",
+        "물류",
+        "자회사",
+        "설립",
+        "배송",
+        "경쟁력",
+        "강화"
+       ]
+      ],
+      [
+       "아이뉴스24",
+       "[컨콜] 네이버 &quot;AI 인프라, 10곳 이상과 계약 논의 중&quot;",
+       [
+        "컨콜",
+        "네이버",
+        "quot",
+        "이상",
+        "계약",
+        "논의"
+       ]
+      ],
+      [
+       "테크엠",
+       "20MW에 2조원, GPU는 5년치 완판...클라우드 3社 AI 인프라 수익화 윤곽(종합)",
+       [
+        "MW",
+        "GPU",
+        "완판",
+        "클라우드",
+        "수익",
+        "윤곽",
+        "종합"
        ]
       ],
       [
@@ -892,26 +1474,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:미국",
+     "name": "단어:컨콜",
      "dim": 10000,
-     "ones": 5015,
-     "head": "0000110011111010000111011010111100010110011011010110110000111010",
-     "bits_b64": "DPodrxZtbDo8cnZzbj6npKsJ9H0WeeKMzy9R+u0HT0ahTYopGEzlTZugfHMtsTkM1Uhq1xUzqTvMpdwxSdY2T5OGZmu+bVYP2hDgGtFCoAC0+fVY2asHkTRqM8xM2ypLfzovVrM6M5zYdBq4Usv4sb9GXw2/dley/Ep/84g/48s2jJjGZ+cxRmxQxuGuYi3bXu2b1r60+7+Q32voM11NMJzmMphk2YomrLlEfraZ/xFbNmVu/rDjw4RcoECYu2YEYJvwj6KubGmF9/4laWyOrRsNE2gzr4Nkd/0Yqrd40ljEP3WGdmh2Zr4I8mcpzm/BqE1+T24gDyKefU6jeMmBM59jcjcR05278XVTuZn/6bJVwSe6OrtKaTjjPQ7Di+nxcaXpDJMh+A/itPoJ0GaZE2WjxGIEYjAZk35cuorbnJRqzWhQLPkXovfZpNAHAtxdGw4TgTLiBDPkD6uogpCbjsYMKsYRsjSxgxOsCiRXr4AlyHKsqdv3zlCaukmyIN+qv4P0wujRcQKkvmnJJSlXUeqFQxfx5X1srS8iDRs+5o0C/aD9rIxzZl2BgGwJ/Y2wewtNXYsifEnRZJ1Enc70Ktiwt9TYefXhKENEEnVu9i7i9NPprxasOfYzerTAshGSYeN6u9XWIR/2VlyU0fs+3ZXpCRLOZeJCIqZgOwl+ra+7CPsZOJdo3CqNtfaybTEdS01Io11kIoAi3nOWUTlYZwbFeMvZssL8VA8VbvD4XhxpbXrPxIatvIxhCNf6Fxb++JFwndiaYUjo+ciw3pbMCYHCXzciN9H2rtsRso/HEnnfG9/OR8HEiDXnYopGAqYIGuxX5DdQLxkVYfHDLWSOo+cxS1taSqKRVU7pio4DazpeR6e8tdTjZM6fvQE8wNFzfdmScqqzrxvGPsYaVwRv1E/SEtatyFzLnsYpokhi+uQOs6J5bNOodH9RZyUMJtgJyP6kZweyFVUrrex0zYTzqyEIBG3aaA53gTE/RQ2tzAxjgBsr45MK3I5vxoYzwnqqT0aE75nNC69Cr6xlPAsvwXI+P2eMSe/uOeeMH9GZDCcqDvgq44vMPI6K1jihUz/Qi2Nr6vzP6u6yIY41a/4ct0Z+7SqMEP+8oxxdmdCi62aGTjISX4OzZtHdiIW6MJq1PyRr0CO3fxjCsZfPsZE5LwvotXigeFBUYHuR+gKSYIY+Wwp62eAQ34bakKIBbnOjvvaYf8JV5mLUt3AoFMQrwpXKQ33yY720Bv2yLUtC8tGS8WwCUU2kDGdzTq12G9cG0qxJyke4LbUsnWNfNcz0DVdp2I/Id6UEZsUvwQYDhNJo8jkSeQ4NlC8JzByajUMdkWUb6Z2VfxJuZw1TRhgzZUT8hvmaH1pmw9aOcOUIZ1zvd6ZK3qkGu2SSGeeiytxsLx200ZhB6xy4CIJZQf46CSEEslljniJxYhnYVWQ/vFB0RmGy4gB7rjPnJoQU05wthGaK8bKGTb+bFNsXpc1dmOIFacUBbrXvW97tIQx6mlXiGcUB7vH12ThfrqlNG2RrciNw5hceC3oQacVse00xf8t1ARqe71g2kLpaPTO8RYdWEdp92Y42pOcpBCngonnLpRg+QiUkXcmxHyri9wb+MAK6EaQ5WpPDAJH38WpPB6hX/w+AVXr8GIqM9R23H9NafGY="
+     "ones": 4990,
+     "head": "1100010010001011011011011110101001100101011100111111010101011111",
+     "bits_b64": "xItt6mVz9V8r3+fFhvglhHZ7/qboIgXL0ftFZ2kebG1NuYCLTHhmDWR6pFeyPsVKbO7y8nZif/GFhuFVmK61C4FH0AyYx6dsk7HaWIjBQJzSipkmMMVyF1xZkiqCKLzeh+tiEXYGsHsKgeCfX3MZMSHExrsqH1GRUQTZ4o2vHerpvuhuEz0KeEXWuC0gdHQZkYMxaiCuP7AfUZ+4fI5BbJplPH1vFvusgKQVBiUcawQrz29K70FtRcLsnSx4wsOkktMZlQZOVP+2ouvf6bqudB5xQrA/UwqUBs/T+G7iRgVNDxcOrwroY6lQdIx24l92h2+UUJs6ePYxPAsPODtUMP09GIV7InKaDDpiIC9iY5LRi/aT+rNHL6+cnpBE1v/RRyEuOqIEq70E3V7ctbx7VPz7Hr8+D3NEL3VbjwNsobefIE7d5XA1NUcPyI+SdwDwOBv+teJheZKCIzDL0H6hNiohGjb6IYY75IwAptAl96kLD/MTpfNM6lRoM/nqp1s2xauzBfgT1eUmcic5D6agY7lqMPEII+ZsPSIduEjlOfGTmagse6iy5jkRS8A41ad3EH1MpmwwxtZsNVxZkvyEWMu7rsAZqXHFlWAzKoHaOROx3oKdIu0GAfg0Gz5YrXQSQvssUs78GYGWPpdIghpwU4KISLlGPoSAduUjVRC5yltr5P7DY3g2pSLaGS5X0d8SF9bBY4jU1Gh5VA8KvkdqA+BwIe3PwjV2ziRNaX6KPiilO2VnkaGE/6Fzs6V2AYHYEFznVvnptXDo6V4R67dJal/uUE9TZi66Mwtc5XuNDpS6M48pF9t+QZU7anLiFWgrKDxQS0Fh0CSGgiojDJmbNyQB4n5QufWiZcWbRw6TR3ckvN80FrLxZeVUjjlDvOjXE6pUwBqouGZbd0z5PgQlMRQZfIXzEt60gpW9KjZIcHH8W3TKjpSzvFbK41bTAhGcdvnwPZ/GCAtTwryAnjsgS+jU3GtyDd5SfGduOsnNuHomsvPLrqMC6jUI19bsry6kvxICwwGdkeKnBHZhlIn85Nmhn4wqgW1EHLChIhjhcybtdMHk7tkTf8bAIn25EG61PabNrvs+uaioxRXDL1IDHmx88wXY0WAX4pjmr6B6zeHjsYRWo93RBXhNE2TLqjfTrfGuiCYS5nPefWefWiZEecwN8/mLNdK1QkXh126loER7nHXtuLBqYE0PPn8ayaayEouD5APZe9v2tJgqy+fqAt9rtTvyuuDC8TIq1TP7hThSmt2zsdCdMseaP6GBUg5/pCf7egBmI4Q9tfCjQ2KFDwXXkD2yXmbe8cx9+we8zmDnnHoFbRQyWChjnn/XnqazASYTL63m7CwojeOora2VN9d7LxsjLgL71sR3GGdS6zVg4A4i2JyCsgkya++Xi0tEmqBWta0UbzX7Ap0m9/62N8iY6OK+PKqq8Z9X0+4ZNs/Jeqm5UBwVPi5tpW5ytiDe1a0P43h8uq+DXuJ1MoWBdskxBaGY5BmsYIqfRhAfHdc/2Wjr7g8sCCPYZJTQq3j3OCpigi0Gu82GI772QTnvOK/5Mm9JfTLiSVrozij8v3ElElBuwaXpTbl23Gtfxiqkbf2tup7IUbPqFt7bdN6u2qXJMCchWilljT006YNLQaRiy0aBaVgzvPKMUcM1+gmZNIo="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:ai-infra ⊕ 단어:미국",
+     "name": "키워드:ai-infra ⊕ 단어:컨콜",
      "dim": 10000,
-     "ones": 4982,
-     "head": "1101111100010110001001100010000010110110111000100011011100010010",
-     "bits_b64": "3xYmILbiNxLsxGzbBBLy0lecFxJdqA/uNlTlJ3ddvQrQZTtM9hwgJSFJQWYs27rF/rytMS+LGlP38Fw16KzU9Uj/mIlVRrGOlxD0m8FQqHDy3hoWkg7m7s1m+4R6h/NPR4zKi3SUB9OnXFRjfeM/p87kVbmJ7JwxU5UsH4PFKkEbAicDdskt+nz/Mb73klZY9xmtsnubRxh480Jb6Cz3ULPXohgO+OHqyezKcEJ11dmx6XF89pPLaPiCu8XeryJsEpu135nTvnPB5fpEVSMAIDtTCw31B6wqXcnv3isU4IMoXd96fFQuqDjfettsz2NNCL7SZjplRr1OUJnaoBWOV9XBdpXmLddbu0vItq7pRYFvL/XpleSBpQPqb7SS1QZxEs00c3saeh+n6M/HzcigwrmEqD/E6hK3nGJfCHN+FnH6BwYb2DReLEXuyfVhfvSHOqttRZXm5jlFcDi33InN9Hq04InvMHYgk2sKmZAjRj5RqMV/IyI71/NITPmjE1PzA8G/JOpbHTJTr8xAPMma3wGRLpVibsOw/KJuGWB0z+NP0z4XrbiIZIWn8NIn9XceaNS6G1nX5AwBBfvNngzWlHQsJilyhFg2N+VHQsN53rsZyBKfSmHc4kAAWF9vfVvvkeYVK97UscMTPgGP9Ie2xLkULNmMVg+pNflkYJFxR5tH4E5dmR90vWZxCw0KTtXvOGVlWI3a7eF+RjLenyEi7oVPQeFdZEkGQP8k6AvZwOnE6ZtTE5+EpuIl8MgB/yAloBAuvmYK8M1ySfgOcngRqurjmkkmJEOsAWoB06Qhl/RMSSSWF2shFccHRrS3MyLS/tK25I+cTs57efDujmOZy5KjhQibq+dHcZHbwXswBfSa4BBoca8FRzY1sBActEqRNBuxIXiYZjhfQMOjDEUmELJe5nk8G6hKt5ptblFig2h6VhzM+85lDh9te+6a0It8jVJSFhJ8HVvTKUxRvHkykiDJVaZ55tRBXyx+6/wc2o9dCc6h+T4G0HzpM0NtmWqRZgg9pMvxtBHp92Nl/M+PX+B5z776rJbFFNO67G6QKxIIG5aPAx9e4GVhh8NJ+x9a0mZ5kR1JIOAXqRhXlnvWqTLAEyNUesLLwats323tu9IHHWHzKPo0An6G+53je3ZXSQrDekggxbFPh0f0m3qWDqOZ9Lon3QPFRfRDb4P9lMOTZx9wyj4rQTQSJ3LsErv545CsRv1cMHRkQMSMi9tMxsiGBxskJvZVrQV6YUIDN8CcVS6nxY46FPktGnuda83TtxDHrbDWvOGkgfSmWNV5o/IeoCYi0qbkN5garhdRfsmafwIL/zmBftdy0XfRAQxdO68WzqOWOg0aVD6DxkVE3EFeu34ANvyaYZ7rMpNIbWJwLl3HVz6k8ukhpsxSSnGvR21CeVa/qhJntJwvStlFZ2lwHXnKZUTyBAwWKRUl4aoa5LvsUWI1MfQNLN4XuXA842hRhZLWAQucDbPc/ol/So+iv91UFORnIvsN4nMlZFqsOAXcQcoL75EnK5IM7xAMvsnXatKOPtdJOF+ZXg41zcISn/jV9ZCWUAqrlCqWUMCm6swBdpYSbGWRPuyNwKWcjM9oCiECmj2Lbu4GqW7RXB+qZ9SCso4gtnKVElUJVw6qqOBkPr7jET1Q8U7oQYWhE6w="
+     "ones": 5005,
+     "head": "0001011101100111010101100110010111000101111111001010111001110111",
+     "bits_b64": "F2dWZcX8rnf7af1t7NRw8oruHcmj8+ipKIDxuvNEniE8kTHuoiijZd6TmUKzVEaDRxo1FEzazJm+02FROdRXsVo+Lu5z7EDt3rHO2ZjTSOyUrXZoe2CTaKVVWmK0dGXav12HzLGohDR1qa5EcFveJ1BmzA8chZoS/tuKDoZV1GDEMFerAhMWxFV5T3J5hA+aOHcHDuWBgxf3fbYLp//7DLVUrP0FN5Bg5fGbCNHwQczBEHtY52JF7r4yhqk+1ofM4NNcxT0zhuXysO++1fUg+T4vWtX5+yXaLPskjPKOdN6hbb3ypTawrS+H/DAz41P6J5w4ec9/MWnhEdx24OdbVLefHCeM3Dh6RgT5Lxh0z6HrZSTAVeyM45SVzCoViBBRJEnzRUo/Ka1BgWsSqBJChSDccuL+h1HqIGlYPfrJK1IP6iCWEb18u/U4par0CygqGb6AcUVlm5gjXKPUjmf3TJaZ0HkEo8Sq9PSmNWRRHhd/b0TALwqA8/e6xUn7lNdveen44/qZudXRY4KwFkZt7VJ+XXObqFiwbK9RrDOvEJ/etzbGepxJ5OE3O34W3V3ZA6K74L7FXpO8VDrQkT6m5mcnPz2zVNwSisYwejfNEYZK4kPrx5p22k4HOdX3Yj5vsv5DwsX+iV1zVspTp2b4Sq51bXIEDWlrYbonDoi2IG+XDEuHwvAqxG4mp9Xv8jvgZP7smFhqGwklzE5CcF8QimP6GMdLFL6M2tR874WroN0Iv4T7Rrit5c83S7qN6bcDSN25dUd5JPVyWW6vR1mUyTTPlTFXdbzgnLpMhFBrixkpYXRxR3Gb3GfbTkwTJOzxzAKxS/mtsfPomisOr56MX1GTLC2RWLB0QRqpDPugKbngG2jg0skXRh3+gyhjyHM1Wmh3k8iDcUXCCUlAZUVs9emViCpiwSo1q8n55i9ICf2Ivsp/GYl+xjb2/51F9ELpM1UGTIoIAAWrRhyl78bhcukVjaDRgwRkonovlDh8rvkYOyZBtA4O5seOIhOy9D6flly7iFOhLlwMXLlhVE1cekvmb1VcZBRvMYSX0afoVBPPYa9BDk2Boy0rc4ZRuE4/ZKPf1Rq4c6YNTYOh0tfJABjCDQwAu11ggC/X6R01nVVi4te31KRWYdcWYHyS4dsx298GIk2FXNpTS7ekcM3rWGR8sjsMkIEkZ8ozQu/KVAHWoGDnq25R/v/Hia/3tW7oT+233TzQrc1GQyyOVPiNBoIn8V0k/6sjWsrimTq6QClcPp8WJRMDKlnEa3dqIhSqwZt1HfcIstC1qWdaLnsIoaCg6JRY+2U+oJFIlBbuNHsVEUEc6yO+stAYgxScEunzq+weCJPlqTNcvtB4LfDijtLZEpy5B6QHdIwSWhES4Qv/ufWvUQsg+4SB1MRnC+aH8tCgHWPqLjskvoNQ/NnJWYDsR8IXx8wpl4qZr58DazWn2HPn435boemHrzRx3MzPsqPUl1gs9huER4q+acGjpKSW07nNnkgkGa9/hW9A49hx+Kg2QTTSPoqg4a+RXwyQ9MDFDuiWjmDfciQDZHrriqaerI0CZ/pCieoZZzHWqjbV6UYSbr3NhTvO5q4ypPbzRCr78prulkfQZxo/KraBtrjZRleasjSGO95WCrwNEQKfnKllApwstUVQVZBqpF9iW0A="
     },
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 14
+     "value": 39
     },
     {
      "type": "value",
@@ -970,9 +1552,54 @@
      ],
      "rows": [
       [
+       "컨콜",
+       2,
+       0.2956,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "종합",
+       2,
+       0.2664,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "네이버",
+       2,
+       0.3037,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "quot",
+       2,
+       0.2859,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "계약",
+       2,
+       0.2703,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "미국",
        1,
-       0.2805,
+       0.1573,
        0,
        0.0,
        "",
@@ -981,7 +1608,7 @@
       [
        "불확실",
        1,
-       0.2727,
+       0.1466,
        0,
        0.0,
        "",
@@ -990,7 +1617,7 @@
       [
        "삼성",
        1,
-       0.2745,
+       0.1486,
        0,
        0.0,
        "",
@@ -999,7 +1626,7 @@
       [
        "현지",
        1,
-       0.2584,
+       0.1181,
        0,
        0.0,
        "",
@@ -1008,7 +1635,7 @@
       [
        "전략",
        1,
-       0.2602,
+       0.1402,
        0,
        0.0,
        "",
@@ -1017,7 +1644,7 @@
       [
        "미스트라",
        1,
-       0.2594,
+       0.1433,
        0,
        0.0,
        "",
@@ -1026,7 +1653,7 @@
       [
        "헬릭",
        1,
-       0.2536,
+       0.1434,
        0,
        0.0,
        "",
@@ -1035,7 +1662,7 @@
       [
        "자금납입",
        1,
-       0.2648,
+       0.1545,
        0,
        0.0,
        "",
@@ -1044,7 +1671,142 @@
       [
        "연기",
        1,
-       0.2671,
+       0.1411,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "규모",
+       1,
+       0.1395,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "물류",
+       1,
+       0.1466,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "자회사",
+       1,
+       0.1319,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "설립",
+       1,
+       0.1327,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "배송",
+       1,
+       0.1365,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "경쟁력",
+       1,
+       0.1507,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "강화",
+       1,
+       0.1411,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "이상",
+       1,
+       0.1494,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "논의",
+       1,
+       0.1349,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "MW",
+       1,
+       0.1484,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "GPU",
+       1,
+       0.1342,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "완판",
+       1,
+       0.142,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "클라우드",
+       1,
+       0.1294,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "수익",
+       1,
+       0.1544,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "윤곽",
+       1,
+       0.1358,
        0,
        0.0,
        "",
@@ -1053,7 +1815,7 @@
       [
        "실적",
        1,
-       0.2658,
+       0.1473,
        0,
        0.0,
        "",
@@ -1062,7 +1824,7 @@
       [
        "ETF",
        1,
-       0.2714,
+       0.1548,
        0,
        0.0,
        "",
@@ -1071,7 +1833,7 @@
       [
        "저가",
        1,
-       0.269,
+       0.1558,
        0,
        0.0,
        "",
@@ -1080,7 +1842,7 @@
       [
        "매수",
        1,
-       0.2708,
+       0.1372,
        0,
        0.0,
        "",
@@ -1089,7 +1851,7 @@
       [
        "기회",
        1,
-       0.2636,
+       0.1419,
        0,
        0.0,
        "",
@@ -1110,8 +1872,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 14,
-    "hdc_answer": 14,
+    "count_answer": 34,
+    "hdc_answer": 34,
     "agree": true
    },
    "source": {
@@ -1171,7 +1933,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 13
+     "value": 51
     },
     {
      "type": "value",
@@ -1198,6 +1960,22 @@
         "샤라웃",
         "정지은의",
         "테크킥"
+       ]
+      ],
+      [
+       "로봇신문",
+       "중국 앤트그룹, 범용 로봇 촉각 AI 모델 '링봇 터치' 오픈소스 공개",
+       [
+        "중국",
+        "앤트그룹",
+        "범용",
+        "촉각",
+        "AI",
+        "모델",
+        "링봇",
+        "터치",
+        "오픈소스",
+        "공개"
        ]
       ],
       [
@@ -1259,6 +2037,154 @@
        ]
       ],
       [
+       "로봇신문",
+       "휴머노이드부터 제조 AI까지‘로봇의 미래’총집결… 5만여 명 열광한‘2026 로보월드’폐막",
+       [
+        "휴머노이드",
+        "제조",
+        "AI",
+        "미래",
+        "집결",
+        "열광",
+        "로보월드",
+        "폐막"
+       ]
+      ],
+      [
+       "로봇신문",
+       "로봇 피부‘촉각’오류 줄이는‘신축성 다이오드’개발",
+       [
+        "피부",
+        "촉각",
+        "오류",
+        "신축",
+        "다이오드",
+        "개발"
+       ]
+      ],
+      [
+       "로봇신문",
+       "티로보틱스, 3분기 영업이익 전년比 293%↑…美 포드·글로벌 디스플레이 고객사 공급 확대",
+       [
+        "분기",
+        "영업이익",
+        "전년",
+        "포드",
+        "글로벌",
+        "디스플레이",
+        "고객사",
+        "공급",
+        "확대"
+       ]
+      ],
+      [
+       "로봇신문",
+       "오늘의 로봇 기업 주식 시세(2026-11-11)",
+       [
+        "오늘",
+        "기업",
+        "주식",
+        "시세"
+       ]
+      ],
+      [
+       "로봇신문",
+       "도구로보틱스, 대만 글로벌 스타트업 경진대회 ‘TiBOOST’ 3위 수상",
+       [
+        "대만",
+        "글로벌",
+        "스타트업",
+        "경진대회",
+        "TiBOOST",
+        "수상"
+       ]
+      ],
+      [
+       "로봇신문",
+       "美 패스 로보틱스, 제조업용 피지컬AI 기술로 4000억원 유치",
+       [
+        "패스",
+        "제조업",
+        "피지컬AI",
+        "기술",
+        "유치"
+       ]
+      ],
+      [
+       "로봇신문",
+       "NXP 반도체, 통합 로봇 플랫폼 공개…피지컬 AI 개발 기간 단축",
+       [
+        "NXP",
+        "반도체",
+        "통합",
+        "플랫폼",
+        "공개",
+        "피지컬",
+        "AI",
+        "개발",
+        "기간",
+        "단축"
+       ]
+      ],
+      [
+       "로봇신문",
+       "일본 ‘제 1회 휴머노이드 로봇 엑스포’, 11일 개막...13일까지 사흘간 열려",
+       [
+        "일본",
+        "휴머노이드",
+        "엑스포",
+        "개막",
+        "사흘"
+       ]
+      ],
+      [
+       "로봇신문",
+       "독일, 1만 3000㎡ 규모 휴머노이드 로봇 실증센터 구축 추진",
+       [
+        "독일",
+        "규모",
+        "휴머노이드",
+        "실증센터",
+        "구축",
+        "추진"
+       ]
+      ],
+      [
+       "로봇신문",
+       "구글, ‘제미나이 로보틱스 2.5’ 공개…휴머노이드 로봇  손재주·작업 신뢰성 대폭 향상",
+       [
+        "구글",
+        "제미나이",
+        "공개",
+        "휴머노이드",
+        "손재주",
+        "작업",
+        "신뢰",
+        "향상"
+       ]
+      ],
+      [
+       "로봇신문",
+       "中 딥로보틱스, 50kg 무게 이고 달리는 4족 로봇 '줴잉 X50' 발표",
+       [
+        "kg",
+        "무게",
+        "줴잉",
+        "발표"
+       ]
+      ],
+      [
+       "로봇신문",
+       "피지컬 AI 시대 이끌 로봇 인재, 대구에 모인다",
+       [
+        "피지컬",
+        "AI",
+        "시대",
+        "인재",
+        "대구"
+       ]
+      ],
+      [
        "이데일리",
        "전기로 위험 정비 60% 이상 로봇으로…경북, AI팩토리 국비 63억 확보",
        [
@@ -1270,82 +2196,6 @@
         "AI팩토리",
         "국비",
         "확보"
-       ]
-      ],
-      [
-       "블로터",
-       "[피지컬 AI 생태계] 마술·K팝 로봇에 소울을…갤럭시코퍼레이션의 꿈",
-       [
-        "피지컬",
-        "AI",
-        "생태",
-        "마술",
-        "K팝",
-        "소울",
-        "갤럭시코퍼레이션"
-       ]
-      ],
-      [
-       "블로터",
-       "[의료로봇 줌인] 큐렉소, 로봇사업 흑자전환 '널뛰기 수익성' 변수",
-       [
-        "줌인",
-        "큐렉소",
-        "흑자전환",
-        "널뛰기",
-        "수익",
-        "변수"
-       ]
-      ],
-      [
-       "블로터",
-       "[의료로봇 줌인] 리브스메드, 해외법인 대여금 손실 '337억' 장부 반영",
-       [
-        "줌인",
-        "리브스메드",
-        "해외법인",
-        "대여금",
-        "손실",
-        "장부",
-        "반영"
-       ]
-      ],
-      [
-       "블로터",
-       "[의료로봇 줌인] 리브스메드, FI '스톤브릿지' 가고 '타임폴리오' 왔다",
-       [
-        "줌인",
-        "리브스메드",
-        "FI",
-        "스톤브릿지",
-        "타임폴리오"
-       ]
-      ],
-      [
-       "뉴시스",
-       "울산 남구, 中상하이 '휴머노이드 로봇 실증기지' 찾았다",
-       [
-        "울산",
-        "남구",
-        "상하이",
-        "휴머노이드",
-        "실증기지"
-       ]
-      ],
-      [
-       "지디넷코리아",
-       "항차, 글로벌 딜러 콘퍼런스에서 LINGTRA AI-Fork 로봇 공개하고 2030 비전 제시",
-       [
-        "항차",
-        "글로벌",
-        "딜러",
-        "콘퍼런스",
-        "LINGTRA",
-        "AI",
-        "Fork",
-        "공개",
-        "비전",
-        "제시"
        ]
       ]
      ]
@@ -1384,26 +2234,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:줌인",
+     "name": "단어:AI",
      "dim": 10000,
-     "ones": 5033,
-     "head": "1011111001101110001110101110011000111101000001110100001111010010",
-     "bits_b64": "vm465j0HQ9JwbjytTrySqgOS0vjlBbKaHj7V1l70poyqRfWY2pH+QE5YZwwJhM1/g0McmPizIaU+9r3z7noYRM7iFjRJ63T0npNIJurOd/uk/RvO+PO9kxPeUCQdGS/sW0ZB/FWEw5H0QEbB4ibYM0sIk+F08ITbaVG5ACCsybaEmcxIhHczVyMjHb1I3be85UJkPExvfoAphCrGALdKomW3rGzknFy39faHKakPBy9YWKQB0fHrGi+X+XYyE4lroyUIaKL++DNTtaFQTYDSMgu3WeljiTUvgjf1sTgwmH1eSwZbko6f1p6+bDsOjGStAXwXZpNHU/a2L/mBoSDrIUMub1IbKiVWrI5w/3jFH40S9hzifIVuhBxm9pT7u5W8nvZKjkDJznXYUgLhs8MfEHORf12a3htriuq/SALGvY1UgzPJX5Wt6JryKQFRtDjXTKwiE3lt7c451nP+VtcIm7qHsnE+0SIoywPfdBj+7jH1btImSg5FSWKypta74/qVUx9hjqmVZySF6jEYPV7QptJOo7J8sombN9BkLcn7jqVrhvaZgcmu4QRYMpg9Jsl8G0lfHzLDZAn+5uugwwFoByotY1ot+kFsnosEPLG8ab3hL/LAugfZDv39USusb0sFe2+CSVeR1nJw+m0YQpkizGCkbPgmeRCR/vg57oj+e7f9V1LmP99taKsyZljoZ1f/IKRmgwXH+t0f/CK7TyMgfhNCYyp3yWxkfGwONJ7ZMR1NOibzOyvvppteh5HeCLqhFsoeE+tYSpE00cLJ9EhAlNdZFSqxf8hNR1GGrE3G536yJKjy0/4D6ukEMyAsY8HIA2oJYlv8Jcv/xD1+uP+g4DjO+9LKOLD1yaOopVe0JkQwaWyqYbOXbmzajpa34CJ4mjdkAqoAT0U+kOsERGW+80rPDmz3R7FGb1pHyUF6G10OWTXHuiWXPSe1Sf7fdMlgohMRWuzpziHuSZfjvvGUmRuFlcnhLzh9r2PDub/Vgg6JBkOQDYYR11IWfsQJlVDp9jdCKoIZIb1dDN7yd3dnd/IL9xZAh4lCbsQgsha1xZQV9Pq/UaELxF1qRYZAVqlZ+kig0EOdOm2CZFHs7LRlNb5ShByPej9k3VTe+pixVFKAvuNAPR/1W6OR2chDZA6upHnpsxLAMDkfDKI+R+Au60On6h/OPZvGmlWOUS/v78LDsAaMToXGMKzTjY3xn2K+5CnLP9VYdrLIW7ZOpWHO//wVucOT3mRDCOhkp1/EKu++zQz7HIXs+bqg/dpBR/z22cdMIzYIL9V7qVb0bX4yMNN/KWtwzoxaIwHWAJSbruwSPbiagQiceLq9Vfra3JAJKbh6ZlGLWEoJ3XCOzybCPG+96FEc9RZrs5A0v/cXddAM+F3WNA5ReHEjsX4VTvVJOAroN49J2FJ11eXnhO+HCQ1zoqSCYIFfxx+nqwR5ScSYaBJXTk9L2ITuIgxAeYEg2Bet65zXfpcKqXV5x/nK6e6Q97Ec9egs1dmHAbyLy/8ek7zEY2nhr0UdIyhgONL8jUmLzH+59sK2D4I193NiMuTHcRIrYgeCB5q92bFhzGU7q5CiE7OwSN4vDZ5xrPTIeDkLE1BRrVTcFZ+/UobA2MSKYXe+4ciXfs9K0L5HcabTVVSpE/k2p3kKtE1RoQ0m5Z8="
+     "ones": 4975,
+     "head": "1000111111000000110000010010111111011111010001001110000000100100",
+     "bits_b64": "j8DBL99E4CQc37NAKQg7nNVlg2KNs5rEC9X84aRs4hf3iJy61FBaUzOS/q6B82UjaSWugKkfhvitkCS3slTQPCo2942OO16GDU967iO0LSGsgzL7tNP/ceEJNrxvpL3hyLeIu6mOXkDnRZCI209WWmSzNs0CDXM5F1uCVKQN0Qxjhr9sBv0daVKXdwnIyL4Cbdb3zoXcuMOTwl8RzunoifeJtKp7It/oV96UlESgKxgkh/mV/snBfYSbcYDi+pElKdw0cOJYd6ei2kbhMZHzDmh7D06M4gtHPm+cMrxFa+6pGopFPOjlNX2YpVmdmmCFsMdByMuPFX63HcWaLuWJyRqQ3kwqNk/KQNVgL+fppWPJ+Tmy/M0cDu3uIphjfGLX9Pu5aBU4FaGiqQZFwHNgzKCQoLYWCorV/x5UY6ii/dOYUjUZAMxWC3Ytrb8EvX/X6DHT+gWtGEkm14JKR9MWeRdKHBtQKgZRNVg9hVQ9PwLB5Uad1IU2q145FPv5ZpRq6cBWQGWe9+PMklW3/8uyl2Dgqh8EpDn9mZGKqr7QVRU/VkBBBLSgROmjy0L0NDurQWiz2KnVyscxqCqrJJMKfNmJ9dN8RuoZD6jJp7fKVOnewyqloJK+QQ8kmGxrKOqQGGPYUmrUgeUxhTei2GpCK+dUJhOGKRW1x8JrB7p7DowiAzJWHUs5+nhYZV12r9swPBiLJS0kY9IieHpIYqqaSiRf4xKPWBrQsi3iVn9luG5ZUHpdqRJ8BKuZqAk9Bi3XmlRU3eVqJa8ttGIMmLP14I2oSqnGhSptLoC0HlxjfJRPAz3yfge3W3x/KerB3iPGN7N6H9gGsxwRyQ0hl3/klZqpMTW4zyu3aiKyLaGgTb88EJoauAkBf352nFt9kyfbXFJtoRvvzzafM5dCCojXFrrVZfsGYPoHuV6gVtS/GCHyuVfHKJJPWtG517moWKC0g1IvpaYVU0/jCEKi1NGp2E5+sVRrxncbSHZWhmkgOBnArxc0HL/0aQTXEtNLjgp6y6d1x9LdMmIvWVOTrjeZJmrxmYiUG8Iu39TbWOYUZ38rQ+Gs1w94PfenGMm+xBdtpH8Am7yQsNXNi6rLPnI9LooimNI+qiC0Jk6/lTePqSle7AmtQgfQS7BgTkn4IB8a9RCBAjWm0qA6pp8ovrRyhKJiO4o/2jInT8aJCstvIJm2ZTrFsz+2e70CR+kSSh9BQfAj0UE2xUg2inPqCs8u2EaHQM8IkU92NPvnA7+XyKh5A70rNdWLXPUZO1jJV/ie/Kb5EcFIPdcHUhFeT5YVMhTfE/tDuWPcs9m5I/x826u/wDmTiol3XSqwV8OI3bhEqcmVg2QYVfaKxX0D8k6Tnh+A9MbWltc8jGgqC+aD/wqRfgLSEvbraSEkBWN8rv/Da5MIECdK5fUMrX1OkoabBrq6HO+K7fp0VFREvLKkTRey/lBRDA4O8XrIslvRv28Q5dHmtrA6n+pF66OYyFYqtWs6VwuYMReffSsDYrmC6Zi77+vFXtd21B+6Dbb+b6ku3gcENkPsMaOE7R3rH4aDVS3vLXNjF6oO9adExjXWR5LZxH74iWIkKmjzm2UKANmz8iA3fpkH9bYhyr/j2VSaKga+k/R2U2wE1OxfifW5/gqI4tYJgFkOPMOSjDTSXSY51Zw="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:robot ⊕ 단어:줌인",
+     "name": "키워드:robot ⊕ 단어:AI",
      "dim": 10000,
-     "ones": 5031,
-     "head": "1011101010110010100001010011100001101011000110101000010011001011",
-     "bits_b64": "urKFOGsahMtRBapfl3x+q+tOvvPLyFEJHBFDVFO1Zw9QpkKDd6R1ickSXYL7nwYVGJqtK85RZEidI+JOxbqSFar2Jdyby5TdhJjd91jyZ8XFeEBzZ4zzzNvxcS6bl7Qwtr9sKF0Eaoh9Eor4lSvB5IyjtNIHrS7W4gMK+TWobo1fsQf3PTYmzi+AaTINyTFJ3panlz3XVBDdeK2tWqXR89aAtlRSDQIsyLZy0vxcMA8MFYRjWXA38p37J7+1/X49DN51TM8qQ3IRurb3UySA51byeNsG2h9aTKYpPvA1cwGDtZXcuSt6FP5hoh5WDFROx/GgxFLLe61Bcg+/vGXec5jS4JBDrS71n4ivZF+Ci01i2b6/4SN9kkz26QAuL8tdIIErSc+h1G5jMglQJCb121VPry0oTL1LQeaEBrmwCewE00VMaqGn9Z+qQ+gDKaes9dGPdPJl0CCxdMNmzAVjafF4mg1x8vmgEYf5NKNz+thtNROoPv5aItqWj+PxpqwCzkZLVaOfAPp5A7GvB5hjheILFsBmBU2mDeMwpYNSPA83llIbxHzeoEm/Z5JCyYA30yF3r0PF+VxzlbxozMKNavsDswA30d8HZgV05RD5P28Cg/7+xkZqnwSYF0HkdSdSKnHGyyITfn7SfUKjY8mKFFGSMMn+1dwlSOv0N+RSqZgdyMrHzNx4VIa5reB3nwVp/kVTsD8YJXy+KJvsTz0++w8puKuGL5Ys37C27p+c1wkVxbD8hOeAGf7g0wr3fx/qIGgPUevI1MXSQ8SyOgyVPvKC1hpcZmThTp00hWPuSbOvYXyqLcnpD7h9r6KnjDVtbr1SIQCcwAI9hgHktEmDuq2CKLBzkIeCfgu4cD33owz1bu2oyy3EAXzvPTXgaEa0FnX50Fk9XodXDR/8mUu4nDXoP6GX+wBNYZn4Hy2y9aFZxuko4RlyXfU1Ex7Nx5UdJrzN6AIiMR6p1/qcebbT+TceVvFluUANm8i9aYhTVbRPowb+EsiyzFQECQ3DMxfa3sXO+k7H/wbfzV6RH2phw85zmq9Pbmbri0XrdZeYiPgVqqzsmfzerva0ynbnXeOBhRu1l/mBbWfPKDEPZuavq819P5cxoPQWndyAwz21ZyPoFNJYha9Tyc1FSDUqEWKxmVnyCJPH3RlxGvjDKIzlHgaasdC979ScK5uOR7O2wncEUF0U3LXDob3GY28aMQjug4FCGcS74OoFl4vJI5Msw2kQaz/+i68UFnsOkatWNz0gNC5GqsymmHUkgIpQkmZ1O01Ga7sxdJ0vOWxbs1H4rDO7y+0lxtz/FzzgdH//F7RldX6CcitnQ3yfkdBGlRSX+6DJBjehUptNjsyiwZkXw6kReEAYITQBT1hmOzJelqqIJLXaWnddXPDP85lJkoyRq4nZEGDTPeUjyVTmN1MGvkU/gjEj7SzW+IyJbOnc+rbDZ/JJvaQVWNn6O/1D9VjQH5CyPQ7l0WtrPUwXTNS0k7wc49MDGm9Zgs+E8sxyqykNdmHTiFO4elBOxzz6rkQIxCd8XLm21gaBbUpDIjEVP/1GkdSkAxNDPM58IDKohXMXvmqzp7XqKlrtcw2u9arM5xDMlLwAre5qEZ1PPu6kCr2Ou4bKbcx1TIID+LKRM1RV0j9JbPlXQarD6myA4jGxmFo="
+     "ones": 5073,
+     "head": "1000101100011100011111101111000110001001010110010010011100111101",
+     "bits_b64": "ixx+8YlZJz09tCWy8MjXnT2572mjfnlXCfpqY6ktI5QNayuheWXRmrTYxCBz6K5J8vwfM5/9wxUORXsKmZRabU4ixGVcG76vF0TvP5GIPR/NBmlGK6yxLikmF7bpKiY9JU6lb6EO91luF1yxrEJPjaMYEf5xUNk0nAkxrbEJdje4rnTTv7wI8F40A4aN3Dj3VgI0ZfRkklNnPth6lPtz2ES+rpLNs4Fzap5hbxHzHDhwytn3dkgdlTb3r0llFGZzhidJVI+MzObg1VFGLzWh2zU+LnzpsSEy8P5AvXRAgJJ05BnCF00A9x1Ha3zFGlBmdkr2agoDPSVAQDOkM6C8m8FsUY5ysURpc9O/tMCuMaO51pvvYWsPGL1+PQy26Dw2SozYr5pQD7oZyQ30V5aKB4ZOcMakmCz1NBJvLRPUSbLIAkOcNfhcFnN1x1ZWIOCsUUx+nY6lJaeudTLS3QF9i1y1NGcfCd3Z79wbxe+wK+tZvocToHUpwOYdPc6zI8L9dJl8m2+UkD0we9UAxQ0BtFClH20eE/3Ao6LeIvR5579jRuTDQQHQBaREnkiL23LgiQCbaNjTV5K8231jK1DvEQinJYlmbXRy9ya5fhaPAjs9byab3NMN0PZB3gYjMobHSX2c0B9WKemTAhgZ+Trq89ZieiJehdkBcdGm3tbX3KPCnKp37kgsxlXTruXpV4mm4vm+Fhf7vHODrMMfYrSEzzg0OJN+vuCYEfFajH4gXnoBr+xSFt4Tu84n/JIUcYicrPZFn+X6u/vLJmR3VvcgSqhziZkrnIbBJ0wGN3JL0llSRumqgDBdvi0GtWhKMddjWmQhXINmVtXTizG7m8nHzw/l4lcBZxzA3Yqi+MvjyPf5FxsYEpdSEG5DL/gqG0MX0BDwc+jS3vT2rmO616bRecXyVDZm3EsMt50fgLh39t2lJosoc66qOgM5jVm66/zJB/3zF0jerHCkli/dE5buuGLlcmzvUA9rfN0oVl6m76MGClJaA/FXcgLFZRqBKE1J41X5Fx4D7NmtmNPwxiqfklaJ9DGb8i2HOlUQn2c5KhMrHbf/H1KtV1x5lzkZz1212ywV3AaM59+Ax8ootCD3sPkNI1mAcOvGZsbhrJKLmlg2Rji1+rd22d6037SRVXMFyDCaubShP4BUsMXV0di5cedfYEVMCH19/giJHFc2DSxxhWFdIQ+z6qwXqQv55HURJliq91DVUxD7Rk5tjD3M5NOCkjNlxIQhKmiNNUsF1Xrn+p+Wg5zBPTqdRgjYgmIdHizzWUxxZp9TwivxkbnfrvQb8X0WsTN5h+SPVxcYYvPIiP+LeaqMZuySk+kUlDzae9Em4wIyXyfOlsEv/PFGYdksZNfSQvVWcKB4jyPKHHAVourefI/nTaDIR4QgcoYb+BA5N8jQAEJascxPIToasfL2PHorYFf9a8dqe18B/mXp8bBP/+VQcSfcq6rSM7bgIlb5YCIIMBYkf5r2Q3tUzzm2Q2mH3pDqKj0Akcl7iU6oCjbSte0vAQrp6aJk+T/al2nzpoXjEWezj9WdysT0WDRuzbXsdr7PzvOFP7YfDoT10YTpPWR+SOwx5fbVWYe3bQnw+XVW9QyXzr0TtTz++H+6SQUC32jm5qEWoflvvPgOZb3p/1lv2hBb0hUDHhquqFk="
     },
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 83
+     "value": 323
     },
     {
      "type": "value",
@@ -1462,9 +2312,63 @@
      ],
      "rows": [
       [
+       "AI",
+       12,
+       0.4259,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "휴머노이드",
+       8,
+       0.2868,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "줌인",
        6,
-       0.5143,
+       0.2081,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "기업",
+       6,
+       0.2141,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "피지컬",
+       6,
+       0.2144,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "개발",
+       5,
+       0.194,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "공개",
+       4,
+       0.1507,
        0,
        0.0,
        "새 조합",
@@ -1473,7 +2377,70 @@
       [
        "리브스메드",
        4,
-       0.3461,
+       0.1578,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "글로벌",
+       4,
+       0.1497,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "기술",
+       4,
+       0.1385,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "오늘",
+       3,
+       0.1187,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "주식",
+       3,
+       0.1055,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "시세",
+       3,
+       0.1087,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "발표",
+       3,
+       0.1025,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "개최",
+       3,
+       0.1076,
        0,
        0.0,
        "새 조합",
@@ -1482,7 +2449,7 @@
       [
        "지멘스",
        2,
-       0.1541,
+       0.0654,
        0,
        0.0,
        "새 조합",
@@ -1491,7 +2458,7 @@
       [
        "회장",
        2,
-       0.1707,
+       0.0718,
        0,
        0.0,
        "새 조합",
@@ -1500,7 +2467,34 @@
       [
        "네이버",
        2,
-       0.1686,
+       0.068,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "중국",
+       2,
+       0.0644,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "촉각",
+       2,
+       0.0777,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "미래",
+       2,
+       0.0999,
        0,
        0.0,
        "새 조합",
@@ -1509,7 +2503,16 @@
       [
        "큐렉소",
        2,
-       0.1709,
+       0.0796,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "투자",
+       2,
+       0.0693,
        0,
        0.0,
        "새 조합",
@@ -1518,16 +2521,223 @@
       [
        "장부",
        2,
-       0.1713,
+       0.0694,
        0,
        0.0,
        "새 조합",
        "새 조합"
       ],
       [
-       "AI",
+       "로보월드",
        2,
-       0.1685,
+       0.0776,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "분기",
+       2,
+       0.0582,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "확대",
+       2,
+       0.074,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "제조업",
+       2,
+       0.0546,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "유치",
+       2,
+       0.0692,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "개막",
+       2,
+       0.0682,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "대구",
+       2,
+       0.0684,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "한국AI",
+       2,
+       0.0518,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "LG",
+       2,
+       0.0801,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "CNS",
+       2,
+       0.0626,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "석학",
+       2,
+       0.0795,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "산업",
+       2,
+       0.0729,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "해법",
+       2,
+       0.0793,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "모색",
+       2,
+       0.0842,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "운영",
+       2,
+       0.0609,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "현장",
+       2,
+       0.0739,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "사업",
+       2,
+       0.0752,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "KAIST",
+       2,
+       0.0693,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "체결",
+       2,
+       0.0777,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "ETRI",
+       2,
+       0.0626,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "사람",
+       2,
+       0.0778,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "특성",
+       2,
+       0.0786,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "평가기술",
+       2,
+       0.0758,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "한국",
+       2,
+       0.0662,
        0,
        0.0,
        "새 조합",
@@ -1536,7 +2746,7 @@
       [
        "인스타",
        1,
-       0.085,
+       0.0398,
        0,
        0.0,
        "",
@@ -1545,7 +2755,7 @@
       [
        "샤라웃",
        1,
-       0.0946,
+       0.0566,
        0,
        0.0,
        "",
@@ -1554,7 +2764,7 @@
       [
        "정지은의",
        1,
-       0.0696,
+       0.0415,
        0,
        0.0,
        "",
@@ -1563,7 +2773,61 @@
       [
        "테크킥",
        1,
-       0.0796,
+       0.0259,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "앤트그룹",
+       1,
+       0.0399,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "범용",
+       1,
+       0.0245,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "모델",
+       1,
+       0.0408,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "링봇",
+       1,
+       0.0266,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "터치",
+       1,
+       0.029,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "오픈소스",
+       1,
+       0.0379,
        0,
        0.0,
        "",
@@ -1572,7 +2836,7 @@
       [
        "하트",
        1,
-       0.0864,
+       0.0261,
        0,
        0.0,
        "",
@@ -1581,7 +2845,7 @@
       [
        "코스닥",
        1,
-       0.089,
+       0.0388,
        0,
        0.0,
        "",
@@ -1590,7 +2854,7 @@
       [
        "입성",
        1,
-       0.0811,
+       0.0213,
        0,
        0.0,
        "",
@@ -1599,7 +2863,7 @@
       [
        "성적표",
        1,
-       0.0962,
+       0.0607,
        0,
        0.0,
        "",
@@ -1608,7 +2872,7 @@
       [
        "흑자경영",
        1,
-       0.1043,
+       0.0528,
        0,
        0.0,
        "",
@@ -1617,7 +2881,7 @@
       [
        "차세대",
        1,
-       0.1018,
+       0.0327,
        0,
        0.0,
        "",
@@ -1626,7 +2890,7 @@
       [
        "센서",
        1,
-       0.0969,
+       0.045,
        0,
        0.0,
        "",
@@ -1635,7 +2899,7 @@
       [
        "액추에이터",
        1,
-       0.0874,
+       0.041,
        0,
        0.0,
        "",
@@ -1644,16 +2908,7 @@
       [
        "이차전지",
        1,
-       0.0656,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "미래",
-       1,
-       0.1026,
+       0.0212,
        0,
        0.0,
        "",
@@ -1662,7 +2917,7 @@
       [
        "성장동력",
        1,
-       0.0715,
+       0.0389,
        0,
        0.0,
        "",
@@ -1671,7 +2926,7 @@
       [
        "공모자금",
        1,
-       0.0739,
+       0.021,
        0,
        0.0,
        "",
@@ -1680,7 +2935,7 @@
       [
        "절반",
        1,
-       0.0928,
+       0.0453,
        0,
        0.0,
        "",
@@ -1689,7 +2944,7 @@
       [
        "소진",
        1,
-       0.086,
+       0.044,
        0,
        0.0,
        "",
@@ -1698,7 +2953,7 @@
       [
        "현금흐름",
        1,
-       0.0839,
+       0.0239,
        0,
        0.0,
        "",
@@ -1707,16 +2962,7 @@
       [
        "경고",
        1,
-       0.067,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "투자",
-       1,
-       0.0709,
+       0.0196,
        0,
        0.0,
        "",
@@ -1725,7 +2971,421 @@
       [
        "부메랑",
        1,
-       0.0968,
+       0.0559,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "제조",
+       1,
+       0.0464,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "집결",
+       1,
+       0.023,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "열광",
+       1,
+       0.0396,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "폐막",
+       1,
+       0.0313,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "피부",
+       1,
+       0.0432,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "오류",
+       1,
+       0.0517,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "신축",
+       1,
+       0.0528,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "다이오드",
+       1,
+       0.014,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "영업이익",
+       1,
+       0.0436,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "전년",
+       1,
+       0.0215,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "포드",
+       1,
+       0.04,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "디스플레이",
+       1,
+       0.0412,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "고객사",
+       1,
+       0.0162,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "공급",
+       1,
+       0.0266,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "대만",
+       1,
+       0.0284,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "스타트업",
+       1,
+       0.0392,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "경진대회",
+       1,
+       0.0351,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "TiBOOST",
+       1,
+       0.0482,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "수상",
+       1,
+       0.0209,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "패스",
+       1,
+       0.0352,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "피지컬AI",
+       1,
+       0.0525,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "NXP",
+       1,
+       0.045,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "반도체",
+       1,
+       0.0528,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "통합",
+       1,
+       0.0408,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "플랫폼",
+       1,
+       0.0335,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기간",
+       1,
+       0.0454,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "단축",
+       1,
+       0.0448,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "일본",
+       1,
+       0.0248,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스포",
+       1,
+       0.0447,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "사흘",
+       1,
+       0.0315,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "독일",
+       1,
+       0.0236,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "규모",
+       1,
+       0.0397,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "실증센터",
+       1,
+       0.0292,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "구축",
+       1,
+       0.04,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "추진",
+       1,
+       0.0467,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "구글",
+       1,
+       0.0506,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "제미나이",
+       1,
+       0.0233,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "손재주",
+       1,
+       0.034,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "작업",
+       1,
+       0.0436,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "신뢰",
+       1,
+       0.0484,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "향상",
+       1,
+       0.0374,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "kg",
+       1,
+       0.0363,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "무게",
+       1,
+       0.0437,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "줴잉",
+       1,
+       0.0511,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "시대",
+       1,
+       0.0347,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인재",
+       1,
+       0.031,
        0,
        0.0,
        "",
@@ -1734,7 +3394,7 @@
       [
        "전기",
        1,
-       0.0975,
+       0.0591,
        0,
        0.0,
        "",
@@ -1743,7 +3403,7 @@
       [
        "위험",
        1,
-       0.0979,
+       0.0331,
        0,
        0.0,
        "",
@@ -1752,7 +3412,7 @@
       [
        "정비",
        1,
-       0.0929,
+       0.0354,
        0,
        0.0,
        "",
@@ -1761,7 +3421,7 @@
       [
        "이상",
        1,
-       0.0798,
+       0.0224,
        0,
        0.0,
        "",
@@ -1770,7 +3430,7 @@
       [
        "경북",
        1,
-       0.0787,
+       0.0403,
        0,
        0.0,
        "",
@@ -1779,7 +3439,7 @@
       [
        "AI팩토리",
        1,
-       0.0699,
+       0.0281,
        0,
        0.0,
        "",
@@ -1788,7 +3448,7 @@
       [
        "국비",
        1,
-       0.0895,
+       0.0523,
        0,
        0.0,
        "",
@@ -1797,16 +3457,7 @@
       [
        "확보",
        1,
-       0.0786,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "피지컬",
-       1,
-       0.0809,
+       0.0235,
        0,
        0.0,
        "",
@@ -1815,7 +3466,7 @@
       [
        "생태",
        1,
-       0.073,
+       0.0282,
        0,
        0.0,
        "",
@@ -1824,7 +3475,7 @@
       [
        "마술",
        1,
-       0.0808,
+       0.0391,
        0,
        0.0,
        "",
@@ -1833,7 +3484,7 @@
       [
        "K팝",
        1,
-       0.0989,
+       0.0412,
        0,
        0.0,
        "",
@@ -1842,7 +3493,7 @@
       [
        "소울",
        1,
-       0.0901,
+       0.0427,
        0,
        0.0,
        "",
@@ -1851,7 +3502,7 @@
       [
        "갤럭시코퍼레이션",
        1,
-       0.0799,
+       0.0334,
        0,
        0.0,
        "",
@@ -1860,7 +3511,7 @@
       [
        "흑자전환",
        1,
-       0.0856,
+       0.0377,
        0,
        0.0,
        "",
@@ -1869,7 +3520,7 @@
       [
        "널뛰기",
        1,
-       0.0969,
+       0.0271,
        0,
        0.0,
        "",
@@ -1878,7 +3529,7 @@
       [
        "수익",
        1,
-       0.0945,
+       0.0449,
        0,
        0.0,
        "",
@@ -1887,7 +3538,7 @@
       [
        "변수",
        1,
-       0.0687,
+       0.0229,
        0,
        0.0,
        "",
@@ -1896,7 +3547,7 @@
       [
        "해외법인",
        1,
-       0.1019,
+       0.0356,
        0,
        0.0,
        "",
@@ -1905,7 +3556,7 @@
       [
        "대여금",
        1,
-       0.0947,
+       0.0473,
        0,
        0.0,
        "",
@@ -1914,7 +3565,7 @@
       [
        "손실",
        1,
-       0.0752,
+       0.0278,
        0,
        0.0,
        "",
@@ -1923,7 +3574,340 @@
       [
        "반영",
        1,
-       0.0946,
+       0.0295,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인사부서장",
+       1,
+       0.0474,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "협의체",
+       1,
+       0.046,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "커리어",
+       1,
+       0.0317,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "라운지",
+       1,
+       0.041,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "in",
+       1,
+       0.0379,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "성료",
+       1,
+       0.0346,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "훼미리마트",
+       1,
+       0.0291,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "음료",
+       1,
+       0.0502,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "보충",
+       1,
+       0.0378,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "내년",
+       1,
+       0.0329,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "전국",
+       1,
+       0.0243,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "적용",
+       1,
+       0.0297,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "차이나타워",
+       1,
+       0.0301,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "검사",
+       1,
+       0.0234,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "수주액",
+       1,
+       0.0293,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "증가",
+       1,
+       0.0321,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "연속",
+       1,
+       0.0388,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "최고",
+       1,
+       0.0219,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "경신",
+       1,
+       0.039,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "도입",
+       1,
+       0.0423,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "정도",
+       1,
+       0.043,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "피규어AI",
+       1,
+       0.0422,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "관리자",
+       1,
+       0.049,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "채용",
+       1,
+       0.0517,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "GS건설",
+       1,
+       0.0219,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "실증",
+       1,
+       0.0317,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "건설",
+       1,
+       0.0415,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "가능",
+       1,
+       0.0364,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "확인",
+       1,
+       0.0483,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인하대",
+       1,
+       0.0611,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "재난",
+       1,
+       0.0246,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "한자리",
+       1,
+       0.0422,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "IEEE",
+       1,
+       0.0526,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "SSRR",
+       1,
+       0.03,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "토론",
+       1,
+       0.0375,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "apos",
+       1,
+       0.0192,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "학습",
+       1,
+       0.0212,
        0,
        0.0,
        "",
@@ -1932,7 +3916,7 @@
       [
        "FI",
        1,
-       0.0938,
+       0.0529,
        0,
        0.0,
        "",
@@ -1941,7 +3925,7 @@
       [
        "스톤브릿지",
        1,
-       0.0918,
+       0.0326,
        0,
        0.0,
        "",
@@ -1950,7 +3934,7 @@
       [
        "타임폴리오",
        1,
-       0.082,
+       0.0389,
        0,
        0.0,
        "",
@@ -1959,7 +3943,7 @@
       [
        "울산",
        1,
-       0.0973,
+       0.0477,
        0,
        0.0,
        "",
@@ -1968,7 +3952,7 @@
       [
        "남구",
        1,
-       0.071,
+       0.0499,
        0,
        0.0,
        "",
@@ -1977,16 +3961,7 @@
       [
        "상하이",
        1,
-       0.0968,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "휴머노이드",
-       1,
-       0.0869,
+       0.0394,
        0,
        0.0,
        "",
@@ -1995,7 +3970,7 @@
       [
        "실증기지",
        1,
-       0.0745,
+       0.0218,
        0,
        0.0,
        "",
@@ -2004,16 +3979,7 @@
       [
        "항차",
        1,
-       0.0943,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "글로벌",
-       1,
-       0.0811,
+       0.0414,
        0,
        0.0,
        "",
@@ -2022,7 +3988,7 @@
       [
        "딜러",
        1,
-       0.0615,
+       0.0206,
        0,
        0.0,
        "",
@@ -2031,7 +3997,7 @@
       [
        "콘퍼런스",
        1,
-       0.0729,
+       0.0213,
        0,
        0.0,
        "",
@@ -2040,7 +4006,7 @@
       [
        "LINGTRA",
        1,
-       0.0795,
+       0.0285,
        0,
        0.0,
        "",
@@ -2049,16 +4015,7 @@
       [
        "Fork",
        1,
-       0.0789,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "공개",
-       1,
-       0.1007,
+       0.0324,
        0,
        0.0,
        "",
@@ -2067,7 +4024,7 @@
       [
        "비전",
        1,
-       0.096,
+       0.0533,
        0,
        0.0,
        "",
@@ -2076,7 +4033,358 @@
       [
        "제시",
        1,
-       0.0723,
+       0.0397,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "국내",
+       1,
+       0.0455,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "최대",
+       1,
+       0.0443,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "IRC",
+       1,
+       0.0154,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스코",
+       1,
+       0.0321,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "제조피지컬AI연구소",
+       1,
+       0.041,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "MOU",
+       1,
+       0.0314,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "협력",
+       1,
+       0.0332,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "강화",
+       1,
+       0.0258,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "주간",
+       1,
+       0.048,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "주가",
+       1,
+       0.0421,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "동향",
+       1,
+       0.0372,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "이해",
+       1,
+       0.0371,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "한국급식학회",
+       1,
+       0.0294,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "테크",
+       1,
+       0.0509,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "컨퍼런스",
+       1,
+       0.0319,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스와이",
+       1,
+       0.0379,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기반",
+       1,
+       0.0446,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인간",
+       1,
+       0.0322,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "상호작용",
+       1,
+       0.0394,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "공동",
+       1,
+       0.0443,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "연구",
+       1,
+       0.0235,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "협약",
+       1,
+       0.0386,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "애자일",
+       1,
+       0.0301,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기업가치",
+       1,
+       0.0132,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "평가",
+       1,
+       0.045,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "레노버",
+       1,
+       0.0472,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "오티스",
+       1,
+       0.0372,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엘리베이터",
+       1,
+       0.0454,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "설치",
+       1,
+       0.0157,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "사과",
+       1,
+       0.0307,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "수확",
+       1,
+       0.0487,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "표준",
+       1,
+       0.0433,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "세계",
+       1,
+       0.035,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "근로자",
+       1,
+       0.034,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "고려",
+       1,
+       0.0294,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "벤처투자",
+       1,
+       0.0392,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "이유",
+       1,
+       0.009,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "차이나",
+       1,
+       0.023,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "워치",
+       1,
+       0.0256,
        0,
        0.0,
        "",
@@ -2097,8 +4405,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 69,
-    "hdc_answer": 69,
+    "count_answer": 231,
+    "hdc_answer": 231,
     "agree": true
    },
    "source": {
@@ -2158,7 +4466,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 1
+     "value": 10
     },
     {
      "type": "value",
@@ -2175,6 +4483,92 @@
      ],
      "rows": [
       [
+       "로봇신문",
+       "휴머노이드부터 제조 AI까지‘로봇의 미래’총집결… 5만여 명 열광한‘2026 로보월드’폐막",
+       [
+        "제조",
+        "AI",
+        "로봇",
+        "미래",
+        "집결",
+        "열광",
+        "로보월드",
+        "폐막"
+       ]
+      ],
+      [
+       "로봇신문",
+       "일본 ‘제 1회 휴머노이드 로봇 엑스포’, 11일 개막...13일까지 사흘간 열려",
+       [
+        "일본",
+        "로봇",
+        "엑스포",
+        "개막",
+        "사흘"
+       ]
+      ],
+      [
+       "로봇신문",
+       "독일, 1만 3000㎡ 규모 휴머노이드 로봇 실증센터 구축 추진",
+       [
+        "독일",
+        "규모",
+        "로봇",
+        "실증센터",
+        "구축",
+        "추진"
+       ]
+      ],
+      [
+       "로봇신문",
+       "구글, ‘제미나이 로보틱스 2.5’ 공개…휴머노이드 로봇  손재주·작업 신뢰성 대폭 향상",
+       [
+        "구글",
+        "제미나이",
+        "로보틱스",
+        "공개",
+        "로봇",
+        "손재주",
+        "작업",
+        "신뢰",
+        "향상"
+       ]
+      ],
+      [
+       "로봇신문",
+       "中 통신사-유비테크 맞손, '휴머노이드' 가정 내 보급키로",
+       [
+        "통신사",
+        "유비테크",
+        "맞손",
+        "가정",
+        "보급키로"
+       ]
+      ],
+      [
+       "로봇신문",
+       "\"중국 기업,  휴머노이드 로봇  도입 1년 정도 늦어진다\"",
+       [
+        "중국",
+        "기업",
+        "로봇",
+        "도입",
+        "정도"
+       ]
+      ],
+      [
+       "로봇신문",
+       "美 피규어AI, 휴머노이드 로봇 운영 현장 관리자 채용한다",
+       [
+        "피규어AI",
+        "로봇",
+        "운영",
+        "현장",
+        "관리자",
+        "채용"
+       ]
+      ],
+      [
        "뉴시스",
        "울산 남구, 中상하이 '휴머노이드 로봇 실증기지' 찾았다",
        [
@@ -2183,6 +4577,36 @@
         "상하이",
         "로봇",
         "실증기지"
+       ]
+      ],
+      [
+       "로봇신문",
+       "엑스와이지-KAIST,휴머노이드 기반 인간–로봇 상호작용 공동 연구 협약 체결",
+       [
+        "엑스와이",
+        "KAIST",
+        "기반",
+        "인간",
+        "로봇",
+        "상호작용",
+        "공동",
+        "연구",
+        "협약",
+        "체결"
+       ]
+      ],
+      [
+       "로봇신문",
+       "KISTEP \"한국 휴머노이드 경쟁력, 하드웨어 넘어 AI·데이터 생태계로 확장해야\"",
+       [
+        "KISTEP",
+        "한국",
+        "경쟁력",
+        "하드웨어",
+        "AI",
+        "데이터",
+        "생태",
+        "확장"
        ]
       ]
      ]
@@ -2221,26 +4645,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:울산",
+     "name": "단어:로봇",
      "dim": 10000,
-     "ones": 4905,
-     "head": "1100101011111011000110001011011110001101100101000001011000001000",
-     "bits_b64": "yvsYt42UFgjIwNKsG4wKJcqrcHSjspmEmGMX+A0sIgr7wDwk/OKqUC8zVzW8S4UnX/tBSFFIGW2Q9Qz7XSGjGVNIm22sRo0s4vbui335NPCD/3jX/OI8QSpgmJiknPG/QEv8ZSbYk5sCDEKpt324JXmn6ddNR+QSr8ht+EsJiDcaw6++6y/lmhhLFsmlD0IlzcWxxIbVLqHPGgJD4rtTOu/tKB52NWeZ5iRmeSyL4itS+mUHxldGP9nUnXUQ0uSDwlKwlY1qaNEZkx2+xtanfbZVNWOn1UyoWQRZItFv+R/PFeihp3gvOtQU/yffTLhOczRJZJ7tr7k5UOKhQRSdsg4t4FtwaYbPJAQkNEj4LkV4kCd7iH9HY1mV8/WQbmUmPx98zBgilBVwVo0VjEaE2p9wtjDgxkzdAuweEPjn05y194eKIQzn6GfqQKZ3hfZYcWJR8ODdJ9wEsU+1aY3SpYVxNlfv5tA0tuRVtWFyJEBTLE4BJgiAcBN1wNR779gVYsCTXPByNmVKQtB3eqSoNeIVKbLvIoudD8JinvE/AM9vDNHJwNprhj7NE59yWlHTwt+8/ANhTuEKVJIyzFnpS/K2T/NkJcqM1qpEGSK5iglLxQysQe5Y3nYgCLxxdctpzwsGX7jSNIypMkijsGLtsLFaFWdJzxPSd44QBphSM0euy+9Lw/Rw28kD3rkNvWB6fDQ2BBkBGNG+zsV6RU6kj8/qVDSsHVgado6gAytPx+uzdIBt66b1BqUtdZQHYdk83UOHG+tV5baddARVWheRkpZo1fJZeECTtQw2icd7bPlFMN5SjXt+SilWhC0Esh3nwIH8kQ0vEagyCgi+ai52tmClpYnXC6qLxEgye9gijDlMVV1gnzaQSap5pfeTHooUmPtZwG1axrgf7yziFMu1PzCF4IEkJ1VbQIgPvvrYfiuoz81Vq+uTqS0GtG7/ksYXdQLVUgnq9CEG/4nfRh4yFx9LdAsws2smzow/q6OeJr1wl9omYbX9jbhK2ZM/3keOZhIz3l8YrvBJAjDonL6u92nSAw4S7wpKKZj57XSzDT2jo5YzkgGD1Sr7W1No6MH5nEG2r4TD+JuQbq/3xXBV00m/TA6zig6RAjhWw7Eqi9cXGXTBG0L1jbg3n/sLWiJRiJrKTwn1LsQmQ1bARAGfeUlO/HQEHbT2SFGCxJo5DoFhdIOaaZtNI2yAysg0A3XkY9FAG8tvWviJ09mnDWWTa3lB/yHhbZTkuOWtxNnjkt2iP60ns61kTaWBaxsGtiTV3CPdGIJHBhbeS6w92jYe4q8nsEJXGAE1Ua9Ikzx7aus/a2z1ncqrH9Pak6y5eWag9NEhebAcYNPXikukd6I21GOtWJy/5QTKUTJ/GhvRT+UWEeCh0A9YnD5JvAne295ybnVq0zGZt0S2Ao201mVA4nlXb/7hEUJprsoKDRJF6MLTM73HGZxGIUrjByGBLeZMdCIN0CEsKHsi6VRJkAKqbF6EaIBqsZm/2m6BAWVqGeGa7KXCE56IFBbciT10UeekSNb+cKq0JzXn4g+E5xhgETyhkIxlwAIqk0q/8H80n1fh961byLq13d4sENfHwEmqEcOL1GLbGCy0BVVKCHR70eKQpeZZXDMdqTRNh1WV6/L7Ozf4b3/MPQhI4ZXF1M/3OPM="
+     "ones": 5055,
+     "head": "1100001011011101110100011110100001111101010101110001010010110011",
+     "bits_b64": "wt3R6H1XFLMrBMMAzQjuUphsUCnavKCGYMVn/ydD9F0gSiS+4Kq29XaodL3uFwO4iq+iUeanmD3gGc/gijT/teRuwed2BgbeBsoPH5bwk1sI+rbGJw4hzoEzI3TZeWkGEHr1rHY4Ja81DlAXYiyQO821nonE5VrZ4oVVxGA9RrgEP6Kx9n0eidjDUWyJbL+PgqGJ2F5gcP06jD7bcVH70ct+8Eht+uzFDq4ejBsAb+e33ZqWbRZsrNv/qz6GHuTm/0BMwLDBulxNMMEVfiX+z0SqR7DvSy5Z2/jNdLxrPeramer6nWmBHhDws5djDqErpNgo2F1f7L1zO1nGwLwEjfzwflCHE9XPitANXwo7z4e3cPyaDzIqTeNHz+S2tAMHYUQLVlWNi0kk9tw+m9DpWt+sptvZE95+2lqw5bGDZcmu6nBuvmX1qKr2Yi77byYW9h8bi7v7VWM2EeeO9Mo1UtfQ+NYBnH0Hdsc6H+a2RbsIWOy/OMZd8YhgdrCoO+D4bt3GoduAk5qr4lurF02VXee2RmMM0h30edQNtglLpfYEmYnSqjTOuXXkiF0fTHA7yXEOhWcOKBbDnJGGvB6kHsyHgIClEp2Smc53DH9WN4yqOEr2y+q7bP+n8XQQx2FEoI0L6riBUds+b/ZrNZvfGEglc8PFOJ0nG/MmtCl3njWC6VPEU/2Kcv1jdXj7RUjFgszjBpENY2BcMtpZa5WIPjhNHf/jgN5k4hXKrnNdOa7/Nqx0dsJenDc1y4lsEif+xoczsvINTTcX3ksVvq8MfrJ+fcQ7ITETpVjksvI/4B34SzFzcQRvN3iZNnUXxPBH5BqiHMt8dw94R9ZcXufAFiGQDotDxRUScyn7MwOMTa+81FqwnQq7G/pD2KvqM5upG/zospZFAuLQa3Pj01U/8mvtHjFrMKLCu6Y/YRvyhtqOzp2jSSgf/VK4B7dcKJw15S0SO/i5iWFszfzc0pr2Qz7B1KWlf4s5x9qjCqCk1fQgLOqVxO/tl9qjdArzssb6dpWiUw41uBtj/DLUA4KllqWw1BQaqCoQtmA+R31laxGAgJgs3rvQMbbW04d4AEIpgb1pAGZVL5ADvrjsixhdCfJTnuEkH0JXcsUpr8Ykpu1sHBhiWFrpEGht336w/lgZ5fr03vHFDE4Qj6VvoVpMLopX7b9vbNksM9xYioXt2zL6kPlAcu/gglIyNQqHsDbdm76eftDWhgRg2ZaYiGs3Y9hUn2VzDCTuCJp+swWgqZgMl7OrUallDKfMO207Y5DTWaU+VK6wd6nFfQYp4hAjpGsx3GrR31n189bv2+Ur9YAhoJUE0vAMlegV+jpKX4yKf3/Ovp/JyCjXd5B4/iQFMvDjSRaUzIJPXQuuijpq/lpYcgYtYHQBFNZOlI99e8dUGgah9uNjd2bXVOG8x7pXTVYC++jWb3zyquGDxNLI/1Lx6Ee3HFwXe8SeSa99Ew3FE8B18EAOQIXE35zAX0KwE3cbdClyU8cWbRkVJJbk1h8H2XDT6bd0m0tuIAnupBNwrHAG1rHR7BR8MVbEFwP66D6qbJmWhARSUJiRolDI8xM+JixJOAvBKhGCxkKfL5iyyE0eAtHoVWSSzNac3w73SKhV8RerR/Jm69ZjxVklYrdXj1fsds07l3ETiqTuj3nTUsg="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:humanoid ⊕ 단어:울산",
+     "name": "키워드:humanoid ⊕ 단어:로봇",
      "dim": 10000,
-     "ones": 4969,
-     "head": "0010011011001101111001101001010100101111110001111010101111010100",
-     "bits_b64": "Js3mlS/Hq9RHmqAh6Tlz67WPCAcQg2LVU4y4dE7pJ0Cq3T/SdFvLH8IiphrxsPNyy31Yp4dur9+E07EG5awEZ6dJt6pn2b8o5RgzAGOKI7wKTO/cAGgUU5tjGVIHKgs9spmz5ELID9Xi/+/8vnU4l9GehnBH7RwJr+2FJU2PwVQJl7gDEfVuYtzQpVRdKiQIvWf6V5K+bQlKrMYrNFOlX/aw9lqj1vJdLL5b4kHe+eFd95l8LafKnRJcm6/LAp8Rys1ZQUu15eF1cF+vQWorfooLNr/WIh3DSCnkvHMZ8PWd+G83J+izvMhP/hweQfxx4jQ1OHRvFjiy2wTmDYnQfMv2uZS9h5KZ6MP1xlBgGQE/ciAJT3OWhv9e5sxHITnUz8FKuhhUCAOkhNEoGAMPnHTFCoVqvfE0BjGJRuGpBq8ychiButkrMNJrNxDMshLPZ0ad+RoNvbNbTwPkzaHn716LrYeFD4yNrfCWh567jvL9AgvbV6oQJhRWOXk/2Jf/21QpArhSBBGcSDNGfht/pUYqbwjrLu9bQF1BnXt4659c3VdW3dVJEjjwC49i1TC9YG7fJLktcA8tpB3dNpwQpw9ijwQ9Pr0kSntvBpOJ+aiVWKoQ7ayq/QaSjyKemcC99+wJHGNV+njWBpKY0hiInEncgST+q2U4Bo0srK6ldTYaEThRnwAiNBaGH99xeLAXqks/EuFtoJrj6dF8f+nXkBpMJuffyaKsIl+sLTDCHhV9gF4QWjJfSXXyRuwFpW8yYmfJZ8cHocjPvPoI+HYoz0YCTD8be9YPBWiHltkN+uevO7zEDCbAgJwleQRnvdduW+JYOmsnUFD7WAsc1BiGyJD0OtfrfiqP14RtUzZRko1xmxtTVMj0wGnD1DGbWvBQlRgg8YlQxXyeBtw6yaZhkp23rEZHj1S4pOf1UIiRJPnYjKGgE6c92nMjlIqKgBrZchlUxwqMUiva/VWkd+MgseZTVGkN1Bsaf5Q9qiqN8N5Yq6CKbFYbCSLYzG79f0W2NjzyD7Olh/6W0AXafqZHZbn1X7dkoQT3X7O66yvlCLn/Dt1j68PeyRU1g1JfBf1qWfuLCURpwez2JhbhEm8wpI2pKE4zAdSB0O4RomWYmcs8/kctvmxeLGsr7wjq8n4m61BNmQvw+7s3ByiVGzpraOj25sLHWC7LytUO6E5RORTOJphMaKpAQL2unQ25DGYIhMPa0DKEQcJ27XeJMkbTA2eA6MevgVM58NQu1j/gpIVuAgz2tShNL+HbKUbiCyIrx6grH+ydu2C4CxcEn1WaF16CD2SEvrwwlffq84b5HuC/rRAkrdYiYAUtZWKYdNO7S3qGg6gzoSNs4UjS1rKrw1BqgpqNerHcVc9ZD02DFYmr8e2wyD+fAtvYmjcpCEnG/qvfq6SUyJMUhnmdZ0lZNNctJEMOyl3bFWusnYadmY0PpQT90Tt6tT4KXSJgCwxeNXK57QzF7yqA9M3h5ggbSowzFCtIrt61i967oiSvS1KXLJRRLSW8uS62FxAi9iRN7RnApA8ZIQ8LmJDnSmq6w7hGgxPT0d7DeX9fmZGOQCLH4/RMSkj0oPgjtJhi5V0+6jaBsWu7KcqVSMNH7/oH+tpOoqG5s3xL6rFj79S77QZhcnD0HBLlNEL0/pWJMgds1Cg="
+     "ones": 4893,
+     "head": "0010111011101011001011111100101011011111000001001010100101101111",
+     "bits_b64": "Lusvyt8EqW+kXrGNP72XnOdIKFppjVvXqyrIc2SG8RdxVydIaBPXupu5hZKj7HXtHim7vjCBLo/0P3IdMrlYyxBv7SC9mTTaASTSlIiDhBeBSSHN24QJ3DAwor56z5OE4qi6LRIoueHV/f1CayQQiWWM8S7OT6LC4qC9GWa7D9sXa7UMDKeVcRxY4vFxSdmi8gPCS0oLM1W/Ovqzp7kNtNIjLgy4GXkBxDQjF3ZVdC240GbthubgDhB3reRdzp9099+lFHYeN2wh04ME+ZlyzHj0RGyevH8yytVw6h4dNACIdG1sHfkdmAyrsqyiA+UUNdhUhLfdVTz4sL+BjCFJQzkrJ59K/cGZRhfcrRKj+MPwkvvoyD77qEWM2t1h+1/1kZo9IFX7F1/wJIADD5ViHDQZGm5TaGOX3ocns6jNsPopb+9lJbA5cB93FZhAWMKB4DvXgkErzwxp76vfUOYAGAwqYwZrdSG+bdP5LRl/7wmmdqllSWTNp49Djx3sDK8S10l8/5Ogoe596LiaE/JCzUOJANkI3nkyNksutYMMTqY3SA9NtzvsLXPZkE0PwxFVa8BtXd1CFvjkbB5pRttd8jFTQHf8Ceo6BR9cE85mRC10pexKZ6hJT48Vdur/K2qQmGoEqWMGny9BWyxQV+G6NLCj54ByXOvNavAaHh+A2EQ2M4TeDwnYnSLmtB6HgJioVLPqEGlh2ysBFc5fUTL7Ie3rbyyQVCTStsTGgGjQ4FAxwnIJx1b00+fq+PFu1pHweaN9zt5fCUlFFrVIHM61I2IU5Al5IqePFTxVrexJdgMSQFPl8FnR/c3qy1x0yzrOf3kGt610NvexFdX+4NEwaNHBkdV/sJUWYOWkG+3/UxuBGhyDVvTfkjn5qW3id+HtFh+Rg3JPASZRgoM7DjjrX8bfUvYImKMhX8nFj2m73Aj+jfFW8WSxjgydJ1MpOkD74jaTrvvfL2uwzyCn42fk5cfZ9MeYGPsFdsKhCym3A5cIEJA5yQwLE0AxYfcxE8TCJrtjguKIkRW8Lgfm4ZpMBHWXiK1s5iStwEt9QSIzbpXcLdN8p3mNLYkYC4ZP7X66RAdUpqb/Fudl9gH6XAc4fjZF+qGklJhHoBNuzhKWtPFH+yuO/XRCsbtxr41RVgRuhjBzCPPA2TEBy9s6/mG4Pyvv9wmsKUMRsVjUplGF7KdVwuKWc97t4YMcYs8KvyUxfKwEtSk9nT6f5zi2t0h3C8aViIM94OMzQKv9oeOjn8DAqhJ6VyxMbuOWeTDf3pYtQi7IU8Bqyt+jPb0Qp3OnUZqUY0wCeeTwN45Nu1+pgYuhZunV4uyF6j7iDPRrUjmRwNRpRIfmCdhsHJMOXzSYJcMkkxCmUzdZWfaIn2w4pDblkgs8eETGijPfsrGKqFDgitgUjnZuCLF10BWVdpZOm/h4sFU5tGNAEUAlVEYQjh0tfv6N1Psr77B3E6ycNefXUpDBzW3nh9RmwgVoKUgBNaWsCIJQTIAcPKkvh9chhKwKGUFA1wxANnMEviS4A9CZCb84AhR86i6QS8mnunEgOrpNfwYgldi7uq1xy75yLGYYMnVeuvmAVzeNYg06CowmM7gUZ9iIZIKzgUCROICLY5CL9lBLqL0wqFNNrdgLZEPNxhDgBaASnjuvlaSiabFIvhM="
     },
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 5
+     "value": 67
     },
     {
      "type": "value",
@@ -2299,9 +4723,360 @@
      ],
      "rows": [
       [
+       "로봇",
+       8,
+       0.7072,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "AI",
+       2,
+       0.1827,
+       0,
+       0.0,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "제조",
+       1,
+       0.0912,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "미래",
+       1,
+       0.1013,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "집결",
+       1,
+       0.0634,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "열광",
+       1,
+       0.1066,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "로보월드",
+       1,
+       0.0725,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "폐막",
+       1,
+       0.0897,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "일본",
+       1,
+       0.0736,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스포",
+       1,
+       0.0861,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "개막",
+       1,
+       0.0917,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "사흘",
+       1,
+       0.0823,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "독일",
+       1,
+       0.0813,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "규모",
+       1,
+       0.0887,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "실증센터",
+       1,
+       0.0856,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "구축",
+       1,
+       0.0883,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "추진",
+       1,
+       0.0823,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "구글",
+       1,
+       0.1035,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "제미나이",
+       1,
+       0.0965,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "로보틱스",
+       1,
+       0.0928,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "공개",
+       1,
+       0.0906,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "손재주",
+       1,
+       0.1017,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "작업",
+       1,
+       0.0997,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "신뢰",
+       1,
+       0.1001,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "향상",
+       1,
+       0.0918,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "통신사",
+       1,
+       0.0896,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "유비테크",
+       1,
+       0.0863,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "맞손",
+       1,
+       0.09,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "가정",
+       1,
+       0.0931,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "보급키로",
+       1,
+       0.0931,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "중국",
+       1,
+       0.0812,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기업",
+       1,
+       0.0912,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "도입",
+       1,
+       0.1014,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "정도",
+       1,
+       0.0752,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "피규어AI",
+       1,
+       0.0934,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "운영",
+       1,
+       0.0824,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "현장",
+       1,
+       0.0915,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "관리자",
+       1,
+       0.0943,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "채용",
+       1,
+       0.0935,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
        "울산",
        1,
-       0.4401,
+       0.0824,
        0,
        0.0,
        "",
@@ -2310,7 +5085,7 @@
       [
        "남구",
        1,
-       0.46,
+       0.107,
        0,
        0.0,
        "",
@@ -2319,16 +5094,7 @@
       [
        "상하이",
        1,
-       0.4572,
-       0,
-       0.0,
-       "",
-       ""
-      ],
-      [
-       "로봇",
-       1,
-       0.4493,
+       0.099,
        0,
        0.0,
        "",
@@ -2337,7 +5103,151 @@
       [
        "실증기지",
        1,
-       0.4439,
+       0.0819,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스와이",
+       1,
+       0.1001,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "KAIST",
+       1,
+       0.1016,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기반",
+       1,
+       0.083,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인간",
+       1,
+       0.0903,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "상호작용",
+       1,
+       0.0971,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "공동",
+       1,
+       0.0943,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "연구",
+       1,
+       0.0677,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "협약",
+       1,
+       0.0999,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "체결",
+       1,
+       0.0781,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "KISTEP",
+       1,
+       0.0985,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "한국",
+       1,
+       0.098,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "경쟁력",
+       1,
+       0.0828,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "하드웨어",
+       1,
+       0.0915,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "데이터",
+       1,
+       0.1014,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "생태",
+       1,
+       0.0991,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "확장",
+       1,
+       0.1096,
        0,
        0.0,
        "",
@@ -2358,8 +5268,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 5,
-    "hdc_answer": 5,
+    "count_answer": 59,
+    "hdc_answer": 59,
     "agree": true
    },
    "source": {
@@ -2695,7 +5605,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 3
+     "value": 7
     },
     {
      "type": "value",
@@ -2724,6 +5634,16 @@
        ]
       ],
       [
+       "에너지신문",
+       "2029년까지 이차전지 실증센터 조성…KTR,189억원 투입해",
+       [
+        "실증센터",
+        "조성",
+        "KTR",
+        "투입"
+       ]
+      ],
+      [
        "뉴시스",
        "정부, WTO서 EU 배터리·철강 등 기술규제에 우려 제기",
        [
@@ -2743,6 +5663,40 @@
         "SW",
         "내년",
         "유망"
+       ]
+      ],
+      [
+       "에너지신문",
+       "[인터뷰] 박용선 포항시장 “배터리 엑스포, 국제 산업협력 플랫폼으로 발전”",
+       [
+        "인터뷰",
+        "박용선",
+        "포항시장",
+        "엑스포",
+        "국제",
+        "산업협력",
+        "플랫폼",
+        "발전"
+       ]
+      ],
+      [
+       "에너지신문",
+       "배터리 기술, 시민 일상 속으로···보고 즐기는 체험축제",
+       [
+        "기술",
+        "시민",
+        "일상",
+        "체험축제"
+       ]
+      ],
+      [
+       "에너지신문",
+       "배터리 속 핵심광물, 어떤 역할 하나···폐배터리 회수기술도 조명",
+       [
+        "핵심광물",
+        "역할",
+        "회수기술",
+        "조명"
        ]
       ]
      ]
@@ -2800,7 +5754,7 @@
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 16
+     "value": 36
     },
     {
      "type": "value",
@@ -2861,7 +5815,7 @@
       [
        "차세대",
        1,
-       0.2577,
+       0.174,
        0,
        0.0,
        "",
@@ -2870,7 +5824,7 @@
       [
        "센서",
        1,
-       0.258,
+       0.1658,
        0,
        0.0,
        "",
@@ -2879,7 +5833,7 @@
       [
        "액추에이터",
        1,
-       0.2561,
+       0.1711,
        0,
        0.0,
        "",
@@ -2888,7 +5842,7 @@
       [
        "로봇",
        1,
-       0.2726,
+       0.1681,
        0,
        0.0,
        "",
@@ -2897,7 +5851,7 @@
       [
        "미래",
        1,
-       0.2364,
+       0.1697,
        0,
        0.0,
        "",
@@ -2906,7 +5860,43 @@
       [
        "성장동력",
        1,
-       0.2325,
+       0.162,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "실증센터",
+       1,
+       0.1541,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "조성",
+       1,
+       0.1698,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "KTR",
+       1,
+       0.1518,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "투입",
+       1,
+       0.1433,
        0,
        0.0,
        "",
@@ -2915,7 +5905,7 @@
       [
        "정부",
        1,
-       0.2468,
+       0.1635,
        0,
        0.0,
        "",
@@ -2924,7 +5914,7 @@
       [
        "WTO",
        1,
-       0.2615,
+       0.1823,
        0,
        0.0,
        "",
@@ -2933,7 +5923,7 @@
       [
        "EU",
        1,
-       0.2712,
+       0.1739,
        0,
        0.0,
        "",
@@ -2942,7 +5932,7 @@
       [
        "철강",
        1,
-       0.2622,
+       0.1711,
        0,
        0.0,
        "",
@@ -2951,7 +5941,7 @@
       [
        "기술규제",
        1,
-       0.2495,
+       0.1621,
        0,
        0.0,
        "",
@@ -2960,7 +5950,7 @@
       [
        "우려",
        1,
-       0.2427,
+       0.1603,
        0,
        0.0,
        "",
@@ -2969,7 +5959,7 @@
       [
        "제기",
        1,
-       0.2643,
+       0.1652,
        0,
        0.0,
        "",
@@ -2978,7 +5968,7 @@
       [
        "SW",
        1,
-       0.2331,
+       0.1486,
        0,
        0.0,
        "",
@@ -2987,7 +5977,7 @@
       [
        "내년",
        1,
-       0.2423,
+       0.1732,
        0,
        0.0,
        "",
@@ -2996,7 +5986,151 @@
       [
        "유망",
        1,
-       0.2527,
+       0.1825,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "인터뷰",
+       1,
+       0.1661,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "박용선",
+       1,
+       0.1578,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "포항시장",
+       1,
+       0.1668,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "엑스포",
+       1,
+       0.174,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "국제",
+       1,
+       0.1727,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "산업협력",
+       1,
+       0.1619,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "플랫폼",
+       1,
+       0.175,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "발전",
+       1,
+       0.1688,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "기술",
+       1,
+       0.1764,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "시민",
+       1,
+       0.1562,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "일상",
+       1,
+       0.1432,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "체험축제",
+       1,
+       0.1696,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "핵심광물",
+       1,
+       0.1568,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "역할",
+       1,
+       0.1707,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "회수기술",
+       1,
+       0.1686,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "조명",
+       1,
+       0.1624,
        0,
        0.0,
        "",
@@ -3017,8 +6151,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 16,
-    "hdc_answer": 16,
+    "count_answer": 36,
+    "hdc_answer": 36,
     "agree": true
    },
    "source": {
@@ -3227,33 +6361,33 @@
      "rows": [
       [
        "피지컬 AI",
-       6,
+       14,
        0,
-       4,
+       15,
        null,
        "예열 중"
       ],
       [
        "AI 인프라",
-       2,
+       5,
        0,
-       0,
+       5,
        null,
        "예열 중"
       ],
       [
        "로봇",
-       13,
+       51,
        0,
-       8,
+       48,
        null,
        "예열 중"
       ],
       [
        "휴머노이드",
-       1,
+       10,
        0,
-       0,
+       2,
        null,
        "예열 중"
       ],
@@ -3275,7 +6409,7 @@
       ],
       [
        "배터리",
-       3,
+       7,
        0,
        0,
        null,
@@ -3301,7 +6435,22 @@
   }
  ],
  "log": {
-  "fetched": {},
+  "fetched": {
+   "한국경제": 100,
+   "매일경제": 50,
+   "이데일리": 50,
+   "지디넷코리아": 30,
+   "블로터": 50,
+   "전자신문": 28,
+   "뉴시스": 200,
+   "로봇신문": 50,
+   "디일렉": 50,
+   "에너지신문": 50,
+   "아이뉴스24": 100,
+   "테크엠": 50,
+   "조선비즈": 100,
+   "서울경제": 50
+  },
   "failures": [],
   "notes": []
  }
