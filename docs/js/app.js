@@ -380,7 +380,9 @@ async function setupTrend(trace) {
           el("a", { href: x[3], target: "_blank", rel: "noopener" }, x[2]))))) : null,
       calc));
   }
-  ol.replaceChildren(...cards);
+  let when = "";
+  try { const sm = await getJSON("data/trend/summary.json"); when = `${sm.date} ${sm.at.slice(11, 16)} 기준. `; } catch {}
+  ol.replaceChildren(el("li", { class: "hint" }, `${when}'오늘'은 그날 0시부터 마지막 수집까지 모인 제목이다.`), ...cards);
 }
 
 async function drawTrend(kid, trace, ol) {
@@ -409,7 +411,7 @@ async function drawTrend(kid, trace, ol) {
   const mine = [];
   for (const r of rows) mine.push(await askPast(r[0]));
   const ok = rows.every((r, i) => Math.abs(r[4] - mine[i]) < 1e-4);
-  ol.replaceChildren(
+  ol.replaceChildren(...[
     day.warmup ? el("li", { class: "check" }, `예열 중: 과거 자료가 있는 날이 ${day.past_days_with}일뿐이라 과거 프로토타입이 얕다. 대부분 새 조합으로 보인다.`) : null,
     card("①", `오늘 '${day.name}'이 든 제목 ${day.titles_today}개 → 명사`, "일반 계산", S("일반 계산"),
       el("ul", { class: "titles" }, day.titles.slice(0, 8).map((x) => el("li", {},
@@ -427,7 +429,7 @@ async function drawTrend(kid, trace, ol) {
     card("⑤", "오늘 문맥과 과거 문맥 전체 비교", "비교", steps.filter((s) => s.op === "비교")[1],
       el("div", { class: "values" }, el("span", { class: "chip" }, "HDC 코사인 ", el("b", {}, day.cos_hdc == null ? "없음" : fmt(Number(day.cos_hdc.toFixed(3))))),
         el("span", { class: "chip" }, "단어 횟수(BoW) 코사인 ", el("b", {}, day.cos_bow == null ? "없음" : fmt(Number(day.cos_bow.toFixed(3))))))),
-  );
+  ].filter(Boolean));
 }
 
 // ---------- 오늘(장중 채점) ----------
