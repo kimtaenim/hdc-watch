@@ -438,6 +438,43 @@ async function drawTrend(kid, trace, ol) {
   const mine = [];
   for (const r of rows) mine.push(await askPast(r[0]));
   const ok = rows.every((r, i) => Math.abs(r[4] - mine[i]) < 1e-4);
+  // ② 묶기 예시: 가장 많이 나온 낱말이 든 제목 하나
+  const bindDemo = [], bundleDemo = [];
+  if (pair) {
+    const ti = day.word_titles?.[top]?.recent?.[0] ?? 0;
+    const ex = day.titles[ti];
+    const exWords = ex[4].slice(0, 6);
+    bindDemo.push(
+      el("p", { class: "plain" }, "제목: ", el("b", {}, ex[2])),
+      el("p", { class: "plain" }, `이 제목에서 '${day.name}' 옆에 나온 낱말 ${ex[4].length}개가 각각 짝 벡터 하나가 된다:`),
+      el("div", { class: "pairs" }, exWords.map((w) => el("span", { class: "chip" }, `${day.name} ⊕ ${w}`)), ex[4].length > 6 ? el("span", { class: "hint" }, " ...") : null),
+      el("p", { class: "plain" }, `그중 '${day.name} ⊕ ${top}'을 칸마다 보면, 위아래 두 칸이 같으면 0, 다르면 1:`),
+      bitRows([{ name: day.name, bits: kv }, { name: top, bits: wv }, { name: "짝 벡터", bits: pair, line: true }], dim),
+      el("p", { class: "hint" }, `짝 벡터는 '${day.name}'과도 '${top}'과도 닮지 않은 새 벡터다(닮음 ${fmt(Number(H.similarity(pair, kv).toFixed(3)))}, ${fmt(Number(H.similarity(pair, wv).toFixed(3)))}). 이 짝이 '${day.name} 옆에 ${top}'이라는 뜻을 맡는다.`));
+    // ③ 더하기 예시: 짝 셋을 +1/-1로 바꿔 칸마다 더하고, 다 더한 프로토타입에 짝을 대 본다
+    const three = day.rows.slice(0, 3).map((r) => r[0]);
+    const pv = {};
+    for (const w of three) pv[w] = H.bind(kv, await H.makeVector(`단어:${w}`, dim));
+    const pm = (v) => Array.from(v, (x) => (x ? 1 : -1));
+    const sum3 = Array.from({ length: dim }, (_, i) => three.reduce((acc, w) => acc + (pv[w][i] ? 1 : -1), 0));
+    const rn = Math.sqrt(recent.reduce((acc, c) => acc + c * c, 0));
+    const askRecent = (v) => { let d = 0; for (let i = 0; i < dim; i++) d += (v[i] ? 1 : -1) * recent[i]; return rn ? d / (Math.sqrt(dim) * rn) : 0; };
+    const probeWords = [...day.rows.slice(0, 3).map((r) => [r[0], r[1]])];
+    if (day.rows.length > 8) probeWords.push([day.rows[day.rows.length - 1][0], day.rows[day.rows.length - 1][1]]);
+    probeWords.push(["바나나", 0]);
+    const probes = [];
+    for (const [w, n] of probeWords) probes.push([w, n, askRecent(H.bind(kv, await H.makeVector(`단어:${w}`, dim)))]);
+    const pmax = Math.max(0.01, ...probes.map((x) => x[2]));
+    bundleDemo.push(
+      el("p", { class: "plain" }, "짝 벡터의 0을 -1, 1을 +1로 바꿔 칸마다 더한다. 짝 셋만 더해 보면:"),
+      bitRows([...three.map((w) => ({ name: `⊕ ${w}`, vals: pm(pv[w]) })), { name: "합", vals: sum3, line: true }], dim, 3, 3),
+      el("p", { class: "plain" }, `${RL}의 짝 ${fmt(proto.recent.n)}개를 이렇게 모두 더한 것이 최근 프로토타입이다(지난 4주는 ${fmt(proto.past.n)}개로 따로).`),
+      el("p", { class: "plain" }, "더하기만 했는데도, 프로토타입에 짝을 대 보면 자주 들어간 짝일수록 닮음이 크고 한 번도 안 들어간 짝은 0 근처다:"),
+      el("div", { class: "hbars" }, probes.map(([w, n, v]) => el("div", { class: "hbar" },
+        el("span", { class: "hl" }, `⊕ ${w}`), el("span", { class: "track" }, el("span", { class: "hb", style: `width:${Math.max(0, v / pmax) * 100}%` })),
+        el("span", { class: "hv" }, `${Number(v.toFixed(3))} (${n}번)`)))),
+      el("p", { class: "hint" }, "'바나나'는 일부러 넣은, 한 번도 나오지 않은 낱말이다. 무관한 짝의 닮음은 0 근처에서 약 0.01 흔들린다."));
+  }
   ol.replaceChildren(...[
     el("li", { class: "section-title" }, "HDC 계산 과정"),
     card("①", `${RL} '${day.name}'이 든 제목 ${day.titles_recent}개 → 명사`, "일반 계산", S("일반 계산"),
@@ -449,10 +486,8 @@ async function drawTrend(kid, trace, ol) {
           el("ul", { class: "titles" }, day.titles.map(li)));
       })()
         : el("p", { class: "hint" }, `${RL} 동안 이 키워드가 든 제목이 없다.`)),
-    pair ? card("②", `묶기: 키워드 ⊕ '${top}'`, "묶기", S("묶기"),
-      bitRows([{ name: `키워드:${day.name}`, bits: kv }, { name: `단어:${top}`, bits: wv }, { name: "묶은 결과", bits: pair, line: true }], dim)) : null,
-    card("③", `정수 프로토타입: ${RL} ${proto.recent.n}개, 과거 ${proto.past.n}개 조합`, "더하기", S("묶기"),
-      bitRows([{ name: "최근", vals: recent }, { name: "과거", vals: past }], dim, 3, 3)),
+    pair ? card("②", "묶기: 제목 하나 → 짝 벡터 여러 개", "묶기", S("묶기"), ...bindDemo) : null,
+    pair ? card("③", "더하기: 짝 벡터를 모두 더한 것이 프로토타입", "더하기", S("묶기"), ...bundleDemo) : null,
     card("④", "과거에 물어보기", "비교", S("비교"),
       colTable(["단어", "최근", "과거 횟수", "과거 점수", "판정"],
         rows.map((r, i) => [r[0], r[1], r[3], Number(mine[i].toFixed(3)), r[5] || ""]), -1, () => {}),

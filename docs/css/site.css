@@ -239,3 +239,9 @@ th { position: sticky; top: 0; background: var(--card); }
 .words .w-n { flex: 0 0 3em; text-align: right; font-variant-numeric: tabular-nums; font-size: .8rem; }
 .words .w-past { flex: 0 0 3.6em; color: var(--muted); font-size: .75rem; }
 .words .once { font-size: .8rem; color: var(--muted); line-height: 1.7; }
+
+.plain { font-size: .86rem; margin: 6px 0; }
+.pairs { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 8px; }
+
+.hbar .hl { width: 7.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar .hv { flex: 0 0 6.8em; white-space: nowrap; font-size: .74rem; }
