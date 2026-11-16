@@ -1284,5 +1284,19 @@
   "trace": "data/volume/045510.KQ/traces/live-20261116-120108.json",
   "delay_min": 26,
   "note": null
+ },
+ {
+  "at": "2026-11-16T15:15:25+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 49
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(12:01)과 194분 간격: 사이 실행 5번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/live-20261116-151525.json",
+  "delay_min": 10,
+  "note": null
  }
 ]
