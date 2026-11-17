@@ -1,0 +1,423 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "volume.close",
+ "subject": {
+  "type": "stock",
+  "id": "045510.KQ",
+  "code": "045510",
+  "name": "정원엔시스"
+ },
+ "started_at": "2026-11-17T16:47:12+09:00",
+ "finished_at": "2026-11-17T16:47:13+09:00",
+ "params": {
+  "D": 10000,
+  "as_of": "2026-11-17T16:47+09:00",
+  "simulated": false
+ },
+ "code": {
+  "commit": "df02bec666b418833f0dd72c40328192f5394d3a",
+  "dirty": false
+ },
+ "sections": [
+  {
+   "title": "오늘 자료",
+   "text": "2026-11-17 16:47 기준",
+   "from_index": 1
+  },
+  {
+   "title": "채점",
+   "text": "",
+   "from_index": 2
+  },
+  {
+   "title": "장 마감 갱신",
+   "text": "",
+   "from_index": 3
+  }
+ ],
+ "steps": [
+  {
+   "index": 1,
+   "section": "오늘 자료",
+   "name": "오늘 5분봉을 30분 칸으로",
+   "op": "일반 계산",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "끝난 30분 칸은 '확정', 지금 진행 중인 칸은 '잠정'(거래량이 아직 다 안 찼다), 시작 전 칸은 '아직'. 끝났는데 5분봉이 하나도 없는 칸은 '자료 없음'으로 두고 채점과 갱신에서 뺀다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "평소 거래량(중앙값)과 단계 경계는 학습 때 값을 그대로 쓴다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 봉",
+     "columns": [
+      "시간",
+      "거래량",
+      "5분봉 수",
+      "상태",
+      "배율",
+      "단계"
+     ],
+     "rows": [
+      [
+       "09:00",
+       17968,
+       5,
+       "확정",
+       4.42,
+       8
+      ],
+      [
+       "09:30",
+       144,
+       3,
+       "확정",
+       0.05,
+       1
+      ],
+      [
+       "10:00",
+       3833,
+       6,
+       "확정",
+       1.55,
+       6
+      ],
+      [
+       "10:30",
+       3529,
+       6,
+       "확정",
+       3.86,
+       7
+      ],
+      [
+       "11:00",
+       17263,
+       5,
+       "확정",
+       8.68,
+       9
+      ],
+      [
+       "11:30",
+       974,
+       5,
+       "확정",
+       0.59,
+       5
+      ],
+      [
+       "12:00",
+       152,
+       3,
+       "확정",
+       0.1,
+       2
+      ],
+      [
+       "12:30",
+       7946,
+       1,
+       "확정",
+       6.09,
+       8
+      ],
+      [
+       "13:00",
+       4845,
+       4,
+       "확정",
+       3.05,
+       7
+      ],
+      [
+       "13:30",
+       8063,
+       4,
+       "확정",
+       4.34,
+       8
+      ],
+      [
+       "14:00",
+       36277,
+       6,
+       "확정",
+       19.77,
+       10
+      ],
+      [
+       "14:30",
+       11399,
+       6,
+       "확정",
+       1.83,
+       6
+      ]
+     ]
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/data.py",
+    "line": 43,
+    "function": "slots_from_5m"
+   }
+  },
+  {
+   "index": 2,
+   "section": "채점",
+   "name": "봉 벡터를 만들어 프로토타입과 비교",
+   "op": "비교",
+   "why": [
+    {
+     "kind": "설계 선택",
+     "text": "봉 벡터 = 요일 ⊕ 시간대 ⊕ 단계. 정수 점수(본)와 이진 점수(비교용)를 잰다. 판정 기준은 학습 때 값이다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "'잠정' 칸은 거래량이 덜 찬 상태라 단계가 낮게 나오기 쉽다. 판정을 확정으로 읽지 않는다."
+    }
+   ],
+   "inputs": [],
+   "outputs": [
+    {
+     "type": "table",
+     "name": "오늘 점수",
+     "columns": [
+      "시간",
+      "상태",
+      "단계",
+      "정수 점수",
+      "이진 점수",
+      "판정"
+     ],
+     "rows": [
+      [
+       "09:00",
+       "확정",
+       8,
+       0.1201,
+       0.0916,
+       "평소"
+      ],
+      [
+       "09:30",
+       "확정",
+       1,
+       0.0932,
+       0.05,
+       "평소"
+      ],
+      [
+       "10:00",
+       "확정",
+       6,
+       0.122,
+       0.0678,
+       "평소"
+      ],
+      [
+       "10:30",
+       "확정",
+       7,
+       0.1318,
+       0.074,
+       "평소"
+      ],
+      [
+       "11:00",
+       "확정",
+       9,
+       0.1073,
+       0.0592,
+       "평소"
+      ],
+      [
+       "11:30",
+       "확정",
+       5,
+       0.1377,
+       0.0548,
+       "평소"
+      ],
+      [
+       "12:00",
+       "확정",
+       2,
+       0.1219,
+       0.0614,
+       "평소"
+      ],
+      [
+       "12:30",
+       "확정",
+       8,
+       0.0948,
+       0.0454,
+       "평소"
+      ],
+      [
+       "13:00",
+       "확정",
+       7,
+       0.1135,
+       0.0472,
+       "평소"
+      ],
+      [
+       "13:30",
+       "확정",
+       8,
+       0.101,
+       0.0518,
+       "평소"
+      ],
+      [
+       "14:00",
+       "확정",
+       10,
+       0.1177,
+       0.085,
+       "평소"
+      ],
+      [
+       "14:30",
+       "확정",
+       6,
+       0.1047,
+       0.0524,
+       "평소"
+      ]
+     ]
+    },
+    {
+     "type": "value",
+     "name": "이상 경계",
+     "value": 0.0575
+    },
+    {
+     "type": "value",
+     "name": "주의 경계",
+     "value": 0.0718
+    }
+   ],
+   "check": null,
+   "source": {
+    "file": "volume/model.py",
+    "line": 65,
+    "function": "counter_score"
+   }
+  },
+  {
+   "index": 3,
+   "section": "장 마감 갱신",
+   "name": "오늘 봉을 정수 프로토타입에 더하기",
+   "op": "더하기",
+   "why": [
+    {
+     "kind": "수학적 사실",
+     "text": "정수 프로토타입은 봉 벡터의 +1/-1을 칸마다 더하기만 하면 갱신된다. 다시 학습하지 않는다."
+    },
+    {
+     "kind": "설계 선택",
+     "text": "평소 거래량(중앙값), 단계 경계, 판정 기준은 바꾸지 않는다. 바꾸려면 학습을 다시 돌린다."
+    }
+   ],
+   "inputs": [
+    {
+     "type": "value",
+     "name": "더하기 전 봉 수",
+     "value": 723
+    }
+   ],
+   "outputs": [
+    {
+     "type": "value",
+     "name": "더한 봉",
+     "value": 12
+    },
+    {
+     "type": "value",
+     "name": "더한 뒤 봉 수",
+     "value": 735
+    },
+    {
+     "type": "table",
+     "name": "앞 4칸의 변화",
+     "columns": [
+      "칸",
+      "전",
+      "더한 값",
+      "후"
+     ],
+     "rows": [
+      [
+       1,
+       -1,
+       0,
+       -1
+      ],
+      [
+       2,
+       23,
+       -2,
+       21
+      ],
+      [
+       3,
+       -155,
+       -4,
+       -159
+      ],
+      [
+       4,
+       -1,
+       0,
+       -1
+      ]
+     ]
+    },
+    {
+     "type": "vector",
+     "name": "갱신된 이진 프로토타입",
+     "dim": 10000,
+     "ones": 5044,
+     "head": "0100110010111000010010101000011001001101010111110010011011111001",
+     "bits_b64": "TLhKhk1fJvkNcZY//ke6pWLoCbkpFrMpt5TUxbJj5EIxo5ucgzSs4J3JQEWVVQaLScUTn+9/g24sNdQKI6sONHiJCBpqoMNxuXGiWG2uW0HTeNZHW5H/5eQcp/VLQghlmXsKb33czx79WrKBYRJSdKpFfFhWCUDVdb9Z05WQhs9VOecS0/kebe0sgQfJ73U5PzM7tkXTZoeVuSlrfzXyUyCTUjC3KT9DzRuytpONQPGG8MshWs5bKGnG/+nAawptBx+fVXIpFTIpyxNvJPEbxIAjlqCUUb/lRSIk4iAYvv+v6fg34bhy9qo/0Yqe19CsxQRu1dWOwGMp0W6n7/4Yhf9TAFBajqVWZ7YdncxRf3Gkrzv5F/ilw33cfU2M7SBJrGyimgw60VyeMTI8luwP9FbQRYlVPOLMP2V6aJRAF+nqhj1QHcYcQupupsPZLHD3lsr9bWI+ec7oSfLKqkVgjIZuZ25J9xG+4Ie+fxNvLwSE7tAiOElfCD8QIVlZaIU5NI15GImtkU1Ei0DjhTv3ps9ZjTC5VYjwUBZ2eFXPRgZsTWAw94lhiRSSeEijJ6qlOly41+4OoF9TeEbwuLASft5aXUdJ3TTT+9dolWjyBObCjQFp73r4uBCQdKlHueOLyfT7aPFPWDJu+sPLW6bu0uSHHR4wI+ZFUw5dWXNFlnvXwFUna05knvd92t+VDYIVFl24Wd9hKYAqWq1HEBHfxEnfmxLgQmlJbmm8YUlHaAnsVpNj/Z5kZ1v0+uSTmEQFagQXJ+nmQ48G/Yv/y2k38trUgK2t3ypRd4Rz4vuS0OYEO38lsvxUw3CnCCjOG3uWA++Pk0cWRhiiMRWqNCYUaunx5q7jQ9aSYnPhONDOeSXX2mPEKdM9jY3KnmEVQEf2WZoCtJIOluZc0/cmvuH4QFLsI9sXYXbclVxRwtCq+QlebMBgzVvpLWmTb4w8qGZ1d211sEFGES0mP6ajNg4tMaYtRLZPLJBIH4jefckNtmZNmCYvAMSuMqNYGnllf8lGNwI2xdircMkCCWrJDUF7mGKDiHaNv8hg6xtNykOHxs/Jh3ECH53j+GtoB2Qlv+RZJ/GFhuLKTt8JTaPy8JaQaA3S31MfMvpUXsdWC4xRSLaA3b2Gg10ZWBdvpnqbu/EWHx9hmEZLjbEfSpyoLVZM3ucu29x4oBP8zzKo3J66MC4jB+/2I6V66eYDANLt/90jaux+o9rNedTc+Xo5JLPUe5bOXx+JyujW34M8jG14FnLdYJ3ng1nK7uevlX0oLODOe5YEjuY7mkKP3t2pgJoHUuMDylVkx3IcWvr4G4p9r1J7z8kCmB2HHDJLvr3lK1Q5nZVqvDrN1Crz8I+CsFBB2eS/MrSiBJHsDYpFcvJVL3f2wmiW80A61n1u6j2qzbhorINfD6kbXagzcayRfewbMdw+CfcgZ4HK6ZI5Fswu7ff3Dlk62LscmVXt/24qYluE2UFv9WLmpIWZ52C0x1dUPF4NNNUrNIX4zEp5c15MxwBBEFIT+ZfQ9ba2knl8m1P/k1irmgT1IOpcJQmldg4xN3FL6ClRfdD+Dq0y3bIGeW8wc+bUtMfZ6g9Hz4Cl93F3C6XCs5nDMn98vzuwic7jh7sMByYqQUXW6dGDl0eiKDKIVJRQOtlCVA9qTFUldRD+yTo="
+    }
+   ],
+   "check": {
+    "question": "후 - 전 = 더한 봉들의 ±1 합인 칸 수",
+    "count_answer": 10000,
+    "hdc_answer": 10000,
+    "agree": true
+   },
+   "source": {
+    "file": "hdc/ops.py",
+    "line": 54,
+    "function": "Memory.add"
+   }
+  }
+ ],
+ "log": {
+  "fetched": {
+   "오늘 5분봉": 54
+  },
+  "failures": [
+   {
+    "at": "2026-11-17T16:47:12+09:00",
+    "what": "예약 실행",
+    "detail": "앞선 실행(01:57)과 890분 간격: 사이 실행 28번이 빠졌거나 밀린 것으로 보인다"
+   }
+  ],
+  "notes": []
+ }
+}
