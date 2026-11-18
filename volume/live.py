@@ -117,7 +117,9 @@ def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = Non
     for s in sessions:
         st = "확정" if closing else slot_status(s, now)
         r = slotted.get(s)
-        if st in ("확정", "잠정") and r is None:
+        if st == "잠정" and r is None:
+            st = "아직"  # 진행 중인데 5분봉이 아직 안 왔다(야후는 15분쯤 늦게 준다)
+        if st == "확정" and r is None:
             st = "자료 없음"  # 5분봉이 하나도 없다: 거래 없음과 자료 누락을 구분할 수 없어 채점·갱신에서 뺀다
         vol = r["volume"] if r else 0
         med = mj["medians"][s]["median"]
