@@ -1474,5 +1474,29 @@
   ],
   "trace": "data/trend/traces/trend-20261118.json",
   "note": "새 제목 410개"
+ },
+ {
+  "at": "2026-11-18T12:53:47+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 50
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/close-20261118-125347.json",
+  "delay_min": null,
+  "note": "따라잡기 2026-11-16: 프로토타입에 11개 더함"
+ },
+ {
+  "at": "2026-11-18T12:53:47+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 30
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261118-125347.json",
+  "delay_min": 18,
+  "note": null
  }
 ]
