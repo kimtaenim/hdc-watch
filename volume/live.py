@@ -56,7 +56,8 @@ def fetch_today(ticker: str):
             for ts, r in zip(m.index.tz_convert("Asia/Seoul"), m.itertuples())]
 
 
-def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = None):
+def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = None, catchup: bool = False):
+    """catchup=True: 예약 실행이 빠져 못 한 지난 날의 마감 갱신을 뒤늦게 한다(at = 그날 16:00)."""
     cfg = json.load(open(CONFIG, encoding="utf-8"))
     stock = next(s for s in cfg["stocks"] if s["id"] == stock_id)
     out = stock_dir(stock_id)
@@ -66,14 +67,17 @@ def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = Non
     edges = np.array(mj["edges"])
     real_now = dt.datetime.now(data.KST)
     now = at or real_now
+    simulated = at is not None and not catchup
     today = now.strftime("%Y-%m-%d")
     closing = now.time() >= CLOSE_AFTER
     kind = "volume.close" if closing else "volume.live"
     stamp = real_now.strftime("%Y%m%d-%H%M%S")
     trace_path = os.path.join(out, "traces", f"{'close' if closing else 'live'}-{stamp}.json")
     t = Trace(kind, subject={"type": "stock", "id": stock_id, "code": stock["code"], "name": stock["name"]},
-              params={"D": dim, "as_of": now.isoformat(timespec="minutes"), "simulated": at is not None})
+              params={"D": dim, "as_of": now.isoformat(timespec="minutes"), "simulated": simulated, "catchup": catchup})
     delay = None if at else scheduled_delay(real_now)
+    if catchup:
+        t.note(f"따라잡기: {today} 장 마감 갱신 예약 실행이 빠져 {real_now.strftime('%m-%d %H:%M')}에 뒤늦게 한다.")
 
     # 같은 날 앞선 실행과의 간격: 빠진 실행 추정
     runs_path = os.path.join(os.path.dirname(os.path.dirname(out)), "runs.json")
@@ -191,7 +195,7 @@ def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = Non
     live_dir = os.path.join(out, "live")
     os.makedirs(live_dir, exist_ok=True)
     day = {"stock": stock_id, "date": today, "as_of": now.isoformat(timespec="minutes"), "closing": closing,
-           "simulated": at is not None, "bars": bars, "trace": rel(trace_path)}
+           "simulated": simulated, "catchup": catchup, "bars": bars, "trace": rel(trace_path)}
     with open(os.path.join(live_dir, f"{today}.json"), "w", encoding="utf-8") as f:
         json.dump(day, f, ensure_ascii=False)
     with open(os.path.join(out, "live.json"), "w", encoding="utf-8") as f:
@@ -201,8 +205,32 @@ def run(stock_id: str, at: dt.datetime | None = None, raw_path: str | None = Non
                 "fetched": t.data["log"]["fetched"],
                 "failures": [f"{x['what']}: {x['detail']}" for x in t.data["log"]["failures"]],
                 "trace": rel(trace_path), "delay_min": delay,
-                "note": ("모의 시각 " + now.isoformat(timespec="minutes")) if at else (f"프로토타입에 {added}개 더함" if added else None)})
+                "note": ("모의 시각 " + now.isoformat(timespec="minutes")) if simulated else
+                ((f"따라잡기 {today}: " if catchup else "") + (f"프로토타입에 {added}개 더함" if added else "더한 봉 없음"))
+                if (added or catchup) else None})
     return day
+
+
+def catch_up(stock_id: str) -> str | None:
+    """최근 5일 5분봉을 한 번 받아, 프로토타입에 아직 안 들어간 지난 장날을 날짜 순서로 마감 갱신한다.
+
+    GitHub 예약 실행은 자주 빠지므로, 어느 실행이든 돌기만 하면 빠진 날을 채운다.
+    받은 5분봉은 파일로 남겨 오늘 채점에도 그대로 쓴다(두 번 받지 않는다). 그 파일 경로를 돌려준다.
+    """
+    five = fetch_today(stock_id)
+    out = stock_dir(stock_id)
+    import tempfile
+    path = os.path.join(tempfile.gettempdir(), f"hdc-5d-{stock_id}.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"fivemin": five}, f, ensure_ascii=False)
+    mj = json.load(open(os.path.join(out, "model.json"), encoding="utf-8"))
+    done = set(mj.get("dates", []))
+    today = dt.datetime.now(data.KST).strftime("%Y-%m-%d")
+    for d in sorted({r["date"] for r in five}):
+        if d < today and d not in done:
+            print(f"따라잡기: {d} 마감 갱신")
+            run(stock_id, dt.datetime.fromisoformat(d + "T16:00:00+09:00"), path, catchup=True)
+    return path
 
 
 def main():
@@ -215,7 +243,10 @@ def main():
     at = dt.datetime.fromisoformat(a.at) if a.at else None
     for sid in ([a.stock] if a.stock else [s["id"] for s in cfg["stocks"]]):
         try:
-            day = run(sid, at, a.raw)
+            raw = a.raw
+            if not at and not raw:
+                raw = catch_up(sid)
+            day = run(sid, at, raw)
             if day:
                 for b in day["bars"]:
                     if b["status"] != "아직":
