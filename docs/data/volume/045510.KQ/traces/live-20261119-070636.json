@@ -1,0 +1,45 @@
+{
+ "format": "hdc-watch-trace/1",
+ "kind": "volume.live",
+ "subject": {
+  "type": "stock",
+  "id": "045510.KQ",
+  "code": "045510",
+  "name": "정원엔시스"
+ },
+ "started_at": "2026-11-19T07:06:36+09:00",
+ "finished_at": "2026-11-19T07:06:36+09:00",
+ "params": {
+  "D": 10000,
+  "as_of": "2026-11-19T07:06+09:00",
+  "simulated": false,
+  "catchup": false
+ },
+ "code": {
+  "commit": "457988424c275e9f68197d897320ca2c42111269",
+  "dirty": false
+ },
+ "sections": [
+  {
+   "title": "오늘 자료",
+   "text": "2026-11-19 07:06 기준",
+   "from_index": 1
+  }
+ ],
+ "steps": [],
+ "log": {
+  "fetched": {
+   "오늘 5분봉": 0
+  },
+  "failures": [
+   {
+    "at": "2026-11-19T07:06:36+09:00",
+    "what": "예약 실행",
+    "detail": "앞선 실행(01:24)과 342분 간격: 사이 실행 10번이 빠졌거나 밀린 것으로 보인다"
+   }
+  ],
+  "notes": [
+   "오늘 5분봉이 없다(휴장일이거나 아직 장 전이거나 야후 지연)."
+  ]
+ }
+}
