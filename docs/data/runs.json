@@ -1543,5 +1543,19 @@
   "trace": "data/volume/045510.KQ/traces/live-20261118-140409.json",
   "delay_min": 29,
   "note": null
+ },
+ {
+  "at": "2026-11-18T16:14:58+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 48
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(14:04)과 131분 간격: 사이 실행 3번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/close-20261118-161458.json",
+  "delay_min": 9,
+  "note": "프로토타입에 12개 더함"
  }
 ]
