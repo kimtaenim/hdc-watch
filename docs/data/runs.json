@@ -1659,5 +1659,19 @@
   "trace": "data/volume/045510.KQ/traces/live-20261119-070636.json",
   "delay_min": 1,
   "note": "오늘 5분봉이 없다(휴장일이거나 아직 장 전이거나 야후 지연)."
+ },
+ {
+  "at": "2026-11-19T10:52:42+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 6
+  },
+  "failures": [
+   "예약 실행: 앞선 실행(07:06)과 226분 간격: 사이 실행 6번이 빠졌거나 밀린 것으로 보인다"
+  ],
+  "trace": "data/volume/045510.KQ/traces/live-20261119-105242.json",
+  "delay_min": 17,
+  "note": null
  }
 ]
