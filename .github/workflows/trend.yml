@@ -1,11 +1,10 @@
+# 2026-11-19부터 정기 수집은 자동 실행(volume-live.yml, keeper.py)이 한다. 이 워크플로는 손으로 한 번 돌릴 때만 쓴다.
 # RSS 제목 수집과 트렌드 문맥 분석. 거래량 따라잡기도 함께 돈다(2026-11-18).
 # 하루 네 번(한국 시각 7:20, 12:20, 17:20, 23:20). 2026-11-14 의장님 결정(두 번 → 네 번).
 # RSS는 최근 글만 주므로(매체에 따라 4-16시간치) 간격 사이 기사 일부는 받지 못한다.
 # 예약 시각은 UTC. 수십 분 밀리거나 빠질 수 있고, 그 기록은 docs/data/runs.json에 남는다.
 name: 트렌드 수집과 분석
 on:
-  schedule:
-    - cron: "20 22,3,8,14 * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -20,12 +19,6 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m trend.analyze --collect
-      - name: 거래량 따라잡기 (거래량 예약 실행이 자주 빠져서, 잘 도는 이 실행에도 붙임. 빠진 마감 갱신을 채우고 오늘 봉을 채점)
-        # 장중(08:30-16:00)에는 거래량 전용 실행이 돌고 있으므로 건너뛴다.
-        run: |
-          t=$(TZ=Asia/Seoul date +%H%M)
-          if [ "$t" -ge 0830 ] && [ "$t" -le 1600 ]; then echo "장중: 거래량 전용 실행에 맡김"; exit 0; fi
-          python -m volume.live || true
       - name: 결과 커밋
         run: |
           git config user.name "github-actions[bot]"
