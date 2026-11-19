@@ -10,6 +10,11 @@ on:
     - cron: "41 23 * * 0-4"
     - cron: "13 1,3,7,11 * * 1-5"
   workflow_dispatch:
+    inputs:
+      life_min:
+        description: "이번 실행의 수명(분). 비우면 345분. 이어달리기 확인용"
+        required: false
+        default: ""
 permissions:
   contents: write
   actions: write
@@ -27,6 +32,7 @@ jobs:
       - name: 이어달리기
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          LIFE_MIN: ${{ inputs.life_min }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

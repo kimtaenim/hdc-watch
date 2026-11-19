@@ -80,7 +80,9 @@ def relay():
 
 def main():
     start = dt.datetime.now(KST)
-    end = start + LIFE
+    life = dt.timedelta(minutes=int(os.environ["LIFE_MIN"])) if os.environ.get("LIFE_MIN") else LIFE
+    end = start + life
+    print("수명", life, "끝", end.strftime("%m-%d %H:%M"), flush=True)
     # 켜지자마자: 장중이나 마감 직후면 한 번 돌린다(빠진 날 따라잡기 포함)
     if start.weekday() < 5 and dt.time(9, 5) <= start.time() <= dt.time(17, 0):
         work()
