@@ -1,36 +1,52 @@
-# 장중 30분마다 채점, 장 마감 뒤 프로토타입 갱신. (매물벽 찾기는 2026-11-14 화면에서 빼고 멈춤. 코드는 volume/walls.py에 남김)
+# 거래량 장중 채점과 장 마감 갱신.
+# GitHub 예약 실행은 장중 30분마다 걸어 두어도 대부분 빠졌다(2026-11-18까지 기록).
+# 그래서 2026-11-19부터는 하루 한 번만 켜지면 되게 바꿨다:
+#   켜진 실행 하나가 장 끝날 때까지 살아 있으면서 30분마다(한국 시각 매시 5분, 35분) 채점하고 커밋한다.
+#   15:30이 지나면 마감 갱신을 한 번 하고 끝난다.
+# 시작 예약(한국 시각, 평일): 08:41, 그 실행이 빠졌을 때를 위한 예비 10:13, 12:13, 마감 예비 16:10, 18:10, 20:10.
+#   이미 하나가 돌고 있으면 뒤에 켜진 실행은 기다렸다가, 앞 실행이 끝난 뒤 마감 확인만 하고 끝난다.
+# 어느 실행이든 프로토타입에 빠진 지난 장날이 있으면 먼저 채운다(따라잡기, volume/live.py).
 # 예약 시각은 UTC. 한국 시각 = UTC + 9시간.
-#   장중: 평일 09:05-15:35 KST, 매시 5분과 35분 (UTC 00:05-06:35)
-#   마감: 평일 16:10, 18:10, 20:10 KST (UTC 07:10, 09:10, 11:10). 하나만 돌아도 된다.
-#   어느 실행이든 프로토타입에 빠진 지난 장날이 있으면 먼저 채운다(따라잡기).
-# GitHub 예약 실행은 기본 브랜치에 있는 워크플로만 돌고, 수십 분 밀리거나 빠질 수 있다.
-# 밀린 시간과 빠진 실행은 docs/data/runs.json에 남는다.
 name: 거래량 장중 채점
 on:
   schedule:
-    - cron: "5,35 0-6 * * 1-5"
+    - cron: "41 23 * * 0-4"
+    - cron: "13 1,3 * * 1-5"
     - cron: "10 7,9,11 * * 1-5"
   workflow_dispatch:
 permissions:
   contents: write
-concurrency: data-commit
+concurrency: volume-loop
 jobs:
   live:
     runs-on: ubuntu-latest
+    timeout-minutes: 420
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - name: 채점 (15:30 이후 실행이면 마감 갱신)
-        run: python -m volume.live
-      - name: 결과 커밋
+      - name: 장 끝날 때까지 30분마다 채점, 15:30 뒤 마감 갱신
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data
-          git diff --cached --quiet && exit 0
-          git commit -m "거래량 채점 $(TZ=Asia/Seoul date +%Y-%m-%dT%H:%M)"
-          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep $((i * 5)); done
-          exit 1
+          while true; do
+            # 트렌드 실행과 같은 파일(runs.json)을 고칠 수 있어, 밀어 올리기가 막히면 최신 main으로 되돌린 뒤 다시 계산한다.
+            for i in 1 2 3 4; do
+              git fetch -q origin main && git reset -q --hard origin/main
+              python -m volume.live || true
+              git add docs/data
+              git diff --cached --quiet && break
+              git commit -q -m "거래량 채점 $(TZ=Asia/Seoul date +%Y-%m-%dT%H:%M)"
+              git push -q origin HEAD:main && break
+              sleep $((i * 5))
+            done
+            now=$(TZ=Asia/Seoul date +%H%M)
+            # 15:30이 지난 실행은 마감 갱신까지 했으므로 끝낸다. 주말이면 바로 끝낸다.
+            if [ "$now" -ge 1530 ] || [ "$(TZ=Asia/Seoul date +%u)" -ge 6 ]; then break; fi
+            # 다음 매시 5분 또는 35분까지 기다린다. 15:05 다음은 15:35(마감 갱신).
+            m=$((10#$(TZ=Asia/Seoul date +%M))); s=$((10#$(TZ=Asia/Seoul date +%S)))
+            if [ $m -lt 5 ]; then w=$((5 - m)); elif [ $m -lt 35 ]; then w=$((35 - m)); else w=$((65 - m)); fi
+            sleep $((w * 60 - s))
+          done
