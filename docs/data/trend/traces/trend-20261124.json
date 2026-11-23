@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-24T06:40:14+09:00",
- "finished_at": "2026-11-24T06:41:07+09:00",
+ "started_at": "2026-11-24T07:20:00+09:00",
+ "finished_at": "2026-11-24T07:20:48+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-24",
@@ -191,12 +191,12 @@
     {
      "type": "value",
      "name": "새로 쌓은 제목",
-     "value": 333
+     "value": 57
     },
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 10598
+     "value": 10655
     },
     {
      "type": "value",
@@ -220,33 +220,33 @@
      "rows": [
       [
        "2026-11-24",
-       "02:00",
-       "DCD",
-       "Sponsored: Solving cabling challenges behind AI data center growth"
+       "06:50",
+       "서울경제",
+       "현대차, 美에 첫 상용 트레일러 생산기지…내년 2분기 가동 [biz-플러스]"
       ],
       [
        "2026-11-24",
-       "01:00",
-       "DCD",
-       "Spain approves decree on data centers to curb electricity costs"
+       "06:48",
+       "서울경제",
+       "키링 달고 모자 고르고…2030이 사우나에 빠진 이유"
       ],
       [
        "2026-11-24",
-       "00:49",
-       "DCD",
-       "CtrlS moves forward with 150MW data center project in Bihar, India"
+       "06:45",
+       "서울경제",
+       "강금실·임웅순…‘위성락 외교 전문성’에 힘 실었다[송종호의 국정쏙쏙]"
       ],
       [
        "2026-11-24",
-       "00:41",
-       "DCD",
-       "Germany's 1&1 turns to European Commission following low-band spectrum snub"
+       "06:41",
+       "서울경제",
+       "젠슨 황 복귀에 엔비디아 31.5% 폭등...SK하닉도 20% ↑ [데일리국제금융]"
       ],
       [
        "2026-11-24",
-       "00:30",
-       "DCD",
-       "Three water numbers, none of them comparable"
+       "06:59",
+       "Electrek",
+       "Hyundai’s new Kona N Line is already out testing [Video]"
       ]
      ]
     }
