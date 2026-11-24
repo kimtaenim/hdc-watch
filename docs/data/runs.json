@@ -3024,5 +3024,17 @@
   "failures": [],
   "trace": "data/trend/traces/trend-20261124.json",
   "note": "새 제목 515개"
+ },
+ {
+  "at": "2026-11-24T12:25:45+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 30
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261124-122545.json",
+  "delay_min": 20,
+  "note": null
  }
 ]
