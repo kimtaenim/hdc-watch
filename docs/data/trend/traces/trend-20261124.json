@@ -14,8 +14,8 @@
    "bess"
   ]
  },
- "started_at": "2026-11-24T17:20:00+09:00",
- "finished_at": "2026-11-24T17:21:07+09:00",
+ "started_at": "2026-11-24T23:20:00+09:00",
+ "finished_at": "2026-11-24T23:20:48+09:00",
  "params": {
   "D": 10000,
   "date": "2026-11-24",
@@ -25,7 +25,7 @@
   "noise_k": 3
  },
  "code": {
-  "commit": "e055583c652bca279ed9831eb9946688e19d6922",
+  "commit": "a00cd29c04ac24e467ddf48e8ba92d4a2b9a5249",
   "dirty": false
  },
  "sections": [
@@ -123,6 +123,10 @@
        50
       ],
       [
+       "전자신문",
+       30
+      ],
+      [
        "뉴시스",
        200
       ],
@@ -187,12 +191,12 @@
     {
      "type": "value",
      "name": "새로 쌓은 제목",
-     "value": 575
+     "value": 518
     },
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 11745
+     "value": 12263
     },
     {
      "type": "value",
@@ -216,33 +220,33 @@
      "rows": [
       [
        "2026-11-24",
-       "16:18",
-       "서울경제",
-       "메타 AI책임자 “AI 통제력 잃어”…해법 없는 경고에 무책임 논란"
-      ],
-      [
-       "2026-11-24",
-       "16:13",
-       "서울경제",
-       "과표비율 30%p 높이면 지방회원제 골프장 다 죽는다? 왜"
-      ],
-      [
-       "2026-11-24",
-       "15:38",
-       "Electrek",
-       "The e-bike industry has a horsepower problem"
-      ],
-      [
-       "2026-11-24",
-       "17:00",
+       "21:08",
        "DCD",
-       "Sponsored: The technician’s AI superpower"
+       "Ncell to retire 3G network by mid-December in Nepal"
       ],
       [
        "2026-11-24",
-       "17:00",
+       "21:02",
        "DCD",
-       "Sponsored: Bitera completes SOC 2 Type II Audit, strengthening governance to international standards"
+       "DatacenterHawk: Global data center supply grows two-thirds, but vacancy shrinks"
+      ],
+      [
+       "2026-11-24",
+       "20:58",
+       "DCD",
+       "NTT signs MoU with B.Grimm for 400MW data center project in Thailand"
+      ],
+      [
+       "2026-11-24",
+       "20:46",
+       "DCD",
+       "The leader in safety helmet performance"
+      ],
+      [
+       "2026-11-24",
+       "19:31",
+       "DCD",
+       "Vodafone, AST SpaceMobile switches on Earth-space station in Málaga, Spain"
       ]
      ]
     }
@@ -270,7 +274,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 29
+     "value": 30
     },
     {
      "type": "value",
@@ -584,7 +588,7 @@
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 188
+     "value": 194
     },
     {
      "type": "value",
@@ -645,7 +649,7 @@
       [
        "로봇",
        8,
-       0.433,
+       0.4288,
        14,
        0.6589,
        "",
@@ -654,7 +658,7 @@
       [
        "ai",
        5,
-       0.274,
+       0.2702,
        3,
        0.1334,
        "",
@@ -663,7 +667,7 @@
       [
        "사업",
        3,
-       0.1627,
+       0.1618,
        1,
        0.0559,
        "",
@@ -672,7 +676,7 @@
       [
        "산업",
        3,
-       0.1773,
+       0.1775,
        2,
        0.1053,
        "",
@@ -681,7 +685,7 @@
       [
        "분야",
        3,
-       0.1761,
+       0.1703,
        0,
        0.0052,
        "새 조합",
@@ -690,7 +694,7 @@
       [
        "구축",
        3,
-       0.1731,
+       0.1699,
        0,
        0.0005,
        "새 조합",
@@ -699,7 +703,7 @@
       [
        "투자",
        2,
-       0.1197,
+       0.1205,
        0,
        0.016,
        "새 조합",
@@ -708,7 +712,7 @@
       [
        "유치",
        2,
-       0.1274,
+       0.1283,
        2,
        0.1042,
        "",
@@ -717,7 +721,7 @@
       [
        "글로벌",
        2,
-       0.1056,
+       0.1043,
        2,
        0.1043,
        "",
@@ -726,7 +730,7 @@
       [
        "플랫폼",
        2,
-       0.112,
+       0.1114,
        1,
        0.0455,
        "",
@@ -735,7 +739,7 @@
       [
        "기업",
        2,
-       0.1159,
+       0.1141,
        1,
        0.0427,
        "",
@@ -744,7 +748,7 @@
       [
        "학습",
        2,
-       0.1203,
+       0.1184,
        1,
        0.0544,
        "",
@@ -753,7 +757,7 @@
       [
        "마음AI",
        2,
-       0.1004,
+       0.101,
        2,
        0.0875,
        "",
@@ -762,7 +766,7 @@
       [
        "한양대",
        2,
-       0.1112,
+       0.1114,
        0,
        0.0056,
        "새 조합",
@@ -771,7 +775,7 @@
       [
        "erica",
        2,
-       0.1031,
+       0.1009,
        0,
        -0.0093,
        "새 조합",
@@ -780,7 +784,7 @@
       [
        "산학협력",
        2,
-       0.1027,
+       0.1037,
        0,
        0.0034,
        "새 조합",
@@ -789,7 +793,7 @@
       [
        "업무협약",
        2,
-       0.108,
+       0.1084,
        0,
        0.0095,
        "새 조합",
@@ -798,7 +802,7 @@
       [
        "체결",
        2,
-       0.1037,
+       0.1041,
        1,
        0.0399,
        "",
@@ -807,7 +811,7 @@
       [
        "mou",
        2,
-       0.1026,
+       0.1005,
        1,
        0.0419,
        "",
@@ -816,7 +820,7 @@
       [
        "lg",
        2,
-       0.1018,
+       0.0994,
        2,
        0.0807,
        "",
@@ -825,7 +829,7 @@
       [
        "인재",
        2,
-       0.1205,
+       0.1185,
        1,
        0.0595,
        "",
@@ -834,7 +838,7 @@
       [
        "배치",
        2,
-       0.1102,
+       0.1106,
        0,
        -0.0115,
        "새 조합",
@@ -843,7 +847,7 @@
       [
        "현장",
        2,
-       0.099,
+       0.0969,
        1,
        0.0506,
        "",
@@ -852,7 +856,7 @@
       [
        "추진",
        2,
-       0.0937,
+       0.0924,
        1,
        0.0339,
        "",
@@ -861,7 +865,7 @@
       [
        "확대",
        2,
-       0.1128,
+       0.1094,
        1,
        0.0539,
        "",
@@ -870,7 +874,7 @@
       [
        "기술",
        2,
-       0.1311,
+       0.1294,
        3,
        0.1405,
        "",
@@ -879,7 +883,7 @@
       [
        "협력",
        2,
-       0.0914,
+       0.0922,
        4,
        0.1882,
        "",
@@ -888,7 +892,7 @@
       [
        "kt",
        2,
-       0.1015,
+       0.098,
        0,
        -0.0006,
        "새 조합",
@@ -897,16 +901,25 @@
       [
        "한국수자원공사",
        2,
-       0.0913,
+       0.0891,
        0,
        -0.0172,
        "새 조합",
        "새 조합"
       ],
       [
+       "실증",
+       2,
+       0.1045,
+       0,
+       0.0078,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "선도기업",
        1,
-       0.0626,
+       0.0611,
        0,
        -0.0028,
        "",
@@ -915,7 +928,7 @@
       [
        "애자일",
        1,
-       0.0602,
+       0.0603,
        0,
        0.0088,
        "",
@@ -924,7 +937,7 @@
       [
        "기업가치",
        1,
-       0.0349,
+       0.0346,
        0,
        -0.0018,
        "",
@@ -933,7 +946,7 @@
       [
        "규모",
        1,
-       0.0461,
+       0.0441,
        1,
        0.0519,
        "",
@@ -942,7 +955,7 @@
       [
        "시리즈",
        1,
-       0.0456,
+       0.0448,
        0,
        0.0005,
        "",
@@ -951,7 +964,7 @@
       [
        "성장",
        1,
-       0.0583,
+       0.0551,
        1,
        0.0366,
        "",
@@ -960,7 +973,7 @@
       [
        "가속",
        1,
-       0.0668,
+       0.0642,
        0,
        -0.0082,
        "",
@@ -969,7 +982,7 @@
       [
        "재배",
        1,
-       0.0471,
+       0.0454,
        0,
        0.0093,
        "",
@@ -978,7 +991,7 @@
       [
        "수확",
        1,
-       0.0593,
+       0.059,
        0,
        0.0037,
        "",
@@ -987,7 +1000,7 @@
       [
        "출고",
        1,
-       0.0407,
+       0.0388,
        0,
        -0.0015,
        "",
@@ -996,7 +1009,7 @@
       [
        "폴리텍",
        1,
-       0.0489,
+       0.0475,
        0,
        -0.0037,
        "",
@@ -1005,7 +1018,7 @@
       [
        "테스트베드",
        1,
-       0.0451,
+       0.0443,
        0,
        -0.0023,
        "",
@@ -1014,7 +1027,7 @@
       [
        "개방",
        1,
-       0.052,
+       0.0522,
        0,
        -0.0002,
        "",
@@ -1023,7 +1036,7 @@
       [
        "카카오모빌리티",
        1,
-       0.0537,
+       0.0524,
        0,
        0.008,
        "",
@@ -1032,7 +1045,7 @@
       [
        "결손금",
        1,
-       0.0437,
+       0.0433,
        0,
        0.0049,
        "",
@@ -1041,7 +1054,7 @@
       [
        "배당",
        1,
-       0.0461,
+       0.0447,
        0,
        -0.0132,
        "",
@@ -1050,7 +1063,7 @@
       [
        "시마AI",
        1,
-       0.0467,
+       0.0485,
        0,
        -0.0061,
        "",
@@ -1059,7 +1072,7 @@
       [
        "개발",
        1,
-       0.0639,
+       0.0644,
        1,
        0.0553,
        "",
@@ -1068,7 +1081,7 @@
       [
        "팔레트",
        1,
-       0.0477,
+       0.0489,
        0,
        -0.0146,
        "",
@@ -1077,7 +1090,7 @@
       [
        "발표",
        1,
-       0.071,
+       0.0688,
        0,
        0.0038,
        "",
@@ -1086,7 +1099,7 @@
       [
        "무뇨스",
        1,
-       0.0537,
+       0.0554,
        0,
        0.003,
        "",
@@ -1095,7 +1108,7 @@
       [
        "현대차",
        1,
-       0.0675,
+       0.0681,
        0,
        0.0036,
        "",
@@ -1113,7 +1126,7 @@
       [
        "훈련인력",
        1,
-       0.042,
+       0.0416,
        0,
        -0.0217,
        "",
@@ -1122,7 +1135,7 @@
       [
        "채용",
        1,
-       0.0497,
+       0.0481,
        0,
        -0.001,
        "",
@@ -1131,7 +1144,7 @@
       [
        "인도",
        1,
-       0.0517,
+       0.0507,
        0,
        -0.0173,
        "",
@@ -1140,7 +1153,7 @@
       [
        "휴민랩스",
        1,
-       0.0669,
+       0.0647,
        0,
        0.0235,
        "",
@@ -1149,7 +1162,7 @@
       [
        "데이터",
        1,
-       0.056,
+       0.0578,
        0,
        -0.0012,
        "",
@@ -1158,7 +1171,7 @@
       [
        "한국",
        1,
-       0.0669,
+       0.0673,
        0,
        0.0037,
        "",
@@ -1167,7 +1180,7 @@
       [
        "장관",
        1,
-       0.0792,
+       0.0766,
        0,
        0.0081,
        "",
@@ -1176,7 +1189,7 @@
       [
        "전도사",
        1,
-       0.0702,
+       0.0699,
        0,
        0.0172,
        "",
@@ -1185,7 +1198,7 @@
       [
        "제조",
        1,
-       0.0497,
+       0.0496,
        0,
        -0.0164,
        "",
@@ -1194,7 +1207,7 @@
       [
        "강국",
        1,
-       0.0452,
+       0.0449,
        0,
        -0.0059,
        "",
@@ -1203,7 +1216,7 @@
       [
        "선도",
        1,
-       0.0519,
+       0.0513,
        0,
        -0.0042,
        "",
@@ -1212,7 +1225,7 @@
       [
        "김창영",
        1,
-       0.066,
+       0.064,
        0,
        -0.0007,
        "",
@@ -1221,7 +1234,7 @@
       [
        "실리콘밸리",
        1,
-       0.0525,
+       0.0512,
        0,
        0.0053,
        "",
@@ -1230,7 +1243,7 @@
       [
        "실증사업",
        1,
-       0.0402,
+       0.0383,
        0,
        -0.0057,
        "",
@@ -1239,7 +1252,7 @@
       [
        "사전",
        1,
-       0.0504,
+       0.0472,
        0,
        -0.0092,
        "",
@@ -1248,7 +1261,7 @@
       [
        "행사",
        1,
-       0.0369,
+       0.035,
        1,
        0.04,
        "",
@@ -1257,7 +1270,7 @@
       [
        "중용",
        1,
-       0.044,
+       0.0449,
        0,
        -0.021,
        "",
@@ -1266,7 +1279,7 @@
       [
        "전진",
        1,
-       0.0464,
+       0.045,
        0,
        -0.0039,
        "",
@@ -1275,7 +1288,7 @@
       [
        "연구서",
        1,
-       0.0481,
+       0.0478,
        0,
        0.0056,
        "",
@@ -1284,7 +1297,7 @@
       [
        "제조혁신",
        1,
-       0.0526,
+       0.0518,
        0,
        -0.0043,
        "",
@@ -1293,7 +1306,7 @@
       [
        "전환",
        1,
-       0.0484,
+       0.0473,
        1,
        0.0463,
        "",
@@ -1302,7 +1315,7 @@
       [
        "엑스와이",
        1,
-       0.0686,
+       0.0671,
        0,
        0.0135,
        "",
@@ -1311,7 +1324,7 @@
       [
        "실패",
        1,
-       0.0355,
+       0.034,
        0,
        -0.0046,
        "",
@@ -1320,7 +1333,7 @@
       [
        "파이프라인",
        1,
-       0.0679,
+       0.069,
        0,
        -0.0004,
        "",
@@ -1329,7 +1342,7 @@
       [
        "공개",
        1,
-       0.0565,
+       0.0561,
        1,
        0.0382,
        "",
@@ -1338,7 +1351,7 @@
       [
        "미래",
        1,
-       0.0507,
+       0.0512,
        0,
        0.0055,
        "",
@@ -1347,7 +1360,7 @@
       [
        "한자리",
        1,
-       0.0592,
+       0.0595,
        0,
        0.0102,
        "",
@@ -1356,7 +1369,7 @@
       [
        "청소년",
        1,
-       0.0516,
+       0.0492,
        0,
        0.0132,
        "",
@@ -1365,7 +1378,7 @@
       [
        "실력",
        1,
-       0.0562,
+       0.0565,
        0,
        0.004,
        "",
@@ -1374,7 +1387,7 @@
       [
        "로크웰",
        1,
-       0.0608,
+       0.0603,
        0,
        0.0028,
        "",
@@ -1383,7 +1396,7 @@
       [
        "오토메이션",
        1,
-       0.0463,
+       0.0448,
        0,
        -0.0132,
        "",
@@ -1392,7 +1405,7 @@
       [
        "애질록스",
        1,
-       0.0445,
+       0.0431,
        0,
        -0.0159,
        "",
@@ -1410,7 +1423,7 @@
       [
        "강화",
        1,
-       0.0496,
+       0.0484,
        3,
        0.1302,
        "",
@@ -1419,7 +1432,7 @@
       [
        "manufacturing",
        1,
-       0.0507,
+       0.0497,
        0,
        -0.0154,
        "",
@@ -1428,7 +1441,7 @@
       [
        "data",
        1,
-       0.0383,
+       0.0378,
        0,
        -0.0186,
        "",
@@ -1437,7 +1450,7 @@
       [
        "gap",
        1,
-       0.0471,
+       0.0476,
        0,
        0.0006,
        "",
@@ -1446,7 +1459,7 @@
       [
        "holding",
        1,
-       0.0809,
+       0.079,
        0,
        0.0262,
        "",
@@ -1455,7 +1468,7 @@
       [
        "back",
        1,
-       0.0638,
+       0.0633,
        0,
        0.013,
        "",
@@ -1464,7 +1477,7 @@
       [
        "자립",
        1,
-       0.0584,
+       0.0591,
        0,
        0.0005,
        "",
@@ -1473,7 +1486,7 @@
       [
        "nc",
        1,
-       0.0566,
+       0.0545,
        0,
        0.0015,
        "",
@@ -1482,7 +1495,7 @@
       [
        "육군",
        1,
-       0.0538,
+       0.0528,
        0,
        0.0064,
        "",
@@ -1491,7 +1504,7 @@
       [
        "작전사령부",
        1,
-       0.0451,
+       0.0429,
        0,
        -0.001,
        "",
@@ -1500,7 +1513,7 @@
       [
        "국방",
        1,
-       0.0636,
+       0.0629,
        1,
        0.066,
        "",
@@ -1509,7 +1522,7 @@
       [
        "도입",
        1,
-       0.0688,
+       0.0679,
        2,
        0.1048,
        "",
@@ -1518,7 +1531,7 @@
       [
        "셰플러",
        1,
-       0.0502,
+       0.0488,
        0,
        -0.0097,
        "",
@@ -1527,7 +1540,7 @@
       [
        "반델봇",
        1,
-       0.0482,
+       0.0473,
        0,
        -0.0047,
        "",
@@ -1536,7 +1549,7 @@
       [
        "생산공장",
        1,
-       0.0659,
+       0.0662,
        0,
        -0.001,
        "",
@@ -1545,7 +1558,7 @@
       [
        "알체라",
        1,
-       0.0433,
+       0.0453,
        0,
        -0.0102,
        "",
@@ -1554,7 +1567,7 @@
       [
        "누적매출",
        1,
-       0.0602,
+       0.0586,
        0,
        -0.0079,
        "",
@@ -1563,7 +1576,7 @@
       [
        "cns",
        1,
-       0.0355,
+       0.0375,
        2,
        0.0978,
        "",
@@ -1572,7 +1585,7 @@
       [
        "고교",
        1,
-       0.0509,
+       0.0474,
        0,
        -0.0023,
        "",
@@ -1581,7 +1594,7 @@
       [
        "교육",
        1,
-       0.0854,
+       0.0843,
        0,
        0.0129,
        "",
@@ -1590,7 +1603,7 @@
       [
        "교과",
        1,
-       0.0594,
+       0.0596,
        0,
        0.0052,
        "",
@@ -1599,7 +1612,7 @@
       [
        "신설",
        1,
-       0.0516,
+       0.0508,
        0,
        -0.0059,
        "",
@@ -1608,7 +1621,7 @@
       [
        "브릴스",
        1,
-       0.0687,
+       0.0689,
        0,
        0.0081,
        "",
@@ -1617,7 +1630,7 @@
       [
        "슬로바키아",
        1,
-       0.0573,
+       0.0553,
        0,
        0.0075,
        "",
@@ -1626,7 +1639,7 @@
       [
        "슈초트카",
        1,
-       0.056,
+       0.0577,
        0,
        -0.0035,
        "",
@@ -1635,7 +1648,7 @@
       [
        "그룹",
        1,
-       0.0304,
+       0.0316,
        0,
        -0.0099,
        "",
@@ -1644,7 +1657,7 @@
       [
        "합작법인",
        1,
-       0.0477,
+       0.0469,
        0,
        -0.0076,
        "",
@@ -1653,7 +1666,7 @@
       [
        "설립",
        1,
-       0.0435,
+       0.0423,
        0,
        -0.0113,
        "",
@@ -1662,7 +1675,7 @@
       [
        "유럽",
        1,
-       0.0468,
+       0.0455,
        1,
        0.0314,
        "",
@@ -1671,7 +1684,7 @@
       [
        "첨단",
        1,
-       0.076,
+       0.0748,
        0,
        0.0167,
        "",
@@ -1689,7 +1702,7 @@
       [
        "물관리",
        1,
-       0.0528,
+       0.05,
        0,
        -0.0034,
        "",
@@ -1698,7 +1711,7 @@
       [
        "관리",
        1,
-       0.0586,
+       0.058,
        0,
        0.0059,
        "",
@@ -1707,7 +1720,7 @@
       [
        "시마닷에이아이",
        1,
-       0.0697,
+       0.0705,
        0,
        0.0023,
        "",
@@ -1716,7 +1729,7 @@
       [
        "모델",
        1,
-       0.0466,
+       0.0469,
        0,
        0.0016,
        "",
@@ -1725,7 +1738,7 @@
       [
        "성능",
        1,
-       0.0587,
+       0.0557,
        0,
        0.0089,
        "",
@@ -1734,7 +1747,7 @@
       [
        "확장",
        1,
-       0.0836,
+       0.082,
        0,
        0.0074,
        "",
@@ -1743,7 +1756,7 @@
       [
        "sw",
        1,
-       0.0639,
+       0.0637,
        1,
        0.0665,
        "",
@@ -1752,7 +1765,7 @@
       [
        "출시",
        1,
-       0.0383,
+       0.0371,
        0,
        -0.0215,
        "",
@@ -1761,7 +1774,7 @@
       [
        "기획특집",
        1,
-       0.0553,
+       0.053,
        0,
        -0.0078,
        "",
@@ -1770,7 +1783,7 @@
       [
        "중국",
        1,
-       0.0464,
+       0.0454,
        1,
        0.0487,
        "",
@@ -1779,7 +1792,7 @@
       [
        "시연",
        1,
-       0.0422,
+       0.0428,
        0,
        -0.0074,
        "",
@@ -1788,7 +1801,7 @@
       [
        "시대",
        1,
-       0.0559,
+       0.0568,
        2,
        0.0966,
        "",
@@ -1797,7 +1810,7 @@
       [
        "ceo",
        1,
-       0.0761,
+       0.0736,
        0,
        0.0064,
        "",
@@ -1806,7 +1819,7 @@
       [
        "복귀",
        1,
-       0.0477,
+       0.0466,
        0,
        -0.0161,
        "",
@@ -1815,7 +1828,7 @@
       [
        "젠슨 황",
        1,
-       0.0545,
+       0.0528,
        0,
        0.0033,
        "",
@@ -1824,7 +1837,7 @@
       [
        "두산",
        1,
-       0.0613,
+       0.0591,
        0,
        0.0034,
        "",
@@ -1833,7 +1846,7 @@
       [
        "엔비디아",
        1,
-       0.0573,
+       0.0561,
        1,
        0.0387,
        "",
@@ -1842,7 +1855,7 @@
       [
        "동맹",
        1,
-       0.0543,
+       0.0541,
        0,
        -0.0023,
        "",
@@ -1851,7 +1864,7 @@
       [
        "탄력",
        1,
-       0.0619,
+       0.0599,
        0,
        -0.0004,
        "",
@@ -1860,7 +1873,7 @@
       [
        "기대",
        1,
-       0.0653,
+       0.063,
        0,
        -0.0002,
        "",
@@ -1869,7 +1882,7 @@
       [
        "sk",
        1,
-       0.0534,
+       0.0521,
        0,
        -0.0088,
        "",
@@ -1878,7 +1891,7 @@
       [
        "해법",
        1,
-       0.0608,
+       0.0604,
        2,
        0.1051,
        "",
@@ -1887,7 +1900,7 @@
       [
        "합성데이터",
        1,
-       0.0486,
+       0.0473,
        0,
        0.0037,
        "",
@@ -1896,7 +1909,7 @@
       [
        "그래프DB",
        1,
-       0.0477,
+       0.0463,
        0,
        -0.0079,
        "",
@@ -1905,7 +1918,7 @@
       [
        "제시",
        1,
-       0.0636,
+       0.0626,
        0,
        -0.0024,
        "",
@@ -1914,7 +1927,7 @@
       [
        "과기정통부",
        1,
-       0.0529,
+       0.0508,
        0,
        -0.0082,
        "",
@@ -1923,7 +1936,7 @@
       [
        "우편물류",
        1,
-       0.0589,
+       0.0585,
        0,
        0.0007,
        "",
@@ -1932,27 +1945,63 @@
       [
        "현장서",
        1,
-       0.0404,
+       0.0398,
        0,
        -0.0061,
        "",
        ""
       ],
       [
-       "실증",
+       "신규",
        1,
-       0.0491,
+       0.0568,
        0,
-       0.0078,
+       0.0096,
        "",
        ""
       ],
       [
-       "신규",
+       "중기부",
        1,
-       0.0577,
+       0.0455,
        0,
-       0.0096,
+       0.0006,
+       "",
+       ""
+      ],
+      [
+       "중소제조",
+       1,
+       0.0584,
+       0,
+       0.0063,
+       "",
+       ""
+      ],
+      [
+       "지원",
+       1,
+       0.0669,
+       0,
+       0.0115,
+       "",
+       ""
+      ],
+      [
+       "투입",
+       1,
+       0.0319,
+       0,
+       -0.0125,
+       "",
+       ""
+      ],
+      [
+       "예정",
+       1,
+       0.0601,
+       0,
+       0.002,
        "",
        ""
       ]
@@ -1971,8 +2020,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 146,
-    "hdc_answer": 146,
+    "count_answer": 151,
+    "hdc_answer": 151,
     "agree": true
    },
    "source": {
@@ -2001,12 +2050,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.5329
+     "value": 0.5279
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.5328
+     "value": 0.5265
     }
    ],
    "check": null,
@@ -2032,7 +2081,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 8
+     "value": 9
     },
     {
      "type": "value",
@@ -2149,6 +2198,22 @@
         "서버",
         "gpu"
        ]
+      ],
+      [
+       "DCD",
+       "Taiwanese AI infrastructure firm Nocera takes $22m stake in Canadian AI data center developer BitRock",
+       [
+        "taiwanese",
+        "firm",
+        "nocera",
+        "stake",
+        "canadian",
+        "ai",
+        "data",
+        "center",
+        "developer",
+        "bitrock"
+       ]
       ]
      ]
     }
@@ -2186,26 +2251,26 @@
     },
     {
      "type": "vector",
-     "name": "단어:기술",
+     "name": "단어:ai",
      "dim": 10000,
-     "ones": 5022,
-     "head": "1001011101110111111111111100000000010110110101100101001000100110",
-     "bits_b64": "l3f/wBbWUiZn0rxxhr5EMG3AeVa+bC5rRhGZ0K3i+i2ZeQbPZV70WuUwWCS3gnbuA59R2w4heBoQM9HL669UCOHZ06Yrejv03qd5CDXaws7xek2Qx9TQqxFT7I/X+7bKs8FxnSG5tdWg1Gf2t26ybCuzxPSzeSV2vJbpbIBO1UVeYnkXlGrgYNQplPPu2+rqjbohTqowTw8fCSY7OdlXvMuEPWVcQgkbZ7OkNCQKICF+bCCFt+gpDwDMdno0PsKaOYeuzpDMmxrIAX0dCMnIx6gTRC43sOd6T3ReezHKXfMOyOgw56onxPe7Dwwbt46utsbPu9h1uEtv5hDL1SYTnDEoflzE74zuh+Dc93hncC6qWpAQiiem2h+ts0NIG7kLxTIJ8XmBus+926sXbwZYj7Y+PLYATns9MKW/Fhu5frGHa8tG4Ldc0r7hUWL4u62ebmapI9qJPFMxJ2CweM9qaaHNiaLck4pKRVF2mQBWLgS+2i0qDfGzfQfLcsxLtyUwbjU7T3tkZo2A+XEtgcfFhYTULpVh4VSohTlDvMF2YcpuA/xh0j3pikinknnL6XTk5UW9E+tTI5qkU/0f83j0LDhd5t1/PhyHl7yC5hNwCNfKeDYube27jypI1LxY8QoHEorskncWRL9iVfzAXbA/ZbOKjQ5sbLAa3iRMNaWay/vqwVpouNU7A1RfbMnAEUxFwUyQbVplVrMrNRuznHYsa76co2E2yY/gJkMT5wzuqeG6JhmfrHdm09Q31tk67hTz6zWmgsSggQorN8PrXE+j9uXvq4hPaEQyuaGBTaoQ9DC8fBWhgdThlfSA1S6LGFsznv4XIp7XWS7D94VlMTlU0SFaEyce+cJ5fD/5neo5L9twVdBtrxUaU6gGEzjUcq/ciKhlALOVrOzRAmHXqFlwrQeU9t18lgw9xHshl/Th47ypVb98Sd3mhUoZcmgLVdzkA+w4OeMhhBrrUPacBkj3LOmlyK/tjgcq4VhzfuIH7zcZzq5d8vs1abM/3UK0vpVgEO3DKGDgqVOsuV8FUpPb+RCcQD7vrweR+pVmyjmmBMCt0MSmtWMkdLbXrmp2odhwr3k+0zZEn0BNA7AqqRfQMYqodyj2iqcwPylDXWYs4mjAMH6+qhLWJlFqZKQgqXS69ObeHV/GurMlo9qXTp6bk+UYdSu+9wDxl5sEG40LQAsBz4bXQIgcmH5AWEtHAp97gdGoHCxeNCHLAsmJgay0FzbR2Xo3SqROOL0YktZhAMKaJKdbRzykYaZl8pQNk5qxWzYbYDZf+66Z/ciCctNXdBxUSzhuQANAV/dZtLWfhnuiie8Px6GcHd4P274ewReoTtb0fHpT11YMPCPIkThixiTn818TmKlZVLQ8+7GSDSDH/qKjcrJHkPmQcoiZHEVUhSTm6nME9W6LhE2QKVTluwkGTNTld8tF7xl6ZY0T9bNVYaYVWo4ofhMP0PXke1V1SmtfJRhtzlQedXLLipqsu+Fv8G0E7KI+QmPIeS59Qifh0JKRjOVWtbcjGpKxfdI4/mwpMfEOjIWj7KRjCgFidB+I9GDg6/QtXRJHzzYK7vI++12ZadFRdXt9pSNfktk6ODn7KvzQkrNNzmxOvEjhsSNdEYeGwKaxzuWZp8uPXw4vTXQk5T3NWMV+RNf4CSvU7w8="
+     "ones": 5033,
+     "head": "0010010001010100010111011011000101000000111111001010010110010101",
+     "bits_b64": "JFRdsUD8pZWg6dJfQj4TA3xMhbxJaSodQyNDm5dG3A81ohLyJWGoYBQ6JCRgEY/1gxLONqjLEhpa8rbREKGcqiTIkUXdna1iZ5awwYGU/Xgr/vlBhozwKXJurFE2N12e3wMdg9H+U4kqW3D8M4ZLtASEN6jFoP8qtNKJeVP9yJDZgSJ6jDxN/BjMSflEpta5+fUkLAU2Inr/8fvhPnz9Br1lbodEFm+xeJFDmu/vTS4k6OWA6RUPtdwfhT0OSIDVrYNWeEoOLZgpV/+LaoXtw1QhEPnmJiWwmLpbCmWgBHWebX42Vx0U0mDfl+SfOLkm54BW/Hv7xeBebjX5WQpaYWq1tzPCG5jnEliAo2M4qdDRReMne3X19qsX2HH/ZJP7xb/fa3JY9sceRUu7nlE8MMmUjXP2lFSF53RwaZEZKt4YVT9DVcJPVsPFFDxCgS/pqIBHbmjzfXA9Up/3xG0TDsKU0OWYpc3ct24W+rJycxrQ5J+tq9lBlK7G2V6m4OpoJRS3+xO+azF/rZ0kcVEl1JUzEnXdeRY38P72DmaO6zbwTRj5mBsxZX9t2Tr/d8mxKY4XnkX9zzH7wi662/1YMLKOYQydsvKSIJQ6jHZaP4VbDL6IJ8bOG0RWjrywJnO4mVZLJbpx6dXh5aL3Xx50Q0EBzdOpkF7lOk0XtcfBF8K/3Dx47suTzjsBWTRYZGB56opqoXZ9RuYU0oc8vjOef16Tz1Fcky+zmKGVk5KLnNYoIdT81cA9E+fuO77CQvw+SXcSPKnN6crywKiK2nqSCFQHR1yTskEnlcIQhJ0biSLuPFvUKDG6qKcDGyfPolMaMx7B+ylpZ5K8IiOaaSY4APAP/ZXGtH7WFNfgEEuhhWUlwoYWWc5dd55kZlU8RHJCOmaq7k99Q2C0KqPbelN6JsEIwbMrO67NStUnOzzmGZn9tHVuxp8v+3Hk75sbhrs3aJuZuNawFsXUkj7AVDzPmq0eIzPs5XHP+0XWj+1LlFna+dc3Nx2xSLw5NUj4b3HM9F4SNhViGhjN3+jnAYnAFUxYulfNT9DGWHJS16EXkWZiR24UWXWVtYgFUbLLsPDcm3K2Tv1idGq6qQLNKQMGbNxwui04mI8lexoSVQ9E1JabN2CChoaIxcFXVrOSRHRstM9YQd6Xv6MtMs1urW0KXhAWaPSIQTVG3JCxBu5LCmL0QJgruP+sv4G5s/dBK00pXG+sN5ojDlD5PyBLcomO0QZT6C7WC+l8qHBaWD9HBy/H95Q7AtapKeUW0xVOpW76mnbfIYZJw9Gsd69TILEwOOp/5jCap9qbYVwl0kgXvQnO/WT1ahBqJ+XPj6I9Bzy8q1AJmeSPTaUQ+mEMJ3zctBUwtoa+bZ+0xV0cC8/nCkVF6rn2EHrqLh9jdRutg1fBl1m2d0FTO9fh1FesGZi/P+aA8iuVzm6V9N+C5/1pvp7FLM1uvNQOz1W6DA8Vjfrw2ZnfmurVown2ucar8s6i3jHfEoM426o3HMnsE9RiVLjzhBepzaVudZINoEzYRN2FkGxN9gB5b+ozzlu52JJJFf7nvnSGoMinGTcDXEdKzUbK/ZAQKzbF9WLZXB/QCCYBBjHGSkow3JHv5g6FPFhTsDH+WgtA6sdZTMQrDkQcMfZwyq60kPAEgO+Dw3XTwLfph5I="
     }
    ],
    "outputs": [
     {
      "type": "vector",
-     "name": "키워드:ai-infra ⊕ 단어:기술",
+     "name": "키워드:ai-infra ⊕ 단어:ai",
      "dim": 10000,
-     "ones": 5005,
-     "head": "0100010010011011110001000100111110110110010110010000100100001110",
-     "bits_b64": "RJvET7ZZCQ63ZKbZ7JIRRpFVmjn1vcMJv2otDTe4CGHoUbeqiw4xMl/ZZTG26PUnKGuWPTSZy3IrZlHPStW2sjqgLUTAUdx1k6dtiSXIyr63XaLejHEx1OhfJMfhp2/Oi3eUQOYXgZrf/CktmEZ1eloRzkCF4+71E0m6gIu0HM9z7MbShUT83MSGY6y3K5FpJE4XKm8f86j3JQ+I4qjt3OS1reU2Y2LXAuYqOtDmCumUszSXv8sBpHwSbf9yKobyS4frnquxSQCME3l8NIZGSohNXEvxGMg0ZUCpD62mbyjiqkLM7ZZ/CnFsh7BetoIiFjVjkoww8dS/y8eyDfoc+HuKev4zEcYOzd5H+E9x3B2QtEJDJXhtFiSk4fkZRVaLplrUjpG6ON/4h57ZcqhhXmoZUOvAxlmTP7m8pOIc9FQXoaUNFHoVXAzWPEeex4VET8PX532N3lmQWPOvJtY8Ex11Q+0iEcjbVSnQCrQix7rKupr5hwh/ZKQZhHxahKlp0ndwqXnuCr136NSkmCcIC2/AQxfyaup01LQPqLo8SKQjLWKL0wkSiJCB4sfl4Y5K9ppKVTmmu990MpuW8LrWkpTBdyDVw7FQiBqBtqVnIEIxRPdYiJrLVJx79lf3PkB64o+DAnwU1GOHPaHbeMy3fJ93qMUuX13xyXtIbj2VIc8WKe8sGV0nYhij0jJ4Mqi3smS9lorbmdJ3rVr7Um5W4j0WmkuyHwQaMrMiYffPNxQXovgDe25PybpzLsbBBiIos7T4oXowEI+xh/NV8KF+VY7ObvZLe9ZoFhCRLIH2cb0vLu750X4ECAZg8RB6Kd/pesD2IiYbOPmt74RIkj5DuVTI3XTfGIevWODL1h8KQRW08me5a278cFCsHin0BjQ+wWpGU2G+Zc9IfGRu8xg5afoYAnLtRfi87SdlW+3hmjDdsAHJ3sAr/yolbqOdo4+RRkDOSPbvjBQT1Fa5d7U2FehkmWROAN0cP0Uy0BO2+bQnR3vX6FY5ZUG5KIfq5YVbOaN6YzLcFu0H4ZAFkld7Z4LbsOeZSn6616FQOYavI/WPxaoDVfe2qF08/5GeCfj69nwsqNfCVU7oiyZIVJIaL/4WiSEu4JpHXZ5yG9tjstxBYy1f3WtRQv4xF7x54phYgsh2tzRRABqolQqsZHU0sk1pNOk5UlNgshTWjgxktE6s85PdU1YnBsyI75uqflch3LecJRNX4jd79X0tHrPTE2udnRzhD++vk0XQ3t8gxdOUgOX+0/86eTg7pkLm44BkPoqVB8ExavoR4V97H8ra2rkjM5GE5QCgBqps26TNfGBQBNQWQZYQ9yZ0xtVVTVjo5Bz5W0RQkkl4DxAYEWUVfyFFztiJsQ+l9vxZucfSBx5Yp1ku+yXl2XQjzaNpnOiX7VQQQr36tGBUOFPmInOa1UFy4/RMjK3GiQy0GfwJqEk7w3xL6exm4dTl2q/nEblkLWWEUTg9guAZbBoA0d6OaYzIJnVRlvO2O0YoulEivCiv8VJMI96ogx5bn6nwiaZfMoaOvTSeuSj6vT6WL0JmxhbvaoKr8TyNnaK2Zi8g+7XOAEvlxsl1vfnFn+Yy8AVtEe6tYvj2VUd3v6iq4iDO3T5NZ/c9KLtSeAb7RPTJD6jSGpvAjvnSUXKiQISnV30vgMU="
+     "ones": 4892,
+     "head": "1111011110111000011001100011111011100000011100111111111010111101",
+     "bits_b64": "97hmPuBz/r1wX8j3KBJGdYDZZtMCuMd/ulj3Rg0cLkNEiqOXyzFtCK7TGTFheww8qOYJ0JJzoXJhpzbVsdt+EP+xb6c2tkrjKpakQJGG9Qht2RYPzSkRVotiZBkAa4Sa57X4XhZQZ8ZVcz4nHK6MonUmPRzzOjSpGw3alVgHARr0D52/nRJRQAhjvqYdVq06UAESSMAZnt0X3dJS5Q1HZpJU/gcuNwR9HcTNlBsDZ+bON/GS4TYnHqDBnrhIXMS934MTKHFz/4JtRfvqVspjTnR/CJwgjgr+so6sfvnMNq5yD9TKXSFMHOYIH1jaObWqR3P61S++jH+OQ+KAgdZVBSAXs5E15dIHWGYbrFQuBePrqzF01Co+OpAeisuuOnx7ptcCFJpjdNdbGX51g/8F4RWz4S42HHYr6Ghz22i8oDuIn1EIoQ8G2HHyeRkk/QcziSU5qs/3n3qcLQzomnRFdH4sGqpmJ49NpxawaQYGmqSkhCh+ISCNjQ0UL+6302YxmVb8HRE0BwGIvDitaLHoWn4nf/dO8qjroXO6Gh3Ewli9Y4YTmS/KZ6dLqYTRfzMfOlHg2JcIV3Qro0gz2D96jh4S8PE3T19FPzI53MBNFxCgMH/+wrG+wPJlrFcf6TnFaVMktbFzeQkEjf/semL8Wm386Bjro7MOLRIT7l/O/fZDNIk8T0OPr3f958/gR4SLmaJHWqbDiYdISsZ0cCvk9t0Z9nvYRaRJjFGkFWmqAiOFpTVgAtkUCYmqw6E5qsrlEfZMHxddeE9ocJg0dpRPqz8mgiKXodN9OnMA5bb9DK99bqCMeJtfNVXjPxk+k9fA1yAg+5GlBkXSOiK3yiEvaIWdM8YHVTsAMAjSW76S66vhZTHCnbW7VGbOa0QcMOmgc6SJvZ1WikMtVKZiIRIz4jyENRy66FpMY4lj9yXmYBWJUcvbUYLigRHY81CNcOhCLTdvycN+HsssFp7lJcEOo6zfcvhPa6v5JViXIRz6gtrkcAK9LbC9RE6/wI2mNGH33RCrfUdepaZmhyfnwU1gi94fSo67qqntdUZkJB4etlNAUgCxueEHaWPuAEkjGNBWwnekNRzkvmQfIZSv1IbMcqjORCTg8rJSGa0jE7ILhCIaZDNj8f8PoW4MJavLD5iOwuHw67UABQqgBB1Vh4alf7hnKTYP5GbX+R9jk28k/idZfI0hqyGXITNxBCesV4VzAQmYDqUq2EZJyJTv7Zbp1VsfrEgATqKdA4iSFDYGwj7JU9aelhU3MXtIh8Ol1XQv/8pRRnEnUoUkaziqTai9lk8InplwAtl7MAEQvVlFRxI8cF/s7CfmzR20ksl2i3P8AZoEvtqMCLpkyVLcpyGrDRCSiwEkRDlIZxV5SbmnAHvas0J7me1IZ5LQyjBdA/oC/ylA34+tetk+aEnaEr/AUa70XQs8NQgWkspMm4xz42SrjhcwD7ZAUJJQBlUW5xbhvpcE7sqF773xoK5gqYqADFx4xJttofu/ZewM0Ks9qre9pdd0Yp6QQzt1JXeZsKniXIbqesXpWkdqn8FM/dFNp/eAIJbNugAH2Yfy9V5g2AE6BoZshC7hPeBhZtq9avpWL+aQAk4WG2XVl8phYjB83CzuLHv7Atq6+idJ7XtaYVCNnUFQ+zQbiVhfxyaMnuES6Fg="
     },
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 54
+     "value": 64
     },
     {
      "type": "value",
@@ -2264,27 +2329,27 @@
      ],
      "rows": [
       [
-       "기술",
-       2,
-       0.2484,
-       0,
-       -0.001,
-       "새 조합",
-       "새 조합"
-      ],
-      [
        "ai",
-       2,
-       0.2701,
+       3,
+       0.3608,
        0,
        -0.0003,
        "새 조합",
        "새 조합"
       ],
       [
+       "기술",
+       2,
+       0.2211,
+       0,
+       -0.001,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "액체",
        1,
-       0.1265,
+       0.1148,
        0,
        -0.0085,
        "",
@@ -2293,7 +2358,7 @@
       [
        "냉각",
        1,
-       0.1265,
+       0.1068,
        0,
        0.0035,
        "",
@@ -2302,7 +2367,7 @@
       [
        "최신",
        1,
-       0.1369,
+       0.1262,
        0,
        0.0046,
        "",
@@ -2311,7 +2376,7 @@
       [
        "공유",
        1,
-       0.1358,
+       0.1144,
        0,
        -0.0071,
        "",
@@ -2320,7 +2385,7 @@
       [
        "디에스앤지",
        1,
-       0.1442,
+       0.1276,
        0,
        0.0192,
        "",
@@ -2329,7 +2394,7 @@
       [
        "이노베이션데이",
        1,
-       0.1287,
+       0.115,
        0,
        -0.0048,
        "",
@@ -2338,7 +2403,7 @@
       [
        "개최",
        1,
-       0.1156,
+       0.1099,
        0,
        0.0155,
        "",
@@ -2347,7 +2412,7 @@
       [
        "argentum",
        1,
-       0.1356,
+       0.1262,
        0,
        0.0114,
        "",
@@ -2356,7 +2421,7 @@
       [
        "kyndryl",
        1,
-       0.1252,
+       0.1146,
        0,
        -0.0013,
        "",
@@ -2365,7 +2430,7 @@
       [
        "ink",
        1,
-       0.1193,
+       0.1046,
        0,
        0.0153,
        "",
@@ -2374,7 +2439,7 @@
       [
        "deal",
        1,
-       0.117,
+       0.0983,
        0,
        -0.0086,
        "",
@@ -2383,7 +2448,7 @@
       [
        "가트너",
        1,
-       0.1394,
+       0.1272,
        0,
        -0.0218,
        "",
@@ -2392,7 +2457,7 @@
       [
        "지출",
        1,
-       0.1242,
+       0.1142,
        0,
        -0.0021,
        "",
@@ -2401,7 +2466,7 @@
       [
        "과반",
        1,
-       0.1391,
+       0.1252,
        0,
        -0.007,
        "",
@@ -2410,7 +2475,7 @@
       [
        "mitsubishi",
        1,
-       0.1432,
+       0.1344,
        0,
        -0.0079,
        "",
@@ -2419,7 +2484,7 @@
       [
        "heavy",
        1,
-       0.1442,
+       0.1302,
        0,
        0.0108,
        "",
@@ -2428,7 +2493,7 @@
       [
        "industries",
        1,
-       0.1431,
+       0.13,
        0,
        0.0133,
        "",
@@ -2437,7 +2502,7 @@
       [
        "sakura",
        1,
-       0.1304,
+       0.1168,
        0,
        -0.0123,
        "",
@@ -2446,7 +2511,7 @@
       [
        "internet",
        1,
-       0.1156,
+       0.1065,
        0,
        -0.0132,
        "",
@@ -2455,7 +2520,7 @@
       [
        "mou",
        1,
-       0.1349,
+       0.1185,
        0,
        0.0003,
        "",
@@ -2464,7 +2529,7 @@
       [
        "establish",
        1,
-       0.1405,
+       0.1263,
        0,
        0.0024,
        "",
@@ -2473,7 +2538,7 @@
       [
        "sovereign",
        1,
-       0.151,
+       0.1374,
        0,
        0.011,
        "",
@@ -2482,7 +2547,7 @@
       [
        "japan",
        1,
-       0.1438,
+       0.1368,
        0,
        -0.001,
        "",
@@ -2491,7 +2556,7 @@
       [
        "바커",
        1,
-       0.121,
+       0.108,
        0,
        0.0028,
        "",
@@ -2500,7 +2565,7 @@
       [
        "차세대",
        1,
-       0.1193,
+       0.1103,
        0,
        -0.0026,
        "",
@@ -2509,7 +2574,7 @@
       [
        "cpo",
        1,
-       0.1345,
+       0.1252,
        0,
        -0.0062,
        "",
@@ -2518,7 +2583,7 @@
       [
        "소재",
        1,
-       0.138,
+       0.1227,
        0,
        -0.0061,
        "",
@@ -2527,7 +2592,7 @@
       [
        "개발",
        1,
-       0.1463,
+       0.1259,
        0,
        -0.0045,
        "",
@@ -2536,7 +2601,7 @@
       [
        "정부",
        1,
-       0.1248,
+       0.1128,
        0,
        -0.0082,
        "",
@@ -2545,7 +2610,7 @@
       [
        "과제",
        1,
-       0.156,
+       0.1401,
        0,
        0.0214,
        "",
@@ -2554,7 +2619,7 @@
       [
        "선정",
        1,
-       0.124,
+       0.1101,
        0,
        -0.0026,
        "",
@@ -2563,7 +2628,7 @@
       [
        "대통령",
        1,
-       0.1302,
+       0.1146,
        0,
        0.0158,
        "",
@@ -2572,7 +2637,7 @@
       [
        "지방",
        1,
-       0.1314,
+       0.1197,
        0,
        -0.002,
        "",
@@ -2581,7 +2646,7 @@
       [
        "연속",
        1,
-       0.122,
+       0.112,
        0,
        0.0165,
        "",
@@ -2590,7 +2655,7 @@
       [
        "메가",
        1,
-       0.1436,
+       0.1306,
        0,
        -0.0173,
        "",
@@ -2599,7 +2664,7 @@
       [
        "프로젝트",
        1,
-       0.1317,
+       0.1245,
        0,
        -0.0066,
        "",
@@ -2608,7 +2673,7 @@
       [
        "현장",
        1,
-       0.1233,
+       0.1057,
        0,
        0.0102,
        "",
@@ -2617,7 +2682,7 @@
       [
        "점검",
        1,
-       0.1341,
+       0.12,
        0,
        -0.0132,
        "",
@@ -2626,7 +2691,7 @@
       [
        "lg",
        1,
-       0.1383,
+       0.1283,
        0,
        0.0052,
        "",
@@ -2635,7 +2700,7 @@
       [
        "플랫폼",
        1,
-       0.1168,
+       0.1029,
        0,
        0.0025,
        "",
@@ -2644,7 +2709,7 @@
       [
        "중심",
        1,
-       0.1484,
+       0.131,
        0,
        -0.0005,
        "",
@@ -2653,7 +2718,7 @@
       [
        "재편",
        1,
-       0.1321,
+       0.115,
        0,
        -0.0031,
        "",
@@ -2662,7 +2727,7 @@
       [
        "김홍근",
        1,
-       0.1332,
+       0.1171,
        0,
        0.0232,
        "",
@@ -2671,7 +2736,7 @@
       [
        "부사장",
        1,
-       0.1285,
+       0.1118,
        0,
        -0.0074,
        "",
@@ -2680,7 +2745,7 @@
       [
        "총괄",
        1,
-       0.1138,
+       0.0961,
        0,
        0.0066,
        "",
@@ -2689,7 +2754,7 @@
       [
        "amd",
        1,
-       0.1451,
+       0.126,
        0,
        0.0089,
        "",
@@ -2698,7 +2763,7 @@
       [
        "확대",
        1,
-       0.114,
+       0.1007,
        0,
        0.0168,
        "",
@@ -2707,7 +2772,7 @@
       [
        "단일",
        1,
-       0.1383,
+       0.1286,
        0,
        -0.0137,
        "",
@@ -2716,7 +2781,7 @@
       [
        "서버",
        1,
-       0.1173,
+       0.0995,
        0,
        -0.0039,
        "",
@@ -2725,9 +2790,90 @@
       [
        "gpu",
        1,
-       0.1315,
+       0.1188,
        1,
        0.1516,
+       "",
+       ""
+      ],
+      [
+       "taiwanese",
+       1,
+       0.1223,
+       0,
+       -0.0038,
+       "",
+       ""
+      ],
+      [
+       "firm",
+       1,
+       0.1075,
+       0,
+       0.0041,
+       "",
+       ""
+      ],
+      [
+       "nocera",
+       1,
+       0.1181,
+       0,
+       0.0027,
+       "",
+       ""
+      ],
+      [
+       "stake",
+       1,
+       0.1165,
+       0,
+       0.028,
+       "",
+       ""
+      ],
+      [
+       "canadian",
+       1,
+       0.1126,
+       0,
+       -0.0095,
+       "",
+       ""
+      ],
+      [
+       "data",
+       1,
+       0.1121,
+       0,
+       0.0,
+       "",
+       ""
+      ],
+      [
+       "center",
+       1,
+       0.1292,
+       0,
+       0.0062,
+       "",
+       ""
+      ],
+      [
+       "developer",
+       1,
+       0.1002,
+       0,
+       -0.004,
+       "",
+       ""
+      ],
+      [
+       "bitrock",
+       1,
+       0.1114,
+       0,
+       -0.0129,
        "",
        ""
       ]
@@ -2746,8 +2892,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 52,
-    "hdc_answer": 52,
+    "count_answer": 61,
+    "hdc_answer": 61,
     "agree": true
    },
    "source": {
@@ -2776,12 +2922,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.0252
+     "value": 0.024
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.0184
+     "value": 0.0165
     }
    ],
    "check": null,
@@ -2807,7 +2953,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 166
+     "value": 169
     },
     {
      "type": "value",
@@ -3122,7 +3268,7 @@
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 1018
+     "value": 1032
     },
     {
      "type": "value",
@@ -3178,8 +3324,8 @@
      "rows": [
       [
        "ai",
-       31,
-       0.5037,
+       32,
+       0.5108,
        26,
        0.4799,
        "",
@@ -3188,7 +3334,7 @@
       [
        "휴머노이드",
        20,
-       0.3195,
+       0.3144,
        18,
        0.3215,
        "",
@@ -3197,7 +3343,7 @@
       [
        "기업",
        16,
-       0.2606,
+       0.2567,
        11,
        0.2095,
        "",
@@ -3206,16 +3352,25 @@
       [
        "기술",
        13,
-       0.2082,
+       0.2051,
        7,
        0.1211,
        "",
        ""
       ],
       [
+       "투자",
+       9,
+       0.142,
+       4,
+       0.0661,
+       "",
+       ""
+      ],
+      [
        "인재",
        9,
-       0.1476,
+       0.1457,
        1,
        0.0068,
        "새 조합",
@@ -3224,7 +3379,7 @@
       [
        "피지컬 AI",
        8,
-       0.1204,
+       0.1184,
        14,
        0.2426,
        "",
@@ -3233,7 +3388,7 @@
       [
        "공급",
        8,
-       0.131,
+       0.13,
        3,
        0.0497,
        "",
@@ -3242,25 +3397,16 @@
       [
        "시장",
        8,
-       0.1273,
+       0.1258,
        2,
        0.046,
        "",
        ""
       ],
       [
-       "투자",
-       7,
-       0.1115,
-       4,
-       0.0661,
-       "",
-       ""
-      ],
-      [
        "확대",
        7,
-       0.1145,
+       0.1134,
        7,
        0.135,
        "",
@@ -3269,7 +3415,7 @@
       [
        "추진",
        7,
-       0.1191,
+       0.1178,
        3,
        0.0583,
        "",
@@ -3278,7 +3424,7 @@
       [
        "공개",
        7,
-       0.1046,
+       0.1038,
        6,
        0.1035,
        "",
@@ -3287,7 +3433,7 @@
       [
        "사업",
        6,
-       0.0924,
+       0.0921,
        3,
        0.0567,
        "",
@@ -3296,7 +3442,7 @@
       [
        "주식",
        6,
-       0.1035,
+       0.1019,
        5,
        0.089,
        "",
@@ -3305,7 +3451,7 @@
       [
        "삼성전자",
        6,
-       0.1036,
+       0.1037,
        0,
        0.0102,
        "새 조합",
@@ -3314,7 +3460,7 @@
       [
        "실증",
        5,
-       0.0823,
+       0.0808,
        1,
        0.0312,
        "",
@@ -3323,7 +3469,7 @@
       [
        "성장",
        5,
-       0.0771,
+       0.0764,
        2,
        0.0444,
        "",
@@ -3332,7 +3478,7 @@
       [
        "공장",
        5,
-       0.086,
+       0.0854,
        0,
        0.005,
        "새 조합",
@@ -3341,7 +3487,7 @@
       [
        "미래컴퍼니",
        5,
-       0.07,
+       0.0691,
        0,
        -0.0078,
        "새 조합",
@@ -3350,7 +3496,7 @@
       [
        "시세",
        5,
-       0.0726,
+       0.0721,
        5,
        0.0932,
        "",
@@ -3359,7 +3505,7 @@
       [
        "생산",
        5,
-       0.0676,
+       0.0675,
        1,
        0.0111,
        "새 조합",
@@ -3368,7 +3514,7 @@
       [
        "경쟁",
        5,
-       0.0649,
+       0.0644,
        0,
        -0.002,
        "새 조합",
@@ -3377,7 +3523,7 @@
       [
        "중국",
        5,
-       0.0714,
+       0.071,
        3,
        0.0496,
        "",
@@ -3386,7 +3532,7 @@
       [
        "논의",
        4,
-       0.0696,
+       0.07,
        2,
        0.0385,
        "",
@@ -3395,7 +3541,7 @@
       [
        "규모",
        4,
-       0.0544,
+       0.0536,
        2,
        0.0239,
        "새 조합",
@@ -3404,7 +3550,7 @@
       [
        "글로벌",
        4,
-       0.0585,
+       0.057,
        5,
        0.0854,
        "",
@@ -3413,7 +3559,7 @@
       [
        "네이버",
        4,
-       0.0519,
+       0.0501,
        3,
        0.0443,
        "",
@@ -3422,7 +3568,7 @@
       [
        "반도체",
        4,
-       0.074,
+       0.0741,
        3,
        0.0635,
        "",
@@ -3431,7 +3577,7 @@
       [
        "투입",
        4,
-       0.0424,
+       0.0428,
        1,
        0.0049,
        "새 조합",
@@ -3440,7 +3586,7 @@
       [
        "부품",
        4,
-       0.0805,
+       0.0796,
        0,
        0.0112,
        "새 조합",
@@ -3449,7 +3595,7 @@
       [
        "LG전자",
        4,
-       0.0646,
+       0.0635,
        2,
        0.0277,
        "새 조합",
@@ -3458,7 +3604,7 @@
       [
        "ces",
        4,
-       0.0633,
+       0.0627,
        0,
        -0.007,
        "새 조합",
@@ -3467,7 +3613,7 @@
       [
        "개발",
        4,
-       0.055,
+       0.0542,
        13,
        0.2255,
        "",
@@ -3476,7 +3622,7 @@
       [
        "승진",
        4,
-       0.053,
+       0.0526,
        0,
        -0.0075,
        "새 조합",
@@ -3485,7 +3631,7 @@
       [
        "업무협약",
        4,
-       0.0677,
+       0.0663,
        0,
        -0.0026,
        "새 조합",
@@ -3494,7 +3640,7 @@
       [
        "현장",
        4,
-       0.0836,
+       0.083,
        3,
        0.0727,
        "",
@@ -3503,7 +3649,7 @@
       [
        "청소년",
        4,
-       0.0389,
+       0.0388,
        0,
        -0.0157,
        "새 조합",
@@ -3512,7 +3658,7 @@
       [
        "미래",
        4,
-       0.0642,
+       0.0624,
        2,
        0.0446,
        "",
@@ -3521,7 +3667,7 @@
       [
        "구축",
        4,
-       0.0721,
+       0.071,
        1,
        0.0294,
        "새 조합",
@@ -3530,7 +3676,7 @@
       [
        "킬러",
        3,
-       0.0314,
+       0.0312,
        1,
        0.0124,
        "새 조합",
@@ -3539,7 +3685,7 @@
       [
        "규제",
        3,
-       0.0537,
+       0.053,
        1,
        0.0085,
        "새 조합",
@@ -3548,7 +3694,7 @@
       [
        "제조",
        3,
-       0.049,
+       0.0479,
        2,
        0.042,
        "",
@@ -3557,7 +3703,7 @@
       [
        "자율주행",
        3,
-       0.0348,
+       0.0332,
        2,
        0.0248,
        "새 조합",
@@ -3566,7 +3712,7 @@
       [
        "도입",
        3,
-       0.0616,
+       0.0601,
        4,
        0.0806,
        "",
@@ -3575,7 +3721,7 @@
       [
        "세종",
        3,
-       0.0405,
+       0.0402,
        0,
        -0.0003,
        "새 조합",
@@ -3584,7 +3730,7 @@
       [
        "지원",
        3,
-       0.0518,
+       0.0516,
        0,
        0.0059,
        "새 조합",
@@ -3593,7 +3739,7 @@
       [
        "조건",
        3,
-       0.0591,
+       0.0582,
        0,
        0.0083,
        "새 조합",
@@ -3602,7 +3748,7 @@
       [
        "자동차",
        3,
-       0.0651,
+       0.0646,
        0,
        0.0051,
        "새 조합",
@@ -3611,7 +3757,7 @@
       [
        "의료",
        3,
-       0.0567,
+       0.0563,
        0,
        0.0036,
        "새 조합",
@@ -3620,7 +3766,7 @@
       [
        "국내",
        3,
-       0.0344,
+       0.034,
        1,
        0.0115,
        "새 조합",
@@ -3629,7 +3775,7 @@
       [
        "대회",
        3,
-       0.0497,
+       0.0481,
        0,
        -0.0029,
        "새 조합",
@@ -3638,7 +3784,7 @@
       [
        "전망",
        3,
-       0.0487,
+       0.0484,
        1,
        0.0214,
        "새 조합",
@@ -3647,7 +3793,7 @@
       [
        "지분",
        3,
-       0.0406,
+       0.0421,
        1,
        0.0026,
        "새 조합",
@@ -3656,7 +3802,7 @@
       [
        "애플",
        3,
-       0.0573,
+       0.0554,
        0,
        0.0225,
        "새 조합",
@@ -3665,7 +3811,7 @@
       [
        "lg",
        3,
-       0.0511,
+       0.0512,
        2,
        0.0507,
        "",
@@ -3674,7 +3820,7 @@
       [
        "체결",
        3,
-       0.0569,
+       0.0564,
        3,
        0.053,
        "",
@@ -3683,7 +3829,7 @@
       [
        "본격",
        3,
-       0.0686,
+       0.0674,
        0,
        0.0346,
        "",
@@ -3692,7 +3838,7 @@
       [
        "강화",
        3,
-       0.0453,
+       0.0454,
        4,
        0.0684,
        "",
@@ -3701,7 +3847,7 @@
       [
        "사람",
        3,
-       0.0502,
+       0.0495,
        6,
        0.0988,
        "",
@@ -3719,7 +3865,7 @@
       [
        "상용",
        3,
-       0.0328,
+       0.0326,
        0,
        -0.0157,
        "새 조합",
@@ -3728,7 +3874,7 @@
       [
        "코스피",
        3,
-       0.0469,
+       0.0466,
        0,
        -0.0232,
        "새 조합",
@@ -3737,7 +3883,7 @@
       [
        "양성",
        3,
-       0.0573,
+       0.0559,
        0,
        0.0032,
        "새 조합",
@@ -3746,16 +3892,25 @@
       [
        "진출",
        3,
-       0.043,
+       0.0423,
        0,
        -0.0075,
        "새 조합",
        "새 조합"
       ],
       [
+       "철회",
+       3,
+       0.044,
+       0,
+       -0.0004,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "물류",
        2,
-       0.0334,
+       0.0324,
        1,
        0.0076,
        "새 조합",
@@ -3764,7 +3919,7 @@
       [
        "SK인텔릭스",
        2,
-       0.0483,
+       0.0469,
        0,
        0.0036,
        "새 조합",
@@ -3773,7 +3928,7 @@
       [
        "kt",
        2,
-       0.0194,
+       0.0198,
        0,
        -0.0167,
        "새 조합",
@@ -3782,7 +3937,7 @@
       [
        "서울대병원",
        2,
-       0.0223,
+       0.0221,
        0,
        -0.0129,
        "새 조합",
@@ -3791,7 +3946,7 @@
       [
        "기업가치",
        2,
-       0.0168,
+       0.017,
        2,
        0.0223,
        "새 조합",
@@ -3800,7 +3955,7 @@
       [
        "시리즈",
        2,
-       0.0112,
+       0.0102,
        0,
        -0.008,
        "새 조합",
@@ -3809,7 +3964,7 @@
       [
        "가속",
        2,
-       0.0429,
+       0.0427,
        0,
        0.001,
        "새 조합",
@@ -3818,7 +3973,7 @@
       [
        "미라콤아이앤씨",
        2,
-       0.0278,
+       0.027,
        0,
        0.008,
        "새 조합",
@@ -3827,7 +3982,7 @@
       [
        "rx",
        2,
-       0.0243,
+       0.0235,
        0,
        -0.0103,
        "새 조합",
@@ -3836,7 +3991,7 @@
       [
        "맞손",
        2,
-       0.0302,
+       0.0298,
        2,
        0.0375,
        "",
@@ -3845,7 +4000,7 @@
       [
        "정체",
        2,
-       0.0399,
+       0.0392,
        0,
        0.0061,
        "새 조합",
@@ -3854,7 +4009,7 @@
       [
        "서비스",
        2,
-       0.0089,
+       0.0086,
        0,
        -0.0146,
        "새 조합",
@@ -3863,7 +4018,7 @@
       [
        "bs",
        2,
-       0.0312,
+       0.0307,
        0,
        -0.0192,
        "새 조합",
@@ -3872,7 +4027,7 @@
       [
        "의료진",
        2,
-       0.0323,
+       0.0329,
        0,
        -0.0065,
        "새 조합",
@@ -3881,7 +4036,7 @@
       [
        "개막",
        2,
-       0.0349,
+       0.0348,
        4,
        0.0802,
        "",
@@ -3890,7 +4045,7 @@
       [
        "한자리",
        2,
-       0.0418,
+       0.0413,
        1,
        0.0225,
        "새 조합",
@@ -3899,7 +4054,7 @@
       [
        "아틀라스",
        2,
-       0.0381,
+       0.0375,
        1,
        0.0151,
        "새 조합",
@@ -3908,7 +4063,7 @@
       [
        "액추에이터",
        2,
-       0.0332,
+       0.0322,
        3,
        0.0657,
        "",
@@ -3917,7 +4072,7 @@
       [
        "기대",
        2,
-       0.0438,
+       0.0442,
        1,
        0.0354,
        "",
@@ -3926,7 +4081,7 @@
       [
        "대형",
        2,
-       0.0415,
+       0.0409,
        0,
        0.0118,
        "새 조합",
@@ -3935,7 +4090,7 @@
       [
        "적자",
        2,
-       0.044,
+       0.043,
        3,
        0.0704,
        "",
@@ -3944,7 +4099,7 @@
       [
        "설립",
        2,
-       0.0254,
+       0.0234,
        0,
        -0.0096,
        "새 조합",
@@ -3953,7 +4108,7 @@
       [
        "공략",
        2,
-       0.0352,
+       0.0359,
        1,
        0.0179,
        "새 조합",
@@ -3962,7 +4117,7 @@
       [
        "고영",
        2,
-       0.0158,
+       0.0141,
        0,
        -0.0145,
        "새 조합",
@@ -3971,7 +4126,7 @@
       [
        "웰니스",
        2,
-       0.0379,
+       0.0375,
        0,
        0.001,
        "새 조합",
@@ -3980,7 +4135,7 @@
       [
        "협약",
        2,
-       0.0475,
+       0.046,
        1,
        0.0061,
        "새 조합",
@@ -3989,7 +4144,7 @@
       [
        "북미",
        2,
-       0.0324,
+       0.0329,
        3,
        0.0635,
        "",
@@ -3998,7 +4153,7 @@
       [
        "교육",
        2,
-       0.0451,
+       0.0452,
        0,
        0.0119,
        "새 조합",
@@ -4007,7 +4162,7 @@
       [
        "전략",
        2,
-       0.0395,
+       0.0384,
        2,
        0.0283,
        "새 조합",
@@ -4016,7 +4171,7 @@
       [
        "엔비디아",
        2,
-       0.0369,
+       0.036,
        0,
        0.014,
        "새 조합",
@@ -4025,7 +4180,7 @@
       [
        "수상",
        2,
-       0.0233,
+       0.0228,
        2,
        0.0281,
        "새 조합",
@@ -4034,7 +4189,7 @@
       [
        "세계",
        2,
-       0.0163,
+       0.0161,
        1,
        0.0074,
        "새 조합",
@@ -4043,7 +4198,7 @@
       [
        "humyn",
        2,
-       0.0517,
+       0.0497,
        0,
        0.0169,
        "새 조합",
@@ -4052,7 +4207,7 @@
       [
        "labs",
        2,
-       0.0297,
+       0.0301,
        1,
        0.0193,
        "새 조합",
@@ -4061,7 +4216,7 @@
       [
        "data",
        2,
-       0.0203,
+       0.0192,
        3,
        0.0474,
        "",
@@ -4070,7 +4225,7 @@
       [
        "심포지엄",
        2,
-       0.0375,
+       0.0368,
        0,
        -0.0014,
        "새 조합",
@@ -4079,7 +4234,7 @@
       [
        "현대차",
        2,
-       0.0325,
+       0.0316,
        1,
        0.0352,
        "",
@@ -4088,7 +4243,7 @@
       [
        "작업",
        2,
-       0.0497,
+       0.0499,
        2,
        0.0526,
        "",
@@ -4097,7 +4252,7 @@
       [
        "삼성",
        2,
-       0.0209,
+       0.0213,
        0,
        0.0066,
        "새 조합",
@@ -4106,7 +4261,7 @@
       [
        "기반",
        2,
-       0.042,
+       0.0415,
        1,
        0.0204,
        "새 조합",
@@ -4115,7 +4270,7 @@
       [
        "군사",
        2,
-       0.0449,
+       0.0438,
        1,
        0.0299,
        "새 조합",
@@ -4124,7 +4279,7 @@
       [
        "확보",
        2,
-       0.036,
+       0.0361,
        1,
        0.0089,
        "새 조합",
@@ -4133,7 +4288,7 @@
       [
        "설계",
        2,
-       0.0166,
+       0.0158,
        0,
        -0.0142,
        "새 조합",
@@ -4142,7 +4297,7 @@
       [
        "축소",
        2,
-       0.0251,
+       0.0249,
        0,
        -0.009,
        "새 조합",
@@ -4151,7 +4306,7 @@
       [
        "유지",
        2,
-       0.0305,
+       0.0294,
        0,
        0.0111,
        "새 조합",
@@ -4160,7 +4315,7 @@
       [
        "다음",
        2,
-       0.0438,
+       0.0435,
        0,
        0.0218,
        "새 조합",
@@ -4169,7 +4324,7 @@
       [
        "vc",
        2,
-       0.0296,
+       0.0289,
        0,
        -0.0014,
        "새 조합",
@@ -4178,7 +4333,7 @@
       [
        "플랫폼",
        2,
-       0.023,
+       0.0225,
        2,
        0.032,
        "",
@@ -4187,7 +4342,7 @@
       [
        "학습",
        2,
-       0.0313,
+       0.0307,
        2,
        0.0348,
        "",
@@ -4196,7 +4351,7 @@
       [
        "집중",
        2,
-       0.0489,
+       0.0483,
        0,
        0.0084,
        "새 조합",
@@ -4205,7 +4360,7 @@
       [
        "데이터센터",
        2,
-       0.0168,
+       0.0163,
        0,
        -0.0016,
        "새 조합",
@@ -4214,7 +4369,7 @@
       [
        "주목",
        2,
-       0.0226,
+       0.0214,
        0,
        -0.0032,
        "새 조합",
@@ -4223,7 +4378,7 @@
       [
        "마음AI",
        2,
-       0.0187,
+       0.0186,
        0,
        -0.0113,
        "새 조합",
@@ -4232,7 +4387,7 @@
       [
        "한양대",
        2,
-       0.0362,
+       0.0361,
        0,
        -0.0099,
        "새 조합",
@@ -4241,7 +4396,7 @@
       [
        "erica",
        2,
-       0.0285,
+       0.0282,
        0,
        -0.0068,
        "새 조합",
@@ -4250,7 +4405,7 @@
       [
        "산학협력",
        2,
-       0.0324,
+       0.0306,
        0,
        -0.0024,
        "새 조합",
@@ -4259,7 +4414,7 @@
       [
        "소프트",
        2,
-       0.049,
+       0.0488,
        0,
        0.002,
        "새 조합",
@@ -4268,7 +4423,7 @@
       [
        "적응",
        2,
-       0.0355,
+       0.0341,
        0,
        0.0121,
        "새 조합",
@@ -4277,7 +4432,7 @@
       [
        "아파트",
        2,
-       0.0315,
+       0.031,
        0,
        0.0003,
        "새 조합",
@@ -4286,7 +4441,7 @@
       [
        "적용",
        2,
-       0.0262,
+       0.0251,
        2,
        0.0271,
        "새 조합",
@@ -4295,7 +4450,7 @@
       [
        "전문가",
        2,
-       0.036,
+       0.0351,
        0,
        -0.0032,
        "새 조합",
@@ -4304,7 +4459,7 @@
       [
        "기용",
        2,
-       0.0401,
+       0.0411,
        0,
        0.015,
        "새 조합",
@@ -4313,7 +4468,7 @@
       [
        "mou",
        2,
-       0.0273,
+       0.0268,
        1,
        0.0082,
        "새 조합",
@@ -4322,7 +4477,7 @@
       [
        "특허",
        2,
-       0.0382,
+       0.0379,
        0,
        0.0027,
        "새 조합",
@@ -4340,7 +4495,7 @@
       [
        "엑스와이",
        2,
-       0.0439,
+       0.0431,
        1,
        0.0079,
        "새 조합",
@@ -4349,7 +4504,7 @@
       [
        "성공",
        2,
-       0.0285,
+       0.0272,
        1,
        0.0257,
        "새 조합",
@@ -4358,7 +4513,7 @@
       [
        "협력",
        2,
-       0.0186,
+       0.0179,
        5,
        0.0764,
        "",
@@ -4367,7 +4522,7 @@
       [
        "오토메이션",
        2,
-       0.0145,
+       0.0141,
        0,
        -0.0059,
        "새 조합",
@@ -4376,7 +4531,7 @@
       [
        "공식",
        2,
-       0.0409,
+       0.0402,
        0,
        0.0042,
        "새 조합",
@@ -4385,7 +4540,7 @@
       [
        "베이스그룹",
        2,
-       0.032,
+       0.0318,
        0,
        -0.0013,
        "새 조합",
@@ -4394,7 +4549,7 @@
       [
        "병원",
        2,
-       0.0439,
+       0.0435,
        0,
        0.0155,
        "새 조합",
@@ -4403,7 +4558,7 @@
       [
        "유럽",
        2,
-       0.0272,
+       0.0275,
        0,
        -0.0196,
        "새 조합",
@@ -4412,7 +4567,7 @@
       [
        "국제",
        2,
-       0.0491,
+       0.0486,
        0,
        0.0177,
        "새 조합",
@@ -4421,7 +4576,7 @@
       [
        "인수",
        2,
-       0.0244,
+       0.0236,
        0,
        -0.0066,
        "새 조합",
@@ -4430,7 +4585,7 @@
       [
        "도전",
        2,
-       0.0352,
+       0.0335,
        0,
        0.0092,
        "새 조합",
@@ -4439,7 +4594,7 @@
       [
        "희토",
        2,
-       0.0234,
+       0.0241,
        0,
        -0.0099,
        "새 조합",
@@ -4448,7 +4603,7 @@
       [
        "ceo",
        2,
-       0.0315,
+       0.0323,
        1,
        0.0168,
        "새 조합",
@@ -4457,7 +4612,7 @@
       [
        "산업",
        2,
-       0.0403,
+       0.0396,
        3,
        0.0527,
        "",
@@ -4466,7 +4621,7 @@
       [
        "분야",
        2,
-       0.0467,
+       0.046,
        0,
        0.0237,
        "새 조합",
@@ -4475,7 +4630,7 @@
       [
        "미국",
        2,
-       0.0449,
+       0.0442,
        0,
        -0.0021,
        "새 조합",
@@ -4484,7 +4639,7 @@
       [
        "애지봇",
        2,
-       0.0321,
+       0.0313,
        0,
        -0.0031,
        "새 조합",
@@ -4493,7 +4648,7 @@
       [
        "농업",
        2,
-       0.0345,
+       0.0341,
        0,
        -0.0051,
        "새 조합",
@@ -4502,7 +4657,7 @@
       [
        "생태",
        2,
-       0.0327,
+       0.0323,
        1,
        0.0088,
        "새 조합",
@@ -4511,7 +4666,7 @@
       [
        "커넥트재단",
        2,
-       0.0293,
+       0.0288,
        0,
        -0.0047,
        "새 조합",
@@ -4520,7 +4675,7 @@
       [
        "성료",
        2,
-       0.0133,
+       0.0128,
        4,
        0.0647,
        "",
@@ -4529,7 +4684,7 @@
       [
        "네트워크",
        2,
-       0.0338,
+       0.0337,
        0,
        -0.0029,
        "새 조합",
@@ -4538,7 +4693,7 @@
       [
        "엑스포",
        2,
-       0.0595,
+       0.0593,
        1,
        0.0452,
        "",
@@ -4547,25 +4702,16 @@
       [
        "한화에어로",
        2,
-       0.0326,
+       0.0324,
        0,
        0.0022,
        "새 조합",
        "새 조합"
       ],
       [
-       "철회",
-       2,
-       0.029,
-       0,
-       -0.0004,
-       "새 조합",
-       "새 조합"
-      ],
-      [
        "손짓",
        1,
-       0.0304,
+       0.0298,
        0,
        0.0118,
        "",
@@ -4574,7 +4720,7 @@
       [
        "learn",
        1,
-       0.026,
+       0.0264,
        0,
        0.0135,
        "",
@@ -4583,7 +4729,7 @@
       [
        "changing",
        1,
-       0.0073,
+       0.0066,
        0,
        -0.0187,
        "",
@@ -4592,7 +4738,7 @@
       [
        "supply",
        1,
-       0.026,
+       0.0257,
        0,
        0.0076,
        "",
@@ -4601,7 +4747,7 @@
       [
        "chain",
        1,
-       0.0201,
+       0.0196,
        0,
        -0.004,
        "",
@@ -4610,7 +4756,7 @@
       [
        "un",
        1,
-       0.0275,
+       0.0269,
        0,
        0.0171,
        "",
@@ -4619,7 +4765,7 @@
       [
        "반대",
        1,
-       0.0135,
+       0.0128,
        0,
        -0.0165,
        "",
@@ -4628,7 +4774,7 @@
       [
        "협상",
        1,
-       0.0326,
+       0.0319,
        0,
        0.0143,
        "",
@@ -4637,7 +4783,7 @@
       [
        "개시",
        1,
-       0.0148,
+       0.0135,
        0,
        0.0065,
        "",
@@ -4655,7 +4801,7 @@
       [
        "제품안전",
        1,
-       0.0109,
+       0.0103,
        0,
        0.0108,
        "",
@@ -4664,7 +4810,7 @@
       [
        "국무총리",
        1,
-       0.0185,
+       0.0178,
        0,
        0.0087,
        "",
@@ -4682,7 +4828,7 @@
       [
        "안전관리",
        1,
-       0.0311,
+       0.0316,
        0,
        0.0114,
        "",
@@ -4691,7 +4837,7 @@
       [
        "인정",
        1,
-       0.0088,
+       0.0092,
        0,
        0.0057,
        "",
@@ -4700,7 +4846,7 @@
       [
        "아이",
        1,
-       0.0194,
+       0.0187,
        0,
        0.0012,
        "",
@@ -4709,7 +4855,7 @@
       [
        "검사",
        1,
-       -0.0006,
+       -0.0002,
        1,
        0.0076,
        "",
@@ -4718,7 +4864,7 @@
       [
        "절차",
        1,
-       0.0018,
+       0.001,
        0,
        -0.0123,
        "",
@@ -4727,7 +4873,7 @@
       [
        "설명",
        1,
-       0.0097,
+       0.0094,
        0,
        0.0007,
        "",
@@ -4736,7 +4882,7 @@
       [
        "선도기업",
        1,
-       0.0233,
+       0.0228,
        0,
        0.015,
        "",
@@ -4745,7 +4891,7 @@
       [
        "애자일",
        1,
-       0.0121,
+       0.0115,
        2,
        0.0322,
        "",
@@ -4763,7 +4909,7 @@
       [
        "선두",
        1,
-       0.0036,
+       0.0038,
        0,
        -0.0154,
        "",
@@ -4772,7 +4918,7 @@
       [
        "로보락",
        1,
-       0.0186,
+       0.0187,
        0,
        0.0043,
        "",
@@ -4781,7 +4927,7 @@
       [
        "진공",
        1,
-       0.0422,
+       0.042,
        0,
        0.016,
        "",
@@ -4790,7 +4936,7 @@
       [
        "물걸레",
        1,
-       0.0279,
+       0.0283,
        0,
        0.0052,
        "",
@@ -4799,7 +4945,7 @@
       [
        "점유",
        1,
-       0.0219,
+       0.021,
        0,
        0.0148,
        "",
@@ -4808,7 +4954,7 @@
       [
        "최루탄",
        1,
-       0.0039,
+       0.0037,
        0,
        0.0013,
        "",
@@ -4817,7 +4963,7 @@
       [
        "유탄발사기",
        1,
-       0.0135,
+       0.0126,
        0,
        0.0094,
        "",
@@ -4826,7 +4972,7 @@
       [
        "폭동",
        1,
-       0.0091,
+       0.0079,
        0,
        -0.0075,
        "",
@@ -4835,7 +4981,7 @@
       [
        "진압",
        1,
-       0.027,
+       0.0271,
        0,
        -0.0004,
        "",
@@ -4844,7 +4990,7 @@
       [
        "어린이",
        1,
-       0.0082,
+       0.0073,
        0,
        -0.013,
        "",
@@ -4853,7 +4999,7 @@
       [
        "환자",
        1,
-       0.0147,
+       0.0158,
        0,
        0.0024,
        "",
@@ -4862,7 +5008,7 @@
       [
        "돌봄",
        1,
-       0.0052,
+       0.0055,
        0,
        -0.0121,
        "",
@@ -4871,7 +5017,7 @@
       [
        "업무",
        1,
-       0.0126,
+       0.0136,
        0,
        -0.0124,
        "",
@@ -4880,7 +5026,7 @@
       [
        "IT돋보기",
        1,
-       0.0074,
+       0.0069,
        0,
        -0.0132,
        "",
@@ -4889,7 +5035,7 @@
       [
        "법인",
        1,
-       0.0205,
+       0.0193,
        0,
        0.0058,
        "",
@@ -4898,7 +5044,7 @@
       [
        "제조업",
        1,
-       -0.0083,
+       -0.0077,
        3,
        0.0273,
        "",
@@ -4907,7 +5053,7 @@
       [
        "특화",
        1,
-       0.0174,
+       0.0167,
        0,
        -0.0061,
        "",
@@ -4916,7 +5062,7 @@
       [
        "중소기업",
        1,
-       0.0133,
+       0.0135,
        0,
        -0.0064,
        "",
@@ -4925,7 +5071,7 @@
       [
        "혁신대전",
        1,
-       0.0155,
+       0.0162,
        0,
        -0.0122,
        "",
@@ -4934,7 +5080,7 @@
       [
        "혁신기술",
        1,
-       0.0136,
+       0.0143,
        0,
        0.0067,
        "",
@@ -4952,7 +5098,7 @@
       [
        "관절",
        1,
-       0.0047,
+       0.0045,
        0,
        0.0009,
        "",
@@ -4961,7 +5107,7 @@
       [
        "한국R",
        1,
-       0.01,
+       0.0091,
        0,
        -0.0052,
        "",
@@ -4970,7 +5116,7 @@
       [
        "장비",
        1,
-       0.0235,
+       0.0226,
        2,
        0.0478,
        "",
@@ -4979,7 +5125,7 @@
       [
        "대응",
        1,
-       0.0105,
+       0.01,
        0,
        0.0046,
        "",
@@ -4997,7 +5143,7 @@
       [
        "폴란드",
        1,
-       0.0087,
+       0.0085,
        0,
        0.0051,
        "",
@@ -5006,7 +5152,7 @@
       [
        "유럽법인",
        1,
-       0.0278,
+       0.0276,
        0,
        -0.0004,
        "",
@@ -5015,7 +5161,7 @@
       [
        "우크라이나",
        1,
-       0.0171,
+       0.0168,
        0,
        0.0045,
        "",
@@ -5024,7 +5170,7 @@
       [
        "재건",
        1,
-       0.0123,
+       0.0134,
        0,
        0.0067,
        "",
@@ -5033,7 +5179,7 @@
       [
        "턴어라운드",
        1,
-       0.0019,
+       0.0014,
        0,
        -0.0109,
        "",
@@ -5042,7 +5188,7 @@
       [
        "뇌수술",
        1,
-       0.0188,
+       0.0191,
        0,
        -0.0046,
        "",
@@ -5060,7 +5206,7 @@
       [
        "부진",
        1,
-       0.0119,
+       0.0106,
        0,
        0.0024,
        "",
@@ -5069,7 +5215,7 @@
       [
        "해외",
        1,
-       0.0269,
+       0.0278,
        0,
        -0.0005,
        "",
@@ -5078,7 +5224,7 @@
       [
        "영업망",
        1,
-       0.0057,
+       0.0054,
        0,
        -0.0203,
        "",
@@ -5087,7 +5233,7 @@
       [
        "확장",
        1,
-       0.0443,
+       0.045,
        1,
        0.0453,
        "",
@@ -5114,7 +5260,7 @@
       [
        "림프순환",
        1,
-       0.0039,
+       0.0049,
        0,
        -0.0168,
        "",
@@ -5123,7 +5269,7 @@
       [
        "rf",
        1,
-       0.0111,
+       0.0103,
        0,
        -0.0159,
        "",
@@ -5132,7 +5278,7 @@
       [
        "주파",
        1,
-       0.0183,
+       0.0178,
        0,
        0.0039,
        "",
@@ -5141,7 +5287,7 @@
       [
        "셀루아",
        1,
-       0.0148,
+       0.0145,
        0,
        0.0129,
        "",
@@ -5150,7 +5296,7 @@
       [
        "수도",
        1,
-       0.0154,
+       0.0167,
        0,
        0.0019,
        "",
@@ -5159,7 +5305,7 @@
       [
        "gm",
        1,
-       0.0276,
+       0.0275,
        0,
        -0.0013,
        "",
@@ -5168,7 +5314,7 @@
       [
        "자체",
        1,
-       0.0191,
+       0.0198,
        0,
        0.001,
        "",
@@ -5177,7 +5323,7 @@
       [
        "노바레스",
        1,
-       0.0198,
+       0.02,
        0,
        0.0113,
        "",
@@ -5186,7 +5332,7 @@
       [
        "통합",
        1,
-       0.0192,
+       0.0191,
        1,
        0.0226,
        "",
@@ -5195,7 +5341,7 @@
       [
        "카드뉴스",
        1,
-       0.01,
+       0.0101,
        0,
        0.0057,
        "",
@@ -5204,7 +5350,7 @@
       [
        "ict",
        1,
-       0.0148,
+       0.015,
        0,
        0.0031,
        "",
@@ -5213,7 +5359,7 @@
       [
        "선점",
        1,
-       0.0106,
+       0.0115,
        0,
        -0.0134,
        "",
@@ -5222,7 +5368,7 @@
       [
        "카본블랙",
        1,
-       0.0126,
+       0.0127,
        0,
        0.0036,
        "",
@@ -5231,7 +5377,7 @@
       [
        "육성팀",
        1,
-       0.0074,
+       0.0065,
        0,
        -0.0003,
        "",
@@ -5240,7 +5386,7 @@
       [
        "ddd",
        1,
-       0.0179,
+       0.0175,
        0,
        0.013,
        "",
@@ -5249,7 +5395,7 @@
       [
        "산업혁신상",
        1,
-       0.0271,
+       0.0264,
        0,
        0.006,
        "",
@@ -5258,7 +5404,7 @@
       [
        "근육",
        1,
-       0.022,
+       0.0216,
        0,
        0.0026,
        "",
@@ -5267,7 +5413,7 @@
       [
        "옷감",
        1,
-       0.018,
+       0.0182,
        0,
        0.0068,
        "",
@@ -5276,7 +5422,7 @@
       [
        "장착",
        1,
-       0.0169,
+       0.0161,
        0,
        0.0093,
        "",
@@ -5285,7 +5431,7 @@
       [
        "인구",
        1,
-       0.0255,
+       0.0256,
        0,
        0.0203,
        "",
@@ -5294,7 +5440,7 @@
       [
        "인간",
        1,
-       0.0004,
+       -0.0015,
        1,
        0.0102,
        "",
@@ -5303,7 +5449,7 @@
       [
        "india",
        1,
-       0.0105,
+       0.0094,
        0,
        -0.0111,
        "",
@@ -5321,7 +5467,7 @@
       [
        "u.s.",
        1,
-       0.0163,
+       0.0152,
        0,
        -0.0023,
        "",
@@ -5330,7 +5476,7 @@
       [
        "companies",
        1,
-       0.0218,
+       0.0211,
        0,
        0.0087,
        "",
@@ -5339,7 +5485,7 @@
       [
        "SNU서울병원",
        1,
-       0.0332,
+       0.0337,
        0,
        0.0076,
        "",
@@ -5348,7 +5494,7 @@
       [
        "이상훈",
        1,
-       0.0202,
+       0.0219,
        0,
        -0.0079,
        "",
@@ -5357,7 +5503,7 @@
       [
        "대표원장",
        1,
-       0.0252,
+       0.0249,
        0,
        0.0002,
        "",
@@ -5366,7 +5512,7 @@
       [
        "rosa",
        1,
-       -0.0001,
+       -0.0009,
        0,
        -0.001,
        "",
@@ -5375,7 +5521,7 @@
       [
        "강연",
        1,
-       0.0034,
+       0.0022,
        0,
        -0.0143,
        "",
@@ -5384,7 +5530,7 @@
       [
        "위너스일렉",
        1,
-       0.0207,
+       0.0202,
        0,
        -0.0041,
        "",
@@ -5393,7 +5539,7 @@
       [
        "주주",
        1,
-       0.026,
+       0.0257,
        0,
        0.015,
        "",
@@ -5402,7 +5548,7 @@
       [
        "지분투자",
        1,
-       0.0031,
+       0.0023,
        0,
        -0.0063,
        "",
@@ -5411,7 +5557,7 @@
       [
        "무뇨스",
        1,
-       0.0138,
+       0.0135,
        0,
        -0.0078,
        "",
@@ -5420,7 +5566,7 @@
       [
        "훈련인력",
        1,
-       0.0222,
+       0.0216,
        0,
        -0.0078,
        "",
@@ -5429,7 +5575,7 @@
       [
        "채용",
        1,
-       0.0254,
+       0.0252,
        1,
        0.0328,
        "",
@@ -5438,7 +5584,7 @@
       [
        "AI시대",
        1,
-       0.0129,
+       0.013,
        0,
        -0.0041,
        "",
@@ -5447,7 +5593,7 @@
       [
        "예견",
        1,
-       0.0172,
+       0.0159,
        0,
        -0.0005,
        "",
@@ -5456,7 +5602,7 @@
       [
        "아시모프",
        1,
-       0.0125,
+       0.0118,
        0,
        -0.0028,
        "",
@@ -5465,7 +5611,7 @@
       [
        "정식",
        1,
-       0.0321,
+       0.0323,
        0,
        0.0041,
        "",
@@ -5474,7 +5620,7 @@
       [
        "완역",
        1,
-       0.0228,
+       0.0233,
        0,
        0.0108,
        "",
@@ -5492,7 +5638,7 @@
       [
        "능력",
        1,
-       0.0426,
+       0.042,
        0,
        0.008,
        "",
@@ -5501,7 +5647,7 @@
       [
        "고도",
        1,
-       0.0123,
+       0.0119,
        0,
        0.0098,
        "",
@@ -5510,7 +5656,7 @@
       [
        "베이항대",
        1,
-       0.0304,
+       0.0302,
        0,
        -0.001,
        "",
@@ -5528,7 +5674,7 @@
       [
        "비행",
        1,
-       0.0074,
+       0.0068,
        0,
        -0.0135,
        "",
@@ -5537,7 +5683,7 @@
       [
        "물리",
        1,
-       0.0119,
+       0.0114,
        0,
        0.0035,
        "",
@@ -5546,7 +5692,7 @@
       [
        "제어",
        1,
-       0.0196,
+       0.0197,
        0,
        0.0206,
        "",
@@ -5555,7 +5701,7 @@
       [
        "제시",
        1,
-       0.0202,
+       0.0193,
        2,
        0.0398,
        "",
@@ -5564,7 +5710,7 @@
       [
        "발크린",
        1,
-       0.0258,
+       0.025,
        0,
        0.0151,
        "",
@@ -5573,7 +5719,7 @@
       [
        "드론",
        1,
-       0.0274,
+       0.027,
        1,
        0.0273,
        "",
@@ -5591,7 +5737,7 @@
       [
        "데치코앤선즈",
        1,
-       0.0222,
+       0.0219,
        0,
        0.0088,
        "",
@@ -5600,7 +5746,7 @@
       [
        "매장",
        1,
-       -0.0041,
+       -0.0046,
        0,
        -0.0046,
        "",
@@ -5609,7 +5755,7 @@
       [
        "심비",
        1,
-       0.0055,
+       0.0057,
        0,
        0.0048,
        "",
@@ -5618,7 +5764,7 @@
       [
        "배치",
        1,
-       -0.0044,
+       -0.0048,
        0,
        -0.0307,
        "",
@@ -5627,7 +5773,7 @@
       [
        "스웨덴",
        1,
-       0.0386,
+       0.038,
        0,
        0.0208,
        "",
@@ -5636,7 +5782,7 @@
       [
        "플렉스링크",
        1,
-       0.0062,
+       0.0061,
        0,
        -0.0215,
        "",
@@ -5645,7 +5791,7 @@
       [
        "안전",
        1,
-       0.0224,
+       0.0227,
        2,
        0.0376,
        "",
@@ -5654,7 +5800,7 @@
       [
        "처리량",
        1,
-       -0.0051,
+       -0.0048,
        0,
        -0.015,
        "",
@@ -5663,7 +5809,7 @@
       [
        "해결",
        1,
-       0.0231,
+       0.0227,
        0,
        0.0049,
        "",
@@ -5672,7 +5818,7 @@
       [
        "팔레타이저",
        1,
-       0.015,
+       0.0141,
        0,
        0.0043,
        "",
@@ -5681,7 +5827,7 @@
       [
        "commercial",
        1,
-       0.0042,
+       0.0049,
        0,
        -0.0051,
        "",
@@ -5690,7 +5836,7 @@
       [
        "scale",
        1,
-       0.0188,
+       0.0186,
        1,
        0.0174,
        "",
@@ -5699,7 +5845,7 @@
       [
        "embodied",
        1,
-       0.0285,
+       0.0282,
        0,
        0.0124,
        "",
@@ -5708,7 +5854,7 @@
       [
        "intelligence",
        1,
-       0.0108,
+       0.012,
        0,
        -0.0012,
        "",
@@ -5717,7 +5863,7 @@
       [
        "challenge",
        1,
-       0.0252,
+       0.0238,
        0,
        -0.0015,
        "",
@@ -5726,7 +5872,7 @@
       [
        "rockwell",
        1,
-       0.0172,
+       0.0174,
        0,
        -0.0026,
        "",
@@ -5735,7 +5881,7 @@
       [
        "automation",
        1,
-       0.0158,
+       0.0154,
        0,
        -0.0057,
        "",
@@ -5744,7 +5890,7 @@
       [
        "acquiring",
        1,
-       0.0015,
+       0.0012,
        0,
        -0.002,
        "",
@@ -5753,7 +5899,7 @@
       [
        "mobile",
        1,
-       0.0273,
+       0.027,
        0,
        0.0058,
        "",
@@ -5762,7 +5908,7 @@
       [
        "maker",
        1,
-       0.0191,
+       0.0187,
        0,
        -0.0027,
        "",
@@ -5771,7 +5917,7 @@
       [
        "agilox",
        1,
-       0.0112,
+       0.0114,
        0,
        -0.0057,
        "",
@@ -5780,7 +5926,7 @@
       [
        "취권",
        1,
-       0.0154,
+       0.0148,
        0,
        -0.0073,
        "",
@@ -5789,7 +5935,7 @@
       [
        "환호",
        1,
-       0.0102,
+       0.011,
        0,
        -0.0133,
        "",
@@ -5798,7 +5944,7 @@
       [
        "선전",
        1,
-       0.0182,
+       0.0172,
        0,
        0.0064,
        "",
@@ -5807,7 +5953,7 @@
       [
        "르포",
        1,
-       -0.0087,
+       -0.0098,
        2,
        0.0299,
        "",
@@ -5816,7 +5962,7 @@
       [
        "밀레",
        1,
-       0.0165,
+       0.0169,
        0,
        -0.0006,
        "",
@@ -5825,7 +5971,7 @@
       [
        "최대주주",
        1,
-       0.0115,
+       0.0109,
        0,
        -0.0064,
        "",
@@ -5834,7 +5980,7 @@
       [
        "지위",
        1,
-       0.0212,
+       0.0208,
        0,
        0.0032,
        "",
@@ -5843,7 +5989,7 @@
       [
        "영입",
        1,
-       0.0229,
+       0.0238,
        0,
        0.0031,
        "",
@@ -5852,7 +5998,7 @@
       [
        "융합",
        1,
-       0.0136,
+       0.0125,
        0,
        -0.0118,
        "",
@@ -5861,7 +6007,7 @@
       [
        "현대건설",
        1,
-       0.0177,
+       0.0183,
        0,
        0.0086,
        "",
@@ -5870,7 +6016,7 @@
       [
        "협력사",
        1,
-       0.0093,
+       0.0102,
        0,
        -0.001,
        "",
@@ -5879,7 +6025,7 @@
       [
        "차세대",
        1,
-       0.0285,
+       0.0283,
        2,
        0.0515,
        "",
@@ -5888,7 +6034,7 @@
       [
        "경영인",
        1,
-       0.0154,
+       0.0146,
        0,
        -0.0009,
        "",
@@ -5897,7 +6043,7 @@
       [
        "육성",
        1,
-       0.0248,
+       0.0245,
        0,
        0.0089,
        "",
@@ -5906,7 +6052,7 @@
       [
        "collect",
        1,
-       0.0172,
+       0.0177,
        0,
        0.0072,
        "",
@@ -5915,7 +6061,7 @@
       [
        "world",
        1,
-       0.0086,
+       0.0093,
        2,
        0.031,
        "",
@@ -5924,7 +6070,7 @@
       [
        "발탁",
        1,
-       0.0439,
+       0.0441,
        0,
        0.0262,
        "",
@@ -5933,7 +6079,7 @@
       [
        "임원",
        1,
-       0.0242,
+       0.0234,
        0,
        0.0004,
        "",
@@ -5942,7 +6088,7 @@
       [
        "최대",
        1,
-       0.0208,
+       0.0203,
        6,
        0.119,
        "",
@@ -5951,7 +6097,7 @@
       [
        "영업",
        1,
-       0.0186,
+       0.0181,
        0,
        -0.0019,
        "",
@@ -5960,7 +6106,7 @@
       [
        "손실",
        1,
-       0.0246,
+       0.0238,
        2,
        0.0378,
        "",
@@ -5978,7 +6124,7 @@
       [
        "역습",
        1,
-       0.0295,
+       0.0298,
        0,
        0.0063,
        "",
@@ -5987,7 +6133,7 @@
       [
        "종속기업",
        1,
-       0.0064,
+       0.0062,
        0,
        -0.0158,
        "",
@@ -6005,7 +6151,7 @@
       [
        "시너지",
        1,
-       0.034,
+       0.0331,
        0,
        0.011,
        "",
@@ -6014,7 +6160,7 @@
       [
        "출시",
        1,
-       0.003,
+       0.0038,
        1,
        0.0023,
        "",
@@ -6023,7 +6169,7 @@
       [
        "삼성SDS",
        1,
-       0.0212,
+       0.0217,
        0,
        0.006,
        "",
@@ -6032,7 +6178,7 @@
       [
        "서울",
        1,
-       0.038,
+       0.0375,
        0,
        0.0194,
        "",
@@ -6041,7 +6187,7 @@
       [
        "포켓메모리",
        1,
-       0.0228,
+       0.0222,
        0,
        -0.003,
        "",
@@ -6050,7 +6196,7 @@
       [
        "데이터",
        1,
-       0.0262,
+       0.0268,
        2,
        0.0452,
        "",
@@ -6059,7 +6205,7 @@
       [
        "용량",
        1,
-       0.0152,
+       0.0141,
        0,
        0.004,
        "",
@@ -6068,7 +6214,7 @@
       [
        "시뮬레이션",
        1,
-       0.0133,
+       0.0136,
        0,
        -0.0029,
        "",
@@ -6077,7 +6223,7 @@
       [
        "정기인사",
        1,
-       0.0013,
+       0.0014,
        0,
        -0.0063,
        "",
@@ -6086,7 +6232,7 @@
       [
        "인사",
        1,
-       0.0114,
+       0.0109,
        0,
        0.0026,
        "",
@@ -6095,7 +6241,7 @@
       [
        "키워드",
        1,
-       0.0071,
+       0.0063,
        0,
        0.004,
        "",
@@ -6104,7 +6250,7 @@
       [
        "승진자",
        1,
-       0.013,
+       0.0118,
        0,
        -0.0087,
        "",
@@ -6113,7 +6259,7 @@
       [
        "uc",
        1,
-       0.0131,
+       0.0127,
        0,
        -0.0086,
        "",
@@ -6122,7 +6268,7 @@
       [
        "샌디에이고",
        1,
-       0.0269,
+       0.0271,
        0,
        0.0303,
        "",
@@ -6131,7 +6277,7 @@
       [
        "전자",
        1,
-       -0.0055,
+       -0.0047,
        0,
        -0.0112,
        "",
@@ -6140,7 +6286,7 @@
       [
        "장치",
        1,
-       0.0066,
+       0.0057,
        0,
        -0.0024,
        "",
@@ -6149,7 +6295,7 @@
       [
        "라캐스트",
        1,
-       0.002,
+       0.0031,
        0,
        -0.0219,
        "",
@@ -6158,7 +6304,7 @@
       [
        "양산",
        1,
-       0.0262,
+       0.0266,
        0,
        0.0155,
        "",
@@ -6167,7 +6313,7 @@
       [
        "독일",
        1,
-       0.0106,
+       0.0112,
        3,
        0.0429,
        "",
@@ -6176,7 +6322,7 @@
       [
        "메디카",
        1,
-       0.0405,
+       0.04,
        0,
        0.0117,
        "",
@@ -6185,7 +6331,7 @@
       [
        "참가",
        1,
-       0.0089,
+       0.009,
        0,
        -0.0035,
        "",
@@ -6194,7 +6340,7 @@
       [
        "시장공략",
        1,
-       0.0094,
+       0.0093,
        0,
        -0.0086,
        "",
@@ -6203,7 +6349,7 @@
       [
        "가속도",
        1,
-       0.0187,
+       0.0176,
        0,
        0.0012,
        "",
@@ -6212,7 +6358,7 @@
       [
        "DHL서플라이체인",
        1,
-       0.0225,
+       0.0216,
        0,
        0.0084,
        "",
@@ -6221,7 +6367,7 @@
       [
        "AI조율",
        1,
-       0.0072,
+       0.0061,
        0,
        -0.0095,
        "",
@@ -6230,7 +6376,7 @@
       [
        "창고운영",
        1,
-       0.0541,
+       0.0548,
        0,
        0.0237,
        "",
@@ -6239,7 +6385,7 @@
       [
        "시범",
        1,
-       0.0174,
+       0.0177,
        0,
        0.0139,
        "",
@@ -6248,7 +6394,7 @@
       [
        "생활",
        1,
-       0.0097,
+       0.0089,
        0,
        -0.0019,
        "",
@@ -6257,7 +6403,7 @@
       [
        "분양",
        1,
-       0.0136,
+       0.0144,
        0,
        0.0041,
        "",
@@ -6266,7 +6412,7 @@
       [
        "스마트시티",
        1,
-       0.0203,
+       0.0197,
        0,
        0.0034,
        "",
@@ -6275,7 +6421,7 @@
       [
        "선도지구",
        1,
-       0.0237,
+       0.0247,
        0,
        0.0161,
        "",
@@ -6284,7 +6430,7 @@
       [
        "가구",
        1,
-       0.0246,
+       0.0242,
        0,
        0.0019,
        "",
@@ -6293,7 +6439,7 @@
       [
        "LG이노텍",
        1,
-       0.0239,
+       0.0238,
        0,
        0.0005,
        "",
@@ -6302,7 +6448,7 @@
       [
        "기판",
        1,
-       0.0124,
+       0.0116,
        0,
        -0.005,
        "",
@@ -6311,7 +6457,7 @@
       [
        "수장",
        1,
-       0.0244,
+       0.0246,
        0,
        0.0028,
        "",
@@ -6320,7 +6466,7 @@
       [
        "조지태",
        1,
-       0.0162,
+       0.0151,
        0,
        -0.0104,
        "",
@@ -6329,7 +6475,7 @@
       [
        "부사장",
        1,
-       0.0188,
+       0.0191,
        0,
        -0.0085,
        "",
@@ -6338,7 +6484,7 @@
       [
        "사장",
        1,
-       0.0262,
+       0.0256,
        0,
        0.0126,
        "",
@@ -6356,7 +6502,7 @@
       [
        "어바웃",
        1,
-       0.0,
+       -0.0005,
        0,
        -0.0116,
        "",
@@ -6365,7 +6511,7 @@
       [
        "cns",
        1,
-       0.0056,
+       0.0054,
        2,
        0.0297,
        "",
@@ -6374,7 +6520,7 @@
       [
        "현신균",
        1,
-       0.0237,
+       0.0244,
        0,
        0.0051,
        "",
@@ -6383,7 +6529,7 @@
       [
        "체제",
        1,
-       0.0223,
+       0.023,
        0,
        0.0142,
        "",
@@ -6392,7 +6538,7 @@
       [
        "dc",
        1,
-       0.0227,
+       0.0219,
        0,
        0.0052,
        "",
@@ -6401,7 +6547,7 @@
       [
        "보스턴다이내믹스",
        1,
-       0.0019,
+       0.0018,
        0,
        -0.0152,
        "",
@@ -6410,7 +6556,7 @@
       [
        "승부",
        1,
-       0.0192,
+       0.0205,
        0,
        -0.0002,
        "",
@@ -6419,7 +6565,7 @@
       [
        "구동",
        1,
-       -0.0029,
+       -0.0014,
        0,
        -0.0074,
        "",
@@ -6428,7 +6574,7 @@
       [
        "방식",
        1,
-       0.0354,
+       0.0361,
        0,
        0.0196,
        "",
@@ -6437,7 +6583,7 @@
       [
        "힘줄",
        1,
-       0.0091,
+       0.0097,
        0,
        -0.0043,
        "",
@@ -6446,7 +6592,7 @@
       [
        "모방",
        1,
-       0.0103,
+       0.0105,
        0,
        0.0035,
        "",
@@ -6455,7 +6601,7 @@
       [
        "핸드",
        1,
-       0.0174,
+       0.0172,
        0,
        -0.0104,
        "",
@@ -6464,7 +6610,7 @@
       [
        "속도",
        1,
-       0.0181,
+       0.0173,
        0,
        0.0017,
        "",
@@ -6473,7 +6619,7 @@
       [
        "숙련공",
        1,
-       0.0164,
+       0.0148,
        0,
        0.0023,
        "",
@@ -6482,7 +6628,7 @@
       [
        "절반",
        1,
-       0.0417,
+       0.0421,
        1,
        0.0302,
        "",
@@ -6491,7 +6637,7 @@
       [
        "수준",
        1,
-       0.0274,
+       0.0273,
        0,
        0.0158,
        "",
@@ -6500,7 +6646,7 @@
       [
        "온도",
        1,
-       0.0376,
+       0.0382,
        0,
        0.0064,
        "",
@@ -6509,7 +6655,7 @@
       [
        "조절",
        1,
-       -0.0062,
+       -0.0066,
        0,
        -0.0101,
        "",
@@ -6518,7 +6664,7 @@
       [
        "복도",
        1,
-       0.0096,
+       0.0081,
        0,
        0.0001,
        "",
@@ -6527,7 +6673,7 @@
       [
        "안정",
        1,
-       0.0064,
+       0.0076,
        0,
        -0.0127,
        "",
@@ -6536,7 +6682,7 @@
       [
        "쇄신",
        1,
-       0.0225,
+       0.0228,
        0,
        0.0062,
        "",
@@ -6545,7 +6691,7 @@
       [
        "biz",
        1,
-       0.0173,
+       0.0166,
        0,
        0.0124,
        "",
@@ -6563,7 +6709,7 @@
       [
        "오너",
        1,
-       0.0203,
+       0.0202,
        0,
        0.0076,
        "",
@@ -6572,7 +6718,7 @@
       [
        "경영",
        1,
-       0.0178,
+       0.0173,
        0,
        -0.0039,
        "",
@@ -6581,7 +6727,7 @@
       [
        "방어책",
        1,
-       0.0123,
+       0.0128,
        0,
        -0.0041,
        "",
@@ -6590,7 +6736,7 @@
       [
        "젠슨 황",
        1,
-       0.0143,
+       0.0142,
        0,
        0.0031,
        "",
@@ -6599,7 +6745,7 @@
       [
        "오리",
        1,
-       0.0114,
+       0.0116,
        0,
        0.0008,
        "",
@@ -6608,7 +6754,7 @@
       [
        "mx",
        1,
-       0.0207,
+       0.0203,
        0,
        0.0072,
        "",
@@ -6617,7 +6763,7 @@
       [
        "최원준",
        1,
-       0.0115,
+       0.0111,
        0,
        0.0025,
        "",
@@ -6626,7 +6772,7 @@
       [
        "전진배치",
        1,
-       0.0239,
+       0.0243,
        0,
        0.0088,
        "",
@@ -6635,7 +6781,7 @@
       [
        "노태문",
        1,
-       -0.0039,
+       -0.0036,
        0,
        -0.0194,
        "",
@@ -6644,7 +6790,7 @@
       [
        "미래사업",
        1,
-       0.0276,
+       0.0263,
        0,
        0.0149,
        "",
@@ -6653,7 +6799,7 @@
       [
        "손발",
        1,
-       0.0228,
+       0.0231,
        0,
        0.0117,
        "",
@@ -6662,7 +6808,7 @@
       [
        "병실",
        1,
-       0.0115,
+       0.0108,
        0,
        -0.0008,
        "",
@@ -6671,7 +6817,7 @@
       [
        "실패",
        1,
-       0.017,
+       0.0185,
        0,
        0.002,
        "",
@@ -6680,7 +6826,7 @@
       [
        "집기",
        1,
-       0.0043,
+       0.0036,
        0,
        -0.0111,
        "",
@@ -6698,7 +6844,7 @@
       [
        "스타트업",
        1,
-       0.0072,
+       0.0077,
        1,
        0.0112,
        "",
@@ -6716,7 +6862,7 @@
       [
        "테트리스",
        1,
-       0.0049,
+       0.0052,
        0,
        -0.005,
        "",
@@ -6725,7 +6871,7 @@
       [
        "월마트",
        1,
-       0.0059,
+       0.0051,
        0,
        0.0016,
        "",
@@ -6734,7 +6880,7 @@
       [
        "물류창고",
        1,
-       0.0131,
+       0.0136,
        0,
        -0.0081,
        "",
@@ -6743,7 +6889,7 @@
       [
        "심보틱",
        1,
-       0.0007,
+       0.0018,
        0,
        -0.0157,
        "",
@@ -6752,7 +6898,7 @@
       [
        "페어",
        1,
-       0.0121,
+       0.0119,
        0,
        -0.0021,
        "",
@@ -6761,7 +6907,7 @@
       [
        "안드로이드",
        1,
-       0.0227,
+       0.0233,
        0,
        0.0157,
        "",
@@ -6770,7 +6916,7 @@
       [
        "창시자",
        1,
-       0.0256,
+       0.0258,
        0,
        0.0034,
        "",
@@ -6779,7 +6925,7 @@
       [
        "앤디 루빈",
        1,
-       0.0165,
+       0.0167,
        0,
        0.003,
        "",
@@ -6788,7 +6934,7 @@
       [
        "겐키",
        1,
-       0.02,
+       0.0196,
        0,
        0.0088,
        "",
@@ -6797,7 +6943,7 @@
       [
        "행보",
        1,
-       0.0153,
+       0.0155,
        0,
        0.0092,
        "",
@@ -6806,7 +6952,7 @@
       [
        "주간",
        1,
-       0.0092,
+       0.0088,
        1,
        0.0192,
        "",
@@ -6815,7 +6961,7 @@
       [
        "주가",
        1,
-       0.0112,
+       0.011,
        1,
        0.0215,
        "",
@@ -6824,7 +6970,7 @@
       [
        "동향",
        1,
-       0.0314,
+       0.0313,
        1,
        0.0242,
        "",
@@ -6833,7 +6979,7 @@
       [
        "숭실대",
        1,
-       0.0243,
+       0.0242,
        0,
        0.0092,
        "",
@@ -6842,7 +6988,7 @@
       [
        "기계공학부",
        1,
-       0.0065,
+       0.0054,
        0,
        -0.0191,
        "",
@@ -6851,7 +6997,7 @@
       [
        "나무엑스",
        1,
-       0.0266,
+       0.0271,
        0,
        0.0124,
        "",
@@ -6860,7 +7006,7 @@
       [
        "파운데이션",
        1,
-       0.0139,
+       0.014,
        1,
        0.0144,
        "",
@@ -6878,7 +7024,7 @@
       [
        "테스트",
        1,
-       0.0185,
+       0.0197,
        0,
        0.0109,
        "",
@@ -6887,7 +7033,7 @@
       [
        "진행",
        1,
-       0.0239,
+       0.0245,
        0,
        0.0162,
        "",
@@ -6896,7 +7042,7 @@
       [
        "한국중부발전",
        1,
-       0.0272,
+       0.0269,
        1,
        0.0312,
        "",
@@ -6905,7 +7051,7 @@
       [
        "국가기술표준원장상",
        1,
-       0.017,
+       0.0165,
        0,
        -0.0022,
        "",
@@ -6914,7 +7060,7 @@
       [
        "네이버랩",
        1,
-       0.0145,
+       0.0138,
        0,
        -0.0079,
        "",
@@ -6923,7 +7069,7 @@
       [
        "hri",
        1,
-       0.0024,
+       0.0023,
        0,
        -0.0099,
        "",
@@ -6932,7 +7078,7 @@
       [
        "일상",
        1,
-       0.0267,
+       0.0272,
        0,
        0.0025,
        "",
@@ -6941,7 +7087,7 @@
       [
        "공존",
        1,
-       0.0411,
+       0.0415,
        0,
        0.0207,
        "",
@@ -6950,7 +7096,7 @@
       [
        "모색",
        1,
-       0.0298,
+       0.0301,
        2,
        0.0468,
        "",
@@ -6959,7 +7105,7 @@
       [
        "AMR",
        1,
-       0.0074,
+       0.0085,
        0,
        -0.0092,
        "",
@@ -6968,7 +7114,7 @@
       [
        "로크웰",
        1,
-       0.0219,
+       0.0206,
        0,
        -0.0048,
        "",
@@ -6977,7 +7123,7 @@
       [
        "애질록스",
        1,
-       0.0027,
+       0.0018,
        0,
        -0.0144,
        "",
@@ -6986,7 +7132,7 @@
       [
        "아이폰",
        1,
-       0.0016,
+       0.0022,
        0,
        -0.0088,
        "",
@@ -6995,7 +7141,7 @@
       [
        "보행",
        1,
-       0.0126,
+       0.0135,
        0,
        -0.0116,
        "",
@@ -7004,7 +7150,7 @@
       [
        "디벨로퍼",
        1,
-       0.0112,
+       0.011,
        0,
        -0.0138,
        "",
@@ -7013,7 +7159,7 @@
       [
        "아카데미",
        1,
-       0.0156,
+       0.0155,
        0,
        0.0003,
        "",
@@ -7022,7 +7168,7 @@
       [
        "post",
        1,
-       0.0225,
+       0.0217,
        0,
        0.0053,
        "",
@@ -7031,7 +7177,7 @@
       [
        "jensen",
        1,
-       0.0161,
+       0.0156,
        0,
        0.0085,
        "",
@@ -7040,7 +7186,7 @@
       [
        "huang",
        1,
-       0.0182,
+       0.0165,
        0,
        0.0077,
        "",
@@ -7049,7 +7195,7 @@
       [
        "era",
        1,
-       0.0119,
+       0.0112,
        0,
        -0.0058,
        "",
@@ -7058,7 +7204,7 @@
       [
        "전공자",
        1,
-       0.0254,
+       0.0256,
        0,
        0.0119,
        "",
@@ -7067,7 +7213,7 @@
       [
        "교실",
        1,
-       0.0005,
+       0.0011,
        0,
        -0.0033,
        "",
@@ -7076,7 +7222,7 @@
       [
        "칼군무",
        1,
-       0.0143,
+       0.0136,
        0,
        -0.0102,
        "",
@@ -7085,7 +7231,7 @@
       [
        "기네스",
        1,
-       0.0164,
+       0.016,
        0,
        -0.0059,
        "",
@@ -7103,7 +7249,7 @@
       [
        "그림",
        1,
-       0.0099,
+       0.0091,
        0,
        -0.0049,
        "",
@@ -7112,7 +7258,7 @@
       [
        "부천로보파크",
        1,
-       0.0019,
+       0.0007,
        0,
        -0.0215,
        "",
@@ -7121,7 +7267,7 @@
       [
        "massrobotics",
        1,
-       0.0047,
+       0.0045,
        0,
        -0.0071,
        "",
@@ -7130,7 +7276,7 @@
       [
        "marine",
        1,
-       0.0199,
+       0.0188,
        0,
        -0.0028,
        "",
@@ -7139,7 +7285,7 @@
       [
        "facility",
        1,
-       0.0217,
+       0.0214,
        0,
        -0.0004,
        "",
@@ -7148,7 +7294,7 @@
       [
        "boston",
        1,
-       0.011,
+       0.0116,
        0,
        0.0023,
        "",
@@ -7166,7 +7312,7 @@
       [
        "응급환자",
        1,
-       0.0311,
+       0.0306,
        0,
        0.0072,
        "",
@@ -7175,7 +7321,7 @@
       [
        "pick",
        1,
-       0.0242,
+       0.0239,
        0,
        0.0041,
        "",
@@ -7184,7 +7330,7 @@
       [
        "대신",
        1,
-       0.0061,
+       0.0047,
        0,
        -0.0099,
        "",
@@ -7193,7 +7339,7 @@
       [
        "뭉칫돈",
        1,
-       0.0274,
+       0.0278,
        1,
        0.0341,
        "",
@@ -7202,7 +7348,7 @@
       [
        "실력",
        1,
-       0.0261,
+       0.0257,
        0,
        0.0014,
        "",
@@ -7211,7 +7357,7 @@
       [
        "와인",
        1,
-       0.0075,
+       0.0067,
        0,
        -0.0084,
        "",
@@ -7220,7 +7366,7 @@
       [
        "트럼프",
        1,
-       0.0047,
+       0.0041,
        0,
        -0.011,
        "",
@@ -7229,7 +7375,7 @@
       [
        "medtronic",
        1,
-       0.0324,
+       0.0325,
        0,
        0.0135,
        "",
@@ -7238,7 +7384,7 @@
       [
        "hugo",
        1,
-       -0.0002,
+       -0.0003,
        0,
        -0.0129,
        "",
@@ -7247,7 +7393,7 @@
       [
        "surgical",
        1,
-       0.0041,
+       0.0039,
        0,
        -0.0106,
        "",
@@ -7256,7 +7402,7 @@
       [
        "bigger",
        1,
-       0.0211,
+       0.0205,
        0,
        0.0157,
        "",
@@ -7265,7 +7411,7 @@
       [
        "operation",
        1,
-       0.0152,
+       0.0159,
        0,
        0.008,
        "",
@@ -7274,7 +7420,7 @@
       [
        "규제안",
        1,
-       0.0094,
+       0.0085,
        0,
        -0.001,
        "",
@@ -7283,7 +7429,7 @@
       [
        "마련",
        1,
-       0.021,
+       0.0212,
        0,
        0.013,
        "",
@@ -7292,7 +7438,7 @@
       [
        "미러",
        1,
-       0.0128,
+       0.0138,
        0,
        0.0003,
        "",
@@ -7301,7 +7447,7 @@
       [
        "소극",
        1,
-       0.0065,
+       0.0058,
        0,
        0.0054,
        "",
@@ -7310,7 +7456,7 @@
       [
        "전쟁터",
        1,
-       0.0129,
+       0.0124,
        0,
        -0.0096,
        "",
@@ -7319,7 +7465,7 @@
       [
        "재앙",
        1,
-       0.0111,
+       0.0119,
        0,
        0.0024,
        "",
@@ -7328,7 +7474,7 @@
       [
        "최적",
        1,
-       0.0178,
+       0.0181,
        0,
        0.0051,
        "",
@@ -7337,7 +7483,7 @@
       [
        "영구자석",
        1,
-       0.0239,
+       0.0241,
        0,
        0.0173,
        "",
@@ -7346,7 +7492,7 @@
       [
        "수출",
        1,
-       0.0037,
+       0.0041,
        0,
        -0.0047,
        "",
@@ -7355,7 +7501,7 @@
       [
        "제한",
        1,
-       0.0031,
+       0.0034,
        0,
        0.0055,
        "",
@@ -7364,7 +7510,7 @@
       [
        "발목",
        1,
-       0.0167,
+       0.0175,
        0,
        -0.0028,
        "",
@@ -7373,7 +7519,7 @@
       [
        "곡소리",
        1,
-       0.0161,
+       0.0162,
        0,
        0.0045,
        "",
@@ -7382,7 +7528,7 @@
       [
        "혼자",
        1,
-       0.0259,
+       0.0252,
        0,
        -0.0042,
        "",
@@ -7391,7 +7537,7 @@
       [
        "잇몸미소",
        1,
-       -0.0004,
+       -0.0007,
        0,
        -0.0077,
        "",
@@ -7400,7 +7546,7 @@
       [
        "수술실",
        1,
-       0.021,
+       0.0205,
        0,
        -0.0046,
        "",
@@ -7409,7 +7555,7 @@
       [
        "ct",
        1,
-       0.0277,
+       0.0271,
        0,
        0.0084,
        "",
@@ -7418,7 +7564,7 @@
       [
        "헬스케어",
        1,
-       0.0193,
+       0.019,
        0,
        -0.0025,
        "",
@@ -7427,7 +7573,7 @@
       [
        "집앞",
        1,
-       0.0193,
+       0.0191,
        0,
        0.0152,
        "",
@@ -7436,7 +7582,7 @@
       [
        "택배",
        1,
-       0.02,
+       0.0198,
        0,
        0.0083,
        "",
@@ -7445,7 +7591,7 @@
       [
        "배송",
        1,
-       -0.0056,
+       -0.006,
        0,
        -0.0164,
        "",
@@ -7454,7 +7600,7 @@
       [
        "미래도시",
        1,
-       0.01,
+       0.0097,
        0,
        -0.0064,
        "",
@@ -7463,7 +7609,7 @@
       [
        "위성",
        1,
-       0.0306,
+       0.0303,
        0,
        -0.0004,
        "",
@@ -7472,7 +7618,7 @@
       [
        "탑재",
        1,
-       0.0178,
+       0.0182,
        1,
        0.0209,
        "",
@@ -7481,7 +7627,7 @@
       [
        "우주",
        1,
-       0.0208,
+       0.02,
        1,
        0.0293,
        "",
@@ -7490,7 +7636,7 @@
       [
        "의류",
        1,
-       0.0021,
+       0.0018,
        0,
        -0.0226,
        "",
@@ -7499,7 +7645,7 @@
       [
        "생산라인",
        1,
-       0.0175,
+       0.0168,
        0,
        0.0024,
        "",
@@ -7508,7 +7654,7 @@
       [
        "샤오미",
        1,
-       0.0024,
+       0.0021,
        0,
        -0.0041,
        "",
@@ -7517,7 +7663,7 @@
       [
        "슝크",
        1,
-       0.0142,
+       0.0143,
        0,
        0.0041,
        "",
@@ -7526,7 +7672,7 @@
       [
        "택틸리아",
        1,
-       0.0123,
+       0.0119,
        0,
        -0.0118,
        "",
@@ -7535,7 +7681,7 @@
       [
        "브랜드",
        1,
-       -0.0024,
+       -0.0023,
        1,
        -0.0048,
        "",
@@ -7544,7 +7690,7 @@
       [
        "변경",
        1,
-       0.0189,
+       0.0183,
        0,
        -0.0022,
        "",
@@ -7553,7 +7699,7 @@
       [
        "육군",
        1,
-       0.0213,
+       0.0207,
        0,
        0.003,
        "",
@@ -7562,7 +7708,7 @@
       [
        "작전사령부",
        1,
-       0.0085,
+       0.0082,
        0,
        -0.003,
        "",
@@ -7571,7 +7717,7 @@
       [
        "국방",
        1,
-       0.0279,
+       0.027,
        0,
        0.0186,
        "",
@@ -7580,7 +7726,7 @@
       [
        "셰플러",
        1,
-       0.0038,
+       0.0045,
        0,
        -0.0087,
        "",
@@ -7598,7 +7744,7 @@
       [
        "생산공장",
        1,
-       0.0247,
+       0.0253,
        0,
        0.0077,
        "",
@@ -7607,7 +7753,7 @@
       [
        "기존",
        1,
-       0.0037,
+       0.0032,
        0,
        -0.0034,
        "",
@@ -7616,7 +7762,7 @@
       [
        "자동",
        1,
-       0.0184,
+       0.0176,
        1,
        0.0286,
        "",
@@ -7625,7 +7771,7 @@
       [
        "역부족",
        1,
-       0.0147,
+       0.0141,
        0,
        -0.0087,
        "",
@@ -7634,7 +7780,7 @@
       [
        "대만",
        1,
-       0.0144,
+       0.0148,
        2,
        0.0193,
        "",
@@ -7643,7 +7789,7 @@
       [
        "부품업체",
        1,
-       0.0058,
+       0.0063,
        0,
        0.0086,
        "",
@@ -7652,7 +7798,7 @@
       [
        "공급망",
        1,
-       0.0094,
+       0.0089,
        1,
        0.013,
        "",
@@ -7670,7 +7816,7 @@
       [
        "균형",
        1,
-       0.0123,
+       0.0114,
        0,
        0.0081,
        "",
@@ -7679,7 +7825,7 @@
       [
        "산길",
        1,
-       0.0295,
+       0.0286,
        0,
        0.0186,
        "",
@@ -7688,7 +7834,7 @@
       [
        "자전거",
        1,
-       0.0082,
+       0.0093,
        0,
        0.0002,
        "",
@@ -7697,7 +7843,7 @@
       [
        "금주",
        1,
-       0.0173,
+       0.0172,
        0,
        -0.0134,
        "",
@@ -7706,7 +7852,7 @@
       [
        "캘린더",
        1,
-       0.0076,
+       0.0064,
        0,
        -0.0016,
        "",
@@ -7715,7 +7861,7 @@
       [
        "지멘스",
        1,
-       0.0038,
+       0.0044,
        2,
        0.0309,
        "",
@@ -7724,7 +7870,7 @@
       [
        "에이전트",
        1,
-       0.0088,
+       0.0087,
        1,
        0.0106,
        "",
@@ -7733,7 +7879,7 @@
       [
        "활용",
        1,
-       0.0201,
+       0.0197,
        1,
        0.0187,
        "",
@@ -7742,7 +7888,7 @@
       [
        "그리퍼",
        1,
-       0.0426,
+       0.0428,
        0,
        0.016,
        "",
@@ -7751,7 +7897,7 @@
       [
        "존 디어",
        1,
-       0.0082,
+       0.0084,
        0,
        -0.0041,
        "",
@@ -7760,7 +7906,7 @@
       [
        "오차드",
        1,
-       0.0111,
+       0.0115,
        0,
        -0.017,
        "",
@@ -7769,7 +7915,7 @@
       [
        "작물",
        1,
-       0.0305,
+       0.0302,
        0,
        0.0252,
        "",
@@ -7778,7 +7924,7 @@
       [
        "단위",
        1,
-       0.0238,
+       0.0229,
        0,
        -0.0005,
        "",
@@ -7787,7 +7933,7 @@
       [
        "정밀농업",
        1,
-       -0.0021,
+       -0.0022,
        0,
        -0.0259,
        "",
@@ -7796,7 +7942,7 @@
       [
        "가정",
        1,
-       0.0303,
+       0.0305,
        0,
        0.0178,
        "",
@@ -7805,7 +7951,7 @@
       [
        "네오",
        1,
-       0.0014,
+       0.0012,
        0,
        0.0005,
        "",
@@ -7814,7 +7960,7 @@
       [
        "개발자",
        1,
-       0.001,
+       0.0004,
        0,
        -0.0153,
        "",
@@ -7823,7 +7969,7 @@
       [
        "합의",
        1,
-       0.0012,
+       -0.0001,
        0,
        -0.0031,
        "",
@@ -7832,7 +7978,7 @@
       [
        "불발",
        1,
-       0.0228,
+       0.0236,
        0,
        0.0078,
        "",
@@ -7841,7 +7987,7 @@
       [
        "연장",
        1,
-       0.0093,
+       0.0085,
        0,
        0.0042,
        "",
@@ -7850,7 +7996,7 @@
       [
        "코스닥",
        1,
-       0.0092,
+       0.0081,
        1,
        0.0274,
        "",
@@ -7859,7 +8005,7 @@
       [
        "급락",
        1,
-       0.0151,
+       0.0141,
        0,
        -0.0011,
        "",
@@ -7868,7 +8014,7 @@
       [
        "선방",
        1,
-       0.0346,
+       0.0339,
        0,
        0.006,
        "",
@@ -7877,7 +8023,7 @@
       [
        "매사추세츠",
        1,
-       0.0111,
+       0.0105,
        0,
        -0.0155,
        "",
@@ -7886,7 +8032,7 @@
       [
        "의대",
        1,
-       -0.0016,
+       -0.0026,
        0,
        -0.0002,
        "",
@@ -7895,7 +8041,7 @@
       [
        "정조준",
        1,
-       0.0171,
+       0.0176,
        0,
        0.002,
        "",
@@ -7904,7 +8050,7 @@
       [
        "아이엘",
        1,
-       0.006,
+       0.0059,
        0,
        -0.0105,
        "",
@@ -7913,7 +8059,7 @@
       [
        "유니콘",
        1,
-       0.0186,
+       0.0179,
        0,
        -0.001,
        "",
@@ -7922,7 +8068,7 @@
       [
        "자이노바",
        1,
-       0.0109,
+       0.0101,
        0,
        0.0059,
        "",
@@ -7931,7 +8077,7 @@
       [
        "독점",
        1,
-       0.0214,
+       0.0225,
        0,
        0.0154,
        "",
@@ -7940,7 +8086,7 @@
       [
        "공급계약",
        1,
-       0.0059,
+       0.006,
        0,
        -0.0029,
        "",
@@ -7949,7 +8095,7 @@
       [
        "지연",
        1,
-       0.016,
+       0.0157,
        0,
        0.009,
        "",
@@ -7958,7 +8104,7 @@
       [
        "회귀",
        1,
-       0.0037,
+       0.0035,
        0,
        -0.0096,
        "",
@@ -7967,7 +8113,7 @@
       [
        "자사주",
        1,
-       0.0232,
+       0.0235,
        0,
        0.0074,
        "",
@@ -7976,7 +8122,7 @@
       [
        "셈법",
        1,
-       0.0147,
+       0.0143,
        0,
        0.0002,
        "",
@@ -7985,7 +8131,7 @@
       [
        "주주가치",
        1,
-       0.0276,
+       0.0269,
        0,
        -0.0013,
        "",
@@ -7994,7 +8140,7 @@
       [
        "자금조달",
        1,
-       0.0003,
+       0.0008,
        0,
        -0.0069,
        "",
@@ -8003,7 +8149,7 @@
       [
        "전력반도체",
        1,
-       0.0073,
+       0.007,
        0,
        -0.0103,
        "",
@@ -8012,7 +8158,7 @@
       [
        "대전",
        1,
-       0.0243,
+       0.0247,
        0,
        -0.0014,
        "",
@@ -8021,7 +8167,7 @@
       [
        "공공조달시장",
        1,
-       0.0101,
+       0.0093,
        0,
        -0.0118,
        "",
@@ -8030,7 +8176,7 @@
       [
        "몽고메리",
        1,
-       0.0249,
+       0.0247,
        0,
        0.0048,
        "",
@@ -8039,7 +8185,7 @@
       [
        "카운티",
        1,
-       0.0106,
+       0.0107,
        0,
        -0.0015,
        "",
@@ -8048,7 +8194,7 @@
       [
        "지식재산처",
        1,
-       0.0228,
+       0.0218,
        0,
        -0.0066,
        "",
@@ -8057,7 +8203,7 @@
       [
        "경쟁력",
        1,
-       0.0183,
+       0.0174,
        1,
        0.0235,
        "",
@@ -8066,7 +8212,7 @@
       [
        "콜로라도주립대",
        1,
-       0.0131,
+       0.0123,
        0,
        -0.0032,
        "",
@@ -8075,7 +8221,7 @@
       [
        "텐세그리티",
        1,
-       0.0196,
+       0.0202,
        0,
        -0.0046,
        "",
@@ -8084,7 +8230,7 @@
       [
        "구조",
        1,
-       0.0305,
+       0.0295,
        0,
        0.0127,
        "",
@@ -8093,7 +8239,7 @@
       [
        "한국화학융합시험연구원",
        1,
-       0.0386,
+       0.0387,
        0,
        0.0146,
        "",
@@ -8102,7 +8248,7 @@
       [
        "공동",
        1,
-       0.0156,
+       0.0152,
        2,
        0.0374,
        "",
@@ -8111,7 +8257,7 @@
       [
        "abb",
        1,
-       0.0243,
+       0.0235,
        0,
        0.0146,
        "",
@@ -8120,7 +8266,7 @@
       [
        "소프트뱅크",
        1,
-       0.0071,
+       0.0072,
        0,
        -0.0054,
        "",
@@ -8129,7 +8275,7 @@
       [
        "사업부",
        1,
-       0.0166,
+       0.0156,
        0,
        -0.0097,
        "",
@@ -8138,7 +8284,7 @@
       [
        "매각",
        1,
-       0.0057,
+       0.0045,
        0,
        -0.0219,
        "",
@@ -8147,7 +8293,7 @@
       [
        "무산",
        1,
-       0.0156,
+       0.0161,
        0,
        0.0023,
        "",
@@ -8156,7 +8302,7 @@
       [
        "상장",
        1,
-       0.0152,
+       0.0149,
        0,
        0.0059,
        "",
@@ -8165,7 +8311,7 @@
       [
        "분사",
        1,
-       0.0198,
+       0.0187,
        0,
        0.0005,
        "",
@@ -8174,7 +8320,7 @@
       [
        "검토",
        1,
-       0.0155,
+       0.0161,
        0,
        -0.0099,
        "",
@@ -8183,7 +8329,7 @@
       [
        "다이나믹솔루션",
        1,
-       0.0087,
+       0.0086,
        0,
        -0.0083,
        "",
@@ -8192,7 +8338,7 @@
       [
        "재활",
        1,
-       0.0248,
+       0.0263,
        0,
        0.0079,
        "",
@@ -8201,7 +8347,7 @@
       [
        "다이나믹",
        1,
-       0.0072,
+       0.0082,
        0,
        -0.0064,
        "",
@@ -8210,7 +8356,7 @@
       [
        "엑스핸드",
        1,
-       0.0217,
+       0.0206,
        0,
        0.0087,
        "",
@@ -8219,7 +8365,7 @@
       [
        "fda",
        1,
-       0.0258,
+       0.0266,
        0,
        0.0216,
        "",
@@ -8228,7 +8374,7 @@
       [
        "모베이스전자",
        1,
-       0.0293,
+       0.0295,
        0,
        0.0068,
        "",
@@ -8237,7 +8383,7 @@
       [
        "전장부품",
        1,
-       0.0276,
+       0.0277,
        0,
        0.0176,
        "",
@@ -8246,7 +8392,7 @@
       [
        "브릴스",
        1,
-       0.0148,
+       0.0145,
        0,
        0.0014,
        "",
@@ -8255,7 +8401,7 @@
       [
        "슬로바키아",
        1,
-       0.0238,
+       0.0221,
        0,
        0.0186,
        "",
@@ -8264,7 +8410,7 @@
       [
        "슈초트카",
        1,
-       0.0175,
+       0.0166,
        0,
        0.0004,
        "",
@@ -8273,7 +8419,7 @@
       [
        "그룹",
        1,
-       0.0106,
+       0.0103,
        0,
        -0.0136,
        "",
@@ -8291,7 +8437,7 @@
       [
        "첨단",
        1,
-       0.03,
+       0.0296,
        0,
        0.0017,
        "",
@@ -8300,7 +8446,7 @@
       [
        "거점",
        1,
-       0.0129,
+       0.0127,
        0,
        0.007,
        "",
@@ -8309,7 +8455,7 @@
       [
        "한국AI",
        1,
-       -0.0052,
+       -0.0053,
        2,
        0.0158,
        "",
@@ -8318,7 +8464,7 @@
       [
        "회원사",
        1,
-       0.0173,
+       0.0172,
        0,
        0.014,
        "",
@@ -8327,7 +8473,7 @@
       [
        "돌파",
        1,
-       0.018,
+       0.0162,
        1,
        0.0158,
        "",
@@ -8336,7 +8482,7 @@
       [
        "카카오",
        1,
-       0.0202,
+       0.0216,
        0,
        0.0013,
        "",
@@ -8345,7 +8491,7 @@
       [
        "발굴",
        1,
-       0.0136,
+       0.013,
        1,
        0.0214,
        "",
@@ -8354,7 +8500,7 @@
       [
        "블랙먼데이",
        1,
-       0.0214,
+       0.0203,
        0,
        0.0022,
        "",
@@ -8363,7 +8509,7 @@
       [
        "공포",
        1,
-       0.0162,
+       0.0163,
        0,
        -0.0033,
        "",
@@ -8372,7 +8518,7 @@
       [
        "사수",
        1,
-       0.0096,
+       0.0088,
        0,
        -0.0078,
        "",
@@ -8381,7 +8527,7 @@
       [
        "화장품",
        1,
-       -0.0019,
+       -0.0022,
        0,
        -0.0071,
        "",
@@ -8390,7 +8536,7 @@
       [
        "국장",
        1,
-       0.0077,
+       0.0074,
        0,
        -0.0083,
        "",
@@ -8408,7 +8554,7 @@
       [
        "진격",
        1,
-       0.0176,
+       0.0182,
        1,
        0.0175,
        "",
@@ -8417,7 +8563,7 @@
       [
        "링장",
        1,
-       0.0169,
+       0.0166,
        0,
        -0.0226,
        "",
@@ -8426,7 +8572,7 @@
       [
        "자유도",
        1,
-       0.0301,
+       0.0292,
        0,
        0.0103,
        "",
@@ -8435,7 +8581,7 @@
       [
        "건설",
        1,
-       0.0008,
+       0.0007,
        1,
        0.0113,
        "",
@@ -8444,7 +8590,7 @@
       [
        "전기차",
        1,
-       -0.0036,
+       -0.0038,
        1,
        0.0062,
        "",
@@ -8462,7 +8608,7 @@
       [
        "K기업",
        1,
-       0.024,
+       0.0233,
        0,
        0.0038,
        "",
@@ -8480,7 +8626,7 @@
       [
        "건설현장",
        1,
-       0.026,
+       0.0264,
        0,
        0.0045,
        "",
@@ -8498,7 +8644,7 @@
       [
        "국토부",
        1,
-       0.0089,
+       0.0094,
        0,
        -0.0085,
        "",
@@ -8507,7 +8653,7 @@
       [
        "스마트건설",
        1,
-       0.0142,
+       0.0143,
        0,
        -0.0086,
        "",
@@ -8525,7 +8671,7 @@
       [
        "오전시황",
        1,
-       0.0177,
+       0.0171,
        0,
        0.0015,
        "",
@@ -8543,7 +8689,7 @@
       [
        "mlcc",
        1,
-       0.0129,
+       0.0128,
        0,
        -0.0051,
        "",
@@ -8552,7 +8698,7 @@
       [
        "급등",
        1,
-       0.0109,
+       0.0095,
        0,
        -0.0017,
        "",
@@ -8561,7 +8707,7 @@
       [
        "속도조절",
        1,
-       0.014,
+       0.0142,
        0,
        0.0119,
        "",
@@ -8570,7 +8716,7 @@
       [
        "자동차업계",
        1,
-       0.0043,
+       0.0036,
        0,
        -0.0139,
        "",
@@ -8579,7 +8725,7 @@
       [
        "ktr",
        1,
-       0.0174,
+       0.0173,
        0,
        0.0126,
        "",
@@ -8588,7 +8734,7 @@
       [
        "갤럭시",
        1,
-       0.0241,
+       0.0249,
        0,
        -0.0002,
        "",
@@ -8597,7 +8743,7 @@
       [
        "먹거리",
        1,
-       0.0176,
+       0.018,
        0,
        0.0109,
        "",
@@ -8606,7 +8752,7 @@
       [
        "중용",
        1,
-       0.0165,
+       0.0167,
        0,
        -0.0104,
        "",
@@ -8615,7 +8761,7 @@
       [
        "현대엘리베이터",
        1,
-       0.0363,
+       0.0353,
        0,
        0.0158,
        "",
@@ -8624,7 +8770,7 @@
       [
        "무벡스",
        1,
-       0.023,
+       0.0225,
        0,
        -0.0076,
        "",
@@ -8633,7 +8779,7 @@
       [
        "prs",
        1,
-       0.032,
+       0.031,
        0,
        0.0085,
        "",
@@ -8642,7 +8788,7 @@
       [
        "흥행",
        1,
-       0.0199,
+       0.0189,
        0,
        0.0079,
        "",
@@ -8651,7 +8797,7 @@
       [
        "기대감",
        1,
-       0.0325,
+       0.0321,
        0,
        0.0168,
        "",
@@ -8660,7 +8806,7 @@
       [
        "에너지",
        1,
-       0.0169,
+       0.0166,
        1,
        0.0289,
        "",
@@ -8669,7 +8815,7 @@
       [
        "광양만",
        1,
-       0.0113,
+       0.0107,
        0,
        0.0001,
        "",
@@ -8696,7 +8842,7 @@
       [
        "사옥",
        1,
-       0.0234,
+       0.0233,
        0,
        -0.0004,
        "",
@@ -8705,7 +8851,7 @@
       [
        "작업장",
        1,
-       0.0163,
+       0.0158,
        0,
        -0.0035,
        "",
@@ -8714,7 +8860,7 @@
       [
        "안전인증",
        1,
-       0.0204,
+       0.02,
        0,
        0.017,
        "",
@@ -8723,7 +8869,7 @@
       [
        "획득",
        1,
-       0.0303,
+       0.03,
        0,
        0.0118,
        "",
@@ -8741,7 +8887,7 @@
       [
        "자회사",
        1,
-       0.0201,
+       0.02,
        0,
        -0.0049,
        "",
@@ -8750,7 +8896,7 @@
       [
        "인공관절",
        1,
-       0.026,
+       0.0256,
        0,
        -0.0031,
        "",
@@ -8759,7 +8905,7 @@
       [
        "수술",
        1,
-       0.0202,
+       0.0198,
        1,
        0.0138,
        "",
@@ -8768,7 +8914,7 @@
       [
        "핵심부품",
        1,
-       0.0136,
+       0.0138,
        0,
        -0.0151,
        "",
@@ -8786,7 +8932,7 @@
       [
        "현대오토에버",
        1,
-       0.0134,
+       0.0145,
        0,
        -0.0017,
        "",
@@ -8795,7 +8941,7 @@
       [
        "상한",
        1,
-       0.0187,
+       0.0178,
        0,
        0.0069,
        "",
@@ -8804,7 +8950,7 @@
       [
        "매일경제TV",
        1,
-       -0.0228,
+       -0.0229,
        0,
        -0.0183,
        "",
@@ -8813,7 +8959,7 @@
       [
        "고수",
        1,
-       0.0105,
+       0.0098,
        0,
        -0.0015,
        "",
@@ -8822,7 +8968,7 @@
       [
        "대결",
        1,
-       -0.0039,
+       -0.0035,
        0,
        -0.0153,
        "",
@@ -8831,7 +8977,7 @@
       [
        "챗GPT",
        1,
-       0.0162,
+       0.0159,
        0,
        0.0047,
        "",
@@ -8849,7 +8995,7 @@
       [
        "앤드류",
        1,
-       0.0105,
+       0.0115,
        0,
        -0.0004,
        "",
@@ -8867,7 +9013,7 @@
       [
        "이견",
        1,
-       0.0212,
+       0.0209,
        0,
        0.0049,
        "",
@@ -8876,7 +9022,7 @@
       [
        "성적표",
        1,
-       0.034,
+       0.0333,
        1,
        0.0335,
        "",
@@ -8885,7 +9031,7 @@
       [
        "돌파구",
        1,
-       0.0214,
+       0.0213,
        0,
        0.0064,
        "",
@@ -8894,7 +9040,7 @@
       [
        "경북도",
        1,
-       0.0144,
+       0.0141,
        0,
        0.0091,
        "",
@@ -8903,7 +9049,7 @@
       [
        "첨단산업",
        1,
-       0.0176,
+       0.0182,
        0,
        -0.0007,
        "",
@@ -8912,7 +9058,7 @@
       [
        "조성",
        1,
-       0.0409,
+       0.0404,
        0,
        0.0215,
        "",
@@ -8921,7 +9067,7 @@
       [
        "코넬대",
        1,
-       0.0184,
+       0.0188,
        0,
        0.0002,
        "",
@@ -8930,7 +9076,7 @@
       [
        "연구센터",
        1,
-       0.0061,
+       0.0055,
        0,
        -0.0035,
        "",
@@ -8939,7 +9085,7 @@
       [
        "출범",
        1,
-       0.0248,
+       0.024,
        1,
        0.0184,
        "",
@@ -8948,7 +9094,7 @@
       [
        "시제품",
        1,
-       0.0161,
+       0.0162,
        0,
        -0.003,
        "",
@@ -8966,7 +9112,7 @@
       [
        "현지",
        1,
-       0.0355,
+       0.0353,
        0,
        0.0026,
        "",
@@ -8975,7 +9121,7 @@
       [
        "유통망",
        1,
-       0.0337,
+       0.0341,
        0,
        0.0124,
        "",
@@ -8984,7 +9130,7 @@
       [
        "최초",
        1,
-       0.0211,
+       0.021,
        0,
        0.0104,
        "",
@@ -8993,7 +9139,7 @@
       [
        "이족보행",
        1,
-       0.0343,
+       0.0345,
        0,
        -0.0013,
        "",
@@ -9002,7 +9148,7 @@
       [
        "연계",
        1,
-       0.0195,
+       0.0205,
        0,
        -0.0046,
        "",
@@ -9011,7 +9157,7 @@
       [
        "공정",
        1,
-       0.0294,
+       0.03,
        0,
        0.0051,
        "",
@@ -9020,7 +9166,7 @@
       [
        "사족보행 로봇",
        1,
-       0.0309,
+       0.0303,
        1,
        0.0137,
        "",
@@ -9029,7 +9175,7 @@
       [
        "비즈톡톡",
        1,
-       0.0082,
+       0.0076,
        0,
        -0.0046,
        "",
@@ -9038,7 +9184,7 @@
       [
        "계열사",
        1,
-       0.0284,
+       0.0292,
        0,
        0.0047,
        "",
@@ -9047,7 +9193,7 @@
       [
        "아워홈",
        1,
-       0.02,
+       0.0196,
        0,
        0.0032,
        "",
@@ -9056,9 +9202,99 @@
       [
        "주방",
        1,
-       0.0204,
+       0.0208,
        0,
        -0.0054,
+       "",
+       ""
+      ],
+      [
+       "동서발전",
+       1,
+       0.0171,
+       0,
+       -0.0176,
+       "",
+       ""
+      ],
+      [
+       "예측",
+       1,
+       0.0245,
+       0,
+       0.0014,
+       "",
+       ""
+      ],
+      [
+       "발전운영",
+       1,
+       0.0203,
+       0,
+       -0.005,
+       "",
+       ""
+      ],
+      [
+       "성과",
+       1,
+       0.0098,
+       0,
+       -0.0093,
+       "",
+       ""
+      ],
+      [
+       "전사",
+       1,
+       0.0214,
+       0,
+       0.0051,
+       "",
+       ""
+      ],
+      [
+       "확산",
+       1,
+       0.0285,
+       0,
+       0.0155,
+       "",
+       ""
+      ],
+      [
+       "한국기계연구원",
+       1,
+       0.0151,
+       0,
+       -0.0135,
+       "",
+       ""
+      ],
+      [
+       "펀드",
+       1,
+       0.0137,
+       0,
+       0.0001,
+       "",
+       ""
+      ],
+      [
+       "근육옷감",
+       1,
+       0.0326,
+       0,
+       -0.0027,
+       "",
+       ""
+      ],
+      [
+       "한화에어로스페이스",
+       1,
+       0.0081,
+       0,
+       -0.0146,
        "",
        ""
       ]
@@ -9077,8 +9313,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 654,
-    "hdc_answer": 622,
+    "count_answer": 664,
+    "hdc_answer": 632,
     "agree": false
    },
    "source": {
@@ -9107,12 +9343,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.6648
+     "value": 0.6642
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.6637
+     "value": 0.6643
     }
    ],
    "check": null,
@@ -11414,7 +11650,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 39
+     "value": 41
     },
     {
      "type": "value",
@@ -11739,7 +11975,7 @@
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 267
+     "value": 289
     },
     {
      "type": "value",
@@ -11796,7 +12032,7 @@
       [
        "BESS",
        8,
-       0.4109,
+       0.394,
        11,
        0.3916,
        "",
@@ -11805,7 +12041,7 @@
       [
        "energy",
        3,
-       0.1488,
+       0.1475,
        5,
        0.1864,
        "",
@@ -11814,7 +12050,7 @@
       [
        "군용",
        3,
-       0.1576,
+       0.1518,
        0,
        -0.0002,
        "새 조합",
@@ -11823,7 +12059,7 @@
       [
        "lg",
        3,
-       0.1434,
+       0.1433,
        2,
        0.0676,
        "",
@@ -11832,7 +12068,7 @@
       [
        "반도체",
        3,
-       0.162,
+       0.1571,
        0,
        -0.0017,
        "새 조합",
@@ -11841,7 +12077,7 @@
       [
        "system",
        3,
-       0.1629,
+       0.1574,
        4,
        0.1358,
        "",
@@ -11850,7 +12086,7 @@
       [
        "australia",
        3,
-       0.1416,
+       0.1376,
        6,
        0.2036,
        "",
@@ -11859,7 +12095,7 @@
       [
        "제정",
        3,
-       0.1324,
+       0.1256,
        0,
        -0.0344,
        "새 조합",
@@ -11868,7 +12104,7 @@
       [
        "ess",
        3,
-       0.1587,
+       0.1579,
        5,
        0.1725,
        "",
@@ -11877,16 +12113,25 @@
       [
        "장기",
        2,
-       0.0978,
+       0.0935,
        0,
        0.0094,
        "새 조합",
        "새 조합"
       ],
       [
+       "data",
+       2,
+       0.072,
+       1,
+       0.0186,
+       "새 조합",
+       ""
+      ],
+      [
        "power",
        2,
-       0.1238,
+       0.1188,
        1,
        0.0545,
        "",
@@ -11895,7 +12140,7 @@
       [
        "에스엠벡셀",
        2,
-       0.0993,
+       0.0966,
        0,
        -0.0066,
        "새 조합",
@@ -11904,7 +12149,7 @@
       [
        "공급계약",
        2,
-       0.0993,
+       0.0979,
        0,
        0.0021,
        "새 조합",
@@ -11913,7 +12158,7 @@
       [
        "mwh",
        2,
-       0.1125,
+       0.1086,
        8,
        0.2916,
        "",
@@ -11922,7 +12167,7 @@
       [
        "lfp",
        2,
-       0.0938,
+       0.092,
        3,
        0.108,
        "",
@@ -11931,7 +12176,7 @@
       [
        "ev",
        2,
-       0.1028,
+       0.1009,
        2,
        0.0836,
        "",
@@ -11940,7 +12185,7 @@
       [
        "소형드론",
        2,
-       0.0828,
+       0.0802,
        0,
        -0.0039,
        "새 조합",
@@ -11949,7 +12194,7 @@
       [
        "크기",
        2,
-       0.1037,
+       0.0947,
        0,
        -0.0067,
        "새 조합",
@@ -11958,7 +12203,7 @@
       [
        "추진",
        2,
-       0.0984,
+       0.0981,
        0,
        0.012,
        "새 조합",
@@ -11967,7 +12212,7 @@
       [
        "gwh",
        2,
-       0.0878,
+       0.0851,
        4,
        0.1481,
        "",
@@ -11976,25 +12221,43 @@
       [
        "중국",
        2,
-       0.1014,
+       0.0982,
        0,
        -0.0092,
        "새 조합",
        "새 조합"
       ],
       [
+       "non",
+       2,
+       0.1062,
+       0,
+       0.005,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "전기차",
        2,
-       0.112,
+       0.1085,
        1,
        0.042,
        "",
        ""
       ],
       [
+       "sodium",
+       2,
+       0.1183,
+       0,
+       0.0095,
+       "새 조합",
+       "새 조합"
+      ],
+      [
        "kwh",
        2,
-       0.0887,
+       0.0864,
        0,
        0.0144,
        "새 조합",
@@ -12012,7 +12275,7 @@
       [
        "th",
        1,
-       0.0505,
+       0.0498,
        0,
        0.011,
        "",
@@ -12021,7 +12284,7 @@
       [
        "sre",
        1,
-       0.0506,
+       0.0498,
        0,
        -0.0019,
        "",
@@ -12030,7 +12293,7 @@
       [
        "worst",
        1,
-       0.052,
+       0.0456,
        0,
        0.0161,
        "",
@@ -12039,7 +12302,7 @@
       [
        "석유화학",
        1,
-       0.0386,
+       0.041,
        0,
        0.0025,
        "",
@@ -12048,7 +12311,7 @@
       [
        "불황",
        1,
-       0.0459,
+       0.0409,
        0,
        -0.0017,
        "",
@@ -12057,7 +12320,7 @@
       [
        "워스트레이팅",
        1,
-       0.0492,
+       0.0482,
        0,
        0.0041,
        "",
@@ -12066,7 +12329,7 @@
       [
        "상위",
        1,
-       0.0453,
+       0.0421,
        0,
        0.0026,
        "",
@@ -12075,7 +12338,7 @@
       [
        "포진",
        1,
-       0.0273,
+       0.0257,
        0,
        -0.0041,
        "",
@@ -12084,7 +12347,7 @@
       [
        "solar",
        1,
-       0.0627,
+       0.0597,
        1,
        0.0284,
        "",
@@ -12093,25 +12356,16 @@
       [
        "makers",
        1,
-       0.0337,
+       0.0292,
        0,
        -0.0168,
        "",
        ""
       ],
       [
-       "data",
-       1,
-       0.0264,
-       1,
-       0.0186,
-       "",
-       ""
-      ],
-      [
        "centres",
        1,
-       0.0507,
+       0.0531,
        0,
        0.0081,
        "",
@@ -12120,7 +12374,7 @@
       [
        "electrostates",
        1,
-       0.0534,
+       0.0511,
        0,
        -0.0033,
        "",
@@ -12129,7 +12383,7 @@
       [
        "petrostates",
        1,
-       0.0414,
+       0.043,
        0,
        -0.0118,
        "",
@@ -12138,7 +12392,7 @@
       [
        "pv",
        1,
-       0.046,
+       0.0429,
        0,
        -0.0014,
        "",
@@ -12147,7 +12401,7 @@
       [
        "tech",
        1,
-       0.0418,
+       0.0414,
        1,
        0.0196,
        "",
@@ -12156,7 +12410,7 @@
       [
        "swedish",
        1,
-       0.0573,
+       0.0575,
        0,
        0.0108,
        "",
@@ -12165,7 +12419,7 @@
       [
        "giant",
        1,
-       0.0417,
+       0.0386,
        0,
        -0.015,
        "",
@@ -12174,7 +12428,7 @@
       [
        "vattenfall",
        1,
-       0.0506,
+       0.0438,
        0,
        0.0072,
        "",
@@ -12183,7 +12437,7 @@
       [
        "kraken",
        1,
-       0.0571,
+       0.0539,
        0,
        0.0034,
        "",
@@ -12192,7 +12446,7 @@
       [
        "manage",
        1,
-       0.0639,
+       0.0607,
        0,
        0.0004,
        "",
@@ -12201,7 +12455,7 @@
       [
        "renewable",
        1,
-       0.0456,
+       0.0448,
        0,
        0.0128,
        "",
@@ -12210,7 +12464,7 @@
       [
        "assets",
        1,
-       0.0484,
+       0.0453,
        0,
        0.0071,
        "",
@@ -12219,7 +12473,7 @@
       [
        "germany",
        1,
-       0.0317,
+       0.0307,
        1,
        0.0362,
        "",
@@ -12228,7 +12482,7 @@
       [
        "통신장비",
        1,
-       0.0594,
+       0.0546,
        0,
        0.0186,
        "",
@@ -12237,7 +12491,7 @@
       [
        "체결",
        1,
-       0.0436,
+       0.0423,
        0,
        -0.0019,
        "",
@@ -12246,7 +12500,7 @@
       [
        "납품",
        1,
-       0.0482,
+       0.0462,
        0,
        -0.0146,
        "",
@@ -12255,7 +12509,7 @@
       [
        "무전기",
        1,
-       0.0462,
+       0.046,
        0,
        0.0101,
        "",
@@ -12264,7 +12518,7 @@
       [
        "전술통신장비",
        1,
-       0.0397,
+       0.0405,
        0,
        -0.0035,
        "",
@@ -12273,7 +12527,7 @@
       [
        "나트륨",
        1,
-       0.0491,
+       0.0489,
        0,
        0.014,
        "",
@@ -12282,7 +12536,7 @@
       [
        "변압기",
        1,
-       0.0646,
+       0.062,
        0,
        0.0035,
        "",
@@ -12291,7 +12545,7 @@
       [
        "결합",
        1,
-       0.043,
+       0.0393,
        0,
        -0.0063,
        "",
@@ -12300,7 +12554,7 @@
       [
        "포스코그룹",
        1,
-       0.0535,
+       0.0445,
        0,
        -0.0102,
        "",
@@ -12309,7 +12563,7 @@
       [
        "catl",
        1,
-       0.0383,
+       0.0358,
        0,
        0.0045,
        "",
@@ -12318,7 +12572,7 @@
       [
        "리튬",
        1,
-       0.0525,
+       0.0536,
        2,
        0.0768,
        "",
@@ -12327,7 +12581,7 @@
       [
        "공급",
        1,
-       0.0329,
+       0.0306,
        3,
        0.089,
        "",
@@ -12336,7 +12590,7 @@
       [
        "정유",
        1,
-       0.0584,
+       0.0601,
        0,
        -0.0072,
        "",
@@ -12345,7 +12599,7 @@
       [
        "기도",
        1,
-       0.0462,
+       0.0418,
        0,
        0.0097,
        "",
@@ -12354,7 +12608,7 @@
       [
        "먹구름",
        1,
-       0.0609,
+       0.0598,
        0,
        0.0164,
        "",
@@ -12363,7 +12617,7 @@
       [
        "agl",
        1,
-       0.0479,
+       0.0481,
        0,
        -0.0129,
        "",
@@ -12372,7 +12626,7 @@
       [
        "abermain",
        1,
-       0.044,
+       0.0425,
        0,
        -0.0032,
        "",
@@ -12381,7 +12635,7 @@
       [
        "cleared",
        1,
-       0.044,
+       0.0437,
        0,
        0.0075,
        "",
@@ -12390,7 +12644,7 @@
       [
        "epbc",
        1,
-       0.0424,
+       0.045,
        2,
        0.055,
        "",
@@ -12399,7 +12653,7 @@
       [
        "act",
        1,
-       0.0642,
+       0.0647,
        2,
        0.0821,
        "",
@@ -12408,7 +12662,7 @@
       [
        "ford",
        1,
-       0.064,
+       0.0613,
        1,
        0.0406,
        "",
@@ -12417,7 +12671,7 @@
       [
        "en",
        1,
-       0.059,
+       0.0587,
        0,
        -0.0026,
        "",
@@ -12426,7 +12680,7 @@
       [
        "route",
        1,
-       0.0474,
+       0.0434,
        0,
        0.0094,
        "",
@@ -12435,7 +12689,7 @@
       [
        "fathom",
        1,
-       0.0505,
+       0.0526,
        0,
        0.0077,
        "",
@@ -12444,7 +12698,7 @@
       [
        "pickup",
        1,
-       0.0354,
+       0.0347,
        0,
        -0.0071,
        "",
@@ -12453,7 +12707,7 @@
       [
        "성능",
        1,
-       0.0501,
+       0.0437,
        1,
        0.0278,
        "",
@@ -12462,7 +12716,7 @@
       [
        "통일",
        1,
-       0.0419,
+       0.0394,
        0,
        -0.0112,
        "",
@@ -12471,7 +12725,7 @@
       [
        "국가표준",
        1,
-       0.0497,
+       0.045,
        0,
        -0.0169,
        "",
@@ -12480,7 +12734,7 @@
       [
        "성능시험",
        1,
-       0.0559,
+       0.055,
        0,
        0.0033,
        "",
@@ -12489,7 +12743,7 @@
       [
        "마련",
        1,
-       0.0808,
+       0.0775,
        0,
        0.0185,
        "",
@@ -12498,7 +12752,7 @@
       [
        "ks",
        1,
-       0.0609,
+       0.0587,
        0,
        0.0112,
        "",
@@ -12507,7 +12761,7 @@
       [
        "topped",
        1,
-       0.042,
+       0.0369,
        0,
        -0.0109,
        "",
@@ -12516,7 +12770,7 @@
       [
        "정부",
        1,
-       0.0511,
+       0.0518,
        1,
        0.0288,
        "",
@@ -12525,7 +12779,7 @@
       [
        "드론",
        1,
-       0.0569,
+       0.0536,
        0,
        0.0106,
        "",
@@ -12534,7 +12788,7 @@
       [
        "표준",
        1,
-       0.0387,
+       0.036,
        0,
        0.0159,
        "",
@@ -12543,7 +12797,7 @@
       [
        "기업",
        1,
-       0.053,
+       0.0514,
        0,
        0.0119,
        "",
@@ -12552,7 +12806,7 @@
       [
        "진출",
        1,
-       0.0538,
+       0.056,
        0,
        0.0103,
        "",
@@ -12561,7 +12815,7 @@
       [
        "지원",
        1,
-       0.0413,
+       0.0407,
        0,
        -0.0063,
        "",
@@ -12570,7 +12824,7 @@
       [
        "충북",
        1,
-       0.0598,
+       0.0592,
        0,
        -0.0007,
        "",
@@ -12579,7 +12833,7 @@
       [
        "수출액",
        1,
-       0.0513,
+       0.0486,
        0,
        -0.0003,
        "",
@@ -12588,7 +12842,7 @@
       [
        "효자",
        1,
-       0.0454,
+       0.0483,
        0,
        -0.0024,
        "",
@@ -12597,7 +12851,7 @@
       [
        "유럽",
        1,
-       0.0597,
+       0.0552,
        0,
        0.0182,
        "",
@@ -12606,7 +12860,7 @@
       [
        "공급망",
        1,
-       0.0364,
+       0.0319,
        0,
        -0.0005,
        "",
@@ -12615,7 +12869,7 @@
       [
        "well",
        1,
-       0.0443,
+       0.0438,
        0,
        0.0148,
        "",
@@ -12624,7 +12878,7 @@
       [
        "past",
        1,
-       0.0579,
+       0.0594,
        0,
        -0.0031,
        "",
@@ -12633,7 +12887,7 @@
       [
        "operation",
        1,
-       0.0596,
+       0.0563,
        1,
        0.0158,
        "",
@@ -12642,7 +12896,7 @@
       [
        "avery",
        1,
-       0.0475,
+       0.0421,
        0,
        0.0131,
        "",
@@ -12651,7 +12905,7 @@
       [
        "dennison",
        1,
-       0.0553,
+       0.051,
        0,
        0.0028,
        "",
@@ -12660,7 +12914,7 @@
       [
        "argent",
        1,
-       0.0518,
+       0.0494,
        0,
        0.0045,
        "",
@@ -12669,7 +12923,7 @@
       [
        "psa",
        1,
-       0.0663,
+       0.0668,
        0,
        -0.0072,
        "",
@@ -12678,7 +12932,7 @@
       [
        "tape",
        1,
-       0.0577,
+       0.0544,
        0,
        -0.0016,
        "",
@@ -12687,7 +12941,7 @@
       [
        "ageing",
        1,
-       0.0653,
+       0.0632,
        0,
        0.0049,
        "",
@@ -12696,7 +12950,7 @@
       [
        "tests",
        1,
-       0.0527,
+       0.0564,
        0,
        0.0034,
        "",
@@ -12705,7 +12959,7 @@
       [
        "supply",
        1,
-       0.0564,
+       0.0518,
        2,
        0.0617,
        "",
@@ -12714,7 +12968,7 @@
       [
        "industry",
        1,
-       0.049,
+       0.0508,
        0,
        0.0172,
        "",
@@ -12723,7 +12977,7 @@
       [
        "eu",
        1,
-       0.0206,
+       0.0191,
        2,
        0.0601,
        "",
@@ -12732,7 +12986,7 @@
       [
        "regulations",
        1,
-       0.0542,
+       0.0568,
        0,
        0.0187,
        "",
@@ -12741,7 +12995,7 @@
       [
        "bw",
        1,
-       0.0411,
+       0.0413,
        0,
        -0.0074,
        "",
@@ -12750,7 +13004,7 @@
       [
        "wattmen",
        1,
-       0.0407,
+       0.0421,
        0,
        0.0021,
        "",
@@ -12759,7 +13013,7 @@
       [
        "develop",
        1,
-       0.0591,
+       0.0572,
        0,
        -0.0151,
        "",
@@ -12768,7 +13022,7 @@
       [
        "mw",
        1,
-       0.0506,
+       0.051,
        1,
        0.0217,
        "",
@@ -12777,7 +13031,7 @@
       [
        "france",
        1,
-       0.0507,
+       0.0524,
        0,
        -0.0019,
        "",
@@ -12786,25 +13040,16 @@
       [
        "technical",
        1,
-       0.0469,
+       0.0476,
        0,
        0.0088,
        "",
        ""
       ],
       [
-       "non",
-       1,
-       0.0585,
-       0,
-       0.005,
-       "",
-       ""
-      ],
-      [
        "controversial",
        1,
-       0.0372,
+       0.0353,
        0,
        -0.0003,
        "",
@@ -12813,7 +13058,7 @@
       [
        "zealand",
        1,
-       0.0348,
+       0.0362,
        0,
        0.0073,
        "",
@@ -12822,7 +13067,7 @@
       [
        "regulator",
        1,
-       0.0557,
+       0.0513,
        0,
        -0.0196,
        "",
@@ -12831,7 +13076,7 @@
       [
        "corrects",
        1,
-       0.0505,
+       0.0509,
        0,
        -0.004,
        "",
@@ -12840,7 +13085,7 @@
       [
        "price",
        1,
-       0.0604,
+       0.0569,
        0,
        0.0255,
        "",
@@ -12849,7 +13094,7 @@
       [
        "band",
        1,
-       0.0388,
+       0.0396,
        0,
        -0.0009,
        "",
@@ -12858,7 +13103,7 @@
       [
        "rule",
        1,
-       0.0491,
+       0.0487,
        0,
        0.0062,
        "",
@@ -12867,7 +13112,7 @@
       [
        "date",
        1,
-       0.0486,
+       0.0469,
        0,
        0.0015,
        "",
@@ -12876,7 +13121,7 @@
       [
        "자원순환",
        1,
-       0.0556,
+       0.0539,
        0,
        -0.0149,
        "",
@@ -12885,7 +13130,7 @@
       [
        "성과",
        1,
-       0.0551,
+       0.0474,
        0,
        -0.003,
        "",
@@ -12894,7 +13139,7 @@
       [
        "국무총리",
        1,
-       0.0669,
+       0.0651,
        0,
        0.0062,
        "",
@@ -12903,7 +13148,7 @@
       [
        "표창",
        1,
-       0.051,
+       0.0522,
        0,
        0.0039,
        "",
@@ -12912,7 +13157,7 @@
       [
        "소재업계",
        1,
-       0.0566,
+       0.0528,
        0,
        0.0013,
        "",
@@ -12921,7 +13166,7 @@
       [
        "한파",
        1,
-       0.0334,
+       0.0326,
        0,
        -0.0027,
        "",
@@ -12930,25 +13175,16 @@
       [
        "코스모신소재",
        1,
-       0.0561,
+       0.0572,
        0,
        0.0013,
        "",
        ""
       ],
       [
-       "sodium",
-       1,
-       0.0712,
-       0,
-       0.0095,
-       "",
-       ""
-      ],
-      [
        "chance",
        1,
-       0.0599,
+       0.0572,
        0,
        -0.0192,
        "",
@@ -12957,7 +13193,7 @@
       [
        "lean",
        1,
-       0.0162,
+       0.0137,
        0,
        -0.0241,
        "",
@@ -12966,7 +13202,7 @@
       [
        "forward",
        1,
-       0.0462,
+       0.0464,
        0,
        -0.0028,
        "",
@@ -12975,7 +13211,7 @@
       [
        "alsym",
        1,
-       0.0451,
+       0.0427,
        0,
        -0.013,
        "",
@@ -12984,7 +13220,7 @@
       [
        "re",
        1,
-       0.0611,
+       0.0547,
        3,
        0.1007,
        "",
@@ -12993,7 +13229,7 @@
       [
        "policy",
        1,
-       0.0505,
+       0.0499,
        0,
        -0.0035,
        "",
@@ -13002,7 +13238,7 @@
       [
        "shift",
        1,
-       0.0481,
+       0.0468,
        0,
        0.0074,
        "",
@@ -13011,7 +13247,7 @@
       [
        "upstream",
        1,
-       0.0504,
+       0.0453,
        0,
        -0.0039,
        "",
@@ -13020,7 +13256,7 @@
       [
        "close",
        1,
-       0.0519,
+       0.0546,
        0,
        0.0062,
        "",
@@ -13029,7 +13265,7 @@
       [
        "proximity",
        1,
-       0.0379,
+       0.0362,
        0,
        -0.0187,
        "",
@@ -13038,7 +13274,7 @@
       [
        "grid",
        1,
-       0.0593,
+       0.0554,
        1,
        0.032,
        "",
@@ -13047,7 +13283,7 @@
       [
        "infrastructure",
        1,
-       0.0429,
+       0.0396,
        0,
        -0.0001,
        "",
@@ -13056,7 +13292,7 @@
       [
        "edf",
        1,
-       0.0421,
+       0.0396,
        0,
        0.0106,
        "",
@@ -13065,7 +13301,7 @@
       [
        "buys",
        1,
-       0.0499,
+       0.0478,
        0,
        -0.0244,
        "",
@@ -13074,7 +13310,7 @@
       [
        "spanish",
        1,
-       0.0425,
+       0.0398,
        0,
        0.0069,
        "",
@@ -13083,7 +13319,7 @@
       [
        "money",
        1,
-       0.0539,
+       0.0526,
        0,
        -0.0075,
        "",
@@ -13092,7 +13328,7 @@
       [
        "lenders",
        1,
-       0.061,
+       0.0606,
        0,
        0.0028,
        "",
@@ -13101,7 +13337,7 @@
       [
        "finance",
        1,
-       0.062,
+       0.0624,
        0,
        0.0261,
        "",
@@ -13110,7 +13346,7 @@
       [
        "double",
        1,
-       0.0382,
+       0.0334,
        0,
        0.0024,
        "",
@@ -13119,7 +13355,7 @@
       [
        "guns",
        1,
-       0.0459,
+       0.0489,
        0,
        -0.0122,
        "",
@@ -13128,7 +13364,7 @@
       [
        "ultra",
        1,
-       0.0464,
+       0.0465,
        0,
        -0.0079,
        "",
@@ -13137,7 +13373,7 @@
       [
        "class",
        1,
-       0.0522,
+       0.0482,
        0,
        -0.0095,
        "",
@@ -13146,7 +13382,7 @@
       [
        "haul",
        1,
-       0.0424,
+       0.0381,
        0,
        -0.0081,
        "",
@@ -13155,7 +13391,7 @@
       [
        "truck",
        1,
-       0.0443,
+       0.047,
        1,
        0.0346,
        "",
@@ -13164,7 +13400,7 @@
       [
        "packs",
        1,
-       0.0837,
+       0.08,
        0,
        0.0151,
        "",
@@ -13173,7 +13409,7 @@
       [
        "dual",
        1,
-       0.0409,
+       0.0423,
        0,
        -0.0023,
        "",
@@ -13182,7 +13418,7 @@
       [
        "gun",
        1,
-       0.0728,
+       0.0702,
        0,
        0.0128,
        "",
@@ -13191,7 +13427,7 @@
       [
        "mcs",
        1,
-       0.0447,
+       0.0398,
        0,
        -0.0015,
        "",
@@ -13200,7 +13436,7 @@
       [
        "charging",
        1,
-       0.0697,
+       0.0648,
        0,
        0.0301,
        "",
@@ -13209,7 +13445,7 @@
       [
        "storage",
        1,
-       0.0216,
+       0.0219,
        3,
        0.0736,
        "",
@@ -13218,7 +13454,7 @@
       [
        "runs",
        1,
-       0.0682,
+       0.0658,
        0,
        0.0201,
        "",
@@ -13227,7 +13463,7 @@
       [
        "retired",
        1,
-       0.038,
+       0.0364,
        0,
        -0.0013,
        "",
@@ -13236,7 +13472,7 @@
       [
        "상장",
        1,
-       0.0457,
+       0.0471,
        0,
        -0.0041,
        "",
@@ -13245,7 +13481,7 @@
       [
        "기존",
        1,
-       0.055,
+       0.0522,
        0,
        0.0175,
        "",
@@ -13254,7 +13490,7 @@
       [
        "차세대",
        1,
-       0.0361,
+       0.0314,
        4,
        0.1396,
        "",
@@ -13263,7 +13499,7 @@
       [
        "기술",
        1,
-       0.0498,
+       0.0496,
        4,
        0.1343,
        "",
@@ -13272,7 +13508,7 @@
       [
        "성장동력",
        1,
-       0.0554,
+       0.056,
        1,
        0.0415,
        "",
@@ -13281,7 +13517,7 @@
       [
        "계획",
        1,
-       0.0398,
+       0.0362,
        0,
        -0.0006,
        "",
@@ -13290,7 +13526,7 @@
       [
        "생산능력",
        1,
-       0.0344,
+       0.0362,
        0,
        -0.0044,
        "",
@@ -13299,7 +13535,7 @@
       [
        "세계",
        1,
-       0.0553,
+       0.0557,
        0,
        -0.0087,
        "",
@@ -13308,7 +13544,7 @@
       [
        "출하량",
        1,
-       0.0375,
+       0.0344,
        0,
        -0.0177,
        "",
@@ -13317,7 +13553,7 @@
       [
        "육박",
        1,
-       0.0611,
+       0.0583,
        0,
        0.0077,
        "",
@@ -13326,7 +13562,7 @@
       [
        "briggs",
        1,
-       0.0372,
+       0.0353,
        0,
        -0.007,
        "",
@@ -13335,7 +13571,7 @@
       [
        "stratton",
        1,
-       0.0537,
+       0.0515,
        0,
        0.0183,
        "",
@@ -13344,7 +13580,7 @@
       [
        "lights",
        1,
-       0.0454,
+       0.0493,
        0,
        -0.0089,
        "",
@@ -13353,7 +13589,7 @@
       [
        "longer",
        1,
-       0.0428,
+       0.0383,
        1,
        0.0399,
        "",
@@ -13362,7 +13598,7 @@
       [
        "bigger",
        1,
-       0.0538,
+       0.0493,
        0,
        -0.0054,
        "",
@@ -13371,7 +13607,7 @@
       [
        "판매",
        1,
-       0.0704,
+       0.0717,
        0,
        0.0079,
        "",
@@ -13380,7 +13616,7 @@
       [
        "ix",
        1,
-       0.0465,
+       0.0422,
        0,
        0.0188,
        "",
@@ -13389,7 +13625,7 @@
       [
        "합류",
        1,
-       0.05,
+       0.0462,
        0,
        -0.0116,
        "",
@@ -13398,7 +13634,7 @@
       [
        "bmw",
        1,
-       0.0442,
+       0.0464,
        0,
        0.0057,
        "",
@@ -13407,7 +13643,7 @@
       [
        "국내",
        1,
-       0.0513,
+       0.0502,
        0,
        -0.0001,
        "",
@@ -13416,7 +13652,7 @@
       [
        "정비",
        1,
-       0.0537,
+       0.0483,
        0,
        -0.0058,
        "",
@@ -13425,7 +13661,7 @@
       [
        "투자",
        1,
-       0.0541,
+       0.0527,
        1,
        0.0245,
        "",
@@ -13434,7 +13670,7 @@
       [
        "강화",
        1,
-       0.0525,
+       0.0492,
        0,
        -0.003,
        "",
@@ -13443,7 +13679,7 @@
       [
        "이노밴스",
        1,
-       0.052,
+       0.0457,
        0,
        -0.014,
        "",
@@ -13452,7 +13688,7 @@
       [
        "AMP코리아",
        1,
-       0.0454,
+       0.0432,
        0,
        -0.0077,
        "",
@@ -13461,7 +13697,7 @@
       [
        "고속",
        1,
-       0.0306,
+       0.029,
        0,
        -0.0196,
        "",
@@ -13470,7 +13706,7 @@
       [
        "노칭기",
        1,
-       0.0453,
+       0.0441,
        0,
        -0.0104,
        "",
@@ -13479,7 +13715,7 @@
       [
        "개발",
        1,
-       0.0611,
+       0.0579,
        3,
        0.0934,
        "",
@@ -13488,7 +13724,7 @@
       [
        "SK온",
        1,
-       0.0333,
+       0.033,
        0,
        -0.0176,
        "",
@@ -13506,7 +13742,7 @@
       [
        "피지티",
        1,
-       0.0451,
+       0.0437,
        0,
        -0.0148,
        "",
@@ -13515,7 +13751,7 @@
       [
        "생산량",
        1,
-       0.0676,
+       0.067,
        0,
        0.006,
        "",
@@ -13533,7 +13769,7 @@
       [
        "절반",
        1,
-       0.0612,
+       0.0554,
        0,
        -0.0074,
        "",
@@ -13542,7 +13778,7 @@
       [
        "제철소",
        1,
-       0.0567,
+       0.0542,
        0,
        -0.0036,
        "",
@@ -13551,7 +13787,7 @@
       [
        "보상금",
        1,
-       0.0452,
+       0.0441,
        0,
        -0.0104,
        "",
@@ -13560,7 +13796,7 @@
       [
        "효과",
        1,
-       0.0495,
+       0.0465,
        0,
        -0.005,
        "",
@@ -13569,7 +13805,7 @@
       [
        "묘책",
        1,
-       0.0547,
+       0.0552,
        0,
        -0.001,
        "",
@@ -13578,7 +13814,7 @@
       [
        "장비",
        1,
-       0.0544,
+       0.0551,
        0,
        0.009,
        "",
@@ -13587,7 +13823,7 @@
       [
        "도입",
        1,
-       0.0595,
+       0.0562,
        0,
        0.0041,
        "",
@@ -13596,7 +13832,7 @@
       [
        "수출통제",
        1,
-       0.0664,
+       0.0628,
        0,
        0.0118,
        "",
@@ -13605,7 +13841,7 @@
       [
        "반사이익",
        1,
-       0.0587,
+       0.0539,
        0,
        0.0017,
        "",
@@ -13614,7 +13850,7 @@
       [
        "촉각",
        1,
-       0.0394,
+       0.0417,
        0,
        -0.002,
        "",
@@ -13623,7 +13859,7 @@
       [
        "한진",
        1,
-       0.0405,
+       0.0412,
        0,
        -0.0009,
        "",
@@ -13632,7 +13868,7 @@
       [
        "에코프로",
        1,
-       0.0457,
+       0.0398,
        2,
        0.0656,
        "",
@@ -13641,7 +13877,7 @@
       [
        "합작사",
        1,
-       0.0566,
+       0.0543,
        0,
        0.0067,
        "",
@@ -13650,7 +13886,7 @@
       [
        "설립",
        1,
-       0.0474,
+       0.0459,
        0,
        -0.0058,
        "",
@@ -13659,7 +13895,7 @@
       [
        "물류",
        1,
-       0.0502,
+       0.0487,
        0,
        -0.0144,
        "",
@@ -13677,7 +13913,7 @@
       [
        "본격",
        1,
-       0.0604,
+       0.0558,
        0,
        0.0085,
        "",
@@ -13686,7 +13922,7 @@
       [
        "greater",
        1,
-       0.0579,
+       0.0568,
        0,
        -0.0043,
        "",
@@ -13695,7 +13931,7 @@
       [
        "operational",
        1,
-       0.0367,
+       0.0345,
        0,
        -0.0073,
        "",
@@ -13704,7 +13940,7 @@
       [
        "flexibility",
        1,
-       0.0352,
+       0.0374,
        0,
        -0.0064,
        "",
@@ -13713,7 +13949,7 @@
       [
        "aemo",
        1,
-       0.0545,
+       0.0513,
        0,
        -0.0047,
        "",
@@ -13722,7 +13958,7 @@
       [
        "leans",
        1,
-       0.051,
+       0.0454,
        0,
        0.0081,
        "",
@@ -13731,7 +13967,7 @@
       [
        "gw",
        1,
-       0.0481,
+       0.0483,
        2,
        0.0815,
        "",
@@ -13740,7 +13976,7 @@
       [
        "summer",
        1,
-       0.0508,
+       0.0492,
        0,
        -0.0039,
        "",
@@ -13749,7 +13985,7 @@
       [
        "ecoflow",
        1,
-       0.0618,
+       0.0587,
        0,
        -0.0059,
        "",
@@ -13758,7 +13994,7 @@
       [
        "titan",
        1,
-       0.0486,
+       0.0459,
        0,
        0.0094,
        "",
@@ -13767,7 +14003,7 @@
       [
        "classic",
        1,
-       0.0558,
+       0.0527,
        0,
        -0.0124,
        "",
@@ -13776,7 +14012,7 @@
       [
        "station",
        1,
-       0.0339,
+       0.035,
        0,
        -0.0189,
        "",
@@ -13785,7 +14021,7 @@
       [
        "velotric",
        1,
-       0.0591,
+       0.0567,
        0,
        0.0057,
        "",
@@ -13794,7 +14030,7 @@
       [
        "nomad",
        1,
-       0.0526,
+       0.0542,
        0,
        -0.0076,
        "",
@@ -13803,7 +14039,7 @@
       [
        "bike",
        1,
-       0.0495,
+       0.0504,
        0,
        0.0001,
        "",
@@ -13812,7 +14048,7 @@
       [
        "extra",
        1,
-       0.0438,
+       0.0439,
        0,
        0.0085,
        "",
@@ -13821,7 +14057,7 @@
       [
        "진단",
        1,
-       0.0482,
+       0.0453,
        0,
        0.008,
        "",
@@ -13830,7 +14066,7 @@
       [
        "정비사",
        1,
-       0.0523,
+       0.0455,
        0,
        -0.0188,
        "",
@@ -13839,7 +14075,7 @@
       [
        "실시간",
        1,
-       0.0535,
+       0.0546,
        0,
        0.0022,
        "",
@@ -13848,9 +14084,180 @@
       [
        "수리",
        1,
-       0.0539,
+       0.0462,
        0,
        0.0183,
+       "",
+       ""
+      ],
+      [
+       "cmblu",
+       1,
+       0.049,
+       0,
+       0.0044,
+       "",
+       ""
+      ],
+      [
+       "highlights",
+       1,
+       0.0533,
+       0,
+       -0.0003,
+       "",
+       ""
+      ],
+      [
+       "community",
+       1,
+       0.0566,
+       0,
+       -0.0021,
+       "",
+       ""
+      ],
+      [
+       "participation",
+       1,
+       0.0451,
+       0,
+       -0.0141,
+       "",
+       ""
+      ],
+      [
+       "california",
+       1,
+       0.0477,
+       0,
+       -0.0014,
+       "",
+       ""
+      ],
+      [
+       "long",
+       1,
+       0.05,
+       1,
+       0.0173,
+       "",
+       ""
+      ],
+      [
+       "duration",
+       1,
+       0.04,
+       1,
+       0.056,
+       "",
+       ""
+      ],
+      [
+       "lithium",
+       1,
+       0.0558,
+       0,
+       0.0046,
+       "",
+       ""
+      ],
+      [
+       "project",
+       1,
+       0.0382,
+       2,
+       0.0572,
+       "",
+       ""
+      ],
+      [
+       "tribal",
+       1,
+       0.0611,
+       0,
+       0.0034,
+       "",
+       ""
+      ],
+      [
+       "desert",
+       1,
+       0.0565,
+       0,
+       0.0126,
+       "",
+       ""
+      ],
+      [
+       "resilience",
+       1,
+       0.0526,
+       0,
+       0.003,
+       "",
+       ""
+      ],
+      [
+       "proper",
+       1,
+       0.0585,
+       0,
+       0.0109,
+       "",
+       ""
+      ],
+      [
+       "voltage",
+       1,
+       0.0451,
+       0,
+       -0.0019,
+       "",
+       ""
+      ],
+      [
+       "ion",
+       1,
+       0.0559,
+       0,
+       0.0012,
+       "",
+       ""
+      ],
+      [
+       "cabinet",
+       1,
+       0.0428,
+       0,
+       -0.0014,
+       "",
+       ""
+      ],
+      [
+       "center",
+       1,
+       0.0424,
+       0,
+       0.0001,
+       "",
+       ""
+      ],
+      [
+       "ups",
+       1,
+       0.0396,
+       0,
+       -0.0085,
+       "",
+       ""
+      ],
+      [
+       "systems",
+       1,
+       0.0501,
+       3,
+       0.0895,
        "",
        ""
       ]
@@ -13869,9 +14276,9 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 229,
-    "hdc_answer": 229,
-    "agree": true
+    "count_answer": 248,
+    "hdc_answer": 247,
+    "agree": false
    },
    "source": {
     "file": "trend/analyze.py",
@@ -13899,12 +14306,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.4195
+     "value": 0.4177
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.4167
+     "value": 0.4162
     }
    ],
    "check": null,
@@ -13930,7 +14337,7 @@
     {
      "type": "value",
      "name": "최근 7일 제목",
-     "value": 19
+     "value": 21
     },
     {
      "type": "value",
@@ -14205,6 +14612,18 @@
         "uncertain",
         "progress"
        ]
+      ],
+      [
+       "Energy-Storage.news",
+       "Global grid-scale BESS deployments up 42% in YTD; Europe nearly 200%",
+       [
+        "grid",
+        "scale",
+        "deployments",
+        "ytd",
+        "europe",
+        "nearly"
+       ]
       ]
      ]
     }
@@ -14261,7 +14680,7 @@
     {
      "type": "value",
      "name": "최근 7일 더한 조합 수",
-     "value": 146
+     "value": 160
     },
     {
      "type": "value",
@@ -14318,7 +14737,7 @@
       [
        "배터리",
        8,
-       0.5006,
+       0.4772,
        11,
        0.2293,
        "",
@@ -14327,7 +14746,7 @@
       [
        "australia",
        5,
-       0.3163,
+       0.3009,
        18,
        0.3813,
        "",
@@ -14336,7 +14755,7 @@
       [
        "re",
        3,
-       0.1908,
+       0.1793,
        0,
        -0.0005,
        "새 조합",
@@ -14345,7 +14764,7 @@
       [
        "gwh",
        3,
-       0.1851,
+       0.1762,
        9,
        0.1977,
        "",
@@ -14354,16 +14773,25 @@
       [
        "industry",
        3,
-       0.1979,
+       0.1861,
        4,
        0.0966,
        "",
        ""
       ],
       [
+       "market",
+       3,
+       0.1569,
+       10,
+       0.2138,
+       "",
+       ""
+      ],
+      [
        "agl",
        2,
-       0.1322,
+       0.1247,
        1,
        0.0244,
        "새 조합",
@@ -14372,7 +14800,7 @@
       [
        "mwh",
        2,
-       0.1361,
+       0.1319,
        17,
        0.3647,
        "",
@@ -14381,7 +14809,7 @@
       [
        "system",
        2,
-       0.1226,
+       0.1174,
        4,
        0.0949,
        "",
@@ -14390,16 +14818,43 @@
       [
        "eu",
        2,
-       0.1201,
+       0.1066,
        0,
        -0.0198,
        "새 조합",
        "새 조합"
       ],
       [
+       "scale",
+       2,
+       0.1187,
+       3,
+       0.0643,
+       "",
+       ""
+      ],
+      [
+       "europe",
+       2,
+       0.0989,
+       3,
+       0.0623,
+       "",
+       ""
+      ],
+      [
+       "operators",
+       2,
+       0.1221,
+       2,
+       0.0426,
+       "",
+       ""
+      ],
+      [
        "progress",
        2,
-       0.1158,
+       0.1064,
        0,
        -0.009,
        "새 조합",
@@ -14408,25 +14863,34 @@
       [
        "construction",
        2,
-       0.1291,
+       0.1188,
        2,
        0.0587,
        "",
        ""
       ],
       [
-       "market",
+       "european",
        2,
-       0.104,
-       10,
-       0.2138,
+       0.1285,
+       0,
+       -0.0061,
+       "새 조합",
+       "새 조합"
+      ],
+      [
+       "grid",
+       2,
+       0.121,
+       5,
+       0.1077,
        "",
        ""
       ],
       [
        "abermain",
        1,
-       0.0545,
+       0.0534,
        0,
        0.0032,
        "",
@@ -14435,7 +14899,7 @@
       [
        "cleared",
        1,
-       0.0707,
+       0.0642,
        0,
        0.0069,
        "",
@@ -14444,7 +14908,7 @@
       [
        "epbc",
        1,
-       0.0512,
+       0.0475,
        5,
        0.1129,
        "",
@@ -14453,7 +14917,7 @@
       [
        "act",
        1,
-       0.0701,
+       0.0688,
        6,
        0.1291,
        "",
@@ -14462,7 +14926,7 @@
       [
        "ounce",
        1,
-       0.0623,
+       0.0578,
        0,
        -0.0079,
        "",
@@ -14471,7 +14935,7 @@
       [
        "value",
        1,
-       0.0684,
+       0.0648,
        1,
        0.0227,
        "",
@@ -14480,7 +14944,7 @@
       [
        "assets",
        1,
-       0.0653,
+       0.0655,
        0,
        0.003,
        "",
@@ -14489,7 +14953,7 @@
       [
        "lg",
        1,
-       0.0647,
+       0.0659,
        1,
        0.02,
        "",
@@ -14498,7 +14962,7 @@
       [
        "energy",
        1,
-       0.0545,
+       0.0529,
        17,
        0.3572,
        "",
@@ -14507,7 +14971,7 @@
       [
        "solution",
        1,
-       0.078,
+       0.0764,
        1,
        0.0405,
        "",
@@ -14516,7 +14980,7 @@
       [
        "vertech",
        1,
-       0.0738,
+       0.0707,
        0,
        -0.004,
        "",
@@ -14525,7 +14989,7 @@
       [
        "cpo",
        1,
-       0.0529,
+       0.0522,
        0,
        -0.007,
        "",
@@ -14534,7 +14998,7 @@
       [
        "talks",
        1,
-       0.0795,
+       0.0756,
        0,
        0.0132,
        "",
@@ -14543,7 +15007,7 @@
       [
        "data",
        1,
-       0.0477,
+       0.0451,
        6,
        0.1148,
        "",
@@ -14552,7 +15016,7 @@
       [
        "centres",
        1,
-       0.0833,
+       0.0792,
        1,
        0.0265,
        "",
@@ -14561,7 +15025,7 @@
       [
        "software",
        1,
-       0.0682,
+       0.0697,
        1,
        0.0073,
        "",
@@ -14570,7 +15034,7 @@
       [
        "integration",
        1,
-       0.066,
+       0.0587,
        0,
        0.001,
        "",
@@ -14579,7 +15043,7 @@
       [
        "topped",
        1,
-       0.0519,
+       0.0499,
        0,
        -0.006,
        "",
@@ -14588,7 +15052,7 @@
       [
        "well",
        1,
-       0.0588,
+       0.0583,
        0,
        0.0093,
        "",
@@ -14597,7 +15061,7 @@
       [
        "past",
        1,
-       0.0503,
+       0.0477,
        0,
        -0.0154,
        "",
@@ -14606,7 +15070,7 @@
       [
        "operation",
        1,
-       0.0545,
+       0.052,
        4,
        0.0758,
        "",
@@ -14615,7 +15079,7 @@
       [
        "avery",
        1,
-       0.0433,
+       0.0398,
        0,
        0.0001,
        "",
@@ -14624,7 +15088,7 @@
       [
        "dennison",
        1,
-       0.0767,
+       0.0687,
        0,
        -0.0008,
        "",
@@ -14633,7 +15097,7 @@
       [
        "argent",
        1,
-       0.0667,
+       0.0652,
        0,
        -0.0005,
        "",
@@ -14642,7 +15106,7 @@
       [
        "psa",
        1,
-       0.0663,
+       0.0644,
        2,
        0.0419,
        "",
@@ -14651,7 +15115,7 @@
       [
        "tape",
        1,
-       0.0691,
+       0.0676,
        2,
        0.0485,
        "",
@@ -14660,7 +15124,7 @@
       [
        "ageing",
        1,
-       0.0719,
+       0.0683,
        0,
        -0.0001,
        "",
@@ -14669,7 +15133,7 @@
       [
        "tests",
        1,
-       0.0636,
+       0.0599,
        0,
        -0.0034,
        "",
@@ -14678,7 +15142,7 @@
       [
        "experts",
        1,
-       0.037,
+       0.0389,
        0,
        -0.0057,
        "",
@@ -14687,7 +15151,7 @@
       [
        "saying",
        1,
-       0.0631,
+       0.0616,
        0,
        0.0034,
        "",
@@ -14696,7 +15160,7 @@
       [
        "baaja",
        1,
-       0.0596,
+       0.0617,
        0,
        0.004,
        "",
@@ -14705,7 +15169,7 @@
       [
        "supply",
        1,
-       0.067,
+       0.0619,
        1,
        0.0163,
        "",
@@ -14714,7 +15178,7 @@
       [
        "regulations",
        1,
-       0.0618,
+       0.0584,
        0,
        0.0288,
        "",
@@ -14723,7 +15187,7 @@
       [
        "bw",
        1,
-       0.0654,
+       0.0635,
        1,
        0.0302,
        "",
@@ -14732,7 +15196,7 @@
       [
        "ess",
        1,
-       0.0513,
+       0.0463,
        1,
        0.0099,
        "",
@@ -14741,7 +15205,7 @@
       [
        "wattmen",
        1,
-       0.0733,
+       0.068,
        0,
        -0.0083,
        "",
@@ -14750,7 +15214,7 @@
       [
        "develop",
        1,
-       0.0636,
+       0.0604,
        0,
        -0.006,
        "",
@@ -14759,7 +15223,7 @@
       [
        "mw",
        1,
-       0.0598,
+       0.059,
        2,
        0.0419,
        "",
@@ -14768,7 +15232,7 @@
       [
        "france",
        1,
-       0.0662,
+       0.0598,
        0,
        0.0003,
        "",
@@ -14777,7 +15241,7 @@
       [
        "statkraft",
        1,
-       0.077,
+       0.072,
        0,
        0.0146,
        "",
@@ -14786,7 +15250,7 @@
       [
        "pairs",
        1,
-       0.0746,
+       0.0731,
        0,
        0.0131,
        "",
@@ -14795,7 +15259,7 @@
       [
        "ppa",
        1,
-       0.064,
+       0.0609,
        0,
        0.0007,
        "",
@@ -14804,7 +15268,7 @@
       [
        "part",
        1,
-       0.0502,
+       0.0463,
        1,
        0.0124,
        "",
@@ -14813,7 +15277,7 @@
       [
        "tolled",
        1,
-       0.0716,
+       0.07,
        0,
        -0.0041,
        "",
@@ -14822,7 +15286,7 @@
       [
        "merchant",
        1,
-       0.0528,
+       0.0477,
        0,
        -0.0039,
        "",
@@ -14831,7 +15295,7 @@
       [
        "contract",
        1,
-       0.0753,
+       0.0673,
        0,
        0.0012,
        "",
@@ -14840,7 +15304,7 @@
       [
        "dutch",
        1,
-       0.0663,
+       0.0617,
        1,
        0.0039,
        "",
@@ -14849,7 +15313,7 @@
       [
        "solar",
        1,
-       0.0604,
+       0.0546,
        3,
        0.0682,
        "",
@@ -14858,7 +15322,7 @@
       [
        "site",
        1,
-       0.055,
+       0.0537,
        0,
        -0.005,
        "",
@@ -14867,7 +15331,7 @@
       [
        "technical",
        1,
-       0.0768,
+       0.0744,
        1,
        0.0388,
        "",
@@ -14876,7 +15340,7 @@
       [
        "non",
        1,
-       0.0569,
+       0.0528,
        0,
        -0.0121,
        "",
@@ -14885,7 +15349,7 @@
       [
        "controversial",
        1,
-       0.0499,
+       0.0468,
        0,
        -0.0083,
        "",
@@ -14894,7 +15358,7 @@
       [
        "zealand",
        1,
-       0.0538,
+       0.0507,
        0,
        -0.0031,
        "",
@@ -14903,7 +15367,7 @@
       [
        "regulator",
        1,
-       0.05,
+       0.0487,
        0,
        -0.014,
        "",
@@ -14912,7 +15376,7 @@
       [
        "corrects",
        1,
-       0.0485,
+       0.0472,
        0,
        -0.0127,
        "",
@@ -14921,7 +15385,7 @@
       [
        "price",
        1,
-       0.0574,
+       0.0586,
        1,
        0.0278,
        "",
@@ -14930,7 +15394,7 @@
       [
        "band",
        1,
-       0.0527,
+       0.0553,
        0,
        0.0001,
        "",
@@ -14939,7 +15403,7 @@
       [
        "rule",
        1,
-       0.0602,
+       0.0575,
        0,
        0.0038,
        "",
@@ -14948,7 +15412,7 @@
       [
        "date",
        1,
-       0.0673,
+       0.0675,
        0,
        -0.0079,
        "",
@@ -14957,7 +15421,7 @@
       [
        "installs",
        1,
-       0.0631,
+       0.057,
        0,
        0.0016,
        "",
@@ -14966,7 +15430,7 @@
       [
        "units",
        1,
-       0.0754,
+       0.0728,
        2,
        0.0457,
        "",
@@ -14975,7 +15439,7 @@
       [
        "tomago",
        1,
-       0.0393,
+       0.0387,
        0,
        -0.0071,
        "",
@@ -14984,7 +15448,7 @@
       [
        "south",
        1,
-       0.0651,
+       0.0629,
        1,
        0.0231,
        "",
@@ -14993,7 +15457,7 @@
       [
        "wales",
        1,
-       0.0697,
+       0.068,
        0,
        -0.0007,
        "",
@@ -15002,25 +15466,16 @@
       [
        "change",
        1,
-       0.0659,
+       0.0635,
        0,
        0.0077,
        "",
        ""
       ],
       [
-       "scale",
-       1,
-       0.0606,
-       3,
-       0.0643,
-       "",
-       ""
-      ],
-      [
        "giga",
        1,
-       0.0701,
+       0.0651,
        1,
        0.0246,
        "",
@@ -15029,7 +15484,7 @@
       [
        "storage",
        1,
-       0.0388,
+       0.0309,
        4,
        0.0653,
        "",
@@ -15038,7 +15493,7 @@
       [
        "evolution",
        1,
-       0.0656,
+       0.0585,
        0,
        0.0039,
        "",
@@ -15047,7 +15502,7 @@
       [
        "asset",
        1,
-       0.0581,
+       0.0593,
        0,
        0.0088,
        "",
@@ -15056,43 +15511,25 @@
       [
        "management",
        1,
-       0.0654,
+       0.0554,
        0,
        0.0015,
        "",
        ""
       ],
       [
-       "europe",
-       1,
-       0.0404,
-       3,
-       0.0623,
-       "",
-       ""
-      ],
-      [
        "germany",
        1,
-       0.0665,
+       0.0639,
        5,
        0.1197,
        "",
        ""
       ],
       [
-       "operators",
-       1,
-       0.0674,
-       2,
-       0.0426,
-       "",
-       ""
-      ],
-      [
        "end",
        1,
-       0.0489,
+       0.0433,
        0,
        -0.0093,
        "",
@@ -15101,7 +15538,7 @@
       [
        "fid",
        1,
-       0.0487,
+       0.0451,
        1,
        0.0109,
        "",
@@ -15110,7 +15547,7 @@
       [
        "deadline",
        1,
-       0.0662,
+       0.0631,
        0,
        -0.005,
        "",
@@ -15119,7 +15556,7 @@
       [
        "buzz",
        1,
-       0.0541,
+       0.0522,
        3,
        0.0527,
        "",
@@ -15128,25 +15565,16 @@
       [
        "premiums",
        1,
-       0.0665,
+       0.0608,
        0,
        -0.0083,
        "",
        ""
       ],
       [
-       "european",
-       1,
-       0.0719,
-       0,
-       -0.0061,
-       "",
-       ""
-      ],
-      [
        "revenue",
        1,
-       0.066,
+       0.064,
        3,
        0.084,
        "",
@@ -15155,7 +15583,7 @@
       [
        "variability",
        1,
-       0.0586,
+       0.056,
        0,
        -0.0165,
        "",
@@ -15164,7 +15592,7 @@
       [
        "close",
        1,
-       0.0666,
+       0.0619,
        0,
        0.0009,
        "",
@@ -15173,25 +15601,16 @@
       [
        "proximity",
        1,
-       0.0516,
+       0.0477,
        0,
        -0.0111,
        "",
        ""
       ],
       [
-       "grid",
-       1,
-       0.0631,
-       5,
-       0.1077,
-       "",
-       ""
-      ],
-      [
        "infrastructure",
        1,
-       0.0563,
+       0.0515,
        0,
        -0.0207,
        "",
@@ -15200,7 +15619,7 @@
       [
        "edf",
        1,
-       0.0595,
+       0.0555,
        0,
        -0.0087,
        "",
@@ -15209,7 +15628,7 @@
       [
        "buys",
        1,
-       0.0719,
+       0.0673,
        1,
        0.0158,
        "",
@@ -15218,7 +15637,7 @@
       [
        "remaining",
        1,
-       0.0763,
+       0.0711,
        0,
        0.0067,
        "",
@@ -15227,7 +15646,7 @@
       [
        "gap",
        1,
-       0.0438,
+       0.0401,
        1,
        0.0147,
        "",
@@ -15236,7 +15655,7 @@
       [
        "ieefa",
        1,
-       0.0561,
+       0.0501,
        0,
        -0.0091,
        "",
@@ -15245,7 +15664,7 @@
       [
        "scorecard",
        1,
-       0.071,
+       0.0699,
        0,
        0.0118,
        "",
@@ -15254,7 +15673,7 @@
       [
        "italy",
        1,
-       0.0597,
+       0.0561,
        1,
        0.0118,
        "",
@@ -15263,7 +15682,7 @@
       [
        "recent",
        1,
-       0.0442,
+       0.0387,
        0,
        -0.0133,
        "",
@@ -15272,7 +15691,7 @@
       [
        "electricity",
        1,
-       0.0647,
+       0.0577,
        0,
        0.004,
        "",
@@ -15281,7 +15700,7 @@
       [
        "decree",
        1,
-       0.0577,
+       0.0548,
        0,
        -0.0118,
        "",
@@ -15290,7 +15709,7 @@
       [
        "reduce",
        1,
-       0.0753,
+       0.0692,
        0,
        0.0127,
        "",
@@ -15299,7 +15718,7 @@
       [
        "revenues",
        1,
-       0.0551,
+       0.0544,
        0,
        0.0043,
        "",
@@ -15308,7 +15727,7 @@
       [
        "overbuild",
        1,
-       0.072,
+       0.0671,
        0,
        -0.0007,
        "",
@@ -15317,7 +15736,7 @@
       [
        "augmentation",
        1,
-       0.0545,
+       0.0522,
        1,
        0.0132,
        "",
@@ -15326,7 +15745,7 @@
       [
        "strategy",
        1,
-       0.0603,
+       0.058,
        0,
        -0.0096,
        "",
@@ -15335,7 +15754,7 @@
       [
        "greater",
        1,
-       0.0634,
+       0.0614,
        0,
        -0.0054,
        "",
@@ -15344,7 +15763,7 @@
       [
        "operational",
        1,
-       0.0685,
+       0.0695,
        3,
        0.0567,
        "",
@@ -15353,7 +15772,7 @@
       [
        "flexibility",
        1,
-       0.0563,
+       0.0562,
        0,
        -0.0005,
        "",
@@ -15362,7 +15781,7 @@
       [
        "aemo",
        1,
-       0.0594,
+       0.0576,
        0,
        0.0004,
        "",
@@ -15371,7 +15790,7 @@
       [
        "leans",
        1,
-       0.058,
+       0.0535,
        0,
        -0.0103,
        "",
@@ -15380,7 +15799,7 @@
       [
        "gw",
        1,
-       0.0693,
+       0.0679,
        4,
        0.0876,
        "",
@@ -15389,7 +15808,7 @@
       [
        "summer",
        1,
-       0.0574,
+       0.0548,
        0,
        0.0019,
        "",
@@ -15398,7 +15817,7 @@
       [
        "japan",
        1,
-       0.0663,
+       0.0599,
        1,
        0.0287,
        "",
@@ -15407,9 +15826,81 @@
       [
        "uncertain",
        1,
-       0.088,
+       0.0834,
        0,
        0.0124,
+       "",
+       ""
+      ],
+      [
+       "deployments",
+       1,
+       0.0476,
+       1,
+       0.013,
+       "",
+       ""
+      ],
+      [
+       "ytd",
+       1,
+       0.0634,
+       0,
+       0.0083,
+       "",
+       ""
+      ],
+      [
+       "nearly",
+       1,
+       0.0615,
+       1,
+       0.0313,
+       "",
+       ""
+      ],
+      [
+       "tolls",
+       1,
+       0.0575,
+       0,
+       -0.002,
+       "",
+       ""
+      ],
+      [
+       "floors",
+       1,
+       0.0565,
+       0,
+       0.0089,
+       "",
+       ""
+      ],
+      [
+       "understand",
+       1,
+       0.0729,
+       0,
+       0.0014,
+       "",
+       ""
+      ],
+      [
+       "soc",
+       1,
+       0.0619,
+       0,
+       0.0053,
+       "",
+       ""
+      ],
+      [
+       "challenges",
+       1,
+       0.0573,
+       1,
+       0.0244,
        "",
        ""
       ]
@@ -15428,8 +15919,8 @@
    ],
    "check": {
     "question": "HDC 판정과 카운트 판정(과거 횟수 0)이 같은 단어 수",
-    "count_answer": 122,
-    "hdc_answer": 121,
+    "count_answer": 130,
+    "hdc_answer": 129,
     "agree": false
    },
    "source": {
@@ -15458,12 +15949,12 @@
     {
      "type": "value",
      "name": "HDC 코사인",
-     "value": 0.5146
+     "value": 0.5235
     },
     {
      "type": "value",
      "name": "단어 횟수(BoW) 코사인",
-     "value": 0.5205
+     "value": 0.527
     }
    ],
    "check": null,
@@ -15500,26 +15991,26 @@
      "rows": [
       [
        "피지컬 AI",
-       29,
+       30,
        26,
-       10,
-       0.533,
+       11,
+       0.528,
        "예열 중"
       ],
       [
        "AI 인프라",
-       8,
+       9,
        7,
        2,
-       0.025,
+       0.024,
        "예열 중"
       ],
       [
        "로봇",
-       166,
+       169,
        154,
        108,
-       0.665,
+       0.664,
        ""
       ],
       [
@@ -15548,18 +16039,18 @@
       ],
       [
        "배터리",
-       39,
+       41,
        62,
-       11,
-       0.419,
+       14,
+       0.418,
        ""
       ],
       [
        "BESS",
-       19,
+       21,
        75,
-       4,
-       0.515,
+       5,
+       0.523,
        ""
       ]
      ]
@@ -15580,6 +16071,7 @@
    "이데일리": 50,
    "지디넷코리아": 30,
    "블로터": 50,
+   "전자신문": 30,
    "뉴시스": 200,
    "로봇신문": 50,
    "디일렉": 50,
@@ -15596,13 +16088,7 @@
    "Electrek": 150,
    "DCD": 20
   },
-  "failures": [
-   {
-    "at": "2026-11-24T17:20:36+09:00",
-    "what": "RSS 수집",
-    "detail": "전자신문 https://rss.etnews.com/Section901.xml: URLError: <urlopen error timed out>"
-   }
-  ],
+  "failures": [],
   "notes": []
  }
 }
