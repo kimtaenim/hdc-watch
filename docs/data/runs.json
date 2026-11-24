@@ -2921,5 +2921,17 @@
   "trace": "data/volume/045510.KQ/traces/live-20261124-090501.json",
   "delay_min": 0,
   "note": "오늘 5분봉이 없다(휴장일이거나 아직 장 전이거나 야후 지연)."
+ },
+ {
+  "at": "2026-11-24T09:35:00+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 3
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261124-093500.json",
+  "delay_min": 0,
+  "note": null
  }
 ]
