@@ -3798,5 +3798,17 @@
   "trace": "data/volume/045510.KQ/traces/close-20261126-160500.json",
   "delay_min": 0,
   "note": null
+ },
+ {
+  "at": "2026-11-26T16:15:25+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 34
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/close-20261126-161525.json",
+  "delay_min": 10,
+  "note": null
  }
 ]
