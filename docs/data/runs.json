@@ -3611,5 +3611,17 @@
   "trace": "data/volume/045510.KQ/traces/live-20261126-100501.json",
   "delay_min": 0,
   "note": null
+ },
+ {
+  "at": "2026-11-26T10:29:54+09:00",
+  "kind": "volume.live",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 9
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/live-20261126-102954.json",
+  "delay_min": 24,
+  "note": null
  }
 ]
