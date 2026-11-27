@@ -4126,5 +4126,17 @@
   "trace": "data/volume/045510.KQ/traces/close-20261127-153500.json",
   "delay_min": 0,
   "note": "프로토타입에 10개 더함"
+ },
+ {
+  "at": "2026-11-27T16:05:00+09:00",
+  "kind": "volume.close",
+  "subject": "045510.KQ",
+  "fetched": {
+   "오늘 5분봉": 24
+  },
+  "failures": [],
+  "trace": "data/volume/045510.KQ/traces/close-20261127-160500.json",
+  "delay_min": 0,
+  "note": null
  }
 ]
